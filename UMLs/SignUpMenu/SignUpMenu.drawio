@@ -1,0 +1,31 @@
+<mxfile host="app.diagrams.net" modified="2023-04-09T15:55:53.512Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" etag="nBfOwCVqMPDGG8LYSFGy" version="21.1.4" type="device">
+  <diagram name="Page-1" id="KibnWhc6dsqWj8oqH3mI">
+    <mxGraphModel dx="1050" dy="483" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="qkIZIHoqZtznd3fQmHG1-6" value="SignUpMenuController" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="150" y="60" width="440" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="qkIZIHoqZtznd3fQmHG1-7" value="- usersDatabase: ArrayList&amp;lt;User&amp;gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="qkIZIHoqZtznd3fQmHG1-6">
+          <mxGeometry y="26" width="440" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="qkIZIHoqZtznd3fQmHG1-8" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="qkIZIHoqZtznd3fQmHG1-6">
+          <mxGeometry y="50" width="440" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="qkIZIHoqZtznd3fQmHG1-9" value="+ SignUpMenuController(): &amp;lt;&amp;lt;constructor&amp;gt;&amp;gt;&lt;br&gt;+ run(scanner: Scanner): void&lt;br&gt;+ handleIO(scanner: Scanner,&amp;nbsp;printable: String, params: Object...): void&lt;br&gt;+ createUser(user: User): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="qkIZIHoqZtznd3fQmHG1-6">
+          <mxGeometry y="58" width="440" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="qkIZIHoqZtznd3fQmHG1-10" value="SignUpMenuView" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="610" y="60" width="310" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="qkIZIHoqZtznd3fQmHG1-11" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="qkIZIHoqZtznd3fQmHG1-10">
+          <mxGeometry y="26" width="310" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="qkIZIHoqZtznd3fQmHG1-12" value="+ SignUpMenuView(): &amp;lt;&amp;lt;constructor&amp;gt;&amp;gt;&lt;br&gt;+ input(scanner: Scanner): void&lt;br&gt;+ output(printable: String, params: Object...): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="qkIZIHoqZtznd3fQmHG1-10">
+          <mxGeometry y="34" width="310" height="66" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

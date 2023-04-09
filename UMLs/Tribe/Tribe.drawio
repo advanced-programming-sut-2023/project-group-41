@@ -1,0 +1,22 @@
+<mxfile host="app.diagrams.net" modified="2023-04-09T15:35:26.269Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" etag="6zeB4OtlhPvMntSn3LaM" version="21.1.4" type="device">
+  <diagram name="Page-1" id="hcKuxEZQHqdqTzTMAdpM">
+    <mxGraphModel dx="1105" dy="569" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="mkiqf4qf6M-DO6z5vBHj-1" value="Tribe&lt;br&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="388" y="119" width="290" height="520" as="geometry" />
+        </mxCell>
+        <mxCell id="mkiqf4qf6M-DO6z5vBHj-2" value="- owner: User&lt;br&gt;- popularityFactors: String[]&lt;br&gt;- popularity: int&lt;br&gt;- foodRate: int&lt;br&gt;- taxRate: int&lt;br&gt;- fearRate: int&lt;br&gt;- resources: Resources" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="mkiqf4qf6M-DO6z5vBHj-1">
+          <mxGeometry y="26" width="290" height="114" as="geometry" />
+        </mxCell>
+        <mxCell id="mkiqf4qf6M-DO6z5vBHj-3" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="mkiqf4qf6M-DO6z5vBHj-1">
+          <mxGeometry y="140" width="290" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="mkiqf4qf6M-DO6z5vBHj-4" value="+ Tribe(owner: User): &amp;lt;&amp;lt;constructor&amp;gt;&amp;gt;&lt;br&gt;+ getPopularityFactors: String[]&lt;br&gt;+ getPopularity: int&lt;br&gt;+ calculatePopularity: void&lt;br&gt;+ getFoodRate: int&lt;br&gt;+ setFoodRate: void&lt;br&gt;+ getTaxRate: int&lt;br&gt;+ setTaxRate: void&lt;br&gt;+ getFearRate: int&lt;br&gt;+ setFearRate: void&lt;br&gt;+ getResources: Resources&lt;br&gt;+ getFoodList&lt;br&gt;+ dropBuilding(building: Building): void&lt;br&gt;+ getBuilding(x: int, y: int): Building&lt;br&gt;+ createUnit(type: String, count: int): void&lt;br&gt;+ repairBuilding(building: Building): void&lt;br&gt;+ getUnit(x: int, y: int): Unit&lt;br&gt;+ moveUnitTo(unit: Unit, x: int, y: int): void&lt;br&gt;+ patrolUnit(unit: Unit, x: int, y: int): void&lt;br&gt;+ setStance(x: int, y: int, type: String): void&lt;br&gt;+ attack(enemy: Tribe): void&lt;br&gt;+ snipeAttack(x: int, y: int): void&lt;br&gt;+ pourOil(oil: Oil, direction: String): void&lt;br&gt;+ digTunnel(x: int, y: int): void&lt;br&gt;+ disband(unit: Unit): void&lt;br&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="mkiqf4qf6M-DO6z5vBHj-1">
+          <mxGeometry y="148" width="290" height="372" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

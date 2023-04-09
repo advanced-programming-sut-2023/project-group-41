@@ -1,0 +1,22 @@
+<mxfile host="app.diagrams.net" modified="2023-04-09T08:35:25.391Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" etag="enRJXlJRF_78x3kGz_y2" version="21.1.4" type="device">
+  <diagram name="Page-1" id="dvLzf7H90kEHNtJA0GPW">
+    <mxGraphModel dx="1050" dy="541" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="U1Gv_FfcPextctbKNLwn-1" value="User&lt;br&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="40" width="560" height="450" as="geometry" />
+        </mxCell>
+        <mxCell id="U1Gv_FfcPextctbKNLwn-2" value="- username: String&lt;br&gt;- password: String&lt;br&gt;- nickname: String&amp;nbsp;&lt;br&gt;- email: String&lt;br&gt;- passwordRecoveryQuestion: int&lt;br&gt;- passwordRecoveryAnswer: String&lt;br&gt;- slogan: String&lt;br&gt;- score: int&lt;br&gt;- tribe: Tribe" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="U1Gv_FfcPextctbKNLwn-1">
+          <mxGeometry y="26" width="560" height="144" as="geometry" />
+        </mxCell>
+        <mxCell id="U1Gv_FfcPextctbKNLwn-3" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="U1Gv_FfcPextctbKNLwn-1">
+          <mxGeometry y="170" width="560" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="U1Gv_FfcPextctbKNLwn-4" value="+ User(username: String, password: String, nickname: String, email: String, passwordRecoveryQuestion: int, passwordRecoveryAnswer: String, slogan: String) &amp;lt;&amp;lt;constructor&amp;gt;&amp;gt;&lt;br&gt;+ getUsername(): String&lt;br&gt;+ getPassword(): String&lt;br&gt;+ setPassword(newPassword: String): void&lt;br&gt;+ getNickname(): String&lt;br&gt;+ getEmail(): String&lt;br&gt;+ getPasswordRecoveryQuestion(): int&lt;br&gt;+ getPasswordRecoveryAnswer(): String&lt;br&gt;+ getSlogan(): String&lt;br&gt;+ getScore(): int&lt;br&gt;+ getTribe(): Tribe&lt;br&gt;+ setScore(score: int): void&lt;br&gt;+ setSlogan(slogan: String): void&lt;br&gt;+ setNickname(nickname: String): void&lt;br&gt;+ setUsername(username: String): void&lt;br&gt;+ setEmail(emal: String): void&lt;br&gt;+ getRank(): int&lt;br&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="U1Gv_FfcPextctbKNLwn-1">
+          <mxGeometry y="178" width="560" height="272" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
