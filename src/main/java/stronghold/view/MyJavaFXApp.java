@@ -1,4 +1,4 @@
-package view;
+package stronghold.view;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
