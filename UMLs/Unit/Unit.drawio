@@ -1,0 +1,22 @@
+<mxfile host="app.diagrams.net" modified="2023-04-11T08:08:54.031Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36" etag="1MjLUiNVIMXMkjoAbtqY" version="21.1.5" type="device">
+  <diagram name="Page-1" id="4t6cEolPa43OtKdv2_k3">
+    <mxGraphModel dx="656" dy="367" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Aj3RfDw2UlmkzhvgcC9I-1" value="Unit" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="760" y="20" width="430" height="320" as="geometry" />
+        </mxCell>
+        <mxCell id="Aj3RfDw2UlmkzhvgcC9I-2" value="-name:String&lt;br&gt;-type:String&lt;br&gt;-loyalty:String&lt;br&gt;- Speed: int&lt;br&gt;-defense: int&lt;br&gt;-offense: int&lt;br&gt;-price:int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="Aj3RfDw2UlmkzhvgcC9I-1" vertex="1">
+          <mxGeometry y="26" width="430" height="134" as="geometry" />
+        </mxCell>
+        <mxCell id="Aj3RfDw2UlmkzhvgcC9I-3" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="Aj3RfDw2UlmkzhvgcC9I-1" vertex="1">
+          <mxGeometry y="160" width="430" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="Aj3RfDw2UlmkzhvgcC9I-4" value="+ Unit( Name:String , Speed:int, defence:int, offense:int, price:int)&lt;br&gt;+ getName(): String&lt;br&gt;+ getType(): String&lt;br&gt;+ getLoyalty(): String&lt;br&gt;+ getSpeed(): int&lt;br&gt;+ getDefense(): int&lt;br&gt;+ getOffense(): int&lt;br&gt;+ getPrice(): int&lt;br&gt;+ setType(): String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="Aj3RfDw2UlmkzhvgcC9I-1" vertex="1">
+          <mxGeometry y="168" width="430" height="152" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
