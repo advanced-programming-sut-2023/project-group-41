@@ -1,0 +1,39 @@
+<mxfile host="app.diagrams.net" modified="2023-04-11T09:07:51.437Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36" etag="Ij-VPpxrfgfCba0Fx2_k" version="21.1.5" type="device">
+  <diagram name="Page-1" id="e7e014a7-5840-1c2e-5031-d8a46d1fe8dd">
+    <mxGraphModel dx="677" dy="342" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="826" background="none" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="z5lGmqAgz2JXUimjmWrz-45" value="Map" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="770" y="40" width="160" height="86" as="geometry" />
+        </mxCell>
+        <mxCell id="z5lGmqAgz2JXUimjmWrz-46" value="- cells:Arraylist" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="z5lGmqAgz2JXUimjmWrz-45" vertex="1">
+          <mxGeometry y="26" width="160" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="z5lGmqAgz2JXUimjmWrz-47" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="z5lGmqAgz2JXUimjmWrz-45" vertex="1">
+          <mxGeometry y="52" width="160" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="z5lGmqAgz2JXUimjmWrz-48" value="+ getCells():Arraylist" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="z5lGmqAgz2JXUimjmWrz-45" vertex="1">
+          <mxGeometry y="60" width="160" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="z5lGmqAgz2JXUimjmWrz-66" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="z5lGmqAgz2JXUimjmWrz-59" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="850" y="130" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="z5lGmqAgz2JXUimjmWrz-59" value="MapCell" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="755" y="250" width="190" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="z5lGmqAgz2JXUimjmWrz-60" value="- material: Material&amp;nbsp;&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;- building: Building&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;- soldier: Unit&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;- Resources:&amp;nbsp; Resource&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;- X: int&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;- Y: int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="z5lGmqAgz2JXUimjmWrz-59" vertex="1">
+          <mxGeometry y="26" width="190" height="104" as="geometry" />
+        </mxCell>
+        <mxCell id="z5lGmqAgz2JXUimjmWrz-61" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="z5lGmqAgz2JXUimjmWrz-59" vertex="1">
+          <mxGeometry y="130" width="190" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="z5lGmqAgz2JXUimjmWrz-62" value="+ getCordinateY():&amp;nbsp; int&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;+ getCordinateX():&amp;nbsp; int&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;+ getBuilding():&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;Building&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;+ getSoldier():&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;Unit&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;+getResource():&amp;nbsp; &amp;nbsp; &amp;nbsp; Resource" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="z5lGmqAgz2JXUimjmWrz-59" vertex="1">
+          <mxGeometry y="138" width="190" height="92" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
