@@ -1,20 +1,20 @@
-<mxfile host="app.diagrams.net" modified="2023-04-11T09:03:57.688Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36" etag="92sxBMtb5WCdWDMNiiRZ" version="21.1.5" type="device">
+<mxfile host="app.diagrams.net" modified="2023-04-13T14:13:08.344Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36" etag="WgUbG02M91Btx2sFBoAS" version="21.1.5" type="device">
   <diagram name="Page-1" id="4t6cEolPa43OtKdv2_k3">
-    <mxGraphModel dx="724" dy="366" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="700" dy="353" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="dbGLPa5XY7f04S50ibSP-1" value="Unit" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="425" y="30" width="255" height="160" as="geometry" />
+        <mxCell id="dbGLPa5XY7f04S50ibSP-1" value="Unit" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="425" y="30" width="255" height="200" as="geometry" />
         </mxCell>
-        <mxCell id="dbGLPa5XY7f04S50ibSP-2" value="- name:String&lt;br&gt;- people:Arraylist(People)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="dbGLPa5XY7f04S50ibSP-1">
-          <mxGeometry y="26" width="255" height="44" as="geometry" />
+        <mxCell id="dbGLPa5XY7f04S50ibSP-2" value="- X: int&lt;br&gt;- Y: int&lt;br&gt;- name: String&lt;br&gt;- people: Arraylist(People)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="dbGLPa5XY7f04S50ibSP-1" vertex="1">
+          <mxGeometry y="26" width="255" height="74" as="geometry" />
         </mxCell>
-        <mxCell id="dbGLPa5XY7f04S50ibSP-3" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="dbGLPa5XY7f04S50ibSP-1">
-          <mxGeometry y="70" width="255" height="8" as="geometry" />
+        <mxCell id="dbGLPa5XY7f04S50ibSP-3" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="dbGLPa5XY7f04S50ibSP-1" vertex="1">
+          <mxGeometry y="100" width="255" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="dbGLPa5XY7f04S50ibSP-4" value="+ Unit(name:String,people:Arraylist(People))&lt;br&gt;+ addPerson(person:People):void&lt;br&gt;+ removePerson(person:People):viod&lt;br&gt;+ getPeople():void&lt;br&gt;+ getName():String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="dbGLPa5XY7f04S50ibSP-1">
-          <mxGeometry y="78" width="255" height="82" as="geometry" />
+        <mxCell id="dbGLPa5XY7f04S50ibSP-4" value="+ Unit(name:String,people:Arraylist&amp;lt;People&amp;gt;)&lt;br&gt;+ addPerson(person:People):void&lt;br&gt;+ removePerson(person:People):viod&lt;br&gt;+ getPeople():Arraylist&amp;lt;People&amp;gt;&lt;br&gt;+ getName():String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="dbGLPa5XY7f04S50ibSP-1" vertex="1">
+          <mxGeometry y="108" width="255" height="92" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
