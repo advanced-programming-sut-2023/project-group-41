@@ -1,0 +1,46 @@
+<mxfile host="app.diagrams.net" modified="2023-04-14T14:32:19.922Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" etag="qdjhSHtJfqon2r3W9V4D" version="21.1.7" type="device">
+  <diagram name="‫صفحه - 1‬" id="KjUGXQwVeWMhCOJx0vsy">
+    <mxGraphModel dx="1249" dy="878" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="HRNE4OiCZlWx9EsLZsNt-1" value="&amp;lt;&amp;lt;Override&amp;gt;&amp;gt;&lt;br&gt;Government" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fontSize=16;" parent="1" vertex="1">
+          <mxGeometry x="170" y="230" width="380" height="450" as="geometry" />
+        </mxCell>
+        <mxCell id="HRNE4OiCZlWx9EsLZsNt-2" value="- user: User&lt;br&gt;- gold: int&lt;br&gt;- resources: HashMap&amp;lt;Resources, int&amp;gt;&lt;br&gt;- foods: HashMap&amp;lt;Food, int&amp;gt;&lt;br&gt;- units: ArrayList&amp;lt;Unit&amp;gt;&lt;br&gt;- peoples: ArrayList&amp;lt;People&amp;gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=16;" parent="HRNE4OiCZlWx9EsLZsNt-1" vertex="1">
+          <mxGeometry y="50" width="380" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="HRNE4OiCZlWx9EsLZsNt-3" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;fontSize=16;" parent="HRNE4OiCZlWx9EsLZsNt-1" vertex="1">
+          <mxGeometry y="180" width="380" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="HRNE4OiCZlWx9EsLZsNt-4" value="+ Government(user: User): &amp;lt;&amp;lt;constructor&amp;gt;&amp;gt;&lt;br&gt;&lt;br&gt;+ addResources(resources: Resources, amount: int): void&lt;br&gt;+ getResourcesNum(resources: Resources): int&lt;br&gt;&lt;br&gt;+ addFood(food: Food, amount: int): void&lt;br&gt;+ getFoodNum(food: Food): int&lt;br&gt;+ addUnit(unit: Unit, amount: int): void&lt;br&gt;+ getUnits(): ArrayList&amp;lt;Unit&amp;gt;&lt;br&gt;+ addPeople(people: People, amount: int): void&lt;br&gt;+ getPeoples(): ArrayList&amp;lt;People&amp;gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=16;" parent="HRNE4OiCZlWx9EsLZsNt-1" vertex="1">
+          <mxGeometry y="188" width="380" height="262" as="geometry" />
+        </mxCell>
+        <mxCell id="WStMXdnE8eiOOoNYFNNc-1" value="&amp;lt;&amp;lt;Enum&amp;gt;&amp;gt;&lt;br&gt;Resources" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-170" y="250" width="130" height="270" as="geometry" />
+        </mxCell>
+        <mxCell id="WStMXdnE8eiOOoNYFNNc-2" value="WHEAT,&lt;br&gt;FLOUR,&lt;br&gt;HOPS,&amp;nbsp;&lt;br&gt;ALE,&lt;br&gt;STONE,&lt;br&gt;IRON,&lt;br&gt;WOOD,&lt;br&gt;PITCH,&lt;br&gt;&lt;br&gt;ARMOR,&lt;br&gt;SWORD,&lt;br&gt;HOURSE,&lt;br&gt;CROSS_BOW,&lt;br&gt;&lt;br&gt;COW;&lt;br&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="WStMXdnE8eiOOoNYFNNc-1">
+          <mxGeometry y="30" width="130" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="WStMXdnE8eiOOoNYFNNc-5" value="" style="endArrow=diamondThin;endFill=0;endSize=24;html=1;rounded=0;entryX=0;entryY=0.526;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1.021;exitY=0.672;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="WStMXdnE8eiOOoNYFNNc-2" target="HRNE4OiCZlWx9EsLZsNt-2">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="-260" y="440" as="sourcePoint" />
+            <mxPoint x="-100" y="440" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WStMXdnE8eiOOoNYFNNc-6" value="&amp;lt;&amp;lt;Enum&amp;gt;&amp;gt;&lt;br&gt;Food" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-170" y="544" width="130" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="WStMXdnE8eiOOoNYFNNc-7" value="MEAT,&lt;br&gt;APPLE,&lt;br&gt;CHESSE,&lt;br&gt;BREAD;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="WStMXdnE8eiOOoNYFNNc-6">
+          <mxGeometry y="30" width="130" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="WStMXdnE8eiOOoNYFNNc-8" value="" style="endArrow=diamondThin;endFill=0;endSize=24;html=1;rounded=0;exitX=1.024;exitY=0.256;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="WStMXdnE8eiOOoNYFNNc-7" target="HRNE4OiCZlWx9EsLZsNt-4">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="-160" y="440" as="sourcePoint" />
+            <mxPoint y="440" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
