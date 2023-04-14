@@ -1,0 +1,52 @@
+<mxfile host="app.diagrams.net" modified="2023-04-14T15:28:42.356Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" etag="1s_UHaybVu33jG4JFwpl" version="21.1.7" type="device">
+  <diagram name="Page-1" id="929967ad-93f9-6ef4-fab6-5d389245f69c">
+    <mxGraphModel dx="803" dy="1506" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1.5" pageWidth="1169" pageHeight="826" background="none" math="0" shadow="0">
+      <root>
+        <mxCell id="0" style=";html=1;" />
+        <mxCell id="1" style=";html=1;" parent="0" />
+        <mxCell id="9huVeLQxGzD-RM6x9B-5-1" value="MainMenuView" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="740" y="765" width="300" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="9huVeLQxGzD-RM6x9B-5-2" value="- mainMenuController: MainMenuController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="9huVeLQxGzD-RM6x9B-5-1" vertex="1">
+          <mxGeometry y="26" width="300" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="9huVeLQxGzD-RM6x9B-5-3" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="9huVeLQxGzD-RM6x9B-5-1" vertex="1">
+          <mxGeometry y="52" width="300" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="9huVeLQxGzD-RM6x9B-5-4" value="+MainMenuView(): &amp;lt;&amp;lt;constructor&amp;gt;&amp;gt;&lt;br&gt;+ input(scanner: Scanner): void&lt;br&gt;+ output(printable: String, params: Object...): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="9huVeLQxGzD-RM6x9B-5-1" vertex="1">
+          <mxGeometry y="60" width="300" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="9huVeLQxGzD-RM6x9B-5-5" value="MainMenuController" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="340" y="370" width="320" height="960" as="geometry" />
+        </mxCell>
+        <mxCell id="9huVeLQxGzD-RM6x9B-5-6" value="- userDataBase: ArrayList&amp;lt;User&amp;gt;&lt;br&gt;- trades: ArrayList&amp;lt;Trade&amp;gt;&lt;br&gt;- market: ArrayList&amp;lt;Object&amp;gt;&lt;br&gt;- &lt;u&gt;roundNumber: int&lt;/u&gt;&lt;br&gt;- resources: ArrayList&amp;lt;Object&amp;gt;&lt;br&gt;- taxIncome: int&lt;br&gt;- unemployedPopulation: int&lt;br&gt;- map: Map" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="9huVeLQxGzD-RM6x9B-5-5" vertex="1">
+          <mxGeometry y="26" width="320" height="124" as="geometry" />
+        </mxCell>
+        <mxCell id="9huVeLQxGzD-RM6x9B-5-7" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="9huVeLQxGzD-RM6x9B-5-5" vertex="1">
+          <mxGeometry y="150" width="320" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="9huVeLQxGzD-RM6x9B-5-8" value="+ MainMenuController(): &amp;lt;&amp;lt;constructor&amp;gt;&amp;gt;&lt;br&gt;+ run(scanner: Scanner): void&lt;br&gt;+ nextPlayer(): void&lt;br&gt;+ endGame(): void&lt;br&gt;+ getRoundNum(): int&lt;br&gt;&lt;br&gt;+ showMap(x: int, y: int): void&lt;br&gt;+ mapUpLeft(): void&lt;br&gt;+ showMapDetails(x: int, y: int): void&lt;br&gt;&lt;br&gt;+ showPopularityFactors(): void&lt;br&gt;+ showPopularity(): void&lt;br&gt;+ showFoodList(): void&lt;br&gt;+ foodRate(rate: int): void&lt;br&gt;+ foodRateShow(): void&lt;br&gt;+ taxRate(rate: int): void&lt;br&gt;+ taxRateShow(): void&lt;br&gt;+ fearRate(rate: int): void&lt;br&gt;&lt;br&gt;+ dropBuilding(x: int, y: int, type: String): void&lt;br&gt;+ selectBuilding(x: int, y: int): void&lt;br&gt;+ createUnit(type: String, count: int): void&lt;br&gt;+ repair(): void&lt;br&gt;&lt;br&gt;+ selectUnit(x: int, y: int): void&lt;br&gt;+ moveUnit(x: int, y: int): void&lt;br&gt;+ moveUnitTo(x: int, y: int): void&lt;br&gt;+ patrolUnit(x1: int, y1: int, x2: int, y2:int): void&lt;br&gt;+ set(x: int, y: int, situation: Situation): void&lt;br&gt;+ attack(enemy: String): void&lt;br&gt;+ attack(x: int, y: int): void&lt;br&gt;+ pourOil(direction: String): void&lt;br&gt;+ digTunnel(x: int, y: int): void&lt;br&gt;+ build(equipmentName: String): void&lt;br&gt;+ disbandUnit(): void&lt;br&gt;&lt;br&gt;+ setTexture(x: int, y: int): void&lt;br&gt;+ setTexture(x1: int, y1: int, x2: int, y2: int): void&lt;br&gt;+ clear(x: int, y: int): void&lt;br&gt;+ dropRock(x: int, y: int, direction: String): void&lt;br&gt;+ dropTree(x: int, y: int, type: String): void&lt;br&gt;+ dropBuilding(x: int, y: int, type: String): void&lt;br&gt;+ dropUnit(x: int, y: int, type: String, count: int): void&lt;br&gt;&lt;br&gt;+ trade(resourceType: String, resourceAmount: String, price: int, message: String): void&lt;br&gt;+ tradeList(): void&lt;br&gt;+ tradeAccept(id: int, message: String): void&lt;br&gt;+ tradeHistory(): void&lt;br&gt;&lt;br&gt;+ showPriceList(): void&lt;br&gt;+ buy(itemName: String, itemAmount: int): void&lt;br&gt;+ sell(itemName: String, itemAmount: int): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="9huVeLQxGzD-RM6x9B-5-5" vertex="1">
+          <mxGeometry y="158" width="320" height="802" as="geometry" />
+        </mxCell>
+        <mxCell id="9huVeLQxGzD-RM6x9B-5-15" value="&amp;lt;&amp;lt;Enum&amp;gt;&amp;gt;&lt;br&gt;Situation" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="740" y="650" width="140" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="9huVeLQxGzD-RM6x9B-5-16" value="STANDING,&lt;br&gt;DEFENSIVE,&lt;br&gt;OFFENSIVE;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="9huVeLQxGzD-RM6x9B-5-15" vertex="1">
+          <mxGeometry y="26" width="140" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="0cnsZ5iu7qtsFK9ChAxQ-2" value="" style="endArrow=open;endFill=1;endSize=12;html=1;rounded=0;entryX=-0.004;entryY=0.316;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" target="9huVeLQxGzD-RM6x9B-5-4">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="660" y="840" as="sourcePoint" />
+            <mxPoint x="740" y="840" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="0cnsZ5iu7qtsFK9ChAxQ-3" value="" style="endArrow=diamondThin;endFill=0;endSize=24;html=1;rounded=0;entryX=1.002;entryY=0.297;entryDx=0;entryDy=0;entryPerimeter=0;exitX=-0.002;exitY=0.282;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="9huVeLQxGzD-RM6x9B-5-16" target="9huVeLQxGzD-RM6x9B-5-8">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="590" y="700" as="sourcePoint" />
+            <mxPoint x="750" y="700" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
