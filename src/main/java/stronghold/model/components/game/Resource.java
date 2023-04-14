@@ -1,2 +1,4 @@
-package stronghold.model.components.game;public class Resource {
+package stronghold.model.components.game;
+
+public class Resource {
 }
