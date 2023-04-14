@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d4900983-f33a-47b2-bf61-9aca166ee9d7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/Unit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/People.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/People.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/Resource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/Resource.java" afterDir="false" />
-    </list>
+    <list default="true" id="d4900983-f33a-47b2-bf61-9aca166ee9d7" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -120,7 +115,7 @@
       <option name="presentableId" value="Default" />
       <updated>1681067145004</updated>
       <workItem from="1681202934421" duration="940000" />
-      <workItem from="1681474203585" duration="2841000" />
+      <workItem from="1681474203585" duration="3435000" />
     </task>
     <servers />
   </component>
