@@ -19,6 +19,7 @@ public class People {
     //////Arraylists
     ArrayList<Resource> equipments= new ArrayList<>();
 
+
    public People(String name, int speed, int price){
        this.name=name;
        this.speed=speed;
@@ -26,6 +27,7 @@ public class People {
       // this.loyalty=mainMenu.getCurrentUser();
 
     }
+
     /////getters
 
 
