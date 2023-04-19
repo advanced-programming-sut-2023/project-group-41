@@ -19,7 +19,7 @@ public class People {
     //////Arraylists
     ArrayList<Resource> equipments= new ArrayList<>();
 
-    People()
+
     /////getters
 
 
