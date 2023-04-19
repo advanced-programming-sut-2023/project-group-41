@@ -1,25 +1,31 @@
 package stronghold.model.components.game;
 
+import stronghold.model.components.general.User;
+
 import java.util.ArrayList;
 
 public class People {
 
     ////////Strings
     private String name;
-    private String type;
-    private String loyalty;
+
+    private User loyalty;
 
     //////Integers
     private int speed;
-    private int defense;
-    private int offense;
     private int price;
-    private int range;
+
 
     //////Arraylists
     ArrayList<Resource> equipments= new ArrayList<>();
 
-    People()
+   public People(String name, int speed, int price){
+       this.name=name;
+       this.speed=speed;
+       this.price=price;
+      // this.loyalty=mainMenu.getCurrentUser();
+
+    }
     /////getters
 
 
@@ -27,11 +33,9 @@ public class People {
         return name;
     }
 
-    public String getType() {
-        return type;
-    }
 
-    public String getLoyalty() {
+
+    public User getLoyalty() {
         return loyalty;
     }
 
@@ -39,13 +43,7 @@ public class People {
         return speed;
     }
 
-    public int getDefense() {
-        return defense;
-    }
 
-    public int getOffense() {
-        return offense;
-    }
 
     public int getPrice() {
         return price;
@@ -60,11 +58,13 @@ public class People {
         this.name = name;
     }
 
-    public void setLoyalty(String loyalty) {
+    public void setLoyalty(User loyalty) {
         this.loyalty = loyalty;
     }
+    public void addEquipments(Resource equipment){
+        equipments.add(equipment);
 
-    public void setType(String type) {
-        this.type = type;
     }
+
+
 }

@@ -13,6 +13,7 @@ public class Unit {
     ArrayList<People> people;
 
     Unit(int x,int y,String name){
+        this.name=name;
         this.x=x;
         this.y=y;
         people = new ArrayList<>();

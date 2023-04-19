@@ -4,7 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d4900983-f33a-47b2-bf61-9aca166ee9d7" name="Changes" comment="" />
+    <list default="true" id="d4900983-f33a-47b2-bf61-9aca166ee9d7" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/MapCell.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/Texture.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/enums/Direction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/enums/Food.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/enums/Tree.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/soldeirtype/Building.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/soldeirtype/Fighter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/soldeirtype/LongRanged.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/soldeirtype/Map.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/soldeirtype/Unarmed.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/People.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/People.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/Unit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/Unit.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,6 +27,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -116,6 +131,8 @@
       <updated>1681067145004</updated>
       <workItem from="1681202934421" duration="940000" />
       <workItem from="1681474203585" duration="3436000" />
+      <workItem from="1681805063831" duration="4021000" />
+      <workItem from="1681833622790" duration="43000" />
     </task>
     <servers />
   </component>
