@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class Unit {
 
     ////Integers
-    int x;
-    int y;
+    int X;
+    int Y;
     ////Strings
     String name;
     ////Arraylists
@@ -14,9 +14,24 @@ public class Unit {
 
     Unit(int x,int y,String name){
         this.name=name;
-        this.x=x;
-        this.y=y;
+        this.X=x;
+        this.Y=y;
         people = new ArrayList<>();
+    }
 
+    public void addPerson(People person) {
+        people.add(person);
+    }
+
+    public void removePerson(People person) {
+        people.remove(person);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public ArrayList<People> getPeople() {
+        return people;
     }
 }
