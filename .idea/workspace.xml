@@ -5,18 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d4900983-f33a-47b2-bf61-9aca166ee9d7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/controller/ShopMenuController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/controller/TradeMenuController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/database/datasets/users.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/trade/Trade.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/trade/TradeDataBase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/Command.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/controller/SignUpMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/controller/SignUpMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/People.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/People.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/Tribe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/Tribe.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/view/SignUpMenuView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/view/MenuView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
