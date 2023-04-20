@@ -12,7 +12,7 @@ public class Unit {
     ////Arraylists
     ArrayList<People> people;
 
-    Unit(int x,int y,String name){
+    public Unit(int x,int y,String name){
         this.name=name;
         this.X=x;
         this.Y=y;
