@@ -1,5 +1,0 @@
-{
-  "security_question": "Pick your security question: 1. What is my father’s name? 2. What was my first pet’s name? 3. What is my mother’s last name?",
-  "random_password": "Your random password is: $VAR1$\nPlease re-enter your password here:",
-  "slogan": "Your slogan is ”$VAR1$”"
-}

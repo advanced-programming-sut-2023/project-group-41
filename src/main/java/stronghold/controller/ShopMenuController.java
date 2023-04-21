@@ -5,7 +5,7 @@ import stronghold.model.components.general.User;
 
 import java.util.HashMap;
 
-public class ShopMenuController {
+public class ShopMenuController extends MenuController{
     private static User currentUser;
     private static HashMap<Resource,Integer> prices;
     //add prices

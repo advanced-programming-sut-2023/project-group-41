@@ -5,7 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d4900983-f33a-47b2-bf61-9aca166ee9d7" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/database/utils/regex/SignUpLoginRegex.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/view/SignUpLoginView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/stronghold_jar/stronghold.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/stronghold_jar/stronghold.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/controller/ShopMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/controller/ShopMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/controller/SignUpMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/controller/SignUpMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/controller/TradeMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/controller/TradeMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/database/textcontent/SignUpMenuResponses.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/database/textcontent/SignUpLoginMenuResponses.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/database/utils/regex/SignUpRegex.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/Command.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/view/MenuView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/view/MenuView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,7 +71,7 @@
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="corretto-11" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="MAIN_CLASS_NAME" value="Main" />
+      <option name="MAIN_CLASS_NAME" value="stronghold.Main" />
       <module name="stronghold" />
       <extension name="coverage">
         <pattern>
@@ -129,5 +140,16 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
