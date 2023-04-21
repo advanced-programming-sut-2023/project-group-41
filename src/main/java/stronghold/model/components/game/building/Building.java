@@ -4,34 +4,25 @@ import stronghold.model.components.game.Resource;
 import stronghold.model.components.game.People;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public abstract class Building {
     protected int health;
-    protected int cost;
     protected int workerNum;
     protected boolean engineerWorkers;
-    protected ArrayList<Resource> neededResources;
-    protected int populationEffect;
-    protected int popularityEffect;
+    protected HashMap<Resource, Integer> neededResources;
 
-    public Building(int health, int cost, int workerNum, boolean engineerWorkers,
-                    ArrayList<Resource> neededResources, int populationEffect, int popularityEffect) {
+    public Building(int health, int workerNum, boolean engineerWorkers, HashMap<Resource, Integer> neededResources) {
         this.health = health;
-        this.cost = cost;
         this.workerNum = workerNum;
         this.engineerWorkers = engineerWorkers;
         this.neededResources = neededResources;
-        this.populationEffect = populationEffect;
-        this.popularityEffect = popularityEffect;
     }
 
     public int getHealth() {
         return health;
     }
 
-    public int getCost() {
-        return cost;
-    }
 
     public int getWorkerNum() {
         return workerNum;
@@ -41,15 +32,7 @@ public abstract class Building {
         return engineerWorkers;
     }
 
-    public ArrayList<Resource> getNeededResources() {
+    public HashMap<Resource, Integer> getNeededResources() {
         return neededResources;
-    }
-
-    public int getPopulationEffect() {
-        return populationEffect;
-    }
-
-    public int getPopularityEffect() {
-        return popularityEffect;
     }
 }
