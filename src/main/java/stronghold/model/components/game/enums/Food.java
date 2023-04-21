@@ -1,5 +1,7 @@
 package stronghold.model.components.game.enums;
 
+import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -9,8 +11,9 @@ public enum Food {
     bread("bread"),
     meat("meat");
 
-    private  String regex;
-    private Food(String r) {
+    private String regex;
+    private static ArrayList<Food> foodArr = new ArrayList<>(EnumSet.allOf(Food.class));
+    Food(String r) {
         this.regex = r;
     }
     public String getRegex() {
@@ -23,4 +26,10 @@ public enum Food {
         return pattern.matcher(input);
     }
 
+    public static Food getFood(String input) {
+        for (Food food : foodArr) {
+            if(getMatcher(input, food).find()) return food;
+        }
+        return null;
+    }
 }
