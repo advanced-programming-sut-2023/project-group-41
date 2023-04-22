@@ -12,4 +12,12 @@ public class Map {
         this.size=size;
        //making the map
     }
+ public MapCell getMapCell(int X, int Y){
+        for(MapCell mapCell: cells){
+            if(mapCell.getX()==X&&mapCell.getY()==Y){
+                return mapCell;
+            }
+        }
+        return null;
+ }
 }

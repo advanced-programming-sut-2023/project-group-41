@@ -33,15 +33,6 @@ public class MainMenuController {
     }
 
 
-    public void showMap(int X, int Y){
-
-    }
-    public void mapUpLeft(){
-
-    }
-    public void showMapDetails(int X, int Y) {
-
-    }
 
 
     public void showPopularityFactors(){
