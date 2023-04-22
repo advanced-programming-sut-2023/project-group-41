@@ -5,7 +5,7 @@ import stronghold.model.components.game.trade.Trade;
 import stronghold.model.components.game.trade.TradeDataBase;
 import stronghold.model.components.general.User;
 
-public class TradeMenuController {
+public class TradeMenuController extends MenuController{
     private static User currentUser;
     public static User getCurrentUser() {
         return currentUser;

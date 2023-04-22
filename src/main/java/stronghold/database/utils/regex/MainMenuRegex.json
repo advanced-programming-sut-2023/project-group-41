@@ -1,0 +1,13 @@
+{
+  "showPopularityFactors": "show\\s+popularity\\s+factors",
+  "showPopularity": "show\\s+popularity",
+  "showFoodList": "show\\s+food\\s+list",
+  "foodRate": "food\\s+rate\\s+-r\\s+(\\d+)",
+  "foodRateShow": "show\\s+food\\s+rate",
+  "taxRate": "tax\\s+rate\\s+-r\\s+(\\d+)",
+  "taxRateShow": "tax\\s+rate\\s+show",
+  "fearRate": "fear\\s+rate\\s+-r\\s+(\\d+)"
+
+
+
+}
