@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 package stronghold.model.components.game.building;
 
 import stronghold.model.components.game.building.Building;
@@ -50,6 +51,9 @@ public class Castle extends Building {
     }
 }
 =======
+=======
+
+>>>>>>> 2c354c3e141bdb26633c22d637da4e87f73c5938
 package stronghold.model.components.game.building;
 
 import stronghold.model.components.game.building.Building;
@@ -100,4 +104,3 @@ public class Castle extends Building {
         return defendRange;
     }
 }
->>>>>>> 2bfb39568ff9b671a99d1ea453cd2f82ca82dd30

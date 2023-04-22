@@ -6,7 +6,23 @@
   "foodRateShow": "show\\s+food\\s+rate",
   "taxRate": "tax\\s+rate\\s+-r\\s+(\\d+)",
   "taxRateShow": "tax\\s+rate\\s+show",
-  "fearRate": "fear\\s+rate\\s+-r\\s+(\\d+)"
+  "fearRate": "fear\\s+rate\\s+-r\\s+(\\d+)",
+
+  "dropBuilding": "dropbuilding\\s+-x\\s+(\\d+)\\s+-y\\s+(\\d+)\\s+-type\\s+(\\S+)",
+  "selectBuilding": "select\\s+building\\s+-x\\s+(\\d+)\\s+-y\\s+(\\d+)",
+  "createUnit": "createunit\\s+-t\\s+(\\S+)\\s+-c\\s+(\\d+)",
+  "repair": "repair",
+
+  "selectUnit": "select\\s+unit\\s+-x\\s+(\\d+)\\s+-y\\s+(\\d+)",
+  "moveUnitTo": "move\\s+unit\\s+to\\s+-x\\s+(\\d+)\\s+-y\\s+(\\d+)",
+  "patrolUnit": "patrol\\s+unit\\s+-x1\\s+(?<X1>\\d+)\\s+-y1\\s+(?<Y1>\\d+)\\s+-x2\\s+(?<X2>\\d+)\\s+-y2\\s+(?<Y2>\\d+)",
+  "set": "set\\s+-x\\s+(\\d+)\\s+-y\\s+(\\d+)\\s+-s\\s+(?<state>\\S+)",
+  "attackEnemy": "attack\\s+-e\\s+(\\d+)\\s+(\\d+)",
+  "airAttack": "attack\\s+-x\\s+(\\d+)\\s+-y\\s+(\\d+)",
+  "pourOil": "pour\\s+oil\\s+-d\\s+(?<direction>\\S+)",
+  "digTunnel": "dig\\s+tunnel\\s+-x\\s+(\\d+)\\s+-y\\s+(\\d+)",
+  "build": "build\\s+-q\\s+(\\S+)",
+  "disbandUnit": "disband\\s+unit"
 
 
 
