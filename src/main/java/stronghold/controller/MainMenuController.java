@@ -1,11 +1,10 @@
 <<<<<<< HEAD
 package stronghold.controller;
 
-import stronghold.model.components.game.Government;
 import stronghold.model.components.game.building.Converter;
 import stronghold.model.components.game.building.Storage;
 import stronghold.model.components.game.soldeirtype.Building;
-import stronghold.model.components.game.soldeirtype.Map;
+import stronghold.model.components.game.Map;
 import stronghold.model.components.general.User;
 
 import java.util.ArrayList;

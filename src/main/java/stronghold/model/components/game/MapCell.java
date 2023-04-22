@@ -70,14 +70,7 @@ public class MapCell {
     public void setTree(Tree tree) {
         this.tree = tree;
     }
-    public char showMovingSoldier(){
-        if(getUnit()!=null)
-            return 'S';
-        else
-            return ' ';
 
-
-    }
     public char showMovingSoldier(){
         if(getUnit()!=null)
             return 'S';
