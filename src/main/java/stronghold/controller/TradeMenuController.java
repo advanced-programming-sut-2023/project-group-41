@@ -1,6 +1,6 @@
 package stronghold.controller;
 
-import stronghold.model.components.game.Resource;
+import stronghold.model.components.game.enums.Resource;
 import stronghold.model.components.game.trade.Trade;
 import stronghold.model.components.game.trade.TradeDataBase;
 import stronghold.model.components.general.User;

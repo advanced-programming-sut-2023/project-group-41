@@ -1,5 +1,6 @@
 package stronghold.model.components.game;
 
+import stronghold.model.components.game.enums.Resource;
 import stronghold.model.components.general.User;
 
 import java.util.ArrayList;

@@ -5,7 +5,7 @@ import stronghold.model.components.game.building.Building;
 
 import java.util.ArrayList;
 
-import stronghold.model.components.game.Resource;
+import stronghold.model.components.game.enums.Resource;
 import stronghold.model.components.game.People;
 
 public class UnitMaker extends Building {

@@ -1,6 +1,4 @@
-package stronghold.model.components.game;
-
-import stronghold.model.components.game.enums.Food;
+package stronghold.model.components.game.enums;
 
 import java.util.ArrayList;
 import java.util.EnumSet;

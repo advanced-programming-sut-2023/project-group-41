@@ -2,7 +2,6 @@ package stronghold.controller;
 
 
 import stronghold.model.components.game.Map;
-import stronghold.model.components.game.Resource;
 
 public class MapMenuController {
     private static Map map;
@@ -117,7 +116,7 @@ public class MapMenuController {
 
     }
 
-    public void showMapDetails(int X, int Y) {
+    public void showMapCellDetails(int X, int Y) {
         if(Map.getMapCell(X,Y)==null){
             System.out.println("You are out of bonds!");
             return;

@@ -1,0 +1,5 @@
+{
+  "showMap": "\\s*show\\s+map\\s+((-x\\s+(?<x>\\d+)\\s*)|(-y\\s+(?<y>\\d+)\\s*)){2}$",
+  "showMapCellDetails": "\\s*show\\s+details\\s+((-x\\s+(?<x>\\d+)\\s*)|(-y\\s+(?<y>\\d+)\\s*)){2}$",
+  "mapShift": "\\s*map\\s+(((?<x>left|right)\\s*)|((?<y>up|down)\\s*)){1,2}$"
+}
