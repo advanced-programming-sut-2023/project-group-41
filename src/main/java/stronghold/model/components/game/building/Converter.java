@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import stronghold.model.components.game.Resource;
-import stronghold.model.components.game.People;
 
 public class Converter extends Building {
     private HashMap<Resource, Resource> options;

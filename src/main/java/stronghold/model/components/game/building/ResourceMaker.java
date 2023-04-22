@@ -5,7 +5,6 @@ import stronghold.model.components.game.building.Building;
 
 
 import stronghold.model.components.game.Resource;
-import stronghold.model.components.game.People;
 
 import java.util.ArrayList;
 
