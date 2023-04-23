@@ -1,6 +1,6 @@
 package stronghold.model.components.general;
 
-import stronghold.model.components.game.Tribe;
+import stronghold.model.components.game.Government;
 
 public class User {
     private String username;
@@ -11,7 +11,6 @@ public class User {
     private String passwordRecoveryAnswer;
     private String slogan;
     private int score;
-    private Tribe tribe;
 
     public User(String username, String password, String nickname, String email, int passwordRecoveryQuestion, String passwordRecoveryAnswer, String slogan) {
         this.username = username;
@@ -85,10 +84,6 @@ public class User {
 
     public void setScore(int score) {
         this.score = score;
-    }
-
-    public Tribe getTribe() {
-        return tribe;
     }
 
     public int getRank(){

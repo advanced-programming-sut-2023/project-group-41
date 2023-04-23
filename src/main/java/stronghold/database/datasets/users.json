@@ -1,11 +1,1 @@
-[
-  {
-    "username": "glenn",
-    "password": "Qu4gM!r3",
-    "nickname": "quagmire",
-    "email": "glennq@gmail.com",
-    "passwordRecoveryQuestion": 1,
-    "passwordRecoveryAnswer": "joemama",
-    "slogan": "giggity"
-  }
-]
+[{"username":"glenn","password":"Qu4gM!r3","nickname":"quagmire","email":"glennq@gmail.com","passwordRecoveryQuestion":1,"passwordRecoveryAnswer":"joemama","slogan":"giggity","score":12},{"username":"anakin","password":"ch0SenOne!","nickname":"skywalker","email":"anakin@jedi.edu","passwordRecoveryQuestion":1,"passwordRecoveryAnswer":"no one","slogan":"buzz droids!","score":0}]
