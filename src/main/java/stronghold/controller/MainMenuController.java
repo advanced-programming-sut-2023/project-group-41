@@ -8,6 +8,8 @@ import stronghold.model.components.game.Government;
 import stronghold.model.components.game.Map;
 import stronghold.model.components.game.enums.Direction;
 import stronghold.model.components.game.enums.State;
+import stronghold.model.components.game.enums.Texture;
+import stronghold.model.components.game.enums.Tree;
 import stronghold.model.components.game.soldeirtype.Building;
 import stronghold.model.components.general.User;
 import stronghold.view.MainMenuView;
@@ -59,6 +61,13 @@ public class MainMenuController extends MenuController{
             Matcher digTunnelMatcher;
             Matcher buildMatcher;
 
+            Matcher setTextureMatcher;
+            Matcher setRectangleTextureMatcher;
+            Matcher clearMatcher;
+            Matcher dropRockMatcher;
+            Matcher dropTreeMatcher;
+            Matcher dropUnitMatcher;
+
             if(command.matches("back")){
                 break;
             } else if (getJSONRegexMatcher(command, "showPopularityFactors", mainMenuRegexObj).matches()) {
@@ -78,6 +87,7 @@ public class MainMenuController extends MenuController{
             } else if ((fearRateMatcher = getJSONRegexMatcher(command, "fearRate", mainMenuRegexObj)).matches()) {
                 fearRate(Integer.parseInt(fearRateMatcher.group(1)));
             } else if ((dropBuildingMatcher = getJSONRegexMatcher(command, "dropBuilding", mainMenuRegexObj)).matches()) {
+                // commands: dropbuilding -x [x] -y [y] -type [type] || dropbuilding -x [x] -y [y] -t [type]
                 int X = Integer.parseInt(dropBuildingMatcher.group("X"));
                 int Y = Integer.parseInt(dropBuildingMatcher.group("Y"));
                 String type = dropBuildingMatcher.group("type");
@@ -130,6 +140,40 @@ public class MainMenuController extends MenuController{
                 build(buildMatcher.group(1));
             } else if (getJSONRegexMatcher(command, "disbandUnit", mainMenuRegexObj).matches()) {
                 disbandUnit();
+            } else if ((setTextureMatcher = getJSONRegexMatcher(command, "setTexture", mainMenuRegexObj)).matches()) {
+                // command: settexture -x1 [x1] -y1 [y1] -t [type]
+                int X = Integer.parseInt(setTextureMatcher.group("X"));
+                int Y = Integer.parseInt(setTextureMatcher.group("Y"));
+                Texture type = Texture.getTexture(setTextureMatcher.group("type"));
+                setTexture(X, Y, type);
+            } else if ((setRectangleTextureMatcher = getJSONRegexMatcher(command, "setRectangleTexture", mainMenuRegexObj)).matches()) {
+                // command: settexture -x1 [x1] -y1 [y1] -x2 [x2] -y2 [y2] -t [type]
+                int X1 = Integer.parseInt(setRectangleTextureMatcher.group("X1"));
+                int Y1 = Integer.parseInt(setRectangleTextureMatcher.group("Y1"));
+                int X2 = Integer.parseInt(setRectangleTextureMatcher.group("X2"));
+                int Y2 = Integer.parseInt(setRectangleTextureMatcher.group("Y2"));
+                Texture type = Texture.getTexture(setRectangleTextureMatcher.group("type"));
+                setTexture(X1, Y1, X2, Y2, type);
+            } else if((clearMatcher = getJSONRegexMatcher(command, "clear", mainMenuRegexObj)).matches()) {
+                int X = Integer.parseInt(clearMatcher.group("X"));
+                int Y = Integer.parseInt(clearMatcher.group("Y"));
+                clear(X, Y);
+            } else if ((dropRockMatcher = getJSONRegexMatcher(command, "dropRock", mainMenuRegexObj)).matches()) {
+                int X = Integer.parseInt(dropRockMatcher.group("X"));
+                int Y = Integer.parseInt(dropRockMatcher.group("Y"));
+                Direction direction = Direction.getDirection(dropRockMatcher.group("direction"));
+                dropRock(X, Y, direction);
+            } else if ((dropTreeMatcher = getJSONRegexMatcher(command, "dropTree", mainMenuRegexObj)).matches()) {
+                int X = Integer.parseInt(dropTreeMatcher.group("X"));
+                int Y = Integer.parseInt(dropTreeMatcher.group("Y"));
+                Tree type = Tree.getTree(dropTreeMatcher.group("type"));
+                dropTree(X, Y, type);
+            } else if ((dropUnitMatcher = getJSONRegexMatcher(command, "dropUnit", mainMenuRegexObj)).matches()) {
+                int X = Integer.parseInt(dropUnitMatcher.group("X"));
+                int Y = Integer.parseInt(dropUnitMatcher.group("Y"));
+                String type = dropUnitMatcher.group("type");
+                int count = Integer.parseInt(dropUnitMatcher.group("count"));
+                dropUnit(X, Y, type, count);
             } else {
                 MainMenuView.output("invalid");
             }
@@ -227,19 +271,19 @@ public class MainMenuController extends MenuController{
 
 
     
-    public static void setTexture(int X, int Y){
+    public static void setTexture(int X, int Y, Texture type){
 
     }
-    public static void setTexture(int X1, int Y1, int X2, int Y2){
+    public static void setTexture(int X1, int Y1, int X2, int Y2, Texture type){
 
     }
     public static void clear(int X, int Y){
 
     }
-    public static void dropRock(int X, int Y){
+    public static void dropRock(int X, int Y, Direction direction){
 
     }
-    public static void dropTree(int X, int Y){
+    public static void dropTree(int X, int Y, Tree type){
 
     }
     public static void dropUnit(int X, int Y, String type, int count){
