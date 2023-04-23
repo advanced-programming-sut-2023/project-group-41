@@ -4,8 +4,12 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import stronghold.model.components.general.User;
+import stronghold.model.utils.encryption;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +41,6 @@ public class UsersDB {
         Gson gson = new Gson();
         FileWriter usersJSON = new FileWriter(pathToUsersDBJsonFile);
         String jsonData = gson.toJson(this.users, new TypeToken<List<User>>(){}.getType());
-        System.out.println(jsonData);
         BufferedWriter writer = new BufferedWriter(usersJSON);
         writer.write(jsonData);
         writer.close();
@@ -66,5 +69,11 @@ public class UsersDB {
 
     public static void main(String[] args) {
         System.out.println(usersDB.getAtIndex(1).getUsername());
+        try {
+            usersDB.toJSON();
+        } catch (
+                IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
