@@ -3,16 +3,17 @@ package stronghold.controller;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import javafx.css.Match;
+import stronghold.database.java.UsersDB;
 import stronghold.model.components.general.User;
+import stronghold.model.utils.Encryption;
+import stronghold.model.utils.StringParser;
 import stronghold.view.SignUpLoginView;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.HashMap;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class SignUpMenuController extends MenuController{
     private static User currentUser;
@@ -41,18 +42,46 @@ public class SignUpMenuController extends MenuController{
             
             if (registerMatcher.find()) {
 
-                String username = registerMatcher.group(3);
-                String password = registerMatcher.group(5);
-                String passwordConfirmation = registerMatcher.group(6);
-                String email = registerMatcher.group(8);
-                String slogan = registerMatcher.group(10);
+                String username = StringParser.removeQuotes(registerMatcher.group(3));
+                String password = StringParser.removeQuotes(registerMatcher.group(5));
+                String passwordConfirmation = StringParser.removeQuotes(registerMatcher.group(6));
+                String email = StringParser.removeQuotes(registerMatcher.group(8));
+                String slogan = StringParser.removeQuotes(registerMatcher.group(10));
+                String nickname = "null";
 
-                System.out.println(username);
-                System.out.println(password);
-                System.out.println(passwordConfirmation);
-                System.out.println(email);
-                System.out.println(slogan);
+                if(username == null){
+                    SignUpLoginView.output("registerusername404");
+                    continue;
+                }
+                if(password == null){
+                    SignUpLoginView.output("registerpassword404");
+                    continue;
+                }
+                if(passwordConfirmation == null){
+                    SignUpLoginView.output("registerpassword404");
+                    continue;
+                }
+                if(email == null){
+                    SignUpLoginView.output("registeremail404");
+                    continue;
+                }
+                if(slogan == null){
+                    SignUpLoginView.output("registerslogan404");
+                    continue;
+                }
 
+                int passwordRecoveryQuestion = 1;
+                String passwordRecoveryAnswer = "null";
+
+
+                User user = new User(username, Encryption.toSHA256(password), nickname, email, passwordRecoveryQuestion, passwordRecoveryAnswer, slogan);
+                UsersDB.usersDB.addUser(user);
+                try {
+                    UsersDB.usersDB.toJSON();
+                } catch (
+                        IOException e) {
+                    throw new RuntimeException(e);
+                }
                 SignUpLoginView.output("slogan", (Object) slogan);
             }
             else{
