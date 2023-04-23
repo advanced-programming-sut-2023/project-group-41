@@ -21,16 +21,11 @@
 =======
     <list default="true" id="d4900983-f33a-47b2-bf61-9aca166ee9d7" name="Changes" comment="">
 <<<<<<< HEAD
-<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/database/java/UsersDB.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/database/datasets/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/database/datasets/users.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/database/utils/regex/SignUpLoginRegex.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/database/utils/regex/SignUpLoginRegex.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/components/general/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/components/general/User.java" afterDir="false" />
-=======
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
->>>>>>> cf9d4ed2e11e0a563fda1fb0a5cdd2e9d1ce94c6
->>>>>>> fe783edf3e352d9dcf1f18961c45690b1aabc574
 =======
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
 >>>>>>> cf9d4ed2e11e0a563fda1fb0a5cdd2e9d1ce94c6
