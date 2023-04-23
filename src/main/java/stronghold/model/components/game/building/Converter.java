@@ -1,12 +1,11 @@
-package stronghold.model.components.game.building;
+
 
 import stronghold.model.components.game.building.Building;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import stronghold.model.components.game.Resource;
-import stronghold.model.components.game.People;
+import stronghold.model.components.game.enums.Resource;
 
 public class Converter extends Building {
     private HashMap<Resource, Resource> options;

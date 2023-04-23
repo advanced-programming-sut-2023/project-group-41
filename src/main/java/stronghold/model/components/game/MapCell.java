@@ -1,6 +1,7 @@
 package stronghold.model.components.game;
 
 import stronghold.model.components.game.enums.Direction;
+import stronghold.model.components.game.enums.Texture;
 import stronghold.model.components.game.enums.Tree;
 import stronghold.model.components.game.soldeirtype.Building;
 
@@ -8,6 +9,7 @@ public class MapCell {
     private final int x;
     private final int y;
     private boolean isPassable;
+    private Unit unit;
     private Texture texture;
     private Building building;
     private Direction rockDirection;
@@ -32,6 +34,10 @@ public class MapCell {
 
     public Building getBuilding() {
         return building;
+    }
+
+    public Unit getUnit() {
+        return unit;
     }
 
     public Direction getRockDirection() {
@@ -64,5 +70,31 @@ public class MapCell {
 
     public void setTree(Tree tree) {
         this.tree = tree;
+    }
+
+    public char showMovingSoldier(){
+        if(getUnit()!=null)
+            return 'S';
+        else
+            return ' ';
+
+
+    }
+    public char showBuilding(){
+        //walls for 'W'
+        if(getBuilding()!=null)
+            return 'B';
+        else
+            return ' ';
+
+
+    }
+    public char showTree(){
+        if(getUnit()!=null)
+            return 'T';
+        else
+            return ' ';
+
+
     }
 }

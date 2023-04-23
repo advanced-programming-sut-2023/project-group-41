@@ -28,7 +28,7 @@ public enum Tree {
         return Pattern.compile(tree.getRegex()).matcher(input);
     }
 
-    public Tree getTree(String input){
+    public static Tree getTree(String input){
         for (Tree tree : treeArr) {
             if(getMatcher(input, tree).find()) return tree;
         }

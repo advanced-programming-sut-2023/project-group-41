@@ -27,4 +27,12 @@ public class TradeDataBase {
     public static void addTrade(Trade trade){
         trades.add(trade);
     }
+    public static Trade getTradeById(int id){
+        for(Trade trade:trades){
+            if(trade.getId()==id){
+                return trade;
+            }
+        }
+        return null;
+    }
 }
