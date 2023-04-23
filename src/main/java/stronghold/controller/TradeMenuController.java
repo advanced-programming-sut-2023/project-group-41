@@ -10,6 +10,7 @@ import stronghold.model.components.game.trade.Trade;
 import stronghold.model.components.game.trade.TradeDataBase;
 import stronghold.model.components.general.User;
 import stronghold.view.MainMenuView;
+import stronghold.view.ShopMenuView;
 import stronghold.view.TradeMenuView;
 
 import java.io.FileNotFoundException;
@@ -40,6 +41,8 @@ public class TradeMenuController extends MenuController{
 
 
             if(command.matches("back")){
+                TradeMenuView.output("back");
+
                 break;
             } else if (getJSONRegexMatcher(command, "sendTrade", menuRegexPatternsObject).matches()) {
                 //sendTrade();

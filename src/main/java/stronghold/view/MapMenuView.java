@@ -2,9 +2,9 @@ package stronghold.view;
 
 import java.util.Scanner;
 
-public class TradeMenuView extends MenuView {
+public class MapMenuView {
     public static void output(String code, Object... params){
-        String pathToJSON = "src/main/java/stronghold/database/textcontent/TradeMenuResponses.json";
+        String pathToJSON = "src/main/java/stronghold/database/textcontent/MapMenuResponses.json";
         MenuView.output(pathToJSON, code, params);
     }
 

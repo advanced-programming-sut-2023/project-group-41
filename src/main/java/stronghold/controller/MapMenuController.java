@@ -1,14 +1,60 @@
 package stronghold.controller;
 
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import stronghold.model.components.game.Map;
+import stronghold.model.components.game.enums.Resource;
+import stronghold.view.MapMenuView;
+import stronghold.view.MenuView;
+import stronghold.view.ShopMenuView;
 
-public class MapMenuController {
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.HashMap;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+
+public class MapMenuController extends MenuController {
     private static Map map;
     private static int xCordinate;
     private static int yCordinate;
+    private static String pathToRegexJSON = "src/main/java/stronghold/database/utils/regex/MapMenuRegex.json";
 
-    public void showMap(int X, int Y) {
+    public static void run(Scanner scanner){
+        JsonElement regexElement = null;
+        try {
+            regexElement = JsonParser.parseReader(new FileReader(pathToRegexJSON));
+        } catch (
+                FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        JsonObject menuRegexPatternsObject = regexElement.getAsJsonObject();
+        while (true){
+            String command = ShopMenuView.input(scanner).trim();
+            Matcher showMap;
+            Matcher mapShift;
+            Matcher showMapCellDetails;
+
+
+            if(command.matches("back")){
+                MapMenuView.output("back");
+                break;
+            } else if ((showMap =getJSONRegexMatcher(command, "buy", menuRegexPatternsObject)).matches()) {
+                 showMap(Integer.parseInt(showMap.group("x")),Integer.parseInt(showMap.group("y")));
+            } else if ((mapShift=getJSONRegexMatcher(command, "showHistory", menuRegexPatternsObject)).matches()) {
+                //mapShift();
+            } else if (( showMapCellDetails = getJSONRegexMatcher(command, "showPriceList", menuRegexPatternsObject)).matches()) {
+               showMapCellDetails(Integer.parseInt(showMapCellDetails.group("x")),Integer.parseInt(showMapCellDetails.group("y")));
+            }   else {
+                MapMenuView.output("invalid");
+            }
+        }
+
+    }
+
+    public static void showMap(int X, int Y) {
         if (X - 4 < 1) {
             X = 1;
         }
@@ -83,7 +129,7 @@ public class MapMenuController {
 
     }
 
-    public void mapShift(String direction,String direction2,int distance) {
+    public static void mapShift(String direction,String direction2,int distance) {
         if(direction.equals(direction2)){
             System.out.println("Invalid directions!");
             return;
@@ -116,7 +162,7 @@ public class MapMenuController {
 
     }
 
-    public void showMapCellDetails(int X, int Y) {
+    public static void showMapCellDetails(int X, int Y) {
         if(Map.getMapCell(X,Y)==null){
             System.out.println("You are out of bonds!");
             return;
