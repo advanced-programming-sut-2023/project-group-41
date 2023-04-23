@@ -1,0 +1,6 @@
+{
+  "buy": "\\s*buy\\s+((-a\\s+(?<id>\\d+)\\s*)|(-i\\s+(?<message>\\S+|\\\"[^\\\\\"]+\\\")\\s*)){2}$",
+  "sell": "\\s*sell\\s+((-a\\s+(?<id>\\d+)\\s*)|(-i\\s+(?<message>\\S+|\\\"[^\\\\\"]+\\\")\\s*)){2}$",
+  "showPriceList": "\\s*show\\s+price\\s+list\\s*",
+  "back": "\\s*back\\s*"
+}

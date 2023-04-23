@@ -1,0 +1,7 @@
+{
+  "sendTrade": "\\s*trade\\s+((-t\\s+(?<resource>\\S+)\\s*)|(-a\\s+(?<amount>\\d+)\\s*)|(-p\\s+(?<price>\\d+)\\s*)|(-m\\s+(?<message>\\S+|\\\"[^\\\\\"]+\\\")\\s*)){4}$",
+  "tradeList": "\\s*trade\\s+list\\s*",
+  "acceptTrade": "\\s*trade\\s+accept\\s+((-i\\s+(?<id>\\d+)\\s*)|(-m\\s+(?<message>\\S+|\\\"[^\\\\\"]+\\\")\\s*)){2}$",
+  "showHistory": "\\s*trade\\s+history\\s*",
+  "back": "\\s*back\\s*"
+}
