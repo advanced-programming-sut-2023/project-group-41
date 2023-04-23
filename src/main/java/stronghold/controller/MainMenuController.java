@@ -78,17 +78,28 @@ public class MainMenuController extends MenuController{
             } else if ((fearRateMatcher = getJSONRegexMatcher(command, "fearRate", mainMenuRegexObj)).matches()) {
                 fearRate(Integer.parseInt(fearRateMatcher.group(1)));
             } else if ((dropBuildingMatcher = getJSONRegexMatcher(command, "dropBuilding", mainMenuRegexObj)).matches()) {
-                dropBuilding(Integer.parseInt(dropBuildingMatcher.group(1)), Integer.parseInt(dropBuildingMatcher.group(2)), dropBuildingMatcher.group(3));
+                int X = Integer.parseInt(dropBuildingMatcher.group("X"));
+                int Y = Integer.parseInt(dropBuildingMatcher.group("Y"));
+                String type = dropBuildingMatcher.group("type");
+                dropBuilding(X, Y, type);
             } else if ((selectBuildingMatcher = getJSONRegexMatcher(command, "selectBuilding", mainMenuRegexObj)).matches()) {
-                selectBuilding(Integer.parseInt(selectBuildingMatcher.group(1)), Integer.parseInt(selectBuildingMatcher.group(2)));
+                int X = Integer.parseInt(selectBuildingMatcher.group("X"));
+                int Y = Integer.parseInt(selectBuildingMatcher.group("Y"));
+                selectBuilding(X, Y);
             } else if ((createUnitMatcher = getJSONRegexMatcher(command, "createUnit", mainMenuRegexObj)).matches()) {
-                createUnit(createUnitMatcher.group(1), Integer.parseInt(createUnitMatcher.group(2)));
+                String type = createUnitMatcher.group("type");
+                int count = Integer.parseInt(createUnitMatcher.group("count"));
+                createUnit(type, count);
             } else if (getJSONRegexMatcher(command, "repair", mainMenuRegexObj).matches()) {
                 repair();
             } else if ((selectUnitMatcher = getJSONRegexMatcher(command, "selectUnit", mainMenuRegexObj)).matches() ) {
-                selectUnit(Integer.parseInt(selectUnitMatcher.group(1)), Integer.parseInt(selectUnitMatcher.group(2)));
+                int X = Integer.parseInt(selectUnitMatcher.group("X"));
+                int Y = Integer.parseInt(selectUnitMatcher.group("Y"));
+                selectUnit(X, Y);
             } else if ((moveUnitToMatcher = getJSONRegexMatcher(command, "moveUnitTo", mainMenuRegexObj)).matches()) {
-                moveUnitTo(Integer.parseInt(moveUnitToMatcher.group(1)), Integer.parseInt(moveUnitToMatcher.group(2)));
+                int X = Integer.parseInt(moveUnitToMatcher.group("X"));
+                int Y = Integer.parseInt(moveUnitToMatcher.group("Y"));
+                moveUnitTo(X, Y);
             } else if ((patrolUnitMatcher = getJSONRegexMatcher(command, "patrolUnit", mainMenuRegexObj)).matches()) {
                 int X1 = Integer.parseInt(patrolUnitMatcher.group("X1"));
                 int Y1 = Integer.parseInt(patrolUnitMatcher.group("Y1"));
@@ -96,19 +107,25 @@ public class MainMenuController extends MenuController{
                 int Y2 = Integer.parseInt(patrolUnitMatcher.group("Y2"));
                 patrolUnit(X1, Y1, X2, Y2);
             } else if ((setMatcher = getJSONRegexMatcher(command, "set", mainMenuRegexObj)).matches()) {
+                int X = Integer.parseInt(setMatcher.group("X"));
+                int Y = Integer.parseInt(setMatcher.group("Y"));
                 State stateOfUnit = State.getState(setMatcher.group("state"));
-                set(Integer.parseInt(setMatcher.group(1)), Integer.parseInt(setMatcher.group(2)), stateOfUnit);
+                set(X, Y, stateOfUnit);
             } else if ((attackEnemyMatcher = getJSONRegexMatcher(command, "attackEnemy", mainMenuRegexObj)).matches()) {
                 //command: attack -e [enemy’s x] [enemy’s y]
                 attackEnemy(Integer.parseInt(attackEnemyMatcher.group(1)), Integer.parseInt(attackEnemyMatcher.group(2)));
             } else if ((airAttakMatcher = getJSONRegexMatcher(command, "airAttack", mainMenuRegexObj)).matches()) {
                 //command: attack -x [x] -y [y]
-                airAttack(Integer.parseInt(airAttakMatcher.group(1)), Integer.parseInt(airAttakMatcher.group(2)));
+                int X = Integer.parseInt(airAttakMatcher.group("X"));
+                int Y = Integer.parseInt(airAttakMatcher.group("Y"));
+                airAttack(X, Y);
             } else if ((pourOilMatcher = getJSONRegexMatcher(command, "pourOil", mainMenuRegexObj)).matches()) {
                 Direction direction = Direction.getDirection(pourOilMatcher.group("direction"));
                 pourOil(direction);
             } else if ((digTunnelMatcher = getJSONRegexMatcher(command, "digTunnel", mainMenuRegexObj)).matches()) {
-                digTunnel(Integer.parseInt(digTunnelMatcher.group(1)), Integer.parseInt(digTunnelMatcher.group(2)));
+                int X = Integer.parseInt(digTunnelMatcher.group("X"));
+                int Y = Integer.parseInt(digTunnelMatcher.group("Y"));
+                digTunnel(X, Y);
             } else if ((buildMatcher = getJSONRegexMatcher(command, "build", mainMenuRegexObj)).matches()) {
                 build(buildMatcher.group(1));
             } else if (getJSONRegexMatcher(command, "disbandUnit", mainMenuRegexObj).matches()) {
