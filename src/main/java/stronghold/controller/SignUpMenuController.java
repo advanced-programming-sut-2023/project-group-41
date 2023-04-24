@@ -126,7 +126,7 @@ public class SignUpMenuController extends MenuController{
                 SignUpLoginView.output("successfulLogin");
 
             } else if (forgotMyPassMatcher.find()) {
-                String username = StringParser.removeQuotes(forgotMyPassMatcher.group(1));
+                String username = StringParser.removeQuotes(forgotMyPassMatcher.group("username"));
                 // TODO: logical action needed
 
                 // TODO: checking password recovery question
