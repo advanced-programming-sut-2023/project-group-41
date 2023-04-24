@@ -4,24 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-<<<<<<< HEAD
-    <list default="true" id="f9afadd4-5ca2-4ec3-b223-f6a4c68e10e0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/enums/State.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/controller/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/controller/MainMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/database/utils/regex/MainMenuRegex.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/database/utils/regex/MainMenuRegex.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/building/Building.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/building/Building.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/building/Castle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/building/Castle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/building/Converter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/building/Converter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/building/ResourceMaker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/building/ResourceMaker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/building/Storage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/building/Storage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/building/UnitMaker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/building/UnitMaker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/view/MainMenuView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/view/MainMenuView.java" afterDir="false" />
-=======
     <list default="true" id="d4900983-f33a-47b2-bf61-9aca166ee9d7" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
->>>>>>> cf9d4ed2e11e0a563fda1fb0a5cdd2e9d1ce94c6
+      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/StringParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/stronghold_jar/stronghold.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/stronghold_jar/stronghold.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/controller/SignUpMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/controller/SignUpMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/database/datasets/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/database/datasets/users.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/database/java/UsersDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/database/java/UsersDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/database/textcontent/SignUpLoginMenuResponses.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/database/textcontent/SignUpLoginMenuResponses.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/Validator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/encryption.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/Encryption.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +34,13 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="workspaceImportEnabled" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
   <component name="ProjectId" id="2OCaiWnhB6UpIzQlXBfaos2QULR" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -49,24 +48,22 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
+    &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/francois/Desktop/SH&quot;,
+    &quot;last_opened_file_path&quot;: &quot;F:/Stronghold/project-group-41&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
-  }
-}</component>
+    }
+    }</component>
   <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="corretto-11" />
@@ -96,6 +93,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="UsersDB" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="stronghold.database.java.UsersDB" />
+      <module name="stronghold" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="stronghold.database.java.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <module name="project-group-41" />
       <method v="2">
@@ -110,12 +120,14 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Application.UsersDB" />
       <item itemvalue="Application.MyJavaFXApp" />
       <item itemvalue="Application.Main" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.UsersDB" />
         <item itemvalue="Application.MyJavaFXApp" />
       </list>
     </recent_temporary>
@@ -134,9 +146,7 @@
       <workItem from="1681833622790" duration="43000" />
       <workItem from="1681919841663" duration="2268000" />
       <workItem from="1681922131756" duration="602000" />
-      <workItem from="1681923376063" duration="5768000" />
-      <workItem from="1682024460540" duration="36000" />
-      <workItem from="1682068700117" duration="2632000" />
+      <workItem from="1681923376063" duration="5766000" />
     </task>
     <servers />
   </component>
@@ -153,9 +163,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="Revert &quot;added MainMenuController&quot;&#10;&#10;This reverts commit 1a31f3a3" />
-    <option name="LAST_COMMIT_MESSAGE" value="Revert &quot;added MainMenuController&quot;&#10;&#10;This reverts commit 1a31f3a3" />
   </component>
 </project>
