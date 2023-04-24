@@ -3,5 +3,12 @@
   "random_password": "Your random password is: $VAR1$\nPlease re-enter your password here:",
   "slogan": "Your slogan is ”$VAR1$”",
 
+  "registerusername404": "Error!: username not provided!",
+  "registerpassword404": "Error!: password or password confirmation not provided!",
+  "registeremail404": "Error!: email not provided!",
+  "registerslogan404": "Error!: slogan not provided!",
+  "emailformatincorrect": "Error!: email's format is incorrect",
+  "weakpassword": "Error!: password is weak!",
+  "unmatchingpasswords": "Error!: unmatching passwords!",
   "invalid": "Invalid command!"
 }

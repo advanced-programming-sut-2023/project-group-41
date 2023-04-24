@@ -11,7 +11,6 @@ public class User {
     private String passwordRecoveryAnswer;
     private String slogan;
     private int score;
-    private Government government;
 
     public User(String username, String password, String nickname, String email, int passwordRecoveryQuestion, String passwordRecoveryAnswer, String slogan) {
         this.username = username;
@@ -85,10 +84,6 @@ public class User {
 
     public void setScore(int score) {
         this.score = score;
-    }
-
-    public Government getTribe() {
-        return government;
     }
 
     public int getRank(){
