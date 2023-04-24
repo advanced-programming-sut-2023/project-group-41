@@ -6,9 +6,18 @@
   "registerusername404": "Error!: username not provided!",
   "registerpassword404": "Error!: password or password confirmation not provided!",
   "registeremail404": "Error!: email not provided!",
+  "registernickname404": "Error!: nickname not provided!",
   "registerslogan404": "Error!: slogan not provided!",
   "emailformatincorrect": "Error!: email's format is incorrect",
   "weakpassword": "Error!: password is weak!",
   "unmatchingpasswords": "Error!: unmatching passwords!",
+
+  "unmatchingpassanduser": "Username and password didn’t match!",
+  "successfulLogin": "user logged in successfully!",
+
+  "passChanged": "password changed successfully",
+
   "invalid": "Invalid command!"
+
+
 }

@@ -68,7 +68,7 @@ public class MainMenuController extends MenuController{
             Matcher dropTreeMatcher;
             Matcher dropUnitMatcher;
 
-            if(command.matches("back")){
+            if(command.matches("user\\s+logout")){
                 break;
             } else if (getJSONRegexMatcher(command, "showPopularityFactors", mainMenuRegexObj).matches()) {
                 showPopularityFactors();

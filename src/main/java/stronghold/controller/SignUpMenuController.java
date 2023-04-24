@@ -39,7 +39,10 @@ public class SignUpMenuController extends MenuController{
             String input = SignUpLoginView.input(scanner);
 
             Matcher registerMatcher = getJSONRegexMatcher(input, "register", menuRegexPatternsObject);
-            
+            Matcher loginMatcher = getJSONRegexMatcher(input, "login", menuRegexPatternsObject);
+            Matcher loginStayLoggedInMatcher = getJSONRegexMatcher(input, "loginStayLoggedIn", menuRegexPatternsObject);
+            Matcher forgotMyPassMatcher = getJSONRegexMatcher(input, "forgotMyPass", menuRegexPatternsObject);
+
             if (registerMatcher.find()) {
 
                 String username = StringParser.removeQuotes(registerMatcher.group(3));
@@ -47,7 +50,7 @@ public class SignUpMenuController extends MenuController{
                 String passwordConfirmation = StringParser.removeQuotes(registerMatcher.group(6));
                 String email = StringParser.removeQuotes(registerMatcher.group(8));
                 String slogan = StringParser.removeQuotes(registerMatcher.group(10));
-                String nickname = "null";
+                String nickname = StringParser.removeQuotes(registerMatcher.group(12));
 
                 if(username == null){
                     SignUpLoginView.output("registerusername404");
@@ -69,10 +72,28 @@ public class SignUpMenuController extends MenuController{
                     SignUpLoginView.output("registerslogan404");
                     continue;
                 }
+                if(nickname == null){
+                    SignUpLoginView.output("registernickname404");
+                    continue;
+                }
+                if (!password.equals(passwordConfirmation)){
+                    SignUpLoginView.output("unmatchingpasswords");
+                    continue;
+                }
+                // TODO: checking password recovery question
 
-                int passwordRecoveryQuestion = 1;
-                String passwordRecoveryAnswer = "null";
+                String questionPickInput = SignUpLoginView.input(scanner);
+                Matcher questionPickMatcher = getJSONRegexMatcher(questionPickInput, "questionPick", menuRegexPatternsObject);
 
+                int passwordRecoveryQuestion = Integer.parseInt(questionPickMatcher.group("questionNumber"));
+                String passwordRecoveryAnswer = StringParser.removeQuotes(questionPickMatcher.group("answer"));
+                String passwordRecoveryAnswerConfirmation = StringParser.removeQuotes(questionPickMatcher.group("answerConfirm"));
+
+                if (!passwordRecoveryAnswer.equals(passwordRecoveryAnswerConfirmation)){
+                    SignUpLoginView.output("unmatchingpasswords");
+                    continue;
+                }
+                // TODO: random pass needed to be added
 
                 User user = new User(username, Encryption.toSHA256(password), nickname, email, passwordRecoveryQuestion, passwordRecoveryAnswer, slogan);
                 UsersDB.usersDB.addUser(user);
@@ -83,8 +104,47 @@ public class SignUpMenuController extends MenuController{
                     throw new RuntimeException(e);
                 }
                 SignUpLoginView.output("slogan", (Object) slogan);
-            }
-            else{
+            } else if (loginMatcher.find()) {
+                String username = StringParser.removeQuotes(loginMatcher.group("username"));
+                String password = StringParser.removeQuotes(loginMatcher.group("pass"));
+                SignUpLoginView.output("successfulLogin");
+                
+            } else if (loginStayLoggedInMatcher.find()) {
+                String username = StringParser.removeQuotes(loginStayLoggedInMatcher.group("username"));
+                String password = StringParser.removeQuotes(loginStayLoggedInMatcher.group("pass"));
+                // TODO: user is not created
+                if (true) {
+                    SignUpLoginView.output("unmatchingpassanduser");
+                    continue;
+                }
+                // TODO: wrong pass
+                if (true) {
+                    SignUpLoginView.output("unmatchingpassanduser");
+                    continue;
+                }
+                // TODO: wrong answer penalty
+                SignUpLoginView.output("successfulLogin");
+
+            } else if (forgotMyPassMatcher.find()) {
+                String username = StringParser.removeQuotes(forgotMyPassMatcher.group(1));
+                // TODO: logical action needed
+
+                // TODO: checking password recovery question
+                String questionPickInput = SignUpLoginView.input(scanner);
+                Matcher questionPickMatcher = getJSONRegexMatcher(questionPickInput, "questionPick", menuRegexPatternsObject);
+
+                int passwordRecoveryQuestion = Integer.parseInt(questionPickMatcher.group("questionNumber"));
+                String passwordRecoveryAnswer = StringParser.removeQuotes(questionPickMatcher.group("answer"));
+                String passwordRecoveryAnswerConfirmation = StringParser.removeQuotes(questionPickMatcher.group("answerConfirm"));
+
+                if (!passwordRecoveryAnswer.equals(passwordRecoveryAnswerConfirmation)){
+                    SignUpLoginView.output("unmatchingpasswords");
+                    continue;
+                }
+
+                SignUpLoginView.output("passChanged");
+
+            } else{
                 SignUpLoginView.output("invalid");
             }
 
