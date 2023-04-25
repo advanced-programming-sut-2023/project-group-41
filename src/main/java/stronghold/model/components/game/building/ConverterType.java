@@ -1,9 +1,6 @@
 package stronghold.model.components.game.building;
 
-import stronghold.model.components.game.Resource;
-
-import java.nio.file.attribute.FileAttribute;
-import java.util.HashMap;
+import stronghold.model.components.game.enums.Resource;
 
 public enum ConverterType {
 
@@ -13,7 +10,10 @@ public enum ConverterType {
     FLETCHER(100, 100, 1, false, Resource.WOOD, 20, Resource.WOOD, Resource.CROSS_BOW, 100),
     POLETURNER(100, 100, 1, false, Resource.WOOD, 10, Resource.WOOD, Resource.SPEAR, 100),
     BAKERY(100, 0, 1, false, Resource.WOOD, 10, Resource.FLOUR, Resource.BREAD, 100),
-    BREWING(100, 0, 1, false, Resource.WOOD, 10,Resource.HOPS, Resource.ALE,  100);
+    BREWING(100, 0, 1, false, Resource.WOOD, 10,Resource.HOPS, Resource.ALE,  100),
+    BARRACKS(100, 0, 0, false, Resource.STONE, 15, Resource.GOLD, Resource.PEOPLE, 100 ),
+    MERCENARY_POST(100, 0, 0, false, Resource.WOOD, 10, Resource.GOLD, Resource.PEOPLE, 100),
+    SHOP(100, 0, 1, false, Resource.WOOD, 5, Resource.GOLD, Resource.GOLD, 0);
 
     private int health;
     private int gold;

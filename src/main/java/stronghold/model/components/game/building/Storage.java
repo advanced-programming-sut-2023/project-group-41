@@ -8,17 +8,23 @@ import java.util.HashMap;
 
 import stronghold.model.components.game.enums.Resource;
 
+
 public class Storage extends Building {
 
-    private int size;
+    private StorageType storageType;
+    private int capacity;
     private HashMap<Resource, Integer> list;
 
-    public Storage(int health, int workerNum, boolean engineerWorkers, HashMap<Resource, Integer> neededResources, int size, HashMap<Resource, Integer> list) {
-        super(health, workerNum, engineerWorkers, neededResources);
-        this.size = size;
-        this.list = list;
+    public Storage(StorageType storageType) {
+        super(storageType.getHealth(), storageType.getGold(), storageType.getWorkerNum(), storageType.isEngineerWorkers(), storageType.getNeededResource(), storageType.getNeededResourceCount());
+        this.storageType = storageType;
+        this.capacity = storageType.getCapacity();
+        list = new HashMap<>();
     }
 
+    public StorageType getStorageType() {
+        return storageType;
+    }
 
     public void addResources(Resource resources, int amount) {
         if (list.containsKey(resources)) list.replace(resources, list.get(resources) + amount);
@@ -29,8 +35,8 @@ public class Storage extends Building {
         list.put(resources, list.get(resources) - amount);
     }
 
-    public int getSize() {
-        return size;
+    public int getCapacity() {
+        return capacity;
     }
 
     public HashMap<Resource, Integer> getList() {

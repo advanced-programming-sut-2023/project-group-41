@@ -28,7 +28,11 @@ public enum Resource {
     HORSE("horse"),
     CROSS_BOW("cross bow"),
 
-    COW("cow");
+    COW("cow"),
+    WORKER("worker"),
+    ENGINEER("engineer"),
+
+    PEOPLE("people");
 
     private String regex;
 

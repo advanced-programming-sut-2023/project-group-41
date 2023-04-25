@@ -12,6 +12,15 @@ public class Government {
     private String[] popularityFactors;
     private int popularity;
     private int foodRate;
+
+    public void setPopularity(int popularity) {
+        this.popularity = popularity;
+    }
+
+    public void setPeople(ArrayList<People> people) {
+        this.people = people;
+    }
+
     private int taxRate;
     private int fearRate;
     private HashMap<Resource, Integer> resources;

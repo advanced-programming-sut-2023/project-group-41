@@ -1,13 +1,14 @@
 package stronghold.model.components.game.building;
 
-import stronghold.model.components.game.Resource;
+
+import stronghold.model.components.game.enums.Resource;
 
 public abstract class Building {
     protected int health;
     protected int cost;
     protected int workerNum;
     protected boolean engineerWorkers;
-    protected Resource  neededResource;
+    protected Resource neededResource;
     protected int neededResourceCount;
 
     public Building(int health,int cost, int workerNum, boolean engineerWorkers, Resource neededResources, int neededResourceCount) {

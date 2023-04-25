@@ -1,6 +1,6 @@
 package stronghold.model.components.game.building;
 
-import stronghold.model.components.game.Resource;
+import stronghold.model.components.game.enums.Resource;
 
 public enum ResourceMakerType {
     WHEAT_FARM(100, 0, 1, 15, Resource.WHEAT, 0,  100),
@@ -11,7 +11,8 @@ public enum ResourceMakerType {
     PITCH_RIG(100, 0, 1, 20, Resource.PITCH, 0, 100),
     QUARRY(100, 0, 3, 20, Resource.STONE, 100, 100),
     IRON_MINE(100, 0, 2, 20, Resource.IRON, 0, 100),
-    STABLE(100, 400, 0, 20, Resource.HORSE, 4, 100);
+    STABLE(100, 400, 0, 20, Resource.HORSE, 4, 100),
+    WOOD_CUTTER(100, 0, 1, 3, Resource.WOOD, 0, 100);
 
 
 
@@ -24,7 +25,6 @@ public enum ResourceMakerType {
     private Resource resource;
     private int limit;
     private int rate;
-
     ResourceMakerType(int health, int gold, int workerNum,
                        int neededResourceCount, Resource resource,int limit, int rate) {
         this.health = health;
