@@ -1,6 +1,7 @@
 package stronghold.controller;
 
 import com.google.gson.JsonObject;
+import javafx.scene.control.skin.SplitPaneSkin;
 import stronghold.database.java.UsersDB;
 import stronghold.view.SignUpLoginView;
 
@@ -15,15 +16,38 @@ public class MenuController {
         return Pattern.compile(pattern).matcher(input);
     }
 
-    public static boolean usernameExists(String username){
-        return UsersDB.usersDB.getUserByUsername(username) == null;
+    public static boolean usernameFormatCorrect(String username) {
+        return username.matches("^[A-Za-z0-9_]+$");
     }
 
-    public static boolean passwordIsStrong(String password){
-        return true;
+    public static boolean usernameExists(String username){
+        return UsersDB.usersDB.getUserByUsername(username) != null;
+    }
+
+    public static boolean emailIsValid(String email) {
+        return email.matches("^[A-Za-z0-9_.]+@[A-Za-z0-9.]+\\.[A-Za-z0-9.]+$");
+    }
+
+    public static boolean emailExists(String email){
+        return UsersDB.usersDB.getUserByEmail(email) != null;
+    }
+
+    public static boolean passwordIsStrong(String password) {
+
+        boolean hasLowercase = password.matches("^.*[a-z].*$");
+        boolean hasUppercase = password.matches("^.*[A-Z].*$");
+        boolean hasDigit = password.matches("^.*[0-9].*$");
+        boolean hasSymbol = !password.matches("^[A-Za-z0-9]+$");
+
+        if(password.length() < 6)
+            return false;
+
+        return hasLowercase && hasUppercase && hasDigit && hasSymbol;
     }
 
     public static void run(Scanner scanner){
 
     }
+
+
 }

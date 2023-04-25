@@ -37,6 +37,7 @@ public class SignUpMenuController extends MenuController{
 
         while(true){
             String input = SignUpLoginView.input(scanner);
+            
 
             Matcher registerMatcher = getJSONRegexMatcher(input, "register", menuRegexPatternsObject);
             Matcher registerRandPassMatcher = getJSONRegexMatcher(input,
@@ -56,35 +57,58 @@ public class SignUpMenuController extends MenuController{
                 String slogan = StringParser.removeQuotes(registerMatcher.group(10));
                 String nickname = StringParser.removeQuotes(registerMatcher.group(12));
 
-                if(username == null){
+                if(username == null) {
                     SignUpLoginView.output("registerusername404");
                     continue;
                 }
-                if(password == null){
+                if(password == null) {
                     SignUpLoginView.output("registerpassword404");
                     continue;
                 }
-                if(passwordConfirmation == null){
+                if(passwordConfirmation == null) {
                     SignUpLoginView.output("registerpassword404");
                     continue;
                 }
-                if(email == null){
+                if(email == null) {
                     SignUpLoginView.output("registeremail404");
                     continue;
                 }
-                if(slogan == null){
+                if(slogan == null) {
                     SignUpLoginView.output("registerslogan404");
                     continue;
                 }
-                if(nickname == null){
+                if(nickname == null) {
                     SignUpLoginView.output("registernickname404");
                     continue;
                 }
-                if (!password.equals(passwordConfirmation)){
+
+                if(!usernameFormatCorrect(username)) {
+                    SignUpLoginView.output("invalidusername");
+                    continue;
+                }
+                if(usernameExists(username)) {
+                    SignUpLoginView.output("usernameexists");
+                    continue;
+                }
+                if(!passwordIsStrong(password)) {
+                    SignUpLoginView.output("passwordweak");
+                    continue;
+                }
+                if (!password.equals(passwordConfirmation)) {
                     SignUpLoginView.output("unmatchingpasswords");
                     continue;
                 }
-                // TODO: checking password recovery question
+                if(emailExists(email)) {
+                    SignUpLoginView.output("emailexists");
+                    continue;
+                }
+                if(!emailIsValid(email)) {
+                    SignUpLoginView.output("invalidemail");
+                    continue;
+                }
+
+
+                SignUpLoginView.output("showsecurityquestions");
 
                 String questionPickInput = SignUpLoginView.input(scanner);
                 Matcher questionPickMatcher = getJSONRegexMatcher(questionPickInput,
@@ -94,12 +118,16 @@ public class SignUpMenuController extends MenuController{
                 String passwordRecoveryAnswer = "null";
                 String passwordRecoveryAnswerConfirmation = "null";
 
+
+
                 while(!questionPickMatcher.find()){
                     if(questionPickInput.equals("Exit")){
                         return;
                     }
                     SignUpLoginView.output("recoveryquestion404");
                     questionPickInput = SignUpLoginView.input(scanner);
+                    questionPickMatcher = getJSONRegexMatcher(questionPickInput,
+                            "questionPick", menuRegexPatternsObject);
                 }
 
                  passwordRecoveryQuestion = Integer.parseInt(questionPickMatcher.group("questionNumber"));
