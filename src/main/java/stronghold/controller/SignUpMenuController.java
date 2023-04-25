@@ -39,9 +39,13 @@ public class SignUpMenuController extends MenuController{
             String input = SignUpLoginView.input(scanner);
 
             Matcher registerMatcher = getJSONRegexMatcher(input, "register", menuRegexPatternsObject);
+            Matcher registerRandPassMatcher = getJSONRegexMatcher(input,
+                    "register_randpass", menuRegexPatternsObject);
             Matcher loginMatcher = getJSONRegexMatcher(input, "login", menuRegexPatternsObject);
-            Matcher loginStayLoggedInMatcher = getJSONRegexMatcher(input, "loginStayLoggedIn", menuRegexPatternsObject);
-            Matcher forgotMyPassMatcher = getJSONRegexMatcher(input, "forgotMyPass", menuRegexPatternsObject);
+            Matcher loginStayLoggedInMatcher = getJSONRegexMatcher(input, "loginStayLoggedIn",
+                    menuRegexPatternsObject);
+            Matcher forgotMyPassMatcher = getJSONRegexMatcher(input, "forgotMyPass",
+                    menuRegexPatternsObject);
 
             if (registerMatcher.find()) {
 
@@ -83,11 +87,26 @@ public class SignUpMenuController extends MenuController{
                 // TODO: checking password recovery question
 
                 String questionPickInput = SignUpLoginView.input(scanner);
-                Matcher questionPickMatcher = getJSONRegexMatcher(questionPickInput, "questionPick", menuRegexPatternsObject);
+                Matcher questionPickMatcher = getJSONRegexMatcher(questionPickInput,
+                        "questionPick", menuRegexPatternsObject);
 
-                int passwordRecoveryQuestion = Integer.parseInt(questionPickMatcher.group("questionNumber"));
-                String passwordRecoveryAnswer = StringParser.removeQuotes(questionPickMatcher.group("answer"));
-                String passwordRecoveryAnswerConfirmation = StringParser.removeQuotes(questionPickMatcher.group("answerConfirm"));
+                int passwordRecoveryQuestion = - 1;
+                String passwordRecoveryAnswer = "null";
+                String passwordRecoveryAnswerConfirmation = "null";
+
+                while(!questionPickMatcher.find()){
+                    if(questionPickInput.equals("Exit")){
+                        return;
+                    }
+                    SignUpLoginView.output("recoveryquestion404");
+                    questionPickInput = SignUpLoginView.input(scanner);
+                }
+
+                 passwordRecoveryQuestion = Integer.parseInt(questionPickMatcher.group("questionNumber"));
+                 passwordRecoveryAnswer = StringParser.removeQuotes(questionPickMatcher.group(
+                        "answer"));
+                 passwordRecoveryAnswerConfirmation = StringParser.removeQuotes(
+                        questionPickMatcher.group("answerConfirm"));
 
                 if (!passwordRecoveryAnswer.equals(passwordRecoveryAnswerConfirmation)){
                     SignUpLoginView.output("unmatchingpasswords");
@@ -95,7 +114,8 @@ public class SignUpMenuController extends MenuController{
                 }
                 // TODO: random pass needed to be added
 
-                User user = new User(username, Encryption.toSHA256(password), nickname, email, passwordRecoveryQuestion, passwordRecoveryAnswer, slogan);
+                User user = new User(username, Encryption.toSHA256(password)
+                        , nickname, email, passwordRecoveryQuestion, passwordRecoveryAnswer, slogan);
                 UsersDB.usersDB.addUser(user);
                 try {
                     UsersDB.usersDB.toJSON();
@@ -103,7 +123,7 @@ public class SignUpMenuController extends MenuController{
                         IOException e) {
                     throw new RuntimeException(e);
                 }
-                SignUpLoginView.output("slogan", (Object) slogan);
+                SignUpLoginView.output("usercreated", (Object) username, (Object) nickname);
             } else if (loginMatcher.find()) {
                 String username = StringParser.removeQuotes(loginMatcher.group("username"));
                 String password = StringParser.removeQuotes(loginMatcher.group("pass"));

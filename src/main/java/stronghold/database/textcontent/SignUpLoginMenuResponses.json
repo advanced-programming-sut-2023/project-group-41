@@ -2,6 +2,11 @@
   "security_question": "Pick your security question: 1. What is my father’s name? 2. What was my first pet’s name? 3. What is my mother’s last name?",
   "random_password": "Your random password is: $VAR1$\nPlease re-enter your password here:",
   "slogan": "Your slogan is ”$VAR1$”",
+  "usercreated": "User \"$VAR1$\" with nickname \"$VAR2$\" successfully created.",
+
+  "successfulLogin": "User logged in successfully!",
+
+  "passChanged": "Password changed successfully",
 
   "registerusername404": "Error!: username not provided!",
   "registerpassword404": "Error!: password or password confirmation not provided!",
@@ -12,12 +17,11 @@
   "weakpassword": "Error!: password is weak!",
   "unmatchingpasswords": "Error!: unmatching passwords!",
 
-  "unmatchingpassanduser": "Username and password didn’t match!",
-  "successfulLogin": "user logged in successfully!",
+  "recoveryquestion404": "Error!: recovery question not provided!",
 
-  "passChanged": "password changed successfully",
+  "unmatchingpassanduser": "Error!: Username and password didn’t match!",
 
-  "invalid": "Invalid command!"
+  "invalid": "Error!: Invalid command!"
 
 
 }

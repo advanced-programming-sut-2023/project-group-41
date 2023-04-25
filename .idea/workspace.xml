@@ -5,15 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d4900983-f33a-47b2-bf61-9aca166ee9d7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/StringParser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/stronghold_jar/stronghold.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/stronghold_jar/stronghold.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/controller/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/controller/MenuController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/controller/SignUpMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/controller/SignUpMenuController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/database/datasets/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/database/datasets/users.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/database/java/UsersDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/database/java/UsersDB.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/database/textcontent/SignUpLoginMenuResponses.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/database/textcontent/SignUpLoginMenuResponses.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/Validator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/encryption.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/Encryption.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/database/utils/regex/SignUpLoginRegex.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/database/utils/regex/SignUpLoginRegex.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
