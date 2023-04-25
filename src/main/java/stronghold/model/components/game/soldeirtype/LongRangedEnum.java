@@ -1,28 +1,25 @@
 package stronghold.model.components.game.soldeirtype;
 
-public enum FighterEnum {
-    spearMan(3,1,3,1,false,false),
-    pikeMan(2,4,3,1,false,false),
-    maceMan(3,3,4,1,false,false),
-    swordsMan(1,1,5,1,false,false),
-    Knight(5,4,5,1,false,true),
-    blackMonk(2,3,3,1,false,false),
-    slaves(4,0,1,1,false,false),
-    assassins(3,3,3,1,true,false),
-    arabianSwordsMen(5,4,4,1,false,false);
+public enum LongRangedEnum {
+    archer(4,2,2,1,3,false),
+    crossbowMen(2,3,2,1,2,false),
+    archerBow(4,2,2,1,3,false),
+    slingers(4,1,2,1,1,false),
+    horseArcher(5,3,2,1,2,true),
+    fireThrowers(5,3,4,1,2,false);
 
 
     private int speed;
     private int defense;
     private int offense;
     private int price;
-    private boolean isAssassin;
+    private int range;
     private boolean isHorsed;
-   FighterEnum(  int speed, int defense, int offense, int price,boolean isAssassin, boolean isHorsed){
+    LongRangedEnum(  int speed, int defense, int offense, int price,int  range, boolean isHorsed){
 
         this.defense=defense;
         this.offense=offense;
-        this.isAssassin=isAssassin;
+        this.range=range;
         this.isHorsed=isHorsed;
         this.speed=speed;
         this.price=price;
@@ -45,11 +42,12 @@ public enum FighterEnum {
         return speed;
     }
 
-    public boolean isAssassin() {
-        return isAssassin;
+    public int getRange() {
+        return range;
     }
 
     public boolean isHorsed() {
         return isHorsed;
     }
 }
+
