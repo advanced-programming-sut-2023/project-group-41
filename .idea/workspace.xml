@@ -4,14 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d4900983-f33a-47b2-bf61-9aca166ee9d7" name="Changes" comment="">
+    <list default="true" id="d4900983-f33a-47b2-bf61-9aca166ee9d7" name="Changes" comment="building classes added">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/controller/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/controller/MenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/controller/SignUpMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/controller/SignUpMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/database/java/UsersDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/database/java/UsersDB.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/database/textcontent/MapMenuResponses..json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/database/textcontent/MapMenuResponses.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/database/textcontent/SignUpLoginMenuResponses.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/database/textcontent/SignUpLoginMenuResponses.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/view/MenuView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/view/MenuView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,17 +21,15 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="building_update" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
-  </component>
-  <component name="MavenImportPreferences">
-    <option name="importingSettings">
-      <MavenImportingSettings>
-        <option name="workspaceImportEnabled" value="true" />
-      </MavenImportingSettings>
-    </option>
   </component>
   <component name="ProjectId" id="2OCaiWnhB6UpIzQlXBfaos2QULR" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -50,6 +42,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;last_opened_file_path&quot;: &quot;F:/Stronghold/project-group-41&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -62,6 +55,11 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
     }
     }</component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="stronghold.model.components.game.building" />
+    </key>
+  </component>
   <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="corretto-11" />
@@ -161,6 +159,28 @@
       <workItem from="1681922131756" duration="602000" />
       <workItem from="1681923376063" duration="5766000" />
     </task>
+    <task id="LOCAL-00001" summary="converter and resource maker building completed">
+      <created>1682425429207</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1682425429208</updated>
+    </task>
+    <task id="LOCAL-00002" summary="building classes completed">
+      <created>1682451274377</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1682451274377</updated>
+    </task>
+    <task id="LOCAL-00003" summary="building classes added">
+      <created>1682451549737</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1682451549737</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -176,5 +196,11 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="converter and resource maker building completed" />
+    <MESSAGE value="building classes completed" />
+    <MESSAGE value="building classes added" />
+    <option name="LAST_COMMIT_MESSAGE" value="building classes added" />
   </component>
 </project>
