@@ -1,6 +1,6 @@
 package stronghold.model.components.game.trade;
 
-import stronghold.model.components.game.enums.Resource;
+import stronghold.model.components.game.Resource;
 import stronghold.model.components.general.User;
 
 public class Trade {

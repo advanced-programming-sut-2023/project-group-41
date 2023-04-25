@@ -3,17 +3,13 @@ package stronghold.controller;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import javafx.css.Match;
-import stronghold.model.components.game.Government;
 import stronghold.model.components.game.Map;
 import stronghold.model.components.game.enums.Direction;
 import stronghold.model.components.game.enums.State;
 import stronghold.model.components.game.enums.Texture;
 import stronghold.model.components.game.enums.Tree;
-import stronghold.model.components.game.soldeirtype.Building;
 import stronghold.model.components.general.User;
 import stronghold.view.MainMenuView;
-import stronghold.view.SignUpLoginView;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;

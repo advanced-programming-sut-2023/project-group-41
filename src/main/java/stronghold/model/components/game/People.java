@@ -1,6 +1,5 @@
 package stronghold.model.components.game;
 
-import stronghold.model.components.game.enums.Resource;
 import stronghold.model.components.general.User;
 
 import java.util.ArrayList;
@@ -21,8 +20,8 @@ public class People {
     ArrayList<Resource> equipments= new ArrayList<>();
 
 
-   public People(String name, int speed, int price){
-       this.name=name;
+   public People( int speed, int price){
+
        this.speed=speed;
        this.price=price;
       // this.loyalty=mainMenu.getCurrentUser();

@@ -5,14 +5,11 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import stronghold.model.components.game.Map;
-import stronghold.model.components.game.enums.Resource;
 import stronghold.view.MapMenuView;
-import stronghold.view.MenuView;
 import stronghold.view.ShopMenuView;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.HashMap;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 
