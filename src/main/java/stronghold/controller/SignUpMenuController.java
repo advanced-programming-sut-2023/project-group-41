@@ -245,14 +245,16 @@ public class SignUpMenuController extends MenuController{
                     continue;
                 }
 
-                SignUpLoginView.output("showsecurityquestions");
-                SignUpLoginView.output("showsecurityquestions");
+                password = generateRandomString();
+                SignUpLoginView.output("randpass", (Object) password);
+                SignUpLoginView.output("confirmrandpass");
                 String passwordConfirmation = SignUpLoginView.input(scanner);
 
                 if(!passwordConfirmation.equals(password)){
-                    SignUpLoginView.output("randpass", "");
+                    SignUpLoginView.output("unmatchingpasswords");
                     continue;
                 }
+
 
                 SignUpLoginView.output("showsecurityquestions");
 
@@ -322,6 +324,7 @@ public class SignUpMenuController extends MenuController{
                 }
 
                 SignUpLoginView.output("successfulLogin");
+                MainMenuController.run(currentUser, scanner);
 
             } else if (loginStayLoggedInMatcher.find()) {
                 try {
@@ -349,7 +352,6 @@ public class SignUpMenuController extends MenuController{
                     failedAttempts++;
                     continue;
                 }
-                new MainMenuController(UsersDB.usersDB.getUserByUsername(username));
                 SignUpLoginView.output("successfulLogin");
 
             } else if (forgotMyPassMatcher.find()) {

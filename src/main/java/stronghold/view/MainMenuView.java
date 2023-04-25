@@ -1,6 +1,7 @@
 package stronghold.view;
 
 import stronghold.controller.MainMenuController;
+import stronghold.model.components.general.User;
 
 import java.util.Scanner;
 
@@ -16,7 +17,4 @@ public class MainMenuView extends MenuView {
         return scanner.nextLine();
     }
 
-    public static void run(Scanner scanner){
-        MainMenuController.run(scanner);
-    }
 }

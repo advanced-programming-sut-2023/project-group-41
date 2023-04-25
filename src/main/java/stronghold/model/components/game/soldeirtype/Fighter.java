@@ -7,12 +7,13 @@ public class Fighter extends People {
     private boolean isHorsed;
     private  int defense;
     private int offense;
-    public Fighter( String name,String loyalty , int speed, int defense, int offense, int price, boolean isAssassin, boolean isHorsed){
-        super(name,speed,price);
-        this.defense=defense;
-        this.offense=offense;
-        this.isAssassin=isAssassin;
-        this.isHorsed=isHorsed;
+    private FighterEnum fighterEnum;
+    public Fighter( FighterEnum fighterEnum){
+        super(fighterEnum.getSpeed(), fighterEnum.getPrice());
+        this.defense=fighterEnum.getDefense();
+        this.offense=fighterEnum.getOffense();
+        this.isAssassin=fighterEnum.isAssassin();
+        this.isHorsed=fighterEnum.isHorsed();
 
     }
 

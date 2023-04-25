@@ -3,17 +3,14 @@ package stronghold.controller;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import javafx.css.Match;
-import stronghold.model.components.game.Government;
 import stronghold.model.components.game.Map;
+import stronghold.model.components.game.building.Building;
 import stronghold.model.components.game.enums.Direction;
 import stronghold.model.components.game.enums.State;
 import stronghold.model.components.game.enums.Texture;
 import stronghold.model.components.game.enums.Tree;
-import stronghold.model.components.game.soldeirtype.Building;
 import stronghold.model.components.general.User;
 import stronghold.view.MainMenuView;
-import stronghold.view.SignUpLoginView;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -26,11 +23,8 @@ public class MainMenuController extends MenuController{
     private static int roundNum;
     private static Map map;
     private static String pathToRegexJSON = "src/main/java/stronghold/database/utils/regex/MainMenuRegex.json";
-
-    public MainMenuController(User currentUser) {
-        this.currentUser = currentUser;
-    }
-    public static void run(Scanner scanner) {
+    
+    public static void run(User currentUser, Scanner scanner) {
         JsonElement regexElement = null;
         try {
             regexElement = JsonParser.parseReader(new FileReader(pathToRegexJSON));
@@ -39,9 +33,8 @@ public class MainMenuController extends MenuController{
             throw new RuntimeException(e);
         }
         JsonObject mainMenuRegexObj = regexElement.getAsJsonObject();
-
-
         while (true){
+            
             String command = MainMenuView.input(scanner).trim();
             Matcher foodRateMatcher;
             Matcher taxRateMatcher;

@@ -4,9 +4,15 @@ import stronghold.model.components.game.People;
 
 public class Unarmed extends People {
     private String type;
-    public Unarmed(String name,String type,int speed, int price  ){
-        super(name,speed,price);
-        this.type=type;
+    private int offense;
+    private int defense;
+    private UnarmedEnum unarmedEnum;
+    public Unarmed(UnarmedEnum unarmedEnum){
+        super(unarmedEnum.getSpeed(), unarmedEnum.getPrice());
+        this.type= unarmedEnum.getType();
+        this.defense=unarmedEnum.getDefense();
+        this.offense= unarmedEnum.getOffense();
+
 
 
     }

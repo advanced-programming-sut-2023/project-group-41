@@ -1,38 +1,30 @@
-
 package stronghold.model.components.game.building;
 
-import stronghold.model.components.game.enums.Resource;
 
-import java.util.ArrayList;
+import stronghold.model.components.game.enums.Resource;
 
 public abstract class Building {
     protected int health;
     protected int cost;
     protected int workerNum;
     protected boolean engineerWorkers;
-    protected ArrayList<Resource> neededResources;
-    protected int populationEffect;
-    protected int popularityEffect;
+    protected Resource neededResource;
+    protected int neededResourceCount;
 
-    public Building(int health, int cost, int workerNum, boolean engineerWorkers,
-                    ArrayList<Resource> neededResources, int populationEffect, int popularityEffect) {
+    public Building(int health,int cost, int workerNum, boolean engineerWorkers, Resource neededResources, int neededResourceCount) {
         this.health = health;
         this.cost = cost;
         this.workerNum = workerNum;
         this.engineerWorkers = engineerWorkers;
-        this.neededResources = neededResources;
-        this.populationEffect = populationEffect;
-        this.popularityEffect = popularityEffect;
+        this.neededResource = neededResources;
+        this.neededResourceCount = neededResourceCount;
     }
 
     public int getHealth() {
         return health;
     }
 
-    public int getCost() {
-        return cost;
-    }
-
+    public int getCost() { return cost;}
     public int getWorkerNum() {
         return workerNum;
     }
@@ -41,15 +33,8 @@ public abstract class Building {
         return engineerWorkers;
     }
 
-    public ArrayList<Resource> getNeededResources() {
-        return neededResources;
+    public Resource getNeededResource() {
+        return neededResource;
     }
-
-    public int getPopulationEffect() {
-        return populationEffect;
-    }
-
-    public int getPopularityEffect() {
-        return popularityEffect;
-    }
+    public int getNeededResourceCount() { return neededResourceCount;}
 }

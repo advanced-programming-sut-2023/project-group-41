@@ -7,12 +7,13 @@ public class LongRanged extends People {
     private boolean isHorsed;
     private int defense;
     private int offense;
-    public LongRanged( String name,String loyalty , int speed, int defense, int offense, int price, int range, boolean isHorsed){
-        super(name,speed,price);
-        this.defense=defense;
-        this.offense=offense;
-        this.range=range;
-        this.isHorsed=isHorsed;
+    private LongRangedEnum longRangedEnum;
+    public LongRanged(  LongRangedEnum longRangedEnum){
+        super(longRangedEnum.getSpeed(), longRangedEnum.getPrice());
+        this.defense=longRangedEnum.getDefense();
+        this.offense=longRangedEnum.getOffense();
+        this.range=longRangedEnum.getRange();
+        this.isHorsed=longRangedEnum.isHorsed();
 
     }
 

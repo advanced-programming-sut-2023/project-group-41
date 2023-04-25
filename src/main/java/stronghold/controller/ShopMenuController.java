@@ -4,10 +4,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import stronghold.model.components.game.enums.Resource;
-import stronghold.model.components.game.trade.TradeDataBase;
 import stronghold.model.components.general.User;
 import stronghold.view.ShopMenuView;
-import stronghold.view.TradeMenuView;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;

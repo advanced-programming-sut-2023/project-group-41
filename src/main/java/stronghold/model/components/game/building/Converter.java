@@ -1,29 +1,37 @@
-
+package stronghold.model.components.game.building;
 
 import stronghold.model.components.game.building.Building;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import stronghold.model.components.game.building.ConverterType;
 import stronghold.model.components.game.enums.Resource;
 
 public class Converter extends Building {
-    private HashMap<Resource, Resource> options;
+    private ConverterType converterType;
+    private Resource inpResource;
+    private Resource outResource;
     private int rate;
 
-    public Converter(int health, int cost, int workerNum, boolean engineerWorkers, ArrayList<Resource> neededResources,
-                     int populationEffect, int popularityEffect, HashMap<Resource, Resource> options, int rate) {
-        super(health, cost, workerNum, engineerWorkers, neededResources, populationEffect, popularityEffect);
-        this.options = options;
-        this.rate = rate;
+    public Converter(ConverterType converterType) {
+        super(converterType.getHealth(), converterType.getGold(), converterType.getWorkerNum(), converterType.isEngineerWorkers(), converterType.getNeededResource(), converterType.getNeededResourceCount());
+        this.converterType = converterType;
+        this.inpResource = converterType.getInpResource();
+        this.outResource = converterType.getOutResource();
+        this.rate = converterType.getRate();
     }
 
-    private void addOption(Resource out, Resource inp) {
-        options.put(out, inp);
+    public ConverterType getConverterType() {
+        return converterType;
     }
 
-    public HashMap<Resource, Resource> getOptions() {
-        return options;
+    public Resource getInpResource() {
+        return inpResource;
+    }
+
+    public Resource getOutResource() {
+        return outResource;
     }
 
     public int getRate() {
