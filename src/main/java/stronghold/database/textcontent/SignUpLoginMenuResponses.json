@@ -4,14 +4,22 @@
   "slogan": "Your slogan is ”$VAR1$”",
   "usercreated": "User $VAR1$ with nickname $VAR2$ successfully created.",
   "showsecurityquestions": "Pick your security question:\n1. What is my father’s name? \n2. What was my first pet’s name?\n3. What is my mother’s last name?",
+  "securityQ1": "1. What is my father’s name?",
+  "securityQ2": "2. What was my first pet’s name?",
+  "securityQ3": "3. What is my mother’s last name?",
+  "setnewpassword": "Set your new password:",
+  "confirmnewpassword": "Confirm your new password:",
+  "randpass": "Your random password is: $VAR1$",
+  "confirmrandpass": "Please re-enter your password here:",
 
   "successfulLogin": "User logged in successfully!",
 
   "passChanged": "Password changed successfully",
 
   "registerusername404": "Error!: username not provided!",
-  "registerpassword404": "Error!: password or password confirmation not provided!",
+  "registerpassword404": "Error!: password not provided!",
   "registeremail404": "Error!: email not provided!",
+  "registerpasswordconfirm404": "Error!: password confirmation not provided!",
   "registernickname404": "Error!: nickname not provided!",
   "registerslogan404": "Error!: slogan not provided!",
 
@@ -23,8 +31,12 @@
   "passwordweak": "Error!: provided password is weak!",
   "emailexists": "Error!: provided email already exists!",
   "invalidemail": "Error!: email's format is invalid!",
+  "usernotfound": "Error!: user doesn't exist",
 
   "unmatchingpassanduser": "Error!: Username and password didn’t match!",
+
+  "loginerror": "Error!: Username and password didn’t match!",
+  "incorrectsecurityanswer": "Error!: Your answer to your security question is incorrect!",
 
   "invalid": "Error!: Invalid command!"
 

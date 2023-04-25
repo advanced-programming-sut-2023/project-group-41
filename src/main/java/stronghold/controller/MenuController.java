@@ -1,9 +1,7 @@
 package stronghold.controller;
 
 import com.google.gson.JsonObject;
-import javafx.scene.control.skin.SplitPaneSkin;
-import stronghold.database.java.UsersDB;
-import stronghold.view.SignUpLoginView;
+import stronghold.model.database.UsersDB;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;

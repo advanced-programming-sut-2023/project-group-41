@@ -1,4 +1,4 @@
-package stronghold.database.java;
+package stronghold.model.database;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -72,13 +72,12 @@ public class UsersDB {
         this.users.remove(this.getUserByUsername(username));
     }
 
-    public static void main(String[] args) {
-        System.out.println(usersDB.getAtIndex(1).getUsername());
-        try {
-            usersDB.toJSON();
-        } catch (
-                IOException e) {
-            throw new RuntimeException(e);
+    public void update(User user){
+        for(User iter: this.users){
+            if(user.equals(user)){
+                iter = user;
+                return;
+            }
         }
     }
 }
