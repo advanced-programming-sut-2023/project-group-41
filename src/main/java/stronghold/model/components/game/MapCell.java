@@ -3,7 +3,6 @@ package stronghold.model.components.game;
 import stronghold.model.components.game.enums.Direction;
 import stronghold.model.components.game.enums.Texture;
 import stronghold.model.components.game.enums.Tree;
-import stronghold.model.components.game.soldeirtype.Building;
 
 public class MapCell {
     private final int x;

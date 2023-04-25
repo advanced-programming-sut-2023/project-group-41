@@ -1,11 +1,8 @@
 
 
-import stronghold.model.components.game.building.Building;
+import stronghold.model.components.game.building.Building;z
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import stronghold.model.components.game.enums.Resource;
+import stronghold.model.components.game.Resource;
 
 public class Converter extends Building {
     private ConverterType converterType;

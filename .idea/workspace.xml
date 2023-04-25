@@ -4,14 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d4900983-f33a-47b2-bf61-9aca166ee9d7" name="Changes" comment="">
+    <list default="true" id="26ef7f42-316d-4d61-8fc2-31134542b3ed" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/controller/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/controller/MenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/controller/SignUpMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/controller/SignUpMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/database/java/UsersDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/database/java/UsersDB.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/database/textcontent/MapMenuResponses..json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/database/textcontent/MapMenuResponses.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/database/textcontent/SignUpLoginMenuResponses.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/database/textcontent/SignUpLoginMenuResponses.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/view/MenuView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/view/MenuView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/controller/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/controller/MainMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/controller/MapMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/controller/MapMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/controller/ShopMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/controller/ShopMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/controller/TradeMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/controller/TradeMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/Government.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/Government.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/MapCell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/MapCell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/People.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/People.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/building/Castle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/building/Castle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/building/Converter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/building/Converter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/building/ResourceMaker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/building/ResourceMaker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/building/Storage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/building/Storage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/building/UnitMaker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/building/UnitMaker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/enums/Resource.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/soldeirtype/Building.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/soldeirtype/Fighter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/soldeirtype/Fighter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/trade/Trade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/trade/Trade.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,8 +31,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Enum" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -39,29 +49,38 @@
       </MavenImportingSettings>
     </option>
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectId" id="2OCaiWnhB6UpIzQlXBfaos2QULR" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-    &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;F:/Stronghold/project-group-41&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
-    }
-    }</component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "F:/Stronghold/project-group-41",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="stronghold.model.components.game" />
+    </key>
+  </component>
   <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="corretto-11" />
@@ -148,7 +167,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="d4900983-f33a-47b2-bf61-9aca166ee9d7" name="Changes" comment="" />
+      <changelist id="26ef7f42-316d-4d61-8fc2-31134542b3ed" name="Changes" comment="" />
       <created>1681067145004</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -160,6 +179,7 @@
       <workItem from="1681919841663" duration="2268000" />
       <workItem from="1681922131756" duration="602000" />
       <workItem from="1681923376063" duration="5766000" />
+      <workItem from="1682423231494" duration="775000" />
     </task>
     <servers />
   </component>

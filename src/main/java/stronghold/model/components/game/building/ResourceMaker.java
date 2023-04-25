@@ -3,9 +3,7 @@
 import stronghold.model.components.game.building.Building;
 
 
-import stronghold.model.components.game.enums.Resource;
-
-import java.util.ArrayList;
+import stronghold.model.components.game.Resource;
 
 public class ResourceMaker extends Building {
     private ResourceMakerType resourceMakerType;

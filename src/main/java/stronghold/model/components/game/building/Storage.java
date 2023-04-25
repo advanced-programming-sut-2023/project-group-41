@@ -1,12 +1,9 @@
 
 package stronghold.model.components.game.building;
 
-import stronghold.model.components.game.building.Building;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 
-import stronghold.model.components.game.enums.Resource;
+import stronghold.model.components.game.Resource;
 
 public class Storage extends Building {
 

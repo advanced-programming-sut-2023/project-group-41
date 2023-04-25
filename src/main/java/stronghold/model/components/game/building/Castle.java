@@ -1,12 +1,10 @@
 
 package stronghold.model.components.game.building;
 
-import stronghold.model.components.game.building.Building;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import stronghold.model.components.game.enums.Resource;
+import stronghold.model.components.game.Resource;
 import stronghold.model.components.game.People;
 
 public class Castle extends Building {
