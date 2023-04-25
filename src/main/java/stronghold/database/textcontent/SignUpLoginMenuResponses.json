@@ -2,7 +2,8 @@
   "security_question": "Pick your security question: 1. What is my father’s name? 2. What was my first pet’s name? 3. What is my mother’s last name?",
   "random_password": "Your random password is: $VAR1$\nPlease re-enter your password here:",
   "slogan": "Your slogan is ”$VAR1$”",
-  "usercreated": "User \"$VAR1$\" with nickname \"$VAR2$\" successfully created.",
+  "usercreated": "User $VAR1$ with nickname $VAR2$ successfully created.",
+  "showsecurityquestions": "Pick your security question:\n1. What is my father’s name? \n2. What was my first pet’s name?\n3. What is my mother’s last name?",
 
   "successfulLogin": "User logged in successfully!",
 
@@ -13,11 +14,15 @@
   "registeremail404": "Error!: email not provided!",
   "registernickname404": "Error!: nickname not provided!",
   "registerslogan404": "Error!: slogan not provided!",
-  "emailformatincorrect": "Error!: email's format is incorrect",
-  "weakpassword": "Error!: password is weak!",
+
   "unmatchingpasswords": "Error!: unmatching passwords!",
 
   "recoveryquestion404": "Error!: recovery question not provided!",
+  "invalidusername": "Error!: username's format is invalid!",
+  "usernameexists": "Error!: username already exists!",
+  "passwordweak": "Error!: provided password is weak!",
+  "emailexists": "Error!: provided email already exists!",
+  "invalidemail": "Error!: email's format is invalid!",
 
   "unmatchingpassanduser": "Error!: Username and password didn’t match!",
 

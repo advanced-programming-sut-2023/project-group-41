@@ -59,6 +59,15 @@ public class UsersDB {
         return null;
     }
 
+    public User getUserByEmail(String email){
+        for(User user: this.users){
+            if(user.getEmail().equalsIgnoreCase(email)){
+                return user;
+            }
+        }
+        return null;
+    }
+
     public void removeUserByUsername(String username){
         this.users.remove(this.getUserByUsername(username));
     }
