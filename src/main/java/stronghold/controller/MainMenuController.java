@@ -4,6 +4,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import stronghold.model.components.game.Map;
+import stronghold.model.components.game.building.Building;
 import stronghold.model.components.game.enums.Direction;
 import stronghold.model.components.game.enums.State;
 import stronghold.model.components.game.enums.Texture;

@@ -1,9 +1,7 @@
 package stronghold.model.components.game.building;
 
-import stronghold.model.components.game.building.Building;
 
-
-import stronghold.model.components.game.Resource;
+import stronghold.model.components.game.enums.Resource;
 
 public class ResourceMaker extends Building {
     private ResourceMakerType resourceMakerType;

@@ -3,7 +3,7 @@ package stronghold.model.components.game.building;
 
 import java.util.HashMap;
 
-import stronghold.model.components.game.Resource;
+import stronghold.model.components.game.enums.Resource;
 
 
 public class Storage extends Building {

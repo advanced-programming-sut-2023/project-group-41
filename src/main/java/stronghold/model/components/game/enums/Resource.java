@@ -1,4 +1,4 @@
-package stronghold.model.components.game;
+package stronghold.model.components.game.enums;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
