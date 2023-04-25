@@ -9,13 +9,22 @@ import stronghold.model.components.game.People;
 import java.util.ArrayList;
 
 public class ResourceMaker extends Building {
+    private ResourceMakerType resourceMakerType;
     private Resource resource;
     private int rate;
 
-    public ResourceMaker(int health, int cost, int workerNum, boolean engineerWorkers,
-                         ArrayList<Resource> neededResources, int populationEffect, int popularityEffect, Resource resource, int rate) {
-        super(health, cost, workerNum, engineerWorkers, neededResources, populationEffect, popularityEffect);
-        this.resource = resource;
-        this.rate = rate;
+    public ResourceMaker(ResourceMakerType resourceMakerType) {
+        super(resourceMakerType.getHealth(), resourceMakerType.getGold(), resourceMakerType.getWorkerNum(), resourceMakerType.isEngineerWorkers(), resourceMakerType.getNeededResource(), resourceMakerType.getNeededResourceCount());
+        this.resourceMakerType = resourceMakerType;
+        this.resource = resourceMakerType.getResource();
+        this.rate = resourceMakerType.getRate();
+    }
+
+    public Resource getResource() {
+        return resource;
+    }
+
+    public int getRate() {
+        return rate;
     }
 }

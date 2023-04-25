@@ -10,22 +10,28 @@ import stronghold.model.components.game.People;
 
 public class Converter extends Building {
     private ConverterType converterType;
-    private HashMap<Resource, Resource> options;
+    private Resource inpResource;
+    private Resource outResource;
     private int rate;
 
     public Converter(ConverterType converterType) {
-        super(converterType.getHealth(), converterType.getWorkerNum(), converterType.isEngineerWorkers(), converterType.getNeededResources());
+        super(converterType.getHealth(), converterType.getGold(), converterType.getWorkerNum(), converterType.isEngineerWorkers(), converterType.getNeededResource(), converterType.getNeededResourceCount());
         this.converterType = converterType;
-        this.options = converterType.getOptions();
+        this.inpResource = converterType.getInpResource();
+        this.outResource = converterType.getOutResource();
         this.rate = converterType.getRate();
     }
 
-    private void addOption(Resource out, Resource inp) {
-        options.put(out, inp);
+    public ConverterType getConverterType() {
+        return converterType;
     }
 
-    public HashMap<Resource, Resource> getOptions() {
-        return options;
+    public Resource getInpResource() {
+        return inpResource;
+    }
+
+    public Resource getOutResource() {
+        return outResource;
     }
 
     public int getRate() {

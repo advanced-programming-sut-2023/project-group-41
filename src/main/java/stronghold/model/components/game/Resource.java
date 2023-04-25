@@ -17,10 +17,16 @@ public enum Resource {
     WOOD("wood"),
     PITCH("pitch"),
 
+    APPLE("apple"),
+    CHEESE("cheese"),
+    BREAD("bread"),
+    MEAT("meat"),
+
     ARMOR("armor"),
     SWORD("sword"),
+    SPEAR("spear"),
     HORSE("horse"),
-    ROSS_BOW("ross bow"),
+    CROSS_BOW("cross bow"),
 
     COW("cow");
 
