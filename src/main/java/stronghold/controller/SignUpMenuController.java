@@ -304,6 +304,7 @@ public class SignUpMenuController extends MenuController{
                 SignUpLoginView.output("usercreated", (Object) username, (Object) nickname);
                 
             } else if (loginMatcher.find()) {
+
                 String username = StringParser.removeQuotes(loginMatcher.group("username"));
                 String password = StringParser.removeQuotes(loginMatcher.group("pass"));
 
@@ -327,12 +328,7 @@ public class SignUpMenuController extends MenuController{
                 MainMenuController.run(currentUser, scanner);
 
             } else if (loginStayLoggedInMatcher.find()) {
-                try {
-                    Thread.sleep(2500*(int) (Math.pow(2,failedAttempts)));
-                } catch (
-                        InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
+
                 String username = StringParser.removeQuotes(loginStayLoggedInMatcher.group("username"));
                 String password = StringParser.removeQuotes(loginStayLoggedInMatcher.group("pass"));
 
@@ -349,10 +345,12 @@ public class SignUpMenuController extends MenuController{
 
                 if(!userAuthenticated){
                     SignUpLoginView.output("unmatchingpassanduser");
-                    failedAttempts++;
                     continue;
                 }
+
+
                 SignUpLoginView.output("successfulLogin");
+                MainMenuController.run(currentUser, scanner);
 
             } else if (forgotMyPassMatcher.find()) {
                 String username = StringParser.removeQuotes(forgotMyPassMatcher.group("username"));

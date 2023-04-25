@@ -25,9 +25,9 @@
   "disbandUnit": "disband\\s+unit",
 
   "setTexture": "settexture\\s+((-x\\s+(?<X>\\d+)\\s*)|(-y\\s+(?<Y>\\d+)\\s*)|(-t\\s+(?<type>\\S+)\\s*)){3}",
-  "setRectangleTexture": "settexture\\s+((-x1\\s+(?<X1>\\d+)\\s*)|(-y1\\s+(?<Y1>\\d+)\\s*)|(-x2\\s+(?<X2>\\d+)\\s*)|(-y2\\s+(?<Y2>\\d+)\\s*)|(-t\\s+(?<type>\\S+)\\s*){5}",
+  "setRectangleTexture": "settexture\\s+((-x1\\s+(?<X1>\\d+)\\s*)|(-y1\\s+(?<Y1>\\d+)\\s*)|(-x2\\s+(?<X2>\\d+)\\s*)|(-y2\\s+(?<Y2>\\d+)\\s*)|(-t\\s+(?<type>\\S+)\\s*)){5}",
   "clear": "clear\\s+((-x\\s+(?<X>\\d+)\\s*)|(-y\\s+(?<Y>\\d+)\\s*)){2}",
   "dropRock": "droprock\\s+((-x\\s+(?<X>\\d+)\\s*)|(-y\\s+(?<Y>\\d+)\\s*)|(-d\\s+(?<direction>\\S+)\\s*)){3}",
   "dropTree": "droptree\\s+((-x\\s+(?<X>\\d+)\\s*)|(-y\\s+(?<Y>\\d+)\\s*)|(-t\\s+(?<type>\\S+)\\s*)){3}",
-  "dropUnit": "dropunit\\s+((-x\\s+(?<X>\\d+)\\s*)|(-y\\s+(?<Y>\\d+)\\s*)|(-t\\s+(?<type>\\S+)\\s*)|(-c\\s+(?<count>\\d+)\\s*){4}"
+  "dropUnit": "dropunit\\s+((-x\\s+(?<X>\\d+)\\s*)|(-y\\s+(?<Y>\\d+)\\s*)|(-t\\s+(?<type>\\S+)\\s*)|(-c\\s+(?<count>\\d+)\\s*)){4}"
 }
