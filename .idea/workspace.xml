@@ -5,9 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26ef7f42-316d-4d61-8fc2-31134542b3ed" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_4_19_2023_7_04_PM__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_4_19_2023_7_04_PM__Changes_1.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/controller/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/controller/MainMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/MapCell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/MapCell.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/Unit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/Unit.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

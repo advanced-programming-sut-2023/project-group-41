@@ -11,32 +11,25 @@ public class Unit {
     private int Y;
     private int count;
     ////Strings
-    private String name;
+    private People people;
     ////Arraylists
-    ArrayList<People> people;
+
     private State state;
 
-    public Unit(int x,int y,String name,int count){
-        this.name=name;
+    public Unit(int x,int y,People type,int count){
+        this.people=type;
         this.X=x;
         this.Y=y;
         this.count=count;
-        people = new ArrayList<>();
+
     }
 
-    public void addPerson(People person) {
-        people.add(person);
+
+    public int getCount() {
+        return count;
     }
 
-    public void removePerson(People person) {
-        people.remove(person);
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public ArrayList<People> getPeople() {
+    public People getPeople() {
         return people;
     }
 
@@ -46,5 +39,13 @@ public class Unit {
 
     public void setState(State state) {
         this.state = state;
+    }
+
+    public int getY() {
+        return Y;
+    }
+
+    public int getX() {
+        return X;
     }
 }

@@ -64,6 +64,9 @@ public class MainMenuController extends MenuController{
             Matcher dropRockMatcher;
             Matcher dropTreeMatcher;
             Matcher dropUnitMatcher;
+            Matcher enterMapMenu;
+            Matcher enterShopMenu;
+            Matcher enterTradeMenu;
 
             if(command.matches("user\\s+logout")){
                 break;
@@ -171,7 +174,16 @@ public class MainMenuController extends MenuController{
                 String type = dropUnitMatcher.group("type");
                 int count = Integer.parseInt(dropUnitMatcher.group("count"));
                 dropUnit(X, Y, type, count);
-            } else {
+            }else if(getJSONRegexMatcher(command,"enterMapMenu",mainMenuRegexObj).matches()){
+                ///da
+
+            }else if(getJSONRegexMatcher(command,"enterShopMenu",mainMenuRegexObj).matches()){
+                ///da
+
+            }else if(getJSONRegexMatcher(command,"enterTradeMenu",mainMenuRegexObj).matches()){
+                ///da
+
+            }else {
                 MainMenuView.output("invalid");
             }
         }
@@ -250,9 +262,24 @@ public class MainMenuController extends MenuController{
 
     }
     public static void moveUnitTo(int X, int Y){
+        if(Map.getMapCell(X,Y).getTexture().equals(Texture.RIVER)||Map.getMapCell(X,Y).getTexture().equals(Texture.SEA)||Map.getMapCell(X,Y).getTexture().equals(Texture.SHALLOW_LAKE)||Map.getMapCell(X,Y).getTexture().equals(Texture.SMALL_POND)||Map.getMapCell(X,Y).getTexture().equals(Texture.BIG_POND)){
+            System.out.println("cant move to WATER or HIGHLANDS!");
+        }
+        else  if(X>(currentUnit.getPeople().getSpeed()*4)+currentUnit.getX()||X<(currentUnit.getPeople().getSpeed()*4)-currentUnit.getX()||Y>(currentUnit.getPeople().getSpeed()*4)+currentUnit.getY()||Y<(currentUnit.getPeople().getSpeed()*4)+currentUnit.getY()){
+            System.out.println("move out of speed capacity!");
+
+        }
+        else{
+            Map.getMapCell(currentUnit.getX(),currentUnit.getY()).setUnit(null);
+            Map.getMapCell(X,Y).setUnit(currentUnit);
+            System.out.println("Unit moved successfully!");
+        }
+
+
 
     }
     public static void patrolUnit(int X1, int Y1, int X2, int Y2){
+        ///????????????????????????????
 
     }
     public static void setStateOfUnit(int X, int Y, State state){

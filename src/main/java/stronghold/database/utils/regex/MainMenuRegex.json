@@ -29,5 +29,8 @@
   "clear": "clear\\s+((-x\\s+(?<X>\\d+)\\s*)|(-y\\s+(?<Y>\\d+)\\s*)){2}",
   "dropRock": "droprock\\s+((-x\\s+(?<X>\\d+)\\s*)|(-y\\s+(?<Y>\\d+)\\s*)|(-d\\s+(?<direction>\\S+)\\s*)){3}",
   "dropTree": "droptree\\s+((-x\\s+(?<X>\\d+)\\s*)|(-y\\s+(?<Y>\\d+)\\s*)|(-t\\s+(?<type>\\S+)\\s*)){3}",
-  "dropUnit": "dropunit\\s+((-x\\s+(?<X>\\d+)\\s*)|(-y\\s+(?<Y>\\d+)\\s*)|(-t\\s+(?<type>\\S+)\\s*)|(-c\\s+(?<count>\\d+)\\s*)){4}"
+  "dropUnit": "dropunit\\s+((-x\\s+(?<X>\\d+)\\s*)|(-y\\s+(?<Y>\\d+)\\s*)|(-t\\s+(?<type>\\S+)\\s*)|(-c\\s+(?<count>\\d+)\\s*)){4}",
+  "enterMapMenu": "\\s*enter\\s+map\\s+menu\\s*",
+  "enterShopMenu": "\\s*enter\\s+shop\\s+menu\\s*",
+  "enterTradeMenu": "\\s*enter\\s+trade\\s+menu\\s*"
 }
