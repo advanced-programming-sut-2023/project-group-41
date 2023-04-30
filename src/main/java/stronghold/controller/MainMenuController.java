@@ -4,6 +4,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import stronghold.model.components.game.Map;
+import stronghold.model.components.game.Unit;
 import stronghold.model.components.game.building.Building;
 import stronghold.model.components.game.enums.Direction;
 import stronghold.model.components.game.enums.State;
@@ -23,6 +24,9 @@ public class MainMenuController extends MenuController{
     private static int roundNum;
     private static Map map;
     private static String pathToRegexJSON = "src/main/java/stronghold/database/utils/regex/MainMenuRegex.json";
+    ///////////
+    private static Unit currentUnit;
+    private static Building currentBuilding;
     
     public static void run(User currentUser, Scanner scanner) {
         JsonElement regexElement = null;
@@ -113,7 +117,7 @@ public class MainMenuController extends MenuController{
                 int X = Integer.parseInt(setMatcher.group("X"));
                 int Y = Integer.parseInt(setMatcher.group("Y"));
                 State stateOfUnit = State.getState(setMatcher.group("state"));
-                set(X, Y, stateOfUnit);
+                setStateOfUnit(X, Y, stateOfUnit);
             } else if ((attackEnemyMatcher = getJSONRegexMatcher(command, "attackEnemy", mainMenuRegexObj)).matches()) {
                 //command: attack -e [enemy’s x] [enemy’s y]
                 attackEnemy(Integer.parseInt(attackEnemyMatcher.group(1)), Integer.parseInt(attackEnemyMatcher.group(2)));
@@ -185,6 +189,7 @@ public class MainMenuController extends MenuController{
 
     
     public static void showPopularityFactors(){
+        System.out.println("food/tax/religion/fear");
 
     }
     public static void showPopularity(){
@@ -229,9 +234,19 @@ public class MainMenuController extends MenuController{
 
     
     public static void selectUnit(int X, int Y){
+        if(Map.getMapCell(X, Y).getUnit() == null){
+            System.out.println("there is no unit in the mentioned cordinate!");
+        }
+        else {
+            currentUnit=Map.getMapCell(X, Y).getUnit();
+            System.out.println("unit selected successfully!!!");
+        }
+
 
     }
     public static void moveUnit(int X, int Y){
+        //destination errors
+
 
     }
     public static void moveUnitTo(int X, int Y){
@@ -240,8 +255,10 @@ public class MainMenuController extends MenuController{
     public static void patrolUnit(int X1, int Y1, int X2, int Y2){
 
     }
-    public static void set(int X, int Y, State state){
+    public static void setStateOfUnit(int X, int Y, State state){
         // State is an enum class and have three obj: standing|defensive|offensive
+        currentUnit.setState(state);
+        System.out.println("the state of the unit changed successfully!");
     }
     public static void attackEnemy(int enemyX, int enemyY) {
         //command: attack -e [enemy’s x] [enemy’s y]
@@ -290,6 +307,9 @@ public class MainMenuController extends MenuController{
 
 
     public static void enterShopMenu(){
+
+    }
+    public static void enterMapMenu(){
 
     }
 }
