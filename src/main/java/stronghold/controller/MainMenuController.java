@@ -259,11 +259,6 @@ public class MainMenuController extends MenuController{
 
 
     }
-    public static void moveUnit(int X, int Y){
-        //destination errors
-
-
-    }
     public static void moveUnitTo(int X, int Y){
         if(Map.getMapCell(X,Y).getTexture().equals(Texture.RIVER)||Map.getMapCell(X,Y).getTexture().equals(Texture.SEA)||Map.getMapCell(X,Y).getTexture().equals(Texture.SHALLOW_LAKE)||Map.getMapCell(X,Y).getTexture().equals(Texture.SMALL_POND)||Map.getMapCell(X,Y).getTexture().equals(Texture.BIG_POND)){
             System.out.println("cant move to WATER or HIGHLANDS!");
@@ -358,18 +353,52 @@ public class MainMenuController extends MenuController{
 
     
     public static void setTexture(int X, int Y, Texture type){
+        Map.getMapCell(X,Y).setTexture(type);
+        System.out.println("texture has been set!");
 
     }
     public static void setTexture(int X1, int Y1, int X2, int Y2, Texture type){
+        if(X1<0||Y1<0||Y2<0||X2<0||X1> Map.getSize() ||Y1> Map.getSize()||Y2> Map.getSize()||X2> Map.getSize()){
+            System.out.println("cordinates out of Map bonds!");
+        }else{
+            for(int i=X1;i<X2;i++){
+                for(int j=Y1;j<Y2;j++){
+                    setTexture(i,j,type);
+
+                }
+
+            }
+            System.out.println("texture has been set!");
+        }
 
     }
     public static void clear(int X, int Y){
+       // Map.getMapCell(X,Y).setTexture();default texture
+        Map.getMapCell(X,Y).setBuilding(null);
+        Map.getMapCell(X,Y).setPassable(true);
+        Map.getMapCell(X,Y).setUnit(null);
+        Map.getMapCell(X,Y).setRockDirection(null);
+        Map.getMapCell(X,Y).setTree(null);
+        System.out.println("cleared the MapCell!!!");
+
 
     }
     public static void dropRock(int X, int Y, Direction direction){
+        if(direction.equals(null)){
+            System.out.println("invalid dicrection!");
+
+        }else{
+            Map.getMapCell(X,Y).setRockDirection(direction);
+        }
 
     }
     public static void dropTree(int X, int Y, Tree type){
+        if(type.equals(null)){
+            System.out.println("invalid tree type!");
+
+        }else{
+            Map.getMapCell(X,Y).setTree(type);
+        }
 
     }
     public static void dropUnit(int X, int Y, String type, int count){
