@@ -10,6 +10,9 @@ import stronghold.model.components.game.enums.Direction;
 import stronghold.model.components.game.enums.State;
 import stronghold.model.components.game.enums.Texture;
 import stronghold.model.components.game.enums.Tree;
+import stronghold.model.components.game.soldeirtype.LongRanged;
+import stronghold.model.components.game.soldeirtype.Unarmed;
+import stronghold.model.components.game.soldeirtype.UnarmedEnum;
 import stronghold.model.components.general.User;
 import stronghold.view.MainMenuView;
 
@@ -175,13 +178,13 @@ public class MainMenuController extends MenuController{
                 int count = Integer.parseInt(dropUnitMatcher.group("count"));
                 dropUnit(X, Y, type, count);
             }else if(getJSONRegexMatcher(command,"enterMapMenu",mainMenuRegexObj).matches()){
-                ///da
+                ///da1
 
             }else if(getJSONRegexMatcher(command,"enterShopMenu",mainMenuRegexObj).matches()){
-                ///da
+                ///da2
 
             }else if(getJSONRegexMatcher(command,"enterTradeMenu",mainMenuRegexObj).matches()){
-                ///da
+                ///da3
 
             }else {
                 MainMenuView.output("invalid");
@@ -247,7 +250,7 @@ public class MainMenuController extends MenuController{
     
     public static void selectUnit(int X, int Y){
         if(Map.getMapCell(X, Y).getUnit() == null){
-            System.out.println("there is no unit in the mentioned cordinate!");
+            System.out.println("there is no unit in the mentioned cordinates!");
         }
         else {
             currentUnit=Map.getMapCell(X, Y).getUnit();
@@ -269,6 +272,9 @@ public class MainMenuController extends MenuController{
             System.out.println("move out of speed capacity!");
 
         }
+        else if(Map.getMapCell(X,Y).getUnit()!=null){
+            System.out.println("there is a unit there already!");
+        }
         else{
             Map.getMapCell(currentUnit.getX(),currentUnit.getY()).setUnit(null);
             Map.getMapCell(X,Y).setUnit(currentUnit);
@@ -285,15 +291,58 @@ public class MainMenuController extends MenuController{
     public static void setStateOfUnit(int X, int Y, State state){
         // State is an enum class and have three obj: standing|defensive|offensive
         currentUnit.setState(state);
+        if(currentUnit.getState().equals(State.DEFENSIVE)){
+            //attack() for a radius
+        }
+        if(currentUnit.getState().equals(State.OFFENSIVE)){
+            //attack() for a radius
+        }
         System.out.println("the state of the unit changed successfully!");
     }
     public static void attackEnemy(int enemyX, int enemyY) {
-        //command: attack -e [enemy’s x] [enemy’s y]
+        //command: attack -e [enemy’s x] [enemy’
+        //buildings attack
+        if(currentUnit.getPeople() instanceof LongRanged){
+            System.out.println("the selected unit can not fight man to man!");
+        }
+       else if(currentUnit.getCount()*currentUnit.getPeople().getOffense()>Map.getMapCell(enemyX,enemyY).getUnit().getPeople().getOffense()*Map.getMapCell(enemyX,enemyY).getUnit().getCount()){
+            Map.getMapCell(currentUnit.getX(),currentUnit.getY()).setUnit(null);
+            Map.getMapCell(enemyX,enemyY).setUnit(currentUnit);
+
+        }
+        else{
+            Map.getMapCell(currentUnit.getX(),currentUnit.getY()).setUnit(null);
+
+        }
     }
     public static void airAttack(int X, int Y) {
         //command: attack -x [x] -y [y]
+        int xDistance=currentUnit.getX()-X,yDistance=currentUnit.getY()-Y;
+        if(!(currentUnit.getPeople() instanceof LongRanged)){
+            System.out.println("the unit is not LongRanged");
+        }else{
+            if (xDistance<0)
+                xDistance*=-1;
+            if(yDistance<0)
+                yDistance*=-1;
+            if(xDistance<=((LongRanged) currentUnit.getPeople()).getRange()*5&&yDistance<=((LongRanged) currentUnit.getPeople()).getRange()*5){
+                   //building
+                    Map.getMapCell(currentUnit.getX(),currentUnit.getY()).setUnit(null);
+                    System.out.println("you have eleminated all troops in the cordinates!");
+
+            }else {
+                System.out.println("cordinatees out of range of unit!");
+            }
+
+        }
     }
     public static void pourOil(Direction direction){
+        if(!(currentUnit.getPeople() .equals(UnarmedEnum.enginner))){
+            System.out.println("Not an enginner!");
+
+        }else{
+
+        }
 
     }
     public static void digTunnel(int X, int Y){
