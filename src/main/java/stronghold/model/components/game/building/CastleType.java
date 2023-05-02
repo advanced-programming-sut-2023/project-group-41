@@ -9,19 +9,19 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum CastleType {
-    SMALL_STONE_GATEHOUSE("small\\s+stone\\s+gatehouse", 100, 0, 0, false, null, 0, 8, 0, 0),
-    BIG_STONE_GATEHOUSE("big\\s+stone\\s+gatehouse", 100, 0 , 0, false, Resource.STONE, 20, 10, 0, 0),
+    SMALL_STONE_GATEHOUSE("smallStoneGatehouse", 100, 0, 0, false, null, 0, 8, 0, 0),
+    BIG_STONE_GATEHOUSE("bigStoneGatehouse", 100, 0 , 0, false, Resource.STONE, 20, 10, 0, 0),
     DRAWBRIDGE("drawbridge", 100, 0 , 0, false, Resource.WOOD, 10, 0, 1, 0),
-    LOOKOUT_TOWER("lookout\\s+tower", 100, 0, 0, false, Resource.STONE, 10, 0, 0, 0),
-    PERIMETER_TOWER("perimeter\\s+tower", 100, 0, 0, false, Resource.STONE, 10, 0, 0, 100),
-    DEFENSIVE_TURRET("defensive\\s+tower", 200, 0, 0, false, Resource.STONE, 15,0, 0, 100),
-    SQUARE_TOWER("square\\s+tower", 100, 0, 0, false, Resource.STONE, 35, 100, 0, 100),
-    CIRCLE_TOWER("circle\\s+tower", 100, 0, 0, false, Resource.STONE, 40, 100, 0, 100),
-    KILLING_PIT("killing\\s+pit",100, 0, 0, false, Resource.WOOD, 6, 0, 0, 1),
-    OIL_SMELTER("oil\\s+smelter", 100, 100, 1, true, Resource.IRON, 10, 0, 1, 0),
-    PITCH_DITCH("pitch\\s+ditch", 100, 0, 0, false, Resource.PITCH, 2, 5, 1, 0),
-    CAGED_WAR_DOGS("caged\\s+war\\s+", 100, 100, 0, false, Resource.WOOD, 10, 0, 0, 100),
-    SIEGE_TENT("siege\\s+tent", 100, 0, 1, true, null, 0, 0, 100, 0);
+    LOOKOUT_TOWER("lookoutTower", 100, 0, 0, false, Resource.STONE, 10, 0, 0, 0),
+    PERIMETER_TOWER("perimeterTower", 100, 0, 0, false, Resource.STONE, 10, 0, 0, 100),
+    DEFENSIVE_TURRET("defensiveTower", 200, 0, 0, false, Resource.STONE, 15,0, 0, 100),
+    SQUARE_TOWER("squareTower", 100, 0, 0, false, Resource.STONE, 35, 100, 0, 100),
+    CIRCLE_TOWER("circleTower", 100, 0, 0, false, Resource.STONE, 40, 100, 0, 100),
+    KILLING_PIT("killingPit",100, 0, 0, false, Resource.WOOD, 6, 0, 0, 1),
+    OIL_SMELTER("oilSmelter", 100, 100, 1, true, Resource.IRON, 10, 0, 1, 0),
+    PITCH_DITCH("pitchDitch", 100, 0, 0, false, Resource.PITCH, 2, 5, 1, 0),
+    CAGED_WAR_DOGS("cagedWarDogs", 100, 100, 0, false, Resource.WOOD, 10, 0, 0, 100),
+    SIEGE_TENT("siegeTent", 100, 0, 1, true, null, 0, 0, 100, 0);
     private static final ArrayList<CastleType> castleTypeArr = new ArrayList<>(EnumSet.allOf(CastleType.class));
     private String regex;
     private int health;

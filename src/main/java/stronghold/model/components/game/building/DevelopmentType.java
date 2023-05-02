@@ -2,12 +2,19 @@ package stronghold.model.components.game.building;
 
 import stronghold.model.components.game.enums.Resource;
 
-public enum DevelopmentType {
-    CHURCH(100, 250, 0, false, null, 0, 2, 0, 0),//monk satay here
-    CATHEDRAL(100, 1000, 0, false, null, 0, 2, 1, 0),
-    INN(100, 100, 1, false, Resource.WOOD, 20, 100, 0, 100),
-    HOUSE(100, 0, 0, false, Resource.WOOD, 6, 8, 0, 0);
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+public enum DevelopmentType {
+    CHURCH("church", 100, 250, 0, false, null, 0, 2, 0, 0),//monk satay here
+    CATHEDRAL("cathedral", 100, 1000, 0, false, null, 0, 2, 1, 0),
+    INN("inn", 100, 100, 1, false, Resource.WOOD, 20, 100, 0, 100),
+    HOUSE("house", 100, 0, 0, false, Resource.WOOD, 6, 8, 0, 0);
+
+    public static final ArrayList<DevelopmentType> developmentTypeArr = new ArrayList<>(EnumSet.allOf(DevelopmentType.class));
+    private String regex;
     private int health;
     private int cost;
     private int workerNum;
@@ -18,7 +25,8 @@ public enum DevelopmentType {
     private int incPopulation;
     private int wineUsageRate;
 
-    DevelopmentType(int health, int cost, int workerNum, boolean engineerWorkers, Resource neededResource, int neededResourceCount, int incPopularity, int incPopulation, int wineUsageRate) {
+    DevelopmentType(String regex, int health, int cost, int workerNum, boolean engineerWorkers, Resource neededResource, int neededResourceCount, int incPopularity, int incPopulation, int wineUsageRate) {
+        this.regex = regex;
         this.health = health;
         this.cost = cost;
         this.workerNum = workerNum;
@@ -28,6 +36,22 @@ public enum DevelopmentType {
         this.incPopularity = incPopularity;
         this.incPopulation = incPopulation;
         this.wineUsageRate = wineUsageRate;
+    }
+
+    public String getRegex(){
+        return regex;
+    }
+
+    public static Matcher getMatcher(String input, DevelopmentType developmentType){
+        String regex = developmentType.getRegex();
+        return Pattern.compile(regex).matcher(input);
+    }
+
+    public static DevelopmentType getDevelopmentType(String input){
+        for (DevelopmentType developmentType : developmentTypeArr) {
+            if (getMatcher(input, developmentType).find()) return developmentType;
+        }
+        return null;
     }
 
     public int getHealth() {

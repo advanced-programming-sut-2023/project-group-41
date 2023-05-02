@@ -19,6 +19,7 @@ public abstract class Building {
         this.neededResource = neededResources;
         this.neededResourceCount = neededResourceCount;
     }
+
     public int getHealth() {
         return health;
     }
@@ -38,6 +39,17 @@ public abstract class Building {
     public int getNeededResourceCount() { return neededResourceCount;}
 
     public static Building getBuilding(String input){
-        return new Storage(StorageType.ARMOURY);
+        if (CastleType.getCastleType(input) != null)
+            return new Castle(CastleType.getCastleType(input));
+        else if (ConverterType.getConverterType(input) != null)
+            return new Converter(ConverterType.getConverterType(input));
+        else if (DevelopmentType.getDevelopmentType(input) != null)
+            return new Development(DevelopmentType.getDevelopmentType(input));
+        else if (ResourceMakerType.getResourceMakerType(input) != null)
+            return new ResourceMaker(ResourceMakerType.getResourceMakerType(input));
+        else if (StorageType.getStorageType(input) != null)
+            return new Storage(StorageType.getStorageType(input));
+        else
+            return null;
     }
 }

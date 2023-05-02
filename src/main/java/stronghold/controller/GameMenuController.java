@@ -236,6 +236,7 @@ public class GameMenuController extends MenuController{
             GameMenuView.output("incorrectBuildingType");
         } else {
             Map.getMapCell(X, Y).setBuilding(type);
+            System.out.println(type.getClass().getSimpleName());
             GameMenuView.output("buildingDrop");
         }
     }
@@ -426,7 +427,7 @@ public class GameMenuController extends MenuController{
 
     }
 
-    public static void main(String[] args) {
-        GameMenuController.run(null,null, new Scanner(System.in));
-    }
+//    public static void main(String[] args) {
+//        GameMenuController.run(null,null, new Scanner(System.in));
+//    }
 }
