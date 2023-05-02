@@ -2,14 +2,12 @@ package stronghold;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import stronghold.controller.GameMenuController;
 import stronghold.controller.MainMenuController;
 import stronghold.controller.SignUpMenuController;
 import stronghold.model.components.general.User;
 import stronghold.model.database.UsersDB;
 import stronghold.model.utils.StringParser;
-import stronghold.view.MenuView;
-import stronghold.view.MyJavaFXApp;
-import stronghold.view.SignUpLoginView;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;

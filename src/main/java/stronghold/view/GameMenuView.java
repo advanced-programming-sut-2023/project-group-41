@@ -2,7 +2,7 @@ package stronghold.view;
 
 import java.util.Scanner;
 
-public class MainMenuView extends MenuView{
+public class GameMenuView extends MenuView {
     public static void output(String code, Object... params){
         String pathToJSON = "src/main/java/stronghold/database/textcontent/MainGameResponses.json";
         MenuView.output(pathToJSON, code, params);
@@ -13,4 +13,5 @@ public class MainMenuView extends MenuView{
             return "";
         return scanner.nextLine();
     }
+
 }

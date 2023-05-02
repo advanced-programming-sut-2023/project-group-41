@@ -19,7 +19,6 @@ public abstract class Building {
         this.neededResource = neededResources;
         this.neededResourceCount = neededResourceCount;
     }
-
     public int getHealth() {
         return health;
     }
@@ -37,4 +36,8 @@ public abstract class Building {
         return neededResource;
     }
     public int getNeededResourceCount() { return neededResourceCount;}
+
+    public static Building getBuilding(String input){
+        return new Storage(StorageType.ARMOURY);
+    }
 }
