@@ -1,5 +1,5 @@
 {
-  "startGame": "start\\s+game",
+  "startGame": "\\s*start\\s+game (?<opponent>.+)\\s+(?<rounds>\\d+)\\s*",
 
   "showPopularityFactors": "show\\s+popularity\\s+factors",
   "showPopularity": "show\\s+popularity",

@@ -13,6 +13,7 @@ public class Government {
     private int popularity;
     private int foodRate;
 
+
     public void setPopularity(int popularity) {
         this.popularity = popularity;
     }
@@ -23,6 +24,7 @@ public class Government {
 
     private int taxRate;
     private int fearRate;
+
     private HashMap<Resource, Integer> resources;
     private HashMap<Food, Integer> foods; // mehrad change ArrayList name to foods from food
     private ArrayList<Unit> units;
