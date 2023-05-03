@@ -3,7 +3,9 @@ package stronghold.model.components.game.building;
 
 import java.util.HashMap;
 
+import stronghold.model.components.game.Government;
 import stronghold.model.components.game.People;
+import stronghold.model.components.general.User;
 
 public class Castle extends Building {
     private int size;
@@ -11,8 +13,8 @@ public class Castle extends Building {
     private int fireRange;
     private int defendRange;
 
-    public Castle(CastleType castleType) {
-        super(castleType.getHealth(), castleType.getGold(), castleType.getWorkerNum(), castleType.isEngineerWorkers(),
+    public Castle(Government ownership, CastleType castleType) {
+        super(ownership, castleType.getHealth(), castleType.getGold(), castleType.getWorkerNum(), castleType.isEngineerWorkers(),
                 castleType.getNeededResource(), castleType.getNeededResourceCount());
         this.size = castleType.getSize();
         this.peopleMap = new HashMap<>();

@@ -95,7 +95,7 @@ public class GameMenuController extends MenuController{
                 // commands: dropbuilding -x [x] -y [y] -type [type] || dropbuilding -x [x] -y [y] -t [type]
                 int X = Integer.parseInt(dropBuildingMatcher.group("X"));
                 int Y = Integer.parseInt(dropBuildingMatcher.group("Y"));
-                Building type = Building.getBuilding(dropBuildingMatcher.group("type"));
+                Building type = Building.getBuilding(currentUser.getGovernment(), dropBuildingMatcher.group("type"));
                 dropBuilding(X, Y, type);
             } else if ((selectBuildingMatcher = getJSONRegexMatcher(command, "selectBuilding", gameMenuRegexObj)).matches()) {
                 int X = Integer.parseInt(selectBuildingMatcher.group("X"));

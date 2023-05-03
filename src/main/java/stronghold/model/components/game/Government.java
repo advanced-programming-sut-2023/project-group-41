@@ -33,6 +33,7 @@ public class Government {
     // i think we shoud remove units arraylist and people arraylist because they should put in mapCellClass
 
     public Government(User owner) {
+        owner.setGovernment(this);
         this.owner = owner;
     }
 
