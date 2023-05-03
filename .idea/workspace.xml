@@ -5,11 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26ef7f42-316d-4d61-8fc2-31134542b3ed" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/enums/colors.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/controller/GameMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/controller/GameMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/database/utils/regex/MainGameRegex.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/database/utils/regex/MainGameRegex.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/Government.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/Government.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/Map.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/database/textcontent/MainGameResponses.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/database/textcontent/MainGameResponses.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/database/utils/regex/MapMenuRegex.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/database/utils/regex/MapMenuRegex.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,8 +19,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Enum" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -160,7 +160,8 @@
       <workItem from="1681922131756" duration="602000" />
       <workItem from="1681923376063" duration="5766000" />
       <workItem from="1682936438757" duration="6990000" />
-      <workItem from="1683125843352" duration="1042000" />
+      <workItem from="1683125843352" duration="4236000" />
+      <workItem from="1683130098795" duration="647000" />
     </task>
     <servers />
   </component>
