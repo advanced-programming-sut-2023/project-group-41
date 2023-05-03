@@ -1,6 +1,7 @@
 package stronghold.model.components.game;
 
 import stronghold.model.components.game.MapCell;
+import stronghold.model.components.general.User;
 
 import java.util.ArrayList;
 
@@ -23,5 +24,10 @@ public class Map {
 
     public static int getSize() {
         return size;
+    }
+    public void startGameMap(User user1,User user2){
+
+
+
     }
 }

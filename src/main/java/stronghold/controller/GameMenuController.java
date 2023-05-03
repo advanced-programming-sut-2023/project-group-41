@@ -3,15 +3,13 @@ package stronghold.controller;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import stronghold.model.components.game.Government;
 import stronghold.model.components.game.Map;
 import stronghold.model.components.game.Unit;
 import stronghold.model.components.game.building.Building;
 import stronghold.model.components.game.building.Storage;
 import stronghold.model.components.game.building.StorageType;
-import stronghold.model.components.game.enums.Direction;
-import stronghold.model.components.game.enums.State;
-import stronghold.model.components.game.enums.Texture;
-import stronghold.model.components.game.enums.Tree;
+import stronghold.model.components.game.enums.*;
 import stronghold.model.components.game.soldeirtype.LongRanged;
 import stronghold.model.components.game.soldeirtype.UnarmedEnum;
 import stronghold.model.components.general.User;
@@ -30,6 +28,10 @@ public class GameMenuController extends MenuController{
     ///////////
     private static Unit currentUnit;
     private static Building currentBuilding;
+    private static ArrayList<Government> governments;
+    private static Government currentPlayer;
+
+
     
     public static void run(User currentUser, ArrayList<User> users, Scanner scanner) {
         JsonElement regexElement = null;
@@ -191,6 +193,9 @@ public class GameMenuController extends MenuController{
             }
         }
     }
+
+
+
     public static void nextPlayer(){
 
     }
@@ -199,6 +204,9 @@ public class GameMenuController extends MenuController{
     }
     public static int getRoundNum() {
         return roundNum;
+    }
+    public static void endOfRound(){
+
     }
 
 
@@ -211,21 +219,32 @@ public class GameMenuController extends MenuController{
 
     }
     public static void showFoodList(){
+        System.out.println("apple: "+currentPlayer.getFoodNum(Food.apple));
+        System.out.println("bread: "+currentPlayer.getFoodNum(Food.bread));
+        System.out.println("meat: "+currentPlayer.getFoodNum(Food.meat));
+        System.out.println("cheese: "+currentPlayer.getFoodNum(Food.cheese));
 
     }
     public static void foodRate(int rate){
+        currentPlayer.setFoodRate(rate);
+        System.out.println("food rate changed!");
 
     }
     public static void foodRateShow(){
+        System.out.println("food rate: "+currentPlayer.getFoodRate());
 
     }
     public static void taxRate(int rate){
+        currentPlayer.setTaxRate(rate);
+        System.out.println("tax rate changed!");
 
     }
     public static void taxRateShow(){
+        System.out.println("tax rate is: "+currentPlayer.getTaxRate());
 
     }
     public static void fearRate(int rate){
+        System.out.println("fear rate: "+currentPlayer.getFearRate());
 
     }
 
@@ -332,10 +351,10 @@ public class GameMenuController extends MenuController{
             if(xDistance<=((LongRanged) currentUnit.getPeople()).getRange()*5&&yDistance<=((LongRanged) currentUnit.getPeople()).getRange()*5){
                    //building
                     Map.getMapCell(currentUnit.getX(),currentUnit.getY()).setUnit(null);
-                    System.out.println("you have eleminated all troops in the cordinates!");
+                    System.out.println("you have eliminated all troops in the coordinates!");
 
             }else {
-                System.out.println("cordinatees out of range of unit!");
+                System.out.println("coordinates out of range of unit!");
             }
 
         }
