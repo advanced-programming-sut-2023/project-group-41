@@ -326,6 +326,7 @@ public class SignUpMenuController extends MenuController{
                     continue;
                 }
 
+                currentUser = UsersDB.usersDB.getUserByUsername(username);
                 SignUpLoginView.output("successfulLogin");
                 MainMenuController.run(currentUser, scanner);
             }
@@ -371,7 +372,7 @@ public class SignUpMenuController extends MenuController{
                     throw new RuntimeException(e);
                 }
 
-
+                currentUser = UsersDB.usersDB.getUserByUsername(username);
                 SignUpLoginView.output("successfulLogin");
                 MainMenuController.run(currentUser, scanner);
 
