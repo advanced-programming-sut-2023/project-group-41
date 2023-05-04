@@ -1,19 +1,26 @@
 package stronghold.model.components.game.trade;
 
+import stronghold.model.components.game.Government;
 import stronghold.model.components.game.enums.Resource;
 import stronghold.model.components.general.User;
 
 public class Trade {
     private Resource resourceType;
 
-    private User receiver;
-    private User sender;
+    private Government receiver;
+    private Government sender;
     private int price;
     private String message;
     private boolean isSeen;
     private boolean isAccepted;
     private int id;
-    public Trade(Resource r,User receiver,User sender,String message,int price){
+    private int number;
+
+    public int getNumber() {
+        return number;
+    }
+
+    public Trade(Resource r, Government receiver, Government sender, String message, int price,int number){
         this.resourceType=r;
         this.receiver=receiver;
         this.sender=sender;
@@ -21,11 +28,12 @@ public class Trade {
         this.price=price;
         this.isAccepted=false;
         this.isSeen=false;
+        this.number=number;
         this.id=TradeDataBase.getIdCounter();
         TradeDataBase.setIdCounter(TradeDataBase.getIdCounter()+1);
     }
 
-    public User getReceiver() {
+    public Government getReceiver() {
         return receiver;
     }
 
@@ -37,7 +45,7 @@ public class Trade {
         return resourceType;
     }
 
-    public User getSender() {
+    public Government getSender() {
         return sender;
     }
 

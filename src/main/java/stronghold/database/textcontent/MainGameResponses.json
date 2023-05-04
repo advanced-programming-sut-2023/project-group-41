@@ -7,5 +7,17 @@
   "welcome": "Welcome, $VAR1$!",
   "logout": "User logged out!",
   "success": "Success",
-  "enterUsers": "Enter usernames in each line and write FINISH when its done"
+  "enterUsers": "Enter usernames in each line and write FINISH when its done",
+ "showPopularityFactors" : "food/tax/religion/fear",
+  "rate": "rate: ",
+  "waterError": "cant move to WATER or HIGHLANDS!",
+  "speedError": "move out of speed capacity!",
+  "notFighter": "the selected unit can not fight man to man!",
+  "notLongRanged": "the unit is not LongRanged",
+  "bondError": "out of bonds",
+  "engineerError": "not an engineer!",
+  "textureSet": "texture has been set!",
+  "invalidDirection": "invalid Direction",
+  "invalidType": "invalid type"
+
 }

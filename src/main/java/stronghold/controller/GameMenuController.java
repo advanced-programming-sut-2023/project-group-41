@@ -15,7 +15,6 @@ import stronghold.model.components.game.soldeirtype.LongRanged;
 import stronghold.model.components.game.soldeirtype.UnarmedEnum;
 import stronghold.model.components.general.User;
 import stronghold.view.GameMenuView;
-import stronghold.view.MainMenuView;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -29,12 +28,15 @@ public class GameMenuController extends MenuController{
     ///////////
     private static Unit currentUnit;
     private static Building currentBuilding;
-    private static ArrayList<Government> governments;
+
     private static Government currentPlayer;
+    private static ArrayList<Government> governments=new ArrayList<>();
 
 
-    
-    public static void run(User currentUser, ArrayList<User> users, Scanner scanner) {
+
+
+    public static void run(User currentUser, ArrayList<User> users, Scanner scanner,int round) {
+        roundNum=round;
         JsonElement regexElement = null;
         try {
             regexElement = JsonParser.parseReader(new FileReader(pathToRegexJSON));
@@ -194,7 +196,24 @@ public class GameMenuController extends MenuController{
             }
         }
     }
+    public static void startGame(int playerNum){
+        for(int i=2;i<playerNum;i++){
+            Government government=new Government(i);
+            governments.add(government);
+        }
+        //set governmentCenter
 
+    }
+    public static Government getGovernmentByColor(int color)
+    {
+        for(Government government:governments){
+            if(government.getColor()==color){
+                return government;
+            }
+        }
+        return null;
+
+    }
 
 
     public static void nextPlayer(){
@@ -213,7 +232,7 @@ public class GameMenuController extends MenuController{
 
     
     public static void showPopularityFactors(){
-        System.out.println("food/tax/religion/fear");
+        GameMenuView.output("showPopularityFactors");
 
     }
     public static void showPopularity(){
@@ -228,24 +247,27 @@ public class GameMenuController extends MenuController{
     }
     public static void foodRate(int rate){
         currentPlayer.setFoodRate(rate);
-        System.out.println("food rate changed!");
+        GameMenuView.output("success");
 
     }
     public static void foodRateShow(){
-        System.out.println("food rate: "+currentPlayer.getFoodRate());
+        GameMenuView.output("rate");
+        System.out.println(currentPlayer.getFoodRate());
 
     }
     public static void taxRate(int rate){
         currentPlayer.setTaxRate(rate);
-        System.out.println("tax rate changed!");
+        GameMenuView.output("success");
 
     }
     public static void taxRateShow(){
-        System.out.println("tax rate is: "+currentPlayer.getTaxRate());
+        GameMenuView.output("rate");
+        System.out.println(currentPlayer.getTaxRate());
 
     }
     public static void fearRate(int rate){
-        System.out.println("fear rate: "+currentPlayer.getFearRate());
+        GameMenuView.output("rate");
+        System.out.println(currentPlayer.getFearRate());
 
     }
 
@@ -291,19 +313,17 @@ public class GameMenuController extends MenuController{
     }
     public static void moveUnitTo(int X, int Y){
         if(Map.getMapCell(X,Y).getTexture().equals(Texture.RIVER)||Map.getMapCell(X,Y).getTexture().equals(Texture.SEA)||Map.getMapCell(X,Y).getTexture().equals(Texture.SHALLOW_LAKE)||Map.getMapCell(X,Y).getTexture().equals(Texture.SMALL_POND)||Map.getMapCell(X,Y).getTexture().equals(Texture.BIG_POND)){
-            System.out.println("cant move to WATER or HIGHLANDS!");
+            GameMenuView.output("waterError");
         }
         else  if(X>(currentUnit.getPeople().getSpeed()*4)+currentUnit.getX()||X<(currentUnit.getPeople().getSpeed()*4)-currentUnit.getX()||Y>(currentUnit.getPeople().getSpeed()*4)+currentUnit.getY()||Y<(currentUnit.getPeople().getSpeed()*4)+currentUnit.getY()){
-            System.out.println("move out of speed capacity!");
+            GameMenuView.output("speedError");
 
         }
-        else if(Map.getMapCell(X,Y).getUnit()!=null){
-            System.out.println("there is a unit there already!");
-        }
+
         else{
             Map.getMapCell(currentUnit.getX(),currentUnit.getY()).setUnit(null);
             Map.getMapCell(X,Y).setUnit(currentUnit);
-            System.out.println("Unit moved successfully!");
+            GameMenuView.output("success");
         }
     }
     public static void patrolUnit(int X1, int Y1, int X2, int Y2){
@@ -319,13 +339,13 @@ public class GameMenuController extends MenuController{
         if(currentUnit.getState().equals(State.OFFENSIVE)){
             //attack() for a radius
         }
-        System.out.println("the state of the unit changed successfully!");
+        GameMenuView.output("success");
     }
     public static void attackEnemy(int enemyX, int enemyY) {
         //command: attack -e [enemy’s x] [enemy’
         //buildings attack
         if(currentUnit.getPeople() instanceof LongRanged){
-            System.out.println("the selected unit can not fight man to man!");
+            GameMenuView.output("notFighter");
         }
        else if(currentUnit.getCount()*currentUnit.getPeople().getOffense()>Map.getMapCell(enemyX,enemyY).getUnit().getPeople().getOffense()*Map.getMapCell(enemyX,enemyY).getUnit().getCount()){
             Map.getMapCell(currentUnit.getX(),currentUnit.getY()).setUnit(null);
@@ -341,7 +361,7 @@ public class GameMenuController extends MenuController{
         //command: attack -x [x] -y [y]
         int xDistance=currentUnit.getX()-X,yDistance=currentUnit.getY()-Y;
         if(!(currentUnit.getPeople() instanceof LongRanged)){
-            System.out.println("the unit is not LongRanged");
+            GameMenuView.output("notLongRanged");
         }else{
             if (xDistance<0)
                 xDistance*=-1;
@@ -350,17 +370,17 @@ public class GameMenuController extends MenuController{
             if(xDistance<=((LongRanged) currentUnit.getPeople()).getRange()*5&&yDistance<=((LongRanged) currentUnit.getPeople()).getRange()*5){
                    //building
                     Map.getMapCell(currentUnit.getX(),currentUnit.getY()).setUnit(null);
-                    System.out.println("you have eliminated all troops in the coordinates!");
+                    //System.out.println("you have eliminated all troops in the coordinates!");
 
             }else {
-                System.out.println("coordinates out of range of unit!");
+               GameMenuView.output("bondError");
             }
 
         }
     }
     public static void pourOil(Direction direction){
         if(!(currentUnit.getPeople() .equals(UnarmedEnum.enginner))){
-            System.out.println("Not an enginner!");
+            GameMenuView.output("engineerError");
 
         }else{
 
@@ -381,12 +401,12 @@ public class GameMenuController extends MenuController{
     
     public static void setTexture(int X, int Y, Texture type){
         Map.getMapCell(X,Y).setTexture(type);
-        System.out.println("texture has been set!");
+        GameMenuView.output("textureSet");
 
     }
     public static void setTexture(int X1, int Y1, int X2, int Y2, Texture type){
         if(X1<0||Y1<0||Y2<0||X2<0||X1> Map.getSize() ||Y1> Map.getSize()||Y2> Map.getSize()||X2> Map.getSize()){
-            System.out.println("cordinates out of Map bonds!");
+            GameMenuView.output("bondError");
         }else{
             for(int i=X1;i<X2;i++){
                 for(int j=Y1;j<Y2;j++){
@@ -395,7 +415,7 @@ public class GameMenuController extends MenuController{
                 }
 
             }
-            System.out.println("texture has been set!");
+            GameMenuView.output("textureSet");
         }
 
     }
@@ -406,12 +426,14 @@ public class GameMenuController extends MenuController{
         Map.getMapCell(X,Y).setUnit(null);
         Map.getMapCell(X,Y).setRockDirection(null);
         Map.getMapCell(X,Y).setTree(null);
-        System.out.println("cleared the MapCell!!!");
+        GameMenuView.output("success");
 
 
     }
     public static void dropRock(int X, int Y, Direction direction){
         if(direction.equals(null)){
+            GameMenuView.output("invalidDirection");
+
             System.out.println("invalid dicrection!");
         }else{
             Map.getMapCell(X,Y).setRockDirection(direction);
@@ -420,7 +442,7 @@ public class GameMenuController extends MenuController{
     }
     public static void dropTree(int X, int Y, Tree type){
         if(type.equals(null)){
-            System.out.println("invalid tree type!");
+            GameMenuView.output("invalidType");
 
         }else{
             Map.getMapCell(X,Y).setTree(type);
@@ -442,6 +464,14 @@ public class GameMenuController extends MenuController{
     }
     public static void enterMapMenu(){
 
+    }
+
+    public static ArrayList<Government> getGovernments() {
+        return governments;
+    }
+
+    public static void setGovernments(ArrayList<Government> governments) {
+        GameMenuController.governments = governments;
     }
 
 //    public static void main(String[] args) {

@@ -1,6 +1,7 @@
 {
   "invalid": "Invalid command!",
-  "back": "you are back in MainMenu!"
-
-
+  "back": "you are back in MainMenu!",
+  "enoughError": "Error! Not enough",
+  "success":"Done successfully!",
+  "User": "$VAR1:  $VAR2"
 }

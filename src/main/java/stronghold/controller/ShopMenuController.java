@@ -3,6 +3,7 @@ package stronghold.controller;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import stronghold.model.components.game.Government;
 import stronghold.model.components.game.enums.Resource;
 import stronghold.model.components.general.User;
 import stronghold.view.ShopMenuView;
@@ -14,7 +15,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 
 public class ShopMenuController extends MenuController{
-    private static User currentUser;
+    private static Government currentGovernment;
     private static String pathToRegexJSON = "src/main/java/stronghold/database/utils/regex/ShopMenuRegex.json";
 
     private static HashMap<Resource,Integer> prices;//not valued yet
@@ -37,9 +38,9 @@ public class ShopMenuController extends MenuController{
                 ShopMenuView.output("back");
                 break;
             } else if ((buy =getJSONRegexMatcher(command, "buy", menuRegexPatternsObject)).matches()) {
-               // buy();
+                buy(Resource.valueOf(buy.group("int")),Integer.parseInt(buy.group(2)));
             } else if ((sell=getJSONRegexMatcher(command, "showHistory", menuRegexPatternsObject)).matches()) {
-               // sell();
+                buy(Resource.valueOf(buy.group("int")),Integer.parseInt(buy.group(2)));
             } else if (( getJSONRegexMatcher(command, "showPriceList", menuRegexPatternsObject)).matches()) {
                 showPriceList();
             }   else {
@@ -50,15 +51,25 @@ public class ShopMenuController extends MenuController{
     }
     //add prices
     public static void buy(Resource resource,int number){
-        //if(prices.get(resource)*number>currentUser.getTribe().getbalance())
-                   // System.out.println("Not enough balance!");
-        //updateUser
-        //setbBalance
+        if(prices.get(resource)*number> currentGovernment.getBalance())
+                    ShopMenuView.output("moneyError");
+        else{
+            currentGovernment.setBalance(currentGovernment.getBalance()-(prices.get(resource)*number));
+            currentGovernment.getResourcesMap().put(resource, (currentGovernment.getResourcesMap().get(resource)+number));
+            ShopMenuView.output("success");
+        }
+
     }
     public static void sell(Resource resource,int number){
+        if(currentGovernment.getResourcesMap().get(resource)>number){
+            ShopMenuView.output("shortage");
+            return;
+        }
+        currentGovernment.setBalance(currentGovernment.getBalance()+(prices.get(resource)*(number*0.8)));
+        currentGovernment.getResourcesMap().put(resource, (currentGovernment.getResourcesMap().get(resource)-number));
+        ShopMenuView.output("success");
 
-        //updateUser
-        //setbBalance
+
     }
     public static void showPriceList(){
         for(Resource resource:prices.keySet()){
