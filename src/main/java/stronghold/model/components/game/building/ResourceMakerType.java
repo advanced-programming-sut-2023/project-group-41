@@ -1,6 +1,7 @@
 package stronghold.model.components.game.building;
 
 import stronghold.model.components.game.enums.Resource;
+import stronghold.model.components.game.enums.Texture;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -93,4 +94,5 @@ public enum ResourceMakerType {
     public int getRate() {
         return rate;
     }
+
 }

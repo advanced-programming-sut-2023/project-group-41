@@ -7,6 +7,7 @@ import stronghold.model.components.game.Government;
 import stronghold.model.components.game.Map;
 import stronghold.model.components.game.Unit;
 import stronghold.model.components.game.building.Building;
+import stronghold.model.components.game.building.Castle;
 import stronghold.model.components.game.building.Storage;
 import stronghold.model.components.game.building.StorageType;
 import stronghold.model.components.game.enums.*;
@@ -248,8 +249,6 @@ public class GameMenuController extends MenuController{
 
     }
 
-    
-
     public static void dropBuilding(int X, int Y, Building type){
         if (type == null){
             GameMenuView.output("incorrectBuildingType");
@@ -269,14 +268,19 @@ public class GameMenuController extends MenuController{
         }
     }
     public static void createUnit(String type, int count){
-
+       // Todo: need completed drop unit command;
     }
     public static void repair(){
-
+        if (!currentBuilding.getClass().getSimpleName().equals("Castle")) {
+            GameMenuView.output("incorrectBuildingType");
+        } else if (true) {
+            // TODO: stopping repair when soldier are near
+        } else {
+            Castle castle = (Castle)currentBuilding;
+            castle.repair();
+        }
     }
 
-
-    
     public static void selectUnit(int X, int Y){
         if(Map.getMapCell(X, Y).getUnit() == null){
             System.out.println("there is no unit in the mentioned coordinates!");
@@ -284,8 +288,6 @@ public class GameMenuController extends MenuController{
             currentUnit=Map.getMapCell(X, Y).getUnit();
             System.out.println("unit selected successfully!!!");
         }
-
-
     }
     public static void moveUnitTo(int X, int Y){
         if(Map.getMapCell(X,Y).getTexture().equals(Texture.RIVER)||Map.getMapCell(X,Y).getTexture().equals(Texture.SEA)||Map.getMapCell(X,Y).getTexture().equals(Texture.SHALLOW_LAKE)||Map.getMapCell(X,Y).getTexture().equals(Texture.SMALL_POND)||Map.getMapCell(X,Y).getTexture().equals(Texture.BIG_POND)){
@@ -303,9 +305,6 @@ public class GameMenuController extends MenuController{
             Map.getMapCell(X,Y).setUnit(currentUnit);
             System.out.println("Unit moved successfully!");
         }
-
-
-
     }
     public static void patrolUnit(int X1, int Y1, int X2, int Y2){
         ///????????????????????????????
@@ -414,7 +413,6 @@ public class GameMenuController extends MenuController{
     public static void dropRock(int X, int Y, Direction direction){
         if(direction.equals(null)){
             System.out.println("invalid dicrection!");
-
         }else{
             Map.getMapCell(X,Y).setRockDirection(direction);
         }

@@ -8,6 +8,7 @@ import stronghold.model.components.game.People;
 import stronghold.model.components.general.User;
 
 public class Castle extends Building {
+    private CastleType castleType;
     private int size;
     private HashMap<People, Integer> peopleMap;
     private int fireRange;
@@ -45,5 +46,9 @@ public class Castle extends Building {
 
     public int getDefendRange() {
         return defendRange;
+    }
+
+    public void repair(){
+        health = castleType.getHealth();
     }
 }
