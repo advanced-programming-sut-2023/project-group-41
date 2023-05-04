@@ -456,8 +456,6 @@ public class GameMenuController extends MenuController{
 
     }
     public static void dropRock(int X, int Y, Direction direction){
-        Map map = new Map(200);
-       // System.out.println(direction);
         if (!Map.validMapCell(X, Y)){
             GameMenuView.output("invalidLocation");
         } else if (direction == null) {
