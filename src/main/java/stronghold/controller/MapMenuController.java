@@ -5,6 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import stronghold.model.components.game.Map;
+import stronghold.model.components.game.enums.Texture;
 import stronghold.view.MapMenuView;
 import stronghold.view.ShopMenuView;
 
@@ -38,11 +39,11 @@ public class MapMenuController extends MenuController {
             if(command.matches("back")){
                 MapMenuView.output("back");
                 break;
-            } else if ((showMap =getJSONRegexMatcher(command, "buy", menuRegexPatternsObject)).matches()) {
+            } else if ((showMap =getJSONRegexMatcher(command, "showMap", menuRegexPatternsObject)).matches()) {
                  showMap(Integer.parseInt(showMap.group("x")),Integer.parseInt(showMap.group("y")));
-            } else if ((mapShift=getJSONRegexMatcher(command, "showHistory", menuRegexPatternsObject)).matches()) {
-                //mapShift();
-            } else if (( showMapCellDetails = getJSONRegexMatcher(command, "showPriceList", menuRegexPatternsObject)).matches()) {
+            } else if ((mapShift=getJSONRegexMatcher(command, "mapShift", menuRegexPatternsObject)).matches()) {
+                mapShift(mapShift.group("x"),mapShift.group("y"),Integer.parseInt(mapShift.group(3)));
+            } else if (( showMapCellDetails = getJSONRegexMatcher(command, "showMapCellDetails", menuRegexPatternsObject)).matches()) {
                showMapCellDetails(Integer.parseInt(showMapCellDetails.group("x")),Integer.parseInt(showMapCellDetails.group("y")));
             }   else {
                 MapMenuView.output("invalid");
@@ -128,7 +129,7 @@ public class MapMenuController extends MenuController {
 
     public static void mapShift(String direction,String direction2,int distance) {
         if(direction.equals(direction2)){
-            System.out.println("Invalid directions!");
+            MapMenuView.output("invalid");
             return;
         }
 
@@ -152,7 +153,7 @@ public class MapMenuController extends MenuController {
 
           }
           if(xCordinate>Map.getSize()||xCordinate<0||yCordinate>Map.getSize()||yCordinate<0){
-              System.out.println("You are Out of bonds!");
+              MapMenuView.output("bondError");
               return;
           }
           showMap(xCordinate,yCordinate);
@@ -161,12 +162,12 @@ public class MapMenuController extends MenuController {
 
     public static void showMapCellDetails(int X, int Y) {
         if(Map.getMapCell(X,Y)==null){
-            System.out.println("You are out of bonds!");
+            MapMenuView.output("bondError");
             return;
         }
         //Resource too
         //System.out.println("Building: "+Map.getMapCell(X,Y).getBuilding());
-        //System.out.println("Texture: "+Map.getMapCell(X,Y).getTexture());
+        ///System.out.println("Texture: "+ Texture.Map.getMapCell(X,Y).getTexture());
         //System.out.println("Unit: "+Map.getMapCell(X,Y).getUnit()+" >>"+Map.getMapCell(X,Y).getUnit().getPeople().size());
 
     }

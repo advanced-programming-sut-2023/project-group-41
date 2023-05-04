@@ -7,14 +7,11 @@ import stronghold.model.components.game.Government;
 import stronghold.model.components.game.Map;
 import stronghold.model.components.game.Unit;
 import stronghold.model.components.game.building.Building;
-import stronghold.model.components.game.building.Storage;
-import stronghold.model.components.game.building.StorageType;
 import stronghold.model.components.game.enums.*;
 import stronghold.model.components.game.soldeirtype.LongRanged;
 import stronghold.model.components.game.soldeirtype.UnarmedEnum;
 import stronghold.model.components.general.User;
 import stronghold.view.GameMenuView;
-import stronghold.view.MainMenuView;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -28,12 +25,15 @@ public class GameMenuController extends MenuController{
     ///////////
     private static Unit currentUnit;
     private static Building currentBuilding;
-    private static ArrayList<Government> governments;
+
     private static Government currentPlayer;
+    private static ArrayList<Government> governments=new ArrayList<>();
 
 
-    
-    public static void run(User currentUser, ArrayList<User> users, Scanner scanner) {
+
+
+    public static void run(User currentUser, ArrayList<User> users, Scanner scanner,int round) {
+        roundNum=round;
         JsonElement regexElement = null;
         try {
             regexElement = JsonParser.parseReader(new FileReader(pathToRegexJSON));
@@ -193,7 +193,24 @@ public class GameMenuController extends MenuController{
             }
         }
     }
+    public static void startGame(int playerNum){
+        for(int i=2;i<playerNum;i++){
+            Government government=new Government(i);
+            governments.add(government);
+        }
+        //set governmentCenter
 
+    }
+    public static Government getGovernmentByColor(int color)
+    {
+        for(Government government:governments){
+            if(government.getColor()==color){
+                return government;
+            }
+        }
+        return null;
+
+    }
 
 
     public static void nextPlayer(){
@@ -445,6 +462,14 @@ public class GameMenuController extends MenuController{
     }
     public static void enterMapMenu(){
 
+    }
+
+    public static ArrayList<Government> getGovernments() {
+        return governments;
+    }
+
+    public static void setGovernments(ArrayList<Government> governments) {
+        GameMenuController.governments = governments;
     }
 
 //    public static void main(String[] args) {
