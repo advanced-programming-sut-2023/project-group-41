@@ -1,5 +1,5 @@
 {
-  "invalid": "Invalid command!",
+  "invalid": "Error!: Invalid command!",
   "back": "you are back in MainMenu!"
 
 }
