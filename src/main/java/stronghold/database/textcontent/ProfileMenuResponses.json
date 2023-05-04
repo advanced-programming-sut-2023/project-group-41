@@ -3,6 +3,6 @@
   "again": "Error! Please enter your new password again",
   "passwordError": "Error! Current password is incorrect!",
   "newPassWord": "Error! Please enter a new password!",
-  "emptySlogan": "Slogan is empty!"
+  "emptySlogan": "Error! Slogan is empty!"
 
 }
