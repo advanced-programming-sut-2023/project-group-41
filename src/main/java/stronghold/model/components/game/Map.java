@@ -20,7 +20,7 @@ public class Map {
         this.cells = new ArrayList<>(size);
         for(int i = 0;i < size;i++){
             for(int j = 0; j < size; j++){
-                MapCell mapCell = new MapCell(i,j,SEA);
+                MapCell mapCell = new MapCell(i,j,LAND);
                 this.cells.add(mapCell);
             }
         }

@@ -20,6 +20,9 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.regex.Matcher;
+
+import static stronghold.model.components.game.enums.Direction.RANDOM;
+
 public class GameMenuController extends MenuController{
     private static int roundNum;
     private static Map map;
@@ -453,21 +456,19 @@ public class GameMenuController extends MenuController{
 
     }
     public static void dropRock(int X, int Y, Direction direction){
+        Map map = new Map(200);
+       // System.out.println(direction);
         if (!Map.validMapCell(X, Y)){
             GameMenuView.output("invalidLocation");
         } else if (direction == null) {
             GameMenuView.output("invalidDirection");
-        } else if (direction.equals(Direction.RANDOM)) {
-            Random random = new Random();
-            int idx = random.nextInt(4);
+        } else if (direction.equals(RANDOM)) {
             Map.getMapCell(X,Y).setRockDirection(Direction.getRandom());
             GameMenuView.output("rockDrop");
         } else{
             Map.getMapCell(X,Y).setRockDirection(direction);
             GameMenuView.output("rockDrop");
         }
-        Random random = new Random();
-
     }
     public static void dropTree(int X, int Y, Tree type){
         if(type.equals(null)){
@@ -503,8 +504,8 @@ public class GameMenuController extends MenuController{
         GameMenuController.governments = governments;
     }
 
-//    public static void main(String[] args) {
-//        GameMenuController.run(null,null, new Scanner(System.in));
-//    }
+    public static void main(String[] args) {
+        GameMenuController.run(null,null, new Scanner(System.in), 1);
+    }
 
 }

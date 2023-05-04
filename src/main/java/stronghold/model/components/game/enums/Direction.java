@@ -32,7 +32,7 @@ public enum Direction {
 
     public static Direction getDirection(String input){
         for (Direction direction : directions) {
-            if (getMatcher(input, direction).find()) {
+            if (getMatcher(input, direction).matches()) {
                 return direction;
             }
         }

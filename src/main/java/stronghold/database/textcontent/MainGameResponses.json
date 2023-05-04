@@ -14,6 +14,7 @@
   "invalidDirection": "Error!: invalid direction",
   "rockDrop": "Success!: rock dropped",
   "invalid": "Error!: Invalid command!",
+
   "welcome": "Welcome, $VAR1$!",
   "logout": "User logged out!",
   "success": "Success",
@@ -26,8 +27,7 @@
   "notLongRanged": "the unit is not LongRanged",
   "bondError": "out of bonds",
   "engineerError": "not an engineer!",
-  "textureSet": "texture has been set!",
-  "invalidDirection": "invalid Direction",
+
   "invalidType": "invalid type"
 
 }
