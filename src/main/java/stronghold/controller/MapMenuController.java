@@ -201,9 +201,4 @@ public class MapMenuController extends MenuController {
 
     }
 
-    public static void main(String[] args) {
-        map = new Map(102);
-
-        showMap(2,2);
-    }
 }
