@@ -33,6 +33,8 @@ public class MainMenuController extends MenuController{
             throw new RuntimeException(e);
         }
         JsonObject mainMenuRegexObj = regexElement.getAsJsonObject();
+
+        MainMenuView.output("welcome",(Object) currentUser.getUsername());
         while (true){
             
             String command = MainMenuView.input(scanner).trim();
@@ -62,6 +64,8 @@ public class MainMenuController extends MenuController{
             Matcher dropUnitMatcher;
 
             if(command.matches("user\\s+logout")){
+                SignUpMenuController.run(scanner);
+
                 break;
             } else if (getJSONRegexMatcher(command, "showPopularityFactors", mainMenuRegexObj).matches()) {
                 showPopularityFactors();

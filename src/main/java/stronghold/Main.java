@@ -31,7 +31,7 @@ public class Main {
                 String.valueOf(prefsElement.getAsJsonObject().get("logged-in user")));
 
         Scanner scanner = new Scanner(System.in);
-        if(loggedinuser.equals("!NULL")) {
+        if(loggedinuser.equals("!NULLUSER")) {
 
             SignUpMenuController.run(scanner);
         }
