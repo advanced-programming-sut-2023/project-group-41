@@ -13,21 +13,27 @@ public class Map {
         this.size=size;
        //making the map
     }
- public static MapCell getMapCell(int X, int Y){
-        for(MapCell mapCell: cells){
-            if(mapCell.getX()==X&&mapCell.getY()==Y){
-                return mapCell;
+     public static MapCell getMapCell(int X, int Y){
+            for(MapCell mapCell: cells){
+                if(mapCell.getX()==X&&mapCell.getY()==Y){
+                    return mapCell;
+                }
             }
-        }
-        return null;
- }
+            return null;
+     }
 
     public static int getSize() {
         return size;
     }
     public void startGameMap(User user1,User user2){
 
+    }
 
+    public static boolean validMapCell(int X, int Y){
+        return X >= 0 && X <= size && Y >= 0 && Y <= size;
+    }
 
+    public static void setSize(int size) {
+        Map.size = size;
     }
 }

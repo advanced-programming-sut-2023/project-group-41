@@ -5,11 +5,9 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import stronghold.model.components.game.Government;
 import stronghold.model.components.game.Map;
+import stronghold.model.components.game.MapCell;
 import stronghold.model.components.game.Unit;
-import stronghold.model.components.game.building.Building;
-import stronghold.model.components.game.building.Castle;
-import stronghold.model.components.game.building.Storage;
-import stronghold.model.components.game.building.StorageType;
+import stronghold.model.components.game.building.*;
 import stronghold.model.components.game.enums.*;
 import stronghold.model.components.game.soldeirtype.LongRanged;
 import stronghold.model.components.game.soldeirtype.UnarmedEnum;
@@ -20,6 +18,7 @@ import stronghold.view.MainMenuView;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 public class GameMenuController extends MenuController{
@@ -250,11 +249,22 @@ public class GameMenuController extends MenuController{
     }
 
     public static void dropBuilding(int X, int Y, Building type){
+        MapCell mapCell;
+        ResourceMaker resourceMaker;
+        Map.setSize(40);
+        if (Map.validMapCell(X, Y)){
+            mapCell = new MapCell(X, Y , Texture.IRON);//Map.getMapCell(X, Y);
+        } else {
+            GameMenuView.output("invalidLocation");
+            return;
+        }
         if (type == null){
             GameMenuView.output("incorrectBuildingType");
+        } else if (type.getClass().getSimpleName().equals("ResourceMaker")
+            && !(resourceMaker = (ResourceMaker) type).checkTexture(mapCell.getTexture())){
+                GameMenuView.output("textureProblem");
         } else {
-            Map.getMapCell(X, Y).setBuilding(type);
-            System.out.println(type.getClass().getSimpleName());
+            mapCell.setBuilding(type);
             GameMenuView.output("buildingDrop");
         }
     }
@@ -273,7 +283,7 @@ public class GameMenuController extends MenuController{
     public static void repair(){
         if (!currentBuilding.getClass().getSimpleName().equals("Castle")) {
             GameMenuView.output("incorrectBuildingType");
-        } else if (true) {
+        } else if (false) {
             // TODO: stopping repair when soldier are near
         } else {
             Castle castle = (Castle)currentBuilding;
@@ -379,25 +389,36 @@ public class GameMenuController extends MenuController{
 
 
     
-    public static void setTexture(int X, int Y, Texture type){
-        Map.getMapCell(X,Y).setTexture(type);
-        System.out.println("texture has been set!");
-
+    public static void setTexture(int X, int Y, Texture type){ // todo: check this two settexture function when you have a map
+        if (!Map.validMapCell(X, Y)) {
+            GameMenuView.output("invalidLocation");
+        } else if (Map.getMapCell(X, Y).getBuilding() != null){
+            GameMenuView.output("buildingPlaced");
+        } else {
+            Map.getMapCell(X, Y).setTexture(type);
+            GameMenuView.output("textureSet");
+        }
     }
     public static void setTexture(int X1, int Y1, int X2, int Y2, Texture type){
-        if(X1<0||Y1<0||Y2<0||X2<0||X1> Map.getSize() ||Y1> Map.getSize()||Y2> Map.getSize()||X2> Map.getSize()){
-            System.out.println("cordinates out of Map bonds!");
-        }else{
-            for(int i=X1;i<X2;i++){
-                for(int j=Y1;j<Y2;j++){
-                    setTexture(i,j,type);
-
-                }
-
-            }
-            System.out.println("texture has been set!");
+        if(!Map.validMapCell(X1, Y1) || !Map.validMapCell(X2, Y2) || X2 < X1 || Y2 < Y1){
+            GameMenuView.output("cantMakeBlock");
         }
 
+        for(int i=X1;i<X2;i++){
+            for(int j=Y1;j<Y2;j++){
+                if (Map.getMapCell(i, j).getBuilding()!= null){
+                    GameMenuView.output("buildingPlaced");
+                    return;
+                }
+            }
+        }
+
+        for(int i=X1;i<X2;i++){
+            for(int j=Y1;j<Y2;j++){
+                setTexture(i,j,type);
+            }
+        }
+        GameMenuView.output("textureSet");
     }
     public static void clear(int X, int Y){
        // Map.getMapCell(X,Y).setTexture();default texture
@@ -411,11 +432,20 @@ public class GameMenuController extends MenuController{
 
     }
     public static void dropRock(int X, int Y, Direction direction){
-        if(direction.equals(null)){
-            System.out.println("invalid dicrection!");
-        }else{
+        if (!Map.validMapCell(X, Y)){
+            GameMenuView.output("invalidLocation");
+        } else if (direction == null) {
+            GameMenuView.output("invalidDirection");
+        } else if (direction.equals(Direction.RANDOM)) {
+            Random random = new Random();
+            int idx = random.nextInt(4);
+            Map.getMapCell(X,Y).setRockDirection(Direction.getRandom());
+            GameMenuView.output("rockDrop");
+        } else{
             Map.getMapCell(X,Y).setRockDirection(direction);
+            GameMenuView.output("rockDrop");
         }
+        Random random = new Random();
 
     }
     public static void dropTree(int X, int Y, Tree type){
@@ -444,7 +474,7 @@ public class GameMenuController extends MenuController{
 
     }
 
-//    public static void main(String[] args) {
-//        GameMenuController.run(null,null, new Scanner(System.in));
-//    }
+    public static void main(String[] args) {
+        GameMenuController.run(null,null, new Scanner(System.in));
+    }
 }

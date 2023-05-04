@@ -28,17 +28,30 @@ public class ResourceMaker extends Building {
 
 
     public boolean checkTexture(Texture texture) {
-        if (resourceMakerType.equals(ResourceMakerType.IRON_MINE)
-                && !texture.equals(Texture.STONE)) {
+        if ((resourceMakerType.equals(ResourceMakerType.APPLE_GARDEN)
+                || resourceMakerType.equals(ResourceMakerType.DAIRY)
+                || resourceMakerType.equals(ResourceMakerType.HOPS_FARM)
+                || resourceMakerType.equals(ResourceMakerType.HUNT_POST)
+                || resourceMakerType.equals(ResourceMakerType.WHEAT_FARM))
+                &&
+                !(texture.equals(Texture.GRASS)
+                        || texture.equals(Texture.DENSE_GRASS_LAND))) {
+            return false;
+        } else if (resourceMakerType.equals(ResourceMakerType.IRON_MINE)
+                && !texture.equals(Texture.IRON)) {
+            return false;
+        }  else if (resourceMakerType.equals(ResourceMakerType.QUARRY)
+                && !texture.equals(Texture.ROCK)) {
             return false;
         } else if (resourceMakerType.equals(ResourceMakerType.PITCH_RIG)
                 && !texture.equals(Texture.PLAIN)) {
             return false;
         } else if (texture.getColor().equals("BLUE")
-                && texture.equals(Texture.ROCK)) {
+                || texture.equals(Texture.STONE)) {
             return false;
+        } else {
+            return true;
         }
-        return true;
     }
 }
 
