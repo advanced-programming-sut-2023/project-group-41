@@ -5,12 +5,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import stronghold.model.components.game.Map;
-<<<<<<< HEAD
 import stronghold.model.components.game.enums.Texture;
-=======
 import stronghold.model.components.game.MapCell;
 import stronghold.model.components.game.building.Castle;
->>>>>>> 85b305b8d5c1abc5798d01148452ff848a211498
 import stronghold.view.MapMenuView;
 import stronghold.view.ShopMenuView;
 

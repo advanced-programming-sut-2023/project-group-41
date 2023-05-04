@@ -7,12 +7,9 @@ import stronghold.model.components.game.Government;
 import stronghold.model.components.game.Map;
 import stronghold.model.components.game.Unit;
 import stronghold.model.components.game.building.Building;
-<<<<<<< HEAD
-=======
 import stronghold.model.components.game.building.Castle;
 import stronghold.model.components.game.building.Storage;
 import stronghold.model.components.game.building.StorageType;
->>>>>>> 85b305b8d5c1abc5798d01148452ff848a211498
 import stronghold.model.components.game.enums.*;
 import stronghold.model.components.game.soldeirtype.LongRanged;
 import stronghold.model.components.game.soldeirtype.UnarmedEnum;
@@ -435,12 +432,9 @@ public class GameMenuController extends MenuController{
     }
     public static void dropRock(int X, int Y, Direction direction){
         if(direction.equals(null)){
-<<<<<<< HEAD
             GameMenuView.output("invalidDirection");
 
-=======
             System.out.println("invalid dicrection!");
->>>>>>> 85b305b8d5c1abc5798d01148452ff848a211498
         }else{
             Map.getMapCell(X,Y).setRockDirection(direction);
         }
