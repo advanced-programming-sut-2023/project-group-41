@@ -1,13 +1,10 @@
 package stronghold.view;
 
-import stronghold.controller.MainMenuController;
-import stronghold.model.components.general.User;
-
 import java.util.Scanner;
 
-public class MainMenuView extends MenuView {
+public class MainMenuView extends MenuView{
     public static void output(String code, Object... params){
-        String pathToJSON = "src/main/java/stronghold/database/textcontent/MainMenuResponses.json";
+        String pathToJSON = "src/main/java/stronghold/database/textcontent/MainGameResponses.json";
         MenuView.output(pathToJSON, code, params);
     }
 
@@ -16,5 +13,4 @@ public class MainMenuView extends MenuView {
             return "";
         return scanner.nextLine();
     }
-
 }

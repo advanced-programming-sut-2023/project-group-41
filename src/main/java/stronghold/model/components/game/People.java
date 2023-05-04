@@ -15,16 +15,20 @@ public class People {
     //////Integers
     private int speed;
     private int price;
+    private int offense;
+    private int defence;
 
 
     //////Arraylists
     ArrayList<Resource> equipments= new ArrayList<>();
 
 
-   public People( int speed, int price){
+   public People( int speed, int price,int defence,int offense){
 
        this.speed=speed;
        this.price=price;
+       this.offense=offense;
+       this.defence=defence;
       // this.loyalty=mainMenu.getCurrentUser();
 
     }
@@ -69,5 +73,11 @@ public class People {
 
     }
 
+    public int getOffense() {
+        return offense;
+    }
 
+    public int getDefence() {
+        return defence;
+    }
 }

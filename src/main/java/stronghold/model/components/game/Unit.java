@@ -1,37 +1,51 @@
 package stronghold.model.components.game;
 
+import stronghold.model.components.game.enums.State;
+
 import java.util.ArrayList;
 
 public class Unit {
 
     ////Integers
-    int X;
-    int Y;
+   private int X;
+    private int Y;
+    private int count;
     ////Strings
-    String name;
+    private People people;
     ////Arraylists
-    ArrayList<People> people;
 
-    public Unit(int x,int y,String name){
-        this.name=name;
+    private State state;
+
+    public Unit(int x,int y,People type,int count){
+        this.people=type;
         this.X=x;
         this.Y=y;
-        people = new ArrayList<>();
+        this.count=count;
+
     }
 
-    public void addPerson(People person) {
-        people.add(person);
+
+    public int getCount() {
+        return count;
     }
 
-    public void removePerson(People person) {
-        people.remove(person);
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public ArrayList<People> getPeople() {
+    public People getPeople() {
         return people;
+    }
+
+    public State getState() {
+        return state;
+    }
+
+    public void setState(State state) {
+        this.state = state;
+    }
+
+    public int getY() {
+        return Y;
+    }
+
+    public int getX() {
+        return X;
     }
 }

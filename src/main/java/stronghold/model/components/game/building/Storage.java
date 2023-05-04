@@ -3,7 +3,9 @@ package stronghold.model.components.game.building;
 
 import java.util.HashMap;
 
+import stronghold.model.components.game.Government;
 import stronghold.model.components.game.enums.Resource;
+import stronghold.model.components.general.User;
 
 
 public class Storage extends Building {
@@ -12,8 +14,8 @@ public class Storage extends Building {
     private int capacity;
     private HashMap<Resource, Integer> list;
 
-    public Storage(StorageType storageType) {
-        super(storageType.getHealth(), storageType.getGold(), storageType.getWorkerNum(), storageType.isEngineerWorkers(), storageType.getNeededResource(), storageType.getNeededResourceCount());
+    public Storage(Government ownership, StorageType storageType) {
+        super(ownership, storageType.getHealth(), storageType.getGold(), storageType.getWorkerNum(), storageType.isEngineerWorkers(), storageType.getNeededResource(), storageType.getNeededResourceCount());
         this.storageType = storageType;
         this.capacity = storageType.getCapacity();
         list = new HashMap<>();

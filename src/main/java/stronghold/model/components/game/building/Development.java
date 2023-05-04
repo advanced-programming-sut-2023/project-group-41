@@ -2,6 +2,7 @@ package stronghold.model.components.game.building;
 
 import stronghold.model.components.game.Government;
 import stronghold.model.components.game.People;
+import stronghold.model.components.general.User;
 
 import java.util.ArrayList;
 
@@ -12,8 +13,8 @@ public class Development extends Building {
     private int wineUsageRate;
 
 
-    Development(DevelopmentType developmentType) {
-        super(developmentType.getHealth(), developmentType.getCost(), developmentType.getWorkerNum(),
+    Development(Government ownership, DevelopmentType developmentType) {
+        super(ownership, developmentType.getHealth(), developmentType.getCost(), developmentType.getWorkerNum(),
                 developmentType.isEngineerWorkers(), developmentType.getNeededResource(), developmentType.getNeededResourceCount());
         this.developmentType = developmentType;
         this.incPopularity = developmentType.getIncPopularity();
@@ -25,7 +26,7 @@ public class Development extends Building {
         government.setPopularity(government.getPopularity() + incPopularity);
         ArrayList<People> peopleArr = new ArrayList<>();
         for (int i = 0; i < incPopulation; i++) {
-            peopleArr.add(new People(0, 0));
+            peopleArr.add(new People(0, 0, 0, 0));
         }
         government.setPeople(peopleArr);
     }

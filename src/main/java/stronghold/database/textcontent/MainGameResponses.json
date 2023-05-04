@@ -1,0 +1,9 @@
+{
+  "incorrectBuildingType": "Error!: incorrect building type",
+  "noBuildingAvailable": "there is no building in the mentioned coordinates!",
+  "buildingDrop": "building dropped successfully",
+  "buildingSelected": "building selected successfully!!!",
+  "invalid": "Invalid command!",
+  "success": "Success",
+  "enterUsers": "Enter usernames in each line and write FINISH when its done"
+}

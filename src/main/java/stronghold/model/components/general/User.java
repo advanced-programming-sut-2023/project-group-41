@@ -3,6 +3,16 @@ package stronghold.model.components.general;
 import stronghold.model.components.game.Government;
 
 public class User {
+    private Government government;
+
+    public Government getGovernment() {
+        return government;
+    }
+
+    public void setGovernment(Government government) {
+        this.government = government;
+    }
+
     private String username;
     private String password;
     private String nickname;

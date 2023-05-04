@@ -2,13 +2,20 @@ package stronghold.model.components.game.building;
 
 import stronghold.model.components.game.enums.Resource;
 
-public enum StorageType {
-    ENGINEER_GUILD(100, 100, 0, false, Resource.WOOD, 10,100),
-    STOCK_PILE(100, 0, 0, false, null, 0, 100),
-    FOOD_STOCK_PILE(100, 0, 0, false, null, 0, 100),
-    Ox_TETHER(100,0, 1, false, Resource.WOOD,  5, 12),
-    ARMOURY(100, 0, 0, false, Resource.WOOD, 5, 100);
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+public enum StorageType {
+    ENGINEER_GUILD("engineerGuild", 100, 100, 0, false, Resource.WOOD, 10,100),
+    STOCK_PILE("stockPile", 100, 0, 0, false, null, 0, 100),
+    FOOD_STOCK_PILE("foodStockPile", 100, 0, 0, false, null, 0, 100),
+    Ox_TETHER("oxTether", 100,0, 1, false, Resource.WOOD,  5, 12),
+    ARMOURY("armoury", 100, 0, 0, false, Resource.WOOD, 5, 100);
+
+    public static final ArrayList<StorageType> storageTypeArr = new ArrayList<>(EnumSet.allOf(StorageType.class));
+    private String regex;
     private int health;
     private int gold;
     private int workerNum;
@@ -17,7 +24,8 @@ public enum StorageType {
     private int neededResourceCount;
     private int capacity;
 
-    StorageType(int health, int gold, int workerNum, boolean engineerWorkers, Resource neededResource, int neededResourceCount, int capacity) {
+    StorageType(String regex, int health, int gold, int workerNum, boolean engineerWorkers, Resource neededResource, int neededResourceCount, int capacity) {
+        this.regex = regex;
         this.health = health;
         this.gold = gold;
         this.workerNum = workerNum;
@@ -25,6 +33,22 @@ public enum StorageType {
         this.neededResource = neededResource;
         this.neededResourceCount = neededResourceCount;
         this.capacity = capacity;
+    }
+
+    public String getRegex(){
+        return regex;
+    }
+
+    public static Matcher getMatcher(String input, StorageType storageType){
+        String regex = storageType.getRegex();
+        return Pattern.compile(regex).matcher(input);
+    }
+
+    public static StorageType getStorageType(String input){
+        for (StorageType storageType : storageTypeArr) {
+            if (getMatcher(input, storageType).find()) return storageType;
+        }
+        return null;
     }
 
     public int getHealth() {

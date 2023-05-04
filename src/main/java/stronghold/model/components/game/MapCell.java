@@ -97,4 +97,10 @@ public class MapCell {
 
 
     }
+
+    public void setUnit(Unit unit) {
+        this.unit = unit;
+    }
+
+
 }

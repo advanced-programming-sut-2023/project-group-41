@@ -83,9 +83,9 @@ public class TradeMenuController extends MenuController{
         if(!trade.getReceiver().equals(currentUser))
             System.out.println("You are not the reciever!");
         //else if(trade.getReceiver().getTribe().getBalance()<trade.getPrice())
-                 //System.out.println("Not enough coins!");
+                // System.out.println("Not enough coins!");
         else{
-            //updateUser
+            //trade.getReceiver().ge//update user
             TradeDataBase.deleteTrade(trade);
             System.out.println("You have done trade "+trade.getId()+"with "+trade.getSender()+"successfully!");
         }

@@ -2,20 +2,26 @@ package stronghold.model.components.game.building;
 
 import stronghold.model.components.game.enums.Resource;
 
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public enum ResourceMakerType {
-    WHEAT_FARM(100, 0, 1, 15, Resource.WHEAT, 0,  100),
-    HUNT_POST(100, 0, 1, 5, Resource.MEAT, 0,100),
-    HOPS_FARM(100, 0, 1, 15, Resource.HOPS, 0,100),
-    DAIRY(100, 0, 1, 15, Resource.CHEESE, 0,100),//also make Leather Vest
-    APPLE_GARDEN(100, 0, 1, 5, Resource.APPLE, 0, 100),
-    PITCH_RIG(100, 0, 1, 20, Resource.PITCH, 0, 100),
-    QUARRY(100, 0, 3, 20, Resource.STONE, 100, 100),
-    IRON_MINE(100, 0, 2, 20, Resource.IRON, 0, 100),
-    STABLE(100, 400, 0, 20, Resource.HORSE, 4, 100),
-    WOOD_CUTTER(100, 0, 1, 3, Resource.WOOD, 0, 100);
+    WHEAT_FARM("wheatFarm", 100, 0, 1, 15, Resource.WHEAT, 0,  100),
+    HUNT_POST("huntPost", 100, 0, 1, 5, Resource.MEAT, 0,100),
+    HOPS_FARM("hopsFarm", 100, 0, 1, 15, Resource.HOPS, 0,100),
+    DAIRY("dairy", 100, 0, 1, 15, Resource.CHEESE, 0,100),//also make Leather Vest
+    APPLE_GARDEN("appleGarden", 100, 0, 1, 5, Resource.APPLE, 0, 100),
+    PITCH_RIG("pitchRig", 100, 0, 1, 20, Resource.PITCH, 0, 100),
+    QUARRY("quarry", 100, 0, 3, 20, Resource.STONE, 100, 100),
+    IRON_MINE("ironMine", 100, 0, 2, 20, Resource.IRON, 0, 100),
+    STABLE("stable", 100, 400, 0, 20, Resource.HORSE, 4, 100),
+    WOOD_CUTTER("woodCutter", 100, 0, 1, 3, Resource.WOOD, 0, 100);
 
 
-
+    public static final ArrayList<ResourceMakerType> resourceMakerTypeArr = new ArrayList<>(EnumSet.allOf(ResourceMakerType.class));
+    private String regex;
     private int health;
     private int gold;
     private int workerNum;
@@ -25,8 +31,9 @@ public enum ResourceMakerType {
     private Resource resource;
     private int limit;
     private int rate;
-    ResourceMakerType(int health, int gold, int workerNum,
+    ResourceMakerType(String regex, int health, int gold, int workerNum,
                        int neededResourceCount, Resource resource,int limit, int rate) {
+        this.regex = regex;
         this.health = health;
         this.gold = gold;
         this.workerNum = workerNum;
@@ -37,6 +44,23 @@ public enum ResourceMakerType {
         this.limit = limit;
         this.rate = rate;
     }
+
+    public String getRegex(){
+        return regex;
+    }
+
+    public static Matcher getMatcher(String input, ResourceMakerType resourceMakerType){
+        String regex = resourceMakerType.getRegex();
+        return Pattern.compile(regex).matcher(input);
+    }
+
+    public static ResourceMakerType getResourceMakerType(String input){
+        for (ResourceMakerType resourceMakerType : resourceMakerTypeArr) {
+            if (getMatcher(input, resourceMakerType).find()) return resourceMakerType;
+        }
+        return null;
+    }
+
 
     public int getHealth() {
         return health;
