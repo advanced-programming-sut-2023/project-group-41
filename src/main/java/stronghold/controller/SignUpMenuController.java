@@ -11,6 +11,7 @@ import stronghold.view.SignUpLoginView;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.security.SecureRandom;
 import java.util.Random;
@@ -78,7 +79,7 @@ public class SignUpMenuController extends MenuController{
 
         while(true){
             String input = SignUpLoginView.input(scanner);
-            
+
 
             Matcher registerMatcher = getJSONRegexMatcher(input, "register", menuRegexPatternsObject);
             Matcher registerRandPassMatcher = getJSONRegexMatcher(input,
@@ -195,7 +196,8 @@ public class SignUpMenuController extends MenuController{
                     throw new RuntimeException(e);
                 }
                 SignUpLoginView.output("usercreated", (Object) username, (Object) nickname);
-            } else if(registerRandPassMatcher.find()){
+            }
+            else if(registerRandPassMatcher.find()){
 
                 String username = StringParser.removeQuotes(registerRandPassMatcher.group(3));
                 String password = StringParser.removeQuotes(registerRandPassMatcher.group(5));
@@ -302,9 +304,9 @@ public class SignUpMenuController extends MenuController{
                     throw new RuntimeException(e);
                 }
                 SignUpLoginView.output("usercreated", (Object) username, (Object) nickname);
-                
-            } else if (loginMatcher.find()) {
 
+            }
+            else if (loginMatcher.find()) {
                 String username = StringParser.removeQuotes(loginMatcher.group("username"));
                 String password = StringParser.removeQuotes(loginMatcher.group("pass"));
 
@@ -324,10 +326,11 @@ public class SignUpMenuController extends MenuController{
                     continue;
                 }
 
+                currentUser = UsersDB.usersDB.getUserByUsername(username);
                 SignUpLoginView.output("successfulLogin");
                 MainMenuController.run(currentUser, scanner);
-
-            } else if (loginStayLoggedInMatcher.find()) {
+            }
+            else if (loginStayLoggedInMatcher.find()) {
 
                 String username = StringParser.removeQuotes(loginStayLoggedInMatcher.group("username"));
                 String password = StringParser.removeQuotes(loginStayLoggedInMatcher.group("pass"));
@@ -348,11 +351,33 @@ public class SignUpMenuController extends MenuController{
                     continue;
                 }
 
+                JsonElement prefsElement;
+                String pathToPrefs = "src/main/java/stronghold/database/datasets/preferences.json";
+                try {
+                    prefsElement = JsonParser.parseReader(
+                            new FileReader(pathToPrefs));
+                } catch (
+                        FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
 
+                try {
+                    String toBeWritten = prefsElement.toString();
+                    toBeWritten = toBeWritten.replace("!NULLUSER",username);
+                    FileWriter fileWriter = new FileWriter(pathToPrefs);
+                    fileWriter.write(toBeWritten);
+                    fileWriter.close();
+                } catch (
+                        IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+                currentUser = UsersDB.usersDB.getUserByUsername(username);
                 SignUpLoginView.output("successfulLogin");
                 MainMenuController.run(currentUser, scanner);
 
-            } else if (forgotMyPassMatcher.find()) {
+            }
+            else if (forgotMyPassMatcher.find()) {
                 String username = StringParser.removeQuotes(forgotMyPassMatcher.group("username"));
 
                 if(!usernameExists(username)){
@@ -396,10 +421,10 @@ public class SignUpMenuController extends MenuController{
                 }
                 SignUpLoginView.output("passChanged");
 
-            } else{
+            }
+            else{
                 SignUpLoginView.output("invalid");
             }
-
         }
     }
 

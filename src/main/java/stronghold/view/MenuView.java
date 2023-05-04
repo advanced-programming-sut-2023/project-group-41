@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class MenuView {
-    public static void output(String pathToOutputJSON,String code, Object... params){
+    public static void output(String pathToOutputJSON,String code, Object... params) {
         try {
             JsonElement jsonElement = JsonParser.parseReader(new FileReader(pathToOutputJSON));
             String response = String.valueOf(jsonElement.getAsJsonObject().get(code));

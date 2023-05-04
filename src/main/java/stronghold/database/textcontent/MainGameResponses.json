@@ -1,9 +1,11 @@
 {
   "incorrectBuildingType": "Error!: incorrect building type",
-  "noBuildingAvailable": "there is no building in the mentioned coordinates!",
+  "noBuildingAvailable": "Error!: there is no building in the mentioned coordinates!",
   "buildingDrop": "building dropped successfully",
   "buildingSelected": "building selected successfully!!!",
-  "invalid": "Invalid command!",
+  "invalid": "Error!: Invalid command!",
+  "welcome": "Welcome, $VAR1$!",
+  "logout": "User logged out!",
   "success": "Success",
   "enterUsers": "Enter usernames in each line and write FINISH when its done",
  "showPopularityFactors" : "food/tax/religion/fear",
