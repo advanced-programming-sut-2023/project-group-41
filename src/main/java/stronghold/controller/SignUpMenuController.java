@@ -323,6 +323,12 @@ public class SignUpMenuController extends MenuController{
 
                 if(!userAuthenticated){
                     SignUpLoginView.output("unmatchingpassanduser");
+                    try {
+                        Thread.sleep(5000 * failedAttempts++);
+                    } catch (
+                            InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
                     continue;
                 }
 
@@ -348,6 +354,12 @@ public class SignUpMenuController extends MenuController{
 
                 if(!userAuthenticated){
                     SignUpLoginView.output("unmatchingpassanduser");
+                    try {
+                        Thread.sleep(5000 * failedAttempts++);
+                    } catch (
+                            InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
                     continue;
                 }
 

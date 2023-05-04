@@ -9,9 +9,11 @@ import java.util.HashMap;
 
 public class Government {
     private User owner;
+    private int color;
     private String[] popularityFactors;
     private int popularity;
     private int foodRate;
+    private double balance;
 
 
     public void setPopularity(int popularity) {
@@ -32,9 +34,9 @@ public class Government {
 
     // i think we shoud remove units arraylist and people arraylist because they should put in mapCellClass
 
-    public Government(User owner) {
+    public Government(int color) {
         owner.setGovernment(this);
-        this.owner = owner;
+        this.color = color;
     }
 
     public String[] getPopularityFactors() {
@@ -107,7 +109,22 @@ public class Government {
         else foods.put(food, amount);
     }
 
-    //method from
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
+    }
+//method from
     // dropBuilding in UML
     // to
     // disBand
