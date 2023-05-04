@@ -12,9 +12,9 @@
   "randpass": "Your random password is: $VAR1$",
   "confirmrandpass": "Please re-enter your password here:",
 
-  "successfulLogin": "User logged in successfully!",
+  "successfulLogin": "Success!: User logged in successfully!",
 
-  "passChanged": "Password changed successfully",
+  "passChanged": "Success!: Password changed successfully",
 
   "registerusername404": "Error!: username not provided!",
   "registerpassword404": "Error!: password not provided!",

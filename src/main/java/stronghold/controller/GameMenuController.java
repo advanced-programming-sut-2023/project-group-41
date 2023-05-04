@@ -58,7 +58,7 @@ public class GameMenuController extends MenuController{
             Matcher patrolUnitMatcher;
             Matcher setMatcher;
             Matcher attackEnemyMatcher;
-            Matcher airAttakMatcher;
+            Matcher airAttackMatcher;
             Matcher pourOilMatcher;
             Matcher digTunnelMatcher;
             Matcher buildMatcher;
@@ -129,10 +129,10 @@ public class GameMenuController extends MenuController{
             } else if ((attackEnemyMatcher = getJSONRegexMatcher(command, "attackEnemy", gameMenuRegexObj)).matches()) {
                 //command: attack -e [enemy’s x] [enemy’s y]
                 attackEnemy(Integer.parseInt(attackEnemyMatcher.group(1)), Integer.parseInt(attackEnemyMatcher.group(2)));
-            } else if ((airAttakMatcher = getJSONRegexMatcher(command, "airAttack", gameMenuRegexObj)).matches()) {
+            } else if ((airAttackMatcher = getJSONRegexMatcher(command, "airAttack", gameMenuRegexObj)).matches()) {
                 //command: attack -x [x] -y [y]
-                int X = Integer.parseInt(airAttakMatcher.group("X"));
-                int Y = Integer.parseInt(airAttakMatcher.group("Y"));
+                int X = Integer.parseInt(airAttackMatcher.group("X"));
+                int Y = Integer.parseInt(airAttackMatcher.group("Y"));
                 airAttack(X, Y);
             } else if ((pourOilMatcher = getJSONRegexMatcher(command, "pourOil", gameMenuRegexObj)).matches()) {
                 Direction direction = Direction.getDirection(pourOilMatcher.group("direction"));
