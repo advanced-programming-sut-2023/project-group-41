@@ -5,7 +5,12 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import stronghold.model.components.game.Map;
+<<<<<<< HEAD
 import stronghold.model.components.game.enums.Texture;
+=======
+import stronghold.model.components.game.MapCell;
+import stronghold.model.components.game.building.Castle;
+>>>>>>> 85b305b8d5c1abc5798d01148452ff848a211498
 import stronghold.view.MapMenuView;
 import stronghold.view.ShopMenuView;
 
@@ -79,7 +84,15 @@ public class MapMenuController extends MenuController {
 
             } else if (i % 4 == 1) {
                 for (int j = 0; j <= 54; j++) {
+                    String color = map.getMapCell(x, y).getTexture().getColor();
+                    if(color.equals("GREEN")){
+                        System.out.print("\033[0;102m");
+                    }
+                    else if(color.equals("BLUE")){
+                        System.out.print("\033[0;104m");
+                    }
                     if (j % 6 == 0) {
+                        System.out.print("\033[0m");
                         System.out.print("|");
                     } else if (j % 6 == 3) {
                         System.out.print(map.getMapCell(x, y).showMovingSoldier());
@@ -87,13 +100,23 @@ public class MapMenuController extends MenuController {
                     } else {
                         System.out.print(" ");
                     }
+                    System.out.print("\033[0m");
                 }
+                System.out.print("\033[0m");
                 System.out.print("\n");
                 x = X;
 
             } else if (i % 4 == 2) {
                 for (int j = 0; j <= 54; j++) {
+                    String color = map.getMapCell(x, y).getTexture().getColor();
+                    if(color.equals("GREEN")){
+                        System.out.print("\033[0;102m");
+                    }
+                    else if(color.equals("BLUE")){
+                        System.out.print("\033[0;104m");
+                    }
                     if (j % 6 == 0) {
+                        System.out.print("\033[0m");
                         System.out.print("|");
                     } else if (j % 6 == 3) {
                         System.out.print(Map.getMapCell(x, y).showBuilding());
@@ -102,12 +125,21 @@ public class MapMenuController extends MenuController {
                         System.out.print(" ");
                     }
                 }
+                System.out.print("\033[0m");
                 System.out.print("\n");
                 x = X;
 
             } else {
                 for (int j = 0; j <= 54; j++) {
+                    String color = map.getMapCell(x, y).getTexture().getColor();
+                    if(color.equals("GREEN")){
+                        System.out.print("\033[0;102m");
+                    }
+                    else if(color.equals("BLUE")){
+                        System.out.print("\033[0;104m");
+                    }
                     if (j % 6 == 0) {
+                        System.out.print("\033[0m");
                         System.out.print("|");
                     } else if (j % 6 == 3) {
                         System.out.print(Map.getMapCell(x, y).showTree());
@@ -115,6 +147,7 @@ public class MapMenuController extends MenuController {
                     } else {
                         System.out.print(" ");
                     }
+                    System.out.print("\033[0m");
                 }
                 System.out.print("\n");
                 x = X;
@@ -172,4 +205,9 @@ public class MapMenuController extends MenuController {
 
     }
 
+    public static void main(String[] args) {
+        map = new Map(102);
+
+        showMap(2,2);
+    }
 }
