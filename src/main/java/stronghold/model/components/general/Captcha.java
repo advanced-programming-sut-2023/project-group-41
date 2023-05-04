@@ -36,7 +36,7 @@ public class Captcha {
     }
     private String[] firstRows = {"#####","    #","#####",
     "#####","#   #","#####","#####","#####","#####", "#####"};
-    private String[] secondRows = {"#   #","  # #","    #","    #","#   #",
+    private String[] secondRows = {"#   #","  ###","    #","    #","#   #",
             "#    ","#    ","   # ","#   #","#   #"};
 
     private String[] thirdRows = {"#   #","    #","#####","#####","#####",
