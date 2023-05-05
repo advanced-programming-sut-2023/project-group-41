@@ -412,7 +412,7 @@ public class GameMenuController extends MenuController{
 
 
     
-    public static void setTexture(int X, int Y, Texture type){ // todo: check this two settexture function when you have a map
+    public static void setTexture(int X, int Y, Texture type){
         if (!Map.validMapCell(X, Y)) {
             GameMenuView.output("invalidLocation");
         } else if (Map.getMapCell(X, Y).getBuilding() != null){
@@ -423,8 +423,11 @@ public class GameMenuController extends MenuController{
         }
     }
     public static void setTexture(int X1, int Y1, int X2, int Y2, Texture type){
+        Map map = new Map(200);
+
         if(!Map.validMapCell(X1, Y1) || !Map.validMapCell(X2, Y2) || X2 < X1 || Y2 < Y1){
             GameMenuView.output("cantMakeBlock");
+            return;
         }
 
         for(int i=X1;i<X2;i++){
@@ -438,11 +441,10 @@ public class GameMenuController extends MenuController{
 
         for(int i=X1;i<X2;i++){
             for(int j=Y1;j<Y2;j++){
-                setTexture(i,j,type);
+                Map.getMapCell(i, j).setTexture(type);
             }
-            System.out.println("texture has been set!");
         }
-
+        GameMenuView.output("textureSet");
     }
     public static void clear(int X, int Y){
        // Map.getMapCell(X,Y).setTexture();default texture

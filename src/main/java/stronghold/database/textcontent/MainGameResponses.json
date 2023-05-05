@@ -4,7 +4,7 @@
   "invalidLocation": "Error!: coordinates out of Map bonds!",
 
   "cantMakeBlock": "Error!: cannot make block with this coordinates",
-  "textureSet": "Error!: texture has been set!",
+  "textureSet": "Success!: texture has been set!",
   "buildingPlaced": "Error!: can not change texture where building placed",
 
   "noBuildingAvailable": "Error!: there is no building in the mentioned coordinates!",
