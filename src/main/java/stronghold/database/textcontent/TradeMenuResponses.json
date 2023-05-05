@@ -3,5 +3,5 @@
   "back": "you are back in MainMenu!",
   "enoughError": "Error! Not enough",
   "success":"Done successfully!",
-  "User": "$VAR1:  $VAR2"
+  "User": "$VAR1$:  $VAR2$"
 }

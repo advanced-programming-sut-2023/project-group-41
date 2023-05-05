@@ -60,4 +60,6 @@ public abstract class Building {
         else
             return null;
     }
+
+   // public abstract void action();
 }

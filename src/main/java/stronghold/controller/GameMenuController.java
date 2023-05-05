@@ -17,11 +17,11 @@ import stronghold.view.GameMenuView;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 
 import static stronghold.model.components.game.enums.Direction.RANDOM;
+import static stronghold.model.components.game.enums.Resource.*;
 
 public class GameMenuController extends MenuController{
     private static int roundNum;
@@ -31,13 +31,14 @@ public class GameMenuController extends MenuController{
     private static Unit currentUnit;
     private static Building currentBuilding;
 
-    private static Government currentPlayer;
+    private static Government currentGovernment;
     private static ArrayList<Government> governments=new ArrayList<>();
 
 
 
 
-    public static void run(User currentUser, ArrayList<User> users, Scanner scanner,int round) {
+    public static void run(Government fisrtGovernment, ArrayList<User> users, Scanner scanner,int round) {
+        currentGovernment = fisrtGovernment;
         roundNum=round;
         JsonElement regexElement = null;
         try {
@@ -100,7 +101,7 @@ public class GameMenuController extends MenuController{
                 // commands: dropbuilding -x [x] -y [y] -type [type] || dropbuilding -x [x] -y [y] -t [type]
                 int X = Integer.parseInt(dropBuildingMatcher.group("X"));
                 int Y = Integer.parseInt(dropBuildingMatcher.group("Y"));
-                Building type = Building.getBuilding(currentUser.getGovernment(), dropBuildingMatcher.group("type"));
+                Building type = Building.getBuilding(currentGovernment, dropBuildingMatcher.group("type"));
                 dropBuilding(X, Y, type);
             } else if ((selectBuildingMatcher = getJSONRegexMatcher(command, "selectBuilding", gameMenuRegexObj)).matches()) {
                 int X = Integer.parseInt(selectBuildingMatcher.group("X"));
@@ -241,35 +242,34 @@ public class GameMenuController extends MenuController{
 
     }
     public static void showFoodList(){
-        System.out.println("apple: "+currentPlayer.getFoodNum(Food.apple));
-        System.out.println("bread: "+currentPlayer.getFoodNum(Food.bread));
-        System.out.println("meat: "+currentPlayer.getFoodNum(Food.meat));
-        System.out.println("cheese: "+currentPlayer.getFoodNum(Food.cheese));
-
+        GameMenuView.output("foodList", (Object) "APPLE", Integer.toString(currentGovernment.getResourcesNum(APPLE)));
+        GameMenuView.output("foodList", (Object) "CHEESE", Integer.toString(currentGovernment.getResourcesNum(CHEESE)));
+        GameMenuView.output("foodList", (Object) "BREAD", Integer.toString(currentGovernment.getResourcesNum(BREAD)));
+        GameMenuView.output("foodList", (Object) "MEAT", Integer.toString(currentGovernment.getResourcesNum(MEAT)));
     }
     public static void foodRate(int rate){
-        currentPlayer.setFoodRate(rate);
+        currentGovernment.setFoodRate(rate);
         GameMenuView.output("success");
 
     }
     public static void foodRateShow(){
         GameMenuView.output("rate");
-        System.out.println(currentPlayer.getFoodRate());
+        System.out.println(currentGovernment.getFoodRate());
 
     }
     public static void taxRate(int rate){
-        currentPlayer.setTaxRate(rate);
+        currentGovernment.setTaxRate(rate);
         GameMenuView.output("success");
 
     }
     public static void taxRateShow(){
         GameMenuView.output("rate");
-        System.out.println(currentPlayer.getTaxRate());
+        System.out.println(currentGovernment.getTaxRate());
 
     }
     public static void fearRate(int rate){
         GameMenuView.output("rate");
-        System.out.println(currentPlayer.getFearRate());
+        System.out.println(currentGovernment.getFearRate());
 
     }
 
@@ -504,8 +504,8 @@ public class GameMenuController extends MenuController{
         GameMenuController.governments = governments;
     }
 
-    public static void main(String[] args) {
-        GameMenuController.run(null,null, new Scanner(System.in), 1);
-    }
+//    public static void main(String[] args) {
+//        GameMenuController.run(null,null, new Scanner(System.in), 1);
+//    }
 
 }

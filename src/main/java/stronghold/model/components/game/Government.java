@@ -1,10 +1,10 @@
 package stronghold.model.components.game;
 
-import stronghold.model.components.game.enums.Food;
 import stronghold.model.components.game.enums.Resource;
 import stronghold.model.components.general.User;
 
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.HashMap;
 
 public class Government {
@@ -14,7 +14,19 @@ public class Government {
     private int popularity;
     private int foodRate;
     private double balance;
+    private int taxRate;
+    private int fearRate;
+    private HashMap<Resource, Integer> resources;
+    private ArrayList<Unit> units;
+    private ArrayList<People> people;
 
+    public Government(int color) {
+        this.color = color;
+        resources = new HashMap<>();
+        for (Resource resource : EnumSet.allOf(Resource.class)) {
+            resources.put(resource, 0);
+        }
+    }
 
     public void setPopularity(int popularity) {
         this.popularity = popularity;
@@ -22,21 +34,6 @@ public class Government {
 
     public void setPeople(ArrayList<People> people) {
         this.people = people;
-    }
-
-    private int taxRate;
-    private int fearRate;
-
-    private HashMap<Resource, Integer> resources;
-    private HashMap<Food, Integer> foods; // mehrad change ArrayList name to foods from food
-    private ArrayList<Unit> units;
-    private ArrayList<People> people;
-
-    // i think we shoud remove units arraylist and people arraylist because they should put in mapCellClass
-
-    public Government(int color) {
-        owner.setGovernment(this);
-        this.color = color;
     }
 
     public String[] getPopularityFactors() {
@@ -63,22 +60,6 @@ public class Government {
         return fearRate;
     }
 
-    public HashMap<Resource, Integer> getResourcesMap() {
-        return resources;
-    }
-
-    public int getResourcesNum(Resource resource) {
-        return resources.get(resource);
-    }
-
-    public HashMap<Food, Integer> getFoodMap() {
-        return foods;
-    }
-
-    public int getFoodNum(Food food){
-        return foods.get(food);
-    }
-
     public ArrayList<Unit> getUnits() {
         return units;
     }
@@ -100,13 +81,15 @@ public class Government {
     }
 
     public void addResources(Resource resource, int amount) {
-        if (resources.containsKey(resource)) resources.put(resource, resources.get(resource) + amount);
-        else resources.put(resource, amount);
+        resources.put(resource, resources.get(resource) + amount);
     }
 
-    public void addFood(Food food, int amount) {
-        if (foods.containsKey(food)) foods.put(food, foods.get(food) + amount);
-        else foods.put(food, amount);
+    public HashMap<Resource, Integer> getResourcesMap() {
+        return resources;
+    }
+
+    public int getResourcesNum(Resource resource) {
+        return resources.get(resource);
     }
 
     public double getBalance() {

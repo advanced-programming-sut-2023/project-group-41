@@ -1,4 +1,6 @@
 {
+  "foodList": "Number of $VAR1$ available in storage is $VAR2$",
+
   "incorrectBuildingType": "Error!: incorrect building type",
   "textureProblem": "Error!: cannot place building in this texture",
   "invalidLocation": "Error!: coordinates out of Map bonds!",
