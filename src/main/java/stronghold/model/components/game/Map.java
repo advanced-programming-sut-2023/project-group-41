@@ -20,28 +20,34 @@ public class Map {
         this.cells = new ArrayList<>(size);
         for(int i = 0;i < size;i++){
             for(int j = 0; j < size; j++){
-                MapCell mapCell = new MapCell(i,j,SEA);
+                MapCell mapCell = new MapCell(i,j,LAND);
                 this.cells.add(mapCell);
             }
         }
 
        //making the map
     }
- public static MapCell getMapCell(int X, int Y){
-        for(MapCell mapCell: cells){
-            if(mapCell.getX()==X&&mapCell.getY()==Y){
-                return mapCell;
+     public static MapCell getMapCell(int X, int Y){
+            for(MapCell mapCell: cells){
+                if(mapCell.getX()==X&&mapCell.getY()==Y){
+                    return mapCell;
+                }
             }
-        }
-        return null;
- }
+            return null;
+     }
 
     public static int getSize() {
         return size;
     }
     public void startGameMap(User user1,User user2){
 
+    }
 
+    public static boolean validMapCell(int X, int Y){
+        return X >= 0 && X <= size && Y >= 0 && Y <= size;
+    }
 
+    public static void setSize(int size) {
+        Map.size = size;
     }
 }
