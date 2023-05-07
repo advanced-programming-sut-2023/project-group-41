@@ -1,6 +1,5 @@
 package stronghold.model.components.game.building;
 
-import stronghold.model.components.game.enums.Food;
 import stronghold.model.components.game.enums.Resource;
 
 import java.util.ArrayList;

@@ -5,9 +5,14 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import stronghold.model.components.game.Government;
 import stronghold.model.components.game.Map;
+import stronghold.model.components.game.MapCell;
 import stronghold.model.components.game.Unit;
+
 import stronghold.model.components.game.building.Building;
 import stronghold.model.components.game.building.Castle;
+
+import stronghold.model.components.game.building.*;
+
 import stronghold.model.components.game.enums.*;
 import stronghold.model.components.game.soldeirtype.LongRanged;
 import stronghold.model.components.game.soldeirtype.UnarmedEnum;
@@ -19,6 +24,10 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
+
+import static stronghold.model.components.game.enums.Direction.RANDOM;
+import static stronghold.model.components.game.enums.Resource.*;
+
 public class GameMenuController extends MenuController{
     private static int roundNum;
     private static Map map;
@@ -26,14 +35,16 @@ public class GameMenuController extends MenuController{
     ///////////
     private static ArrayList<Unit> currentUnits;
     private static Building currentBuilding;
-
     private static Government currentPlayer;
+
+    private static Government currentGovernment;
     private static ArrayList<Government> governments=new ArrayList<>();
 
 
 
 
-    public static void run(User currentUser, ArrayList<User> users, Scanner scanner,int round) {
+    public static void run(Government fisrtGovernment, ArrayList<User> users, Scanner scanner,int round) {
+        currentGovernment = fisrtGovernment;
         roundNum=round;
         JsonElement regexElement = null;
         try {
@@ -96,7 +107,7 @@ public class GameMenuController extends MenuController{
                 // commands: dropbuilding -x [x] -y [y] -type [type] || dropbuilding -x [x] -y [y] -t [type]
                 int X = Integer.parseInt(dropBuildingMatcher.group("X"));
                 int Y = Integer.parseInt(dropBuildingMatcher.group("Y"));
-                Building type = Building.getBuilding(currentUser.getGovernment(), dropBuildingMatcher.group("type"));
+                Building type = Building.getBuilding(currentGovernment, dropBuildingMatcher.group("type"));
                 dropBuilding(X, Y, type);
             } else if ((selectBuildingMatcher = getJSONRegexMatcher(command, "selectBuilding", gameMenuRegexObj)).matches()) {
                 int X = Integer.parseInt(selectBuildingMatcher.group("X"));
@@ -254,46 +265,55 @@ public class GameMenuController extends MenuController{
 
     }
     public static void showFoodList(){
-       // GameMenuView.output("foodtypenum",(Object) 234);
-        //System.out.println("dfsdf");
-        System.out.println("apple: "+currentPlayer.getFoodNum(Food.apple));
-        System.out.println("bread: "+currentPlayer.getFoodNum(Food.bread));
-        System.out.println("meat: "+currentPlayer.getFoodNum(Food.meat));
-        System.out.println("cheese: "+currentPlayer.getFoodNum(Food.cheese));
 
+        GameMenuView.output("foodList", (Object) "APPLE", Integer.toString(currentGovernment.getResourcesNum(APPLE)));
+        GameMenuView.output("foodList", (Object) "CHEESE", Integer.toString(currentGovernment.getResourcesNum(CHEESE)));
+        GameMenuView.output("foodList", (Object) "BREAD", Integer.toString(currentGovernment.getResourcesNum(BREAD)));
+        GameMenuView.output("foodList", (Object) "MEAT", Integer.toString(currentGovernment.getResourcesNum(MEAT)));
     }
     public static void foodRate(int rate){
-        currentPlayer.setFoodRate(rate);
+        currentGovernment.setFoodRate(rate);
         GameMenuView.output("success");
 
     }
     public static void foodRateShow(){
         GameMenuView.output("rate");
-        System.out.println(currentPlayer.getFoodRate());
+        System.out.println(currentGovernment.getFoodRate());
 
     }
     public static void taxRate(int rate){
-        currentPlayer.setTaxRate(rate);
+        currentGovernment.setTaxRate(rate);
         GameMenuView.output("success");
 
     }
     public static void taxRateShow(){
         GameMenuView.output("rate");
-        System.out.println(currentPlayer.getTaxRate());
+        System.out.println(currentGovernment.getTaxRate());
 
     }
     public static void fearRate(int rate){
         GameMenuView.output("rate");
-        System.out.println(currentPlayer.getFearRate());
+        System.out.println(currentGovernment.getFearRate());
 
     }
 
     public static void dropBuilding(int X, int Y, Building type){
+        MapCell mapCell;
+        ResourceMaker resourceMaker;
+        Map.setSize(40);
+        if (Map.validMapCell(X, Y)){
+            mapCell = new MapCell(X, Y , Texture.IRON);//Map.getMapCell(X, Y);
+        } else {
+            GameMenuView.output("invalidLocation");
+            return;
+        }
         if (type == null){
             GameMenuView.output("incorrectBuildingType");
+        } else if (type.getClass().getSimpleName().equals("ResourceMaker")
+            && !(resourceMaker = (ResourceMaker) type).checkTexture(mapCell.getTexture())){
+                GameMenuView.output("textureProblem");
         } else {
-            Map.getMapCell(X, Y).setBuilding(type);
-            System.out.println(type.getClass().getSimpleName());
+            mapCell.setBuilding(type);
             GameMenuView.output("buildingDrop");
         }
     }
@@ -312,7 +332,7 @@ public class GameMenuController extends MenuController{
     public static void repair(){
         if (!currentBuilding.getClass().getSimpleName().equals("Castle")) {
             GameMenuView.output("incorrectBuildingType");
-        } else if (true) {
+        } else if (false) {
             // TODO: stopping repair when soldier are near
         } else {
             Castle castle = (Castle)currentBuilding;
@@ -434,24 +454,38 @@ public class GameMenuController extends MenuController{
 
     
     public static void setTexture(int X, int Y, Texture type){
-        Map.getMapCell(X,Y).setTexture(type);
-        GameMenuView.output("textureSet");
-
-    }
-    public static void setTexture(int X1, int Y1, int X2, int Y2, Texture type){
-        if(X1<0||Y1<0||Y2<0||X2<0||X1> Map.getSize() ||Y1> Map.getSize()||Y2> Map.getSize()||X2> Map.getSize()){
-            GameMenuView.output("bondError");
-        }else{
-            for(int i=X1;i<X2;i++){
-                for(int j=Y1;j<Y2;j++){
-                    setTexture(i,j,type);
-
-                }
-
-            }
+        if (!Map.validMapCell(X, Y)) {
+            GameMenuView.output("invalidLocation");
+        } else if (Map.getMapCell(X, Y).getBuilding() != null){
+            GameMenuView.output("buildingPlaced");
+        } else {
+            Map.getMapCell(X, Y).setTexture(type);
             GameMenuView.output("textureSet");
         }
+    }
+    public static void setTexture(int X1, int Y1, int X2, int Y2, Texture type){
+        Map map = new Map(200);
 
+        if(!Map.validMapCell(X1, Y1) || !Map.validMapCell(X2, Y2) || X2 < X1 || Y2 < Y1){
+            GameMenuView.output("cantMakeBlock");
+            return;
+        }
+
+        for(int i=X1;i<X2;i++){
+            for(int j=Y1;j<Y2;j++){
+                if (Map.getMapCell(i, j).getBuilding()!= null){
+                    GameMenuView.output("buildingPlaced");
+                    return;
+                }
+            }
+        }
+
+        for(int i=X1;i<X2;i++){
+            for(int j=Y1;j<Y2;j++){
+                Map.getMapCell(i, j).setTexture(type);
+            }
+        }
+        GameMenuView.output("textureSet");
     }
     public static void clear(int X, int Y){
        // Map.getMapCell(X,Y).setTexture();default texture
@@ -465,14 +499,21 @@ public class GameMenuController extends MenuController{
 
     }
     public static void dropRock(int X, int Y, Direction direction){
-        if(direction.equals(null)){
+        if (!Map.validMapCell(X, Y)){
+            GameMenuView.output("invalidLocation");
+        } else if (direction == null) {
             GameMenuView.output("invalidDirection");
 
 
-        }else{
-            Map.getMapCell(X,Y).setRockDirection(direction);
-        }
 
+        }else if (direction.equals(RANDOM)) {
+            Map.getMapCell(X,Y).setRockDirection(Direction.getRandom());
+            GameMenuView.output("rockDrop");
+        } else{
+
+            Map.getMapCell(X,Y).setRockDirection(direction);
+            GameMenuView.output("rockDrop");
+        }
     }
     public static void dropTree(int X, int Y, Tree type){
         if(type.equals(null)){
@@ -516,6 +557,7 @@ public class GameMenuController extends MenuController{
     }
 
 
+
     public static void main(String[] args) {
        startGame(3);
     }
@@ -523,4 +565,10 @@ public class GameMenuController extends MenuController{
     public static Government getCurrentPlayer() {
         return currentPlayer;
     }
+
+//    public static void main(String[] args) {
+//        GameMenuController.run(null,null, new Scanner(System.in), 1);
+//    }
+
+
 }

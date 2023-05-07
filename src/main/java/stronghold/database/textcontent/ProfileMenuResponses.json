@@ -1,8 +1,10 @@
 {
+  "usernameChanged": "Success!: username has changed!",
+
   "invalid": "Error!: Invalid command!",
   "again": "Error! Please enter your new password again",
   "passwordError": "Error! Current password is incorrect!",
   "newPassWord": "Error! Please enter a new password!",
-  "emptySlogan": "Error! Slogan is empty!"
-
+  "emptySlogan": "Error! Slogan is empty!",
+  "usernameEmpty": "Error! Username not provided"
 }
