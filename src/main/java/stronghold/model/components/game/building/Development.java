@@ -16,6 +16,7 @@ public class Development extends Building {
     Development(Government ownership, DevelopmentType developmentType) {
         super(ownership, developmentType.getHealth(), developmentType.getCost(), developmentType.getWorkerNum(),
                 developmentType.isEngineerWorkers(), developmentType.getNeededResource(), developmentType.getNeededResourceCount());
+        ownership.addBuilding(developmentType.getRegex());
         this.developmentType = developmentType;
         this.incPopularity = developmentType.getIncPopularity();
         this.incPopulation = developmentType.getIncPopulation();
@@ -47,8 +48,9 @@ public class Development extends Building {
         return wineUsageRate;
     }
 
-//    @Override
-//    public void action() {
-//
-//    }
+
+    @Override
+    public String getRegex() {
+        return developmentType.getRegex();
+    }
 }

@@ -11,6 +11,7 @@
 
   "noBuildingAvailable": "Error!: there is no building in the mentioned coordinates!",
   "buildingDrop": "Success!: building dropped successfully",
+  "oxTetherError": "Error!: you should place oxTether near Quarry",
   "buildingSelected": "building selected successfully!!!",
 
   "invalidDirection": "Error!: invalid direction",

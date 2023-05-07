@@ -16,6 +16,7 @@ public class Storage extends Building {
 
     public Storage(Government ownership, StorageType storageType) {
         super(ownership, storageType.getHealth(), storageType.getGold(), storageType.getWorkerNum(), storageType.isEngineerWorkers(), storageType.getNeededResource(), storageType.getNeededResourceCount());
+        ownership.addBuilding(storageType.getRegex());
         this.storageType = storageType;
         this.capacity = storageType.getCapacity();
         list = new HashMap<>();
@@ -40,5 +41,10 @@ public class Storage extends Building {
 
     public HashMap<Resource, Integer> getList() {
         return list;
+    }
+
+    @Override
+    public String getRegex() {
+        return storageType.getRegex();
     }
 }

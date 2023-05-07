@@ -7,6 +7,7 @@ import stronghold.model.components.game.soldeirtype.FighterEnum;
 import stronghold.model.components.general.User;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static stronghold.model.components.game.enums.Texture.LAND;
 import static stronghold.model.components.game.enums.Texture.SEA;
@@ -49,5 +50,23 @@ public class Map {
 
     public static void setSize(int size) {
         Map.size = size;
+    }
+
+    public static boolean isBuildingNear(int X, int Y, String regex){
+        for (int i = -1; i <= 1 ; i++) {
+            for (int j = -1; j <= 1; j++) {
+                if (isBuildingHere(X + i, Y + j, regex)) return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean isBuildingHere(int X, int Y, String regex){
+        if (Map.validMapCell(X, Y)){
+            try {
+                return Objects.requireNonNull(Map.getMapCell(X, Y)).getBuilding().getRegex().matches(regex);
+            } catch (Exception ignored){}
+        }
+        return false;
     }
 }

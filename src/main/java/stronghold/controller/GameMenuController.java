@@ -276,9 +276,8 @@ public class GameMenuController extends MenuController{
     public static void dropBuilding(int X, int Y, Building type){
         MapCell mapCell;
         ResourceMaker resourceMaker;
-        Map.setSize(40);
         if (Map.validMapCell(X, Y)){
-            mapCell = new MapCell(X, Y , Texture.IRON);//Map.getMapCell(X, Y);
+            mapCell = Map.getMapCell(X, Y);
         } else {
             GameMenuView.output("invalidLocation");
             return;
@@ -288,6 +287,8 @@ public class GameMenuController extends MenuController{
         } else if (type.getClass().getSimpleName().equals("ResourceMaker")
             && !(resourceMaker = (ResourceMaker) type).checkTexture(mapCell.getTexture())){
                 GameMenuView.output("textureProblem");
+        } else if (type.getRegex().matches("\\s*oxTether\\s*") && !Map.isBuildingNear(X, Y, ResourceMakerType.QUARRY.getRegex())) {
+            GameMenuView.output("oxTetherError");
         } else {
             mapCell.setBuilding(type);
             GameMenuView.output("buildingDrop");
@@ -423,8 +424,6 @@ public class GameMenuController extends MenuController{
         }
     }
     public static void setTexture(int X1, int Y1, int X2, int Y2, Texture type){
-        Map map = new Map(200);
-
         if(!Map.validMapCell(X1, Y1) || !Map.validMapCell(X2, Y2) || X2 < X1 || Y2 < Y1){
             GameMenuView.output("cantMakeBlock");
             return;
@@ -488,7 +487,6 @@ public class GameMenuController extends MenuController{
 
     }
 
-
     public static void enterShopMenu(){
 
     }
@@ -504,8 +502,8 @@ public class GameMenuController extends MenuController{
         GameMenuController.governments = governments;
     }
 
-//    public static void main(String[] args) {
-//        GameMenuController.run(null,null, new Scanner(System.in), 1);
-//    }
+    public static void main(String[] args) {
+        GameMenuController.run(new Government(3),null, new Scanner(System.in), 1);
+    }
 
 }

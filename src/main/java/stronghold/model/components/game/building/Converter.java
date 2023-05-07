@@ -18,6 +18,7 @@ public class Converter extends Building {
 
     public Converter(Government ownership, ConverterType converterType) {
         super(ownership, converterType.getHealth(), converterType.getGold(), converterType.getWorkerNum(), converterType.isEngineerWorkers(), converterType.getNeededResource(), converterType.getNeededResourceCount());
+        ownership.addBuilding(converterType.getRegex());
         this.converterType = converterType;
         this.inpResource = converterType.getInpResource();
         this.outResource = converterType.getOutResource();
@@ -38,5 +39,10 @@ public class Converter extends Building {
 
     public int getRate() {
         return rate;
+    }
+
+    @Override
+    public String getRegex() {
+        return converterType.getRegex();
     }
 }
