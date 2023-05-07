@@ -1,38 +1,3 @@
 {
-  "startGame": "\\s*start\\s+game\\s+(?<opponent>[2345678])\\s+(?<rounds>\\d+)\\s*",
-
-  "showPopularityFactors": "show\\s+popularity\\s+factors",
-  "showPopularity": "show\\s+popularity",
-  "showFoodList": "show\\s+food\\s+list",
-  "foodRate": "food\\s+rate\\s+-r\\s+(\\d+)",
-  "foodRateShow": "food\\s+rate\\s+show",
-  "taxRate": "tax\\s+rate\\s+-r\\s+(\\d+)",
-  "taxRateShow": "tax\\s+rate\\s+show",
-  "fearRate": "fear\\s+rate\\s+-r\\s+(\\d+)",
-
-  "dropBuilding": "dropbuilding\\s+((-x\\s+(?<X>\\d+)\\s*)|(-y\\s+(?<Y>\\d+)\\s*)|(-(type|t)\\s+(?<type>\\S+)\\s*)){3}",
-  "selectBuilding": "select\\s+building\\s+((-x\\s+(?<X>\\d+)\\s*)|(-y\\s+(?<Y>\\d+)\\s*)){2}",
-  "createUnit": "createunit\\s+((-t\\s+(?<type>\\S+)\\s*)|(-c\\s+(?<count>\\d+)\\s*)){2}",
-  "repair": "repair",
-
-  "selectUnit": "select\\s+unit\\s+((-x\\s+(?<X>\\d+)\\s*)|(-y\\s+(?<Y>\\d+)\\s*)){2}",
-  "moveUnitTo": "move\\s+unit\\s+to\\s+((-x\\s+(?<X>\\d+)\\s*)|(-y\\s+(?<Y>\\d+)\\s*)){2}",
-  "patrolUnit": "patrol\\s+unit\\s+((-x1\\s+(?<X1>\\d+)\\s*)|(-y1\\s+(?<Y1>\\d+)\\s*)|(-x2\\s+(?<X2>\\d+)\\s*)|(-y2\\s+(?<Y2>\\d+)\\s*)){4}",
-  "set": "set\\s+((-x\\s+(?<X>\\d+)\\s*)|(-y\\s+(?<Y>\\d+)\\s*)|(-s\\s+(?<state>\\S+)\\s*)){3}",
-  "attackEnemy": "attack\\s+-e\\s+(\\d+)\\s+(\\d+)",
-  "airAttack": "attack\\s+((-x\\s+(?<X>\\d+)\\s*)|(-y\\s+(?<Y>\\d+)\\s*)){2}",
-  "pourOil": "pour\\s+oil\\s+-d\\s+(?<direction>\\S+)",
-  "digTunnel": "dig\\s+tunnel\\s+((-x\\s+(?<X>\\d+)\\s*)|(-y\\s+(?<Y>\\d+)\\s*)){2}",
-  "build": "build\\s+-q\\s+(\\S+)",
-  "disbandUnit": "disband\\s+unit",
-
-  "setTexture": "settexture\\s+((-x\\s+(?<X>\\d+)\\s*)|(-y\\s+(?<Y>\\d+)\\s*)|(-t\\s+(?<type>\\S+)\\s*)){3}",
-  "setRectangleTexture": "settexture\\s+((-x1\\s+(?<X1>\\d+)\\s*)|(-y1\\s+(?<Y1>\\d+)\\s*)|(-x2\\s+(?<X2>\\d+)\\s*)|(-y2\\s+(?<Y2>\\d+)\\s*)|(-t\\s+(?<type>\\S+)\\s*)){5}",
-  "clear": "clear\\s+((-x\\s+(?<X>\\d+)\\s*)|(-y\\s+(?<Y>\\d+)\\s*)){2}",
-  "dropRock": "droprock\\s+((-x\\s+(?<X>\\d+)\\s*)|(-y\\s+(?<Y>\\d+)\\s*)|(-d\\s+(?<direction>\\S+)\\s*)){3}",
-  "dropTree": "droptree\\s+((-x\\s+(?<X>\\d+)\\s*)|(-y\\s+(?<Y>\\d+)\\s*)|(-t\\s+(?<type>\\S+)\\s*)){3}",
-  "dropUnit": "dropunit\\s+((-x\\s+(?<X>\\d+)\\s*)|(-y\\s+(?<Y>\\d+)\\s*)|(-t\\s+(?<type>\\S+)\\s*)|(-c\\s+(?<count>\\d+)\\s*)){4}",
-  "enterMapMenu": "enter\\s+map\\s+menu",
-  "enterShopMenu": "enter\\s+shop\\s+menu",
-  "enterTradeMenu": "enter\\s+trade\\s+menu"
+  "write nothing here": ""
 }

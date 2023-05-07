@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class MainMenuView extends MenuView{
     public static void output(String code, Object... params){
-        String pathToJSON = "src/main/java/stronghold/database/textcontent/MainGameResponses.json";
+        String pathToJSON = "src/main/java/stronghold/database/textcontent/MainMenuResponses.json";
         MenuView.output(pathToJSON, code, params);
     }
 
