@@ -44,4 +44,8 @@ public class Map {
 
 
     }
+
+    public static ArrayList<MapCell> getCells() {
+        return cells;
+    }
 }

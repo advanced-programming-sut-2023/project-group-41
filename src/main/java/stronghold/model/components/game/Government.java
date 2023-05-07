@@ -1,5 +1,7 @@
 package stronghold.model.components.game;
 
+import stronghold.model.components.game.building.Building;
+import stronghold.model.components.game.building.Ruler;
 import stronghold.model.components.game.enums.Food;
 import stronghold.model.components.game.enums.Resource;
 import stronghold.model.components.general.User;
@@ -31,12 +33,24 @@ public class Government {
     private HashMap<Food, Integer> foods; // mehrad change ArrayList name to foods from food
     private ArrayList<Unit> units;
     private ArrayList<People> people;
+    private Building Ruler;
 
-    // i think we shoud remove units arraylist and people arraylist because they should put in mapCellClass
+    public Building getRuler() {
+        return Ruler;
+    }
+
+    public void setRuler(Building ruler) {
+        Ruler = ruler;
+    }
+// i think we shoud remove units arraylist and people arraylist because they should put in mapCellClass
 
     public Government(int color) {
-        owner.setGovernment(this);
+       // owner.setGovernment(this);
         this.color = color;
+        Building ruler=new Ruler(this);
+        this.setRuler(ruler);
+
+   
     }
 
     public String[] getPopularityFactors() {
@@ -123,6 +137,16 @@ public class Government {
 
     public void setColor(int color) {
         this.color = color;
+    }
+    public MapCell findRuler(Building ruler){
+        for(MapCell mapCell:Map.getCells()){
+            if(ruler.equals(mapCell.getBuilding())){
+                return mapCell;
+            }
+
+        }
+        return null;
+
     }
 //method from
     // dropBuilding in UML

@@ -34,5 +34,6 @@
   "dropUnit": "dropunit\\s+((-x\\s+(?<X>\\d+)\\s*)|(-y\\s+(?<Y>\\d+)\\s*)|(-t\\s+(?<type>\\S+)\\s*)|(-c\\s+(?<count>\\d+)\\s*)){4}",
   "enterMapMenu": "enter\\s+map\\s+menu",
   "enterShopMenu": "enter\\s+shop\\s+menu",
-  "enterTradeMenu": "enter\\s+trade\\s+menu"
+  "enterTradeMenu": "enter\\s+trade\\s+menu",
+  "playerCoordinate": "\\s*(?<X>\\d+)\\s+(?<Y>\\d+)\\s*"
 }

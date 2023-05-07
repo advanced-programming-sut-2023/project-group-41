@@ -17,14 +17,16 @@ public class People {
     private int price;
     private int offense;
     private int defence;
+    private Government owner;
+
 
 
     //////Arraylists
     ArrayList<Resource> equipments= new ArrayList<>();
 
 
-   public People( int speed, int price,int defence,int offense){
-
+   public People( int speed, int price,int defence,int offense,Government owner){
+       this.owner=owner;
        this.speed=speed;
        this.price=price;
        this.offense=offense;

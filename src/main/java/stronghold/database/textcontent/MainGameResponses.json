@@ -18,6 +18,8 @@
   "engineerError": "not an engineer!",
   "textureSet": "texture has been set!",
   "invalidDirection": "invalid Direction",
-  "invalidType": "invalid type"
+  "invalidType": "invalid type",
+  "foodtypenum": "$VAR1: VAR2",
+  "playerCenter": "Enter players Center cordinate:  -x -y"
 
 }
