@@ -7,14 +7,17 @@ import stronghold.model.components.game.Government;
 import stronghold.model.components.game.Map;
 import stronghold.model.components.game.MapCell;
 import stronghold.model.components.game.Unit;
+import java.lang.Math;
 
 import stronghold.model.components.game.building.Building;
 import stronghold.model.components.game.building.Castle;
 
 import stronghold.model.components.game.building.*;
 
+
 import stronghold.model.components.game.enums.*;
 import stronghold.model.components.game.soldeirtype.LongRanged;
+import stronghold.model.components.game.soldeirtype.Unarmed;
 import stronghold.model.components.game.soldeirtype.UnarmedEnum;
 import stronghold.model.components.general.User;
 import stronghold.view.GameMenuView;
@@ -37,14 +40,14 @@ public class GameMenuController extends MenuController{
     private static Building currentBuilding;
     private static Government currentPlayer;
 
-    private static Government currentGovernment;
+    //private static Government currentGovernment;
     private static ArrayList<Government> governments=new ArrayList<>();
 
 
 
 
     public static void run(Government fisrtGovernment, ArrayList<User> users, Scanner scanner,int round) {
-        currentGovernment = fisrtGovernment;
+        currentPlayer = fisrtGovernment;
         roundNum=round;
         JsonElement regexElement = null;
         try {
@@ -107,7 +110,7 @@ public class GameMenuController extends MenuController{
                 // commands: dropbuilding -x [x] -y [y] -type [type] || dropbuilding -x [x] -y [y] -t [type]
                 int X = Integer.parseInt(dropBuildingMatcher.group("X"));
                 int Y = Integer.parseInt(dropBuildingMatcher.group("Y"));
-                Building type = Building.getBuilding(currentGovernment, dropBuildingMatcher.group("type"));
+                Building type = Building.getBuilding(currentPlayer, dropBuildingMatcher.group("type"));
                 dropBuilding(X, Y, type);
             } else if ((selectBuildingMatcher = getJSONRegexMatcher(command, "selectBuilding", gameMenuRegexObj)).matches()) {
                 int X = Integer.parseInt(selectBuildingMatcher.group("X"));
@@ -206,15 +209,7 @@ public class GameMenuController extends MenuController{
         }
     }
     public static void startGame(int playerNum){
-        JsonElement regexElement = null;
-        try {
-            regexElement = JsonParser.parseReader(new FileReader(pathToRegexJSON));
-        } catch (
-                FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        JsonObject gameMenuRegexObj = regexElement.getAsJsonObject();
-        Matcher getCenter;
+
         Scanner scanner= new Scanner(System.in);
         for(int i=1;i<=playerNum;i++){
             Government government=new Government(i);
@@ -225,10 +220,15 @@ public class GameMenuController extends MenuController{
             Map map =new Map(200);
             map.getMapCell(x,y).setBuilding(government.getRuler());
            // System.out.println(map.getMapCell(x,y).getBuilding()2);
+
             
         }
 
 
+
+    }
+    public static void setCurrentPlayer(Government government){
+        currentPlayer=government;
     }
     public static Government getGovernmentByColor(int color)
     {
@@ -242,7 +242,11 @@ public class GameMenuController extends MenuController{
     }
 
 
-    public static void nextPlayer(){
+    public static void nextPlayer(int PlayerNum){
+        if(currentPlayer.getColor()==PlayerNum){
+            //TODO:end of round
+        }
+        setCurrentPlayer(getGovernmentByColor(currentPlayer.getColor()+1));
 
     }
     public static void endGame(){
@@ -266,34 +270,34 @@ public class GameMenuController extends MenuController{
     }
     public static void showFoodList(){
 
-        GameMenuView.output("foodList", (Object) "APPLE", Integer.toString(currentGovernment.getResourcesNum(APPLE)));
-        GameMenuView.output("foodList", (Object) "CHEESE", Integer.toString(currentGovernment.getResourcesNum(CHEESE)));
-        GameMenuView.output("foodList", (Object) "BREAD", Integer.toString(currentGovernment.getResourcesNum(BREAD)));
-        GameMenuView.output("foodList", (Object) "MEAT", Integer.toString(currentGovernment.getResourcesNum(MEAT)));
+        GameMenuView.output("foodList", (Object) "APPLE", Integer.toString(currentPlayer.getResourcesNum(APPLE)));
+        GameMenuView.output("foodList", (Object) "CHEESE", Integer.toString(currentPlayer.getResourcesNum(CHEESE)));
+        GameMenuView.output("foodList", (Object) "BREAD", Integer.toString(currentPlayer.getResourcesNum(BREAD)));
+        GameMenuView.output("foodList", (Object) "MEAT", Integer.toString(currentPlayer.getResourcesNum(MEAT)));
     }
     public static void foodRate(int rate){
-        currentGovernment.setFoodRate(rate);
+        currentPlayer.setFoodRate(rate);
         GameMenuView.output("success");
 
     }
     public static void foodRateShow(){
         GameMenuView.output("rate");
-        System.out.println(currentGovernment.getFoodRate());
+        System.out.println(currentPlayer.getFoodRate());
 
     }
     public static void taxRate(int rate){
-        currentGovernment.setTaxRate(rate);
+        currentPlayer.setTaxRate(rate);
         GameMenuView.output("success");
 
     }
     public static void taxRateShow(){
         GameMenuView.output("rate");
-        System.out.println(currentGovernment.getTaxRate());
+        System.out.println(currentPlayer.getTaxRate());
 
     }
     public static void fearRate(int rate){
         GameMenuView.output("rate");
-        System.out.println(currentGovernment.getFearRate());
+        System.out.println(currentPlayer.getFearRate());
 
     }
 
@@ -423,8 +427,28 @@ public class GameMenuController extends MenuController{
     }
     public static void pourOil(Direction direction){
         for (Unit unit:currentUnits){
-            if(unit.equals(UnarmedEnum.enginner)){
-                //if has oil
+            Unit unit1=Map.getUnarmed(Map.getMapCell(currentUnits.get(0).getX(),currentUnits.get(0).getY()),"engineer");
+            if(unit1!=null){
+                if(unit1.getPeople().getHasOil()){
+                    if(direction.getRegex().equals("r")){
+                        Map.getMapCell(currentUnits.get(0).getX()+1,currentUnits.get(0).getY()).setHasOil(true);
+                        GameMenuView.output("success");
+                    } if(direction.getRegex().equals("n")){
+                        Map.getMapCell(currentUnits.get(0).getX(),currentUnits.get(0).getY()+1).setHasOil(true);
+                        GameMenuView.output("success");
+                    } if(direction.getRegex().equals("s")){
+                        Map.getMapCell(currentUnits.get(0).getX(),currentUnits.get(0).getY()-1).setHasOil(true);
+                        GameMenuView.output("success");
+                    } if(direction.getRegex().equals("w")){
+                        Map.getMapCell(currentUnits.get(0).getX()-1,currentUnits.get(0).getY()).setHasOil(true);
+                        GameMenuView.output("success");
+                    } if(direction.getRegex().equals("e")){
+                        Map.getMapCell(currentUnits.get(0).getX()+1,currentUnits.get(0).getY()).setHasOil(true);
+                        GameMenuView.output("success");
+                    }
+
+
+                }
             }
         }
 
@@ -433,6 +457,9 @@ public class GameMenuController extends MenuController{
 
     }
     public static void build(String equipmentName){
+
+    }
+    public  static void burnOil(){
 
     }
     public static void disbandUnit(){
@@ -558,12 +585,89 @@ public class GameMenuController extends MenuController{
 
 
 
-    public static void main(String[] args) {
-       startGame(3);
-    }
+
 
     public static Government getCurrentPlayer() {
         return currentPlayer;
+    }
+    public static void popularityLogic(){
+        //food types
+        int i=0;
+        if(currentPlayer.getResourcesNum(APPLE)>0){
+            i++;
+        }
+        if(currentPlayer.getResourcesNum(BREAD)>0){
+            i++;
+        }
+        if(currentPlayer.getResourcesNum(CHEESE)>0){
+            i++;
+        }
+        if(currentPlayer.getResourcesNum(MEAT)>0){
+            i++;
+        }
+        currentPlayer.setPopularity(currentPlayer.getPopularity()+i-1);
+        currentPlayer.setPopularity(currentPlayer.getPopularity()+(-4*currentPlayer.getFoodRate()));
+        if(currentPlayer.getTaxRate()<=0){
+            currentPlayer.setPopularity(currentPlayer.getPopularity()+((-2*currentPlayer.getTaxRate())+1));
+        }else if(currentPlayer.getTaxRate()>0&&currentPlayer.getTaxRate()<=4){
+            currentPlayer.setPopularity(currentPlayer.getPopularity()-(2*currentPlayer.getTaxRate()));
+
+        }else {
+            currentPlayer.setPopularity(currentPlayer.getPopularity()-(12+((currentPlayer.getTaxRate()-5)*4)));
+
+        }
+        //TODO:relgion ;
+        currentPlayer.setPopularity(currentPlayer.getPopularity()+currentPlayer.getFearRate());
+    }
+    private static void foodLogic(){
+        if(currentPlayer.getResourcesNum(MEAT)+currentPlayer.getResourcesNum(CHEESE)+currentPlayer.getResourcesNum(APPLE)+currentPlayer.getResourcesNum(BREAD)==0){
+            currentPlayer.setFoodRate(-2);
+        }else if(currentPlayer.getResourcesNum(MEAT)+currentPlayer.getResourcesNum(CHEESE)+currentPlayer.getResourcesNum(APPLE)+currentPlayer.getResourcesNum(BREAD)<currentPlayer.getPeople().size()*((currentPlayer.getFoodRate()+2)*0.5)){
+            currentPlayer.setFoodRate(-2);
+            return;
+
+        }else{
+            double neededFood=currentPlayer.getPeople().size()*((currentPlayer.getFoodRate()+2)*0.5);
+            double j=Math.max(0,currentPlayer.getResourcesNum(APPLE)-neededFood);
+            double i=Math.max(0,neededFood-currentPlayer.getResourcesNum(APPLE));
+            currentPlayer.getResourcesMap().put(APPLE,((int)j));
+
+            double j2=Math.max(0,currentPlayer.getResourcesNum(BREAD)-i);
+            double i2=Math.max(0,i-currentPlayer.getResourcesNum(BREAD));
+            currentPlayer.getResourcesMap().put(BREAD,((int)j2));
+
+            double j3=Math.max(0,currentPlayer.getResourcesNum(CHEESE)-i2);
+            double i3=Math.max(0,i2-currentPlayer.getResourcesNum(CHEESE));
+            currentPlayer.getResourcesMap().put(CHEESE,((int)j3));
+
+            double j4=Math.max(0,currentPlayer.getResourcesNum(MEAT)-i3);
+            double i4=Math.max(0,i3-currentPlayer.getResourcesNum(MEAT));
+            currentPlayer.getResourcesMap().put(BREAD,((int)j4));
+
+
+        }
+    }
+    public static void taxLogic(){
+        double i=0;
+        if (currentPlayer.getTaxRate()<0){
+            i=1-(-0.2*(3-currentPlayer.getTaxRate()));
+            if(currentPlayer.getBalance()<currentPlayer.getPeople().size()*i){
+                currentPlayer.setFoodRate(-2);
+                return;
+
+            }
+            i*=-1;
+        }else if(currentPlayer.getTaxRate()>0){
+            i=0.4+(0.2*currentPlayer.getTaxRate());
+
+        }
+        if(currentPlayer.getBalance()==0){
+            currentPlayer.setTaxRate(0);
+            return;
+        }else{
+            currentPlayer.setBalance(currentPlayer.getBalance()-currentPlayer.getPeople().size()*i);
+        }
+
     }
 
 //    public static void main(String[] args) {

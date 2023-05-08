@@ -4,6 +4,8 @@ import stronghold.model.components.game.building.Building;
 import stronghold.model.components.game.enums.Direction;
 import stronghold.model.components.game.enums.Texture;
 import stronghold.model.components.game.enums.Tree;
+import stronghold.model.components.game.soldeirtype.Unarmed;
+import stronghold.model.components.game.soldeirtype.UnarmedEnum;
 
 import java.util.ArrayList;
 
@@ -11,6 +13,7 @@ public class MapCell {
     private final int x;
     private final int y;
     private boolean isPassable;
+    private boolean hasOil;
     private ArrayList<Unit> units;
     private Texture texture;
     private Building building;
@@ -24,6 +27,11 @@ public class MapCell {
         rockDirection=null;
         tree=null;
         isPassable=true;
+        this.hasOil=false;
+    }
+
+    public void setHasOil(boolean hasOil) {
+        this.hasOil = hasOil;
     }
 
     public int getX() {
@@ -114,6 +122,7 @@ public class MapCell {
         }
         return null;
     }
+
 
 
 }

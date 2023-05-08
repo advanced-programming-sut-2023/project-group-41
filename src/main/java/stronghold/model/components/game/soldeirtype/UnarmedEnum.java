@@ -1,21 +1,25 @@
 package stronghold.model.components.game.soldeirtype;
 
 public enum UnarmedEnum {
-    tunneler("tunnneler",4,1,1,3),
+    tunneler("tunneler",4,1,1,3),
     ladderMen("ladderMen",4,1,1,0),
-    enginner("enginner",3,1,1,0);
+    engineer("engineer",3,1,1,0);
     private String type;
     private int speed;
     private int price;
     private int defense;
     private int offense;
+
     UnarmedEnum(String type,int speed,int price,int defense,int offense){
         this.type=type;
         this.speed=speed;
         this.price=price;
         this.defense=defense;
         this.offense=offense;
+
     }
+
+
 
     public int getSpeed() {
         return speed;

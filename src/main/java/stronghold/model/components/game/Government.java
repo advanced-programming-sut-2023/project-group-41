@@ -26,6 +26,8 @@ public class Government {
 
 
 
+
+
     public void setPopularity(int popularity) {
         this.popularity = popularity;
     }
@@ -55,9 +57,11 @@ public class Government {
         for (Resource resource : EnumSet.allOf(Resource.class)) {
             resources.put(resource, 0);
         }
+        foodRate=-2;
+        taxRate=0;
 
    
-    }git a
+    }
 
 
     public String[] getPopularityFactors() {

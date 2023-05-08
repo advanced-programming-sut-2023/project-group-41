@@ -34,7 +34,9 @@
   "invalidType": "invalid type",
   "foodtypenum": "$VAR1: VAR2",
   "playerCenter": "Enter players Center cordinate:  -x -y",
-  "invalidType": "invalid type"
+  "invalidType": "invalid type",
+  "foodError": "Error! not enough food!",
+  "nextplayer": "nextPlayer"
 
 
 }
