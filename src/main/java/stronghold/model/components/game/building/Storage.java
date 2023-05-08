@@ -16,7 +16,7 @@ public class Storage extends Building {
 
     public Storage(Government ownership, StorageType storageType) {
         super(ownership, storageType.getHealth(), storageType.getGold(), storageType.getWorkerNum(), storageType.isEngineerWorkers(), storageType.getNeededResource(), storageType.getNeededResourceCount());
-        ownership.addBuilding(storageType.getRegex());
+        ownership.addBuilding(storageType);
         this.storageType = storageType;
         this.capacity = storageType.getCapacity();
         list = new HashMap<>();

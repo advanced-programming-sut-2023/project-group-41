@@ -62,4 +62,5 @@ public abstract class Building {
     }
 
     public abstract String getRegex();
+    //public abstract void action();
 }

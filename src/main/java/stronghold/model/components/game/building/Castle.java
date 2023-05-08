@@ -17,7 +17,7 @@ public class Castle extends Building {
     public Castle(Government ownership, CastleType castleType) {
         super(ownership, castleType.getHealth(), castleType.getGold(), castleType.getWorkerNum(), castleType.isEngineerWorkers(),
                 castleType.getNeededResource(), castleType.getNeededResourceCount());
-        ownership.addBuilding(castleType.getRegex());
+        ownership.addBuilding(castleType);
         this.size = castleType.getSize();
         this.peopleMap = new HashMap<>();
         this.fireRange = castleType.getFireRange();
@@ -57,4 +57,5 @@ public class Castle extends Building {
     public String getRegex() {
         return castleType.getRegex();
     }
+
 }

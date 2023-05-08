@@ -13,7 +13,7 @@ public class ResourceMaker extends Building {
 
     public ResourceMaker(Government ownership, ResourceMakerType resourceMakerType) {
         super(ownership, resourceMakerType.getHealth(), resourceMakerType.getGold(), resourceMakerType.getWorkerNum(), resourceMakerType.isEngineerWorkers(), resourceMakerType.getNeededResource(), resourceMakerType.getNeededResourceCount());
-        ownership.addBuilding(resourceMakerType.getRegex());
+        ownership.addBuilding(resourceMakerType);
         this.resourceMakerType = resourceMakerType;
         this.resource = resourceMakerType.getResource();
         this.rate = resourceMakerType.getRate();

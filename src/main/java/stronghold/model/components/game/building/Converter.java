@@ -13,14 +13,16 @@ import stronghold.model.components.general.User;
 public class Converter extends Building {
     private ConverterType converterType;
     private Resource inpResource;
+    private int inpResourceCount;
     private Resource outResource;
     private int rate;
 
     public Converter(Government ownership, ConverterType converterType) {
         super(ownership, converterType.getHealth(), converterType.getGold(), converterType.getWorkerNum(), converterType.isEngineerWorkers(), converterType.getNeededResource(), converterType.getNeededResourceCount());
-        ownership.addBuilding(converterType.getRegex());
+        ownership.addBuilding(converterType);
         this.converterType = converterType;
         this.inpResource = converterType.getInpResource();
+        this.inpResourceCount = converterType.getInpResourceCount();
         this.outResource = converterType.getOutResource();
         this.rate = converterType.getRate();
     }

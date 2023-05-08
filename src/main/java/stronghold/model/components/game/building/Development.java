@@ -17,11 +17,13 @@ public class Development extends Building {
     Development(Government ownership, DevelopmentType developmentType) {
         super(ownership, developmentType.getHealth(), developmentType.getCost(), developmentType.getWorkerNum(),
                 developmentType.isEngineerWorkers(), developmentType.getNeededResource(), developmentType.getNeededResourceCount());
-        ownership.addBuilding(developmentType.getRegex());
+        ownership.addBuilding(developmentType);
         this.developmentType = developmentType;
         this.incPopularity = developmentType.getIncPopularity();
         this.incPopulation = developmentType.getIncPopulation();
         this.wineUsageRate = developmentType.getWineUsageRate();
+        ownership.incPopulation(incPopularity);
+        ownership.incPopularity(incPopularity);
     }
 
     public void action(Government government) {
