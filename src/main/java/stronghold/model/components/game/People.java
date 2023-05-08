@@ -17,14 +17,19 @@ public class People {
     private int price;
     private int offense;
     private int defence;
+    private Government owner;
+    private boolean hasOil;
+
+
 
 
     //////Arraylists
     ArrayList<Resource> equipments= new ArrayList<>();
 
 
-   public People( int speed, int price,int defence,int offense){
-
+   public People( int speed, int price,int defence,int offense,Government owner){
+       this.hasOil=false;
+       this.owner=owner;
        this.speed=speed;
        this.price=price;
        this.offense=offense;
@@ -33,7 +38,14 @@ public class People {
 
     }
 
-    /////getters
+    public void setHasOil(boolean hasOil) {
+        this.hasOil = hasOil;
+    }
+    public boolean getHasOil(){
+       return hasOil;
+
+    }
+/////getters
 
 
     public String getName() {

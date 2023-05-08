@@ -4,6 +4,7 @@ import stronghold.model.components.game.MapCell;
 import stronghold.model.components.game.building.Castle;
 import stronghold.model.components.game.soldeirtype.Fighter;
 import stronghold.model.components.game.soldeirtype.FighterEnum;
+import stronghold.model.components.game.soldeirtype.Unarmed;
 import stronghold.model.components.general.User;
 
 import java.util.ArrayList;
@@ -50,6 +51,25 @@ public class Map {
 
     public static void setSize(int size) {
         Map.size = size;
+    }
+
+    public static ArrayList<MapCell> getCells() {
+        return cells;
+    }
+    public static Unit getUnarmed(MapCell mapCell,String type){
+        for(Unit unit: mapCell.getUnits()){
+            if(unit.getPeople() instanceof Unarmed){
+                if(((Unarmed) unit.getPeople()).getType().equals(type)){
+                    return unit;
+
+                }
+            }
+            return null;
+
+
+
+        }
+        return null;
     }
 
     public static boolean isBuildingNear(int X, int Y, String regex){

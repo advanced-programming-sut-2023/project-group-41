@@ -1,6 +1,10 @@
 package stronghold.model.components.game;
 
 import stronghold.model.components.game.building.*;
+
+import stronghold.model.components.game.building.Building;
+import stronghold.model.components.game.building.Ruler;
+
 import stronghold.model.components.game.enums.Resource;
 import stronghold.model.components.general.User;
 
@@ -23,16 +27,8 @@ public class Government {
     private ArrayList<Unit> units;
     private ArrayList<People> people;
 
-    public Government(int color) {
-        this.color = color;
-        resources = new HashMap<>();
-        for (Resource resource : EnumSet.allOf(Resource.class)) {
-            resources.put(resource, 0);
-        }
 
-        buildingHash = new HashMap<>();
-        listAllBuilding(buildingHash);
-    }
+
 
 
     public void setPopularity(int popularity) {
@@ -42,6 +38,39 @@ public class Government {
     public void setPeople(ArrayList<People> people) {
         this.people = people;
     }
+
+;
+    private Building Ruler;
+
+    public Building getRuler() {
+        return Ruler;
+    }
+
+    public void setRuler(Building ruler) {
+        Ruler = ruler;
+    }
+// i think we shoud remove units arraylist and people arraylist because they should put in mapCellClass
+
+    public Government(int color) {
+       // owner.setGovernment(this);
+        this.color = color;
+        Building ruler=new Ruler(this);
+        this.setRuler(ruler);
+        resources = new HashMap<>();
+        for (Resource resource : EnumSet.allOf(Resource.class)) {
+            resources.put(resource, 0);
+        }
+
+        buildingHash = new HashMap<>();
+        listAllBuilding(buildingHash);
+    }
+
+        foodRate=-2;
+        taxRate=0;
+
+
+    }
+
 
     public String[] getPopularityFactors() {
         return popularityFactors;
@@ -113,6 +142,16 @@ public class Government {
 
     public void setColor(int color) {
         this.color = color;
+    }
+    public MapCell findRuler(Building ruler){
+        for(MapCell mapCell:Map.getCells()){
+            if(ruler.equals(mapCell.getBuilding())){
+                return mapCell;
+            }
+
+        }
+        return null;
+
     }
 
     private void listAllBuilding(HashMap<String, Integer> buildingHash) {

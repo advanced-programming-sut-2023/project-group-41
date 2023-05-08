@@ -18,6 +18,8 @@
   "rockDrop": "Success!: rock dropped",
   "invalid": "Error!: Invalid command!",
 
+  "welcome": "Welcome, $VAR1$!",
+  "logout": "User logged out!",
   "success": "Success",
   "showPopularityFactors" : "food/tax/religion/fear",
   "rate": "rate: ",
@@ -27,6 +29,14 @@
   "notLongRanged": "the unit is not LongRanged",
   "bondError": "out of bonds",
   "engineerError": "not an engineer!",
+ "textureSet": "texture has been set!",
+  "invalidDirection": "invalid Direction",
+  "invalidType": "invalid type",
+  "foodtypenum": "$VAR1: VAR2",
+  "playerCenter": "Enter players Center cordinate:  -x -y",
+  "invalidType": "invalid type",
+  "foodError": "Error! not enough food!",
+  "nextplayer": "nextPlayer"
 
   "invalidType": "invalid type"
 }

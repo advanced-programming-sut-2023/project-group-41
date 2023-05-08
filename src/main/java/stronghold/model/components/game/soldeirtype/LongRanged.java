@@ -1,5 +1,6 @@
 package stronghold.model.components.game.soldeirtype;
 
+import stronghold.controller.GameMenuController;
 import stronghold.model.components.game.People;
 
 public class LongRanged extends People {
@@ -8,7 +9,7 @@ public class LongRanged extends People {
 
     private LongRangedEnum longRangedEnum;
     public LongRanged(  LongRangedEnum longRangedEnum){
-        super(longRangedEnum.getSpeed(), longRangedEnum.getPrice(),longRangedEnum.getDefense(),longRangedEnum.getOffense());
+        super(longRangedEnum.getSpeed(), longRangedEnum.getPrice(),longRangedEnum.getDefense(),longRangedEnum.getOffense(), GameMenuController.getCurrentPlayer());
 
         this.range=longRangedEnum.getRange();
         this.isHorsed=longRangedEnum.isHorsed();
