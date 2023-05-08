@@ -18,10 +18,7 @@
   "rockDrop": "Success!: rock dropped",
   "invalid": "Error!: Invalid command!",
 
-  "welcome": "Welcome, $VAR1$!",
-  "logout": "User logged out!",
   "success": "Success",
-  "enterUsers": "Enter usernames in each line and write FINISH when its done",
   "showPopularityFactors" : "food/tax/religion/fear",
   "rate": "rate: ",
   "waterError": "cant move to WATER or HIGHLANDS!",
