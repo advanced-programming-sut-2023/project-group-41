@@ -63,12 +63,9 @@ public class Government {
 
         buildingHash = new HashMap<>();
         listAllBuilding(buildingHash);
-    }
 
         foodRate=-2;
         taxRate=0;
-
-
     }
 
 
