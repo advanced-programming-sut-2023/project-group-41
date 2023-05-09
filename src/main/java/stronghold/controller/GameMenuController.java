@@ -252,7 +252,7 @@ public class GameMenuController extends MenuController{
         return roundNum;
     }
     public static void endOfRound(){
-
+        currentPlayer.allBuildingActions();
     }
 
 
@@ -265,7 +265,6 @@ public class GameMenuController extends MenuController{
 
     }
     public static void showFoodList(){
-
         GameMenuView.output("foodList", (Object) "APPLE", Integer.toString(currentPlayer.getResourcesNum(APPLE)));
         GameMenuView.output("foodList", (Object) "CHEESE", Integer.toString(currentPlayer.getResourcesNum(CHEESE)));
         GameMenuView.output("foodList", (Object) "BREAD", Integer.toString(currentPlayer.getResourcesNum(BREAD)));
@@ -308,11 +307,17 @@ public class GameMenuController extends MenuController{
         }
         if (type == null){
             GameMenuView.output("incorrectBuildingType");
+        } else if (!type.haveEnoughResource(currentPlayer)) {
+            GameMenuView.output("lackOfResource");
         } else if (type.getClass().getSimpleName().equals("ResourceMaker")
             && !(resourceMaker = (ResourceMaker) type).checkTexture(mapCell.getTexture())){
                 GameMenuView.output("textureProblem");
-        } else if (type.getRegex().matches("\\s*oxTether\\s*") && !Map.isBuildingNear(X, Y, ResourceMakerType.QUARRY)) {
-            GameMenuView.output("oxTetherError");
+        } else if (type.getBuildingType().equals(StorageType.STOCK_PILE) && !Map.isBuildingHere(X, Y, type.getBuildingType())){
+            GameMenuView.output("nearBuilding", (Object) type.getBuildingType().getRegex());
+        } else if (type.getBuildingType().equals(StorageType.FOOD_STOCK_PILE) && !Map.isBuildingHere(X, Y, type.getBuildingType())) {
+            GameMenuView.output("nearBuilding", (Object) type.getBuildingType().getRegex());
+        } else if (type.getBuildingType().equals(ConverterType.Ox_TETHER) && !Map.isBuildingNear(X, Y, ResourceMakerType.QUARRY)) {
+            GameMenuView.output("nearBuilding", (Object) ResourceMakerType.QUARRY.getRegex());
         } else {
             mapCell.setBuilding(type);
             GameMenuView.output("buildingDrop");

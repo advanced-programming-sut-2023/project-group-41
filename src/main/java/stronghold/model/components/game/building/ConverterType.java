@@ -18,6 +18,7 @@ public enum ConverterType implements BuildingType{
     POLETURNER("poleturner", 100, 100, 1, false, Resource.WOOD, 10, Resource.WOOD, 10, Resource.SPEAR, 50),
     BAKERY("bakery", 100, 0, 1, false, Resource.WOOD, 10, Resource.FLOUR, 5, Resource.BREAD, 100),
     BREWING("brewing", 100, 0, 1, false, Resource.WOOD, 10,Resource.HOPS, 10, Resource.ALE,  100),
+    Ox_TETHER("oxTether", 100,0, 1, false, Resource.WOOD,  5, , Resource.STONE_IN_QUARRY, Resource.STONE, 12),
     BARRACKS("barracks", 100, 0, 0, false, Resource.STONE, 15, null, 0, null, 100 ),
     MERCENARY_POST("mercenaryPost", 100, 0, 0, false, Resource.WOOD, 10, null, 0, null, 100),
     SHOP("post", 100, 0, 1, false, Resource.WOOD, 5, null, 0, null, 0);
@@ -108,6 +109,7 @@ public enum ConverterType implements BuildingType{
 
     @Override
     public void action(Government government, int buildingCount) {
+        if (inpResource == null) return;
         for (int i = 0; i < buildingCount; i++) {
             for (int j = 0; j < rate; j++) {
                 if (government.useResource(inpResource, inpResourceCount))

@@ -7,7 +7,7 @@ public class Ruler extends  Building {
     private Government owner;
 
     public Ruler(Government owner){
-            super(owner,500,0,0,false,null,0);
+            super(owner, null, 500,0,0,false,null,0);
 
 
     }
