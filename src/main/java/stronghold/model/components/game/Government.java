@@ -29,6 +29,7 @@ public class Government {
     private LinkedHashMap<BuildingType, Integer> buildingHash;
     private ArrayList<Unit> units;
     private ArrayList<People> people;
+    private ArrayList<People> normalPeople;
 
 
     public void incPopularity(int num) {
@@ -37,6 +38,9 @@ public class Government {
 
     public void incPopulation(int num) {
         population += num;
+        for (int i = 0; i < num; i++) {
+            normalPeople.add(new People(0, 0, 0,0, this));
+        }
     }
 
     public void incFreeStockSpace(int num) {
@@ -81,6 +85,7 @@ public class Government {
         buildingHash = new LinkedHashMap<>();
         listAllBuilding(buildingHash);
 
+        normalPeople = new ArrayList<>();
         foodRate = -2;
         taxRate = 0;
 

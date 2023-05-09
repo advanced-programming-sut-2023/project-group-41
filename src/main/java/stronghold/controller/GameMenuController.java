@@ -217,15 +217,11 @@ public class GameMenuController extends MenuController{
             GameMenuView.output("playerCenter");
             int x=scanner.nextInt();
             int y=scanner.nextInt();
-            Map map =new Map(200);
+            Map map = Map.getInstanceMap();
+            map.setSize(200);
             map.getMapCell(x,y).setBuilding(government.getRuler());
            // System.out.println(map.getMapCell(x,y).getBuilding()2);
-
-
         }
-
-
-
     }
     public static void setCurrentPlayer(Government government){
         currentPlayer=government;
@@ -304,7 +300,6 @@ public class GameMenuController extends MenuController{
     public static void dropBuilding(int X, int Y, Building type){
         MapCell mapCell;
         ResourceMaker resourceMaker;
-        Map.setSize(40);
         if (Map.validMapCell(X, Y)){
             mapCell = Map.getMapCell(X, Y);
         } else {
@@ -316,7 +311,7 @@ public class GameMenuController extends MenuController{
         } else if (type.getClass().getSimpleName().equals("ResourceMaker")
             && !(resourceMaker = (ResourceMaker) type).checkTexture(mapCell.getTexture())){
                 GameMenuView.output("textureProblem");
-        } else if (type.getRegex().matches("\\s*oxTether\\s*") && !Map.isBuildingNear(X, Y, ResourceMakerType.QUARRY.getRegex())) {
+        } else if (type.getRegex().matches("\\s*oxTether\\s*") && !Map.isBuildingNear(X, Y, ResourceMakerType.QUARRY)) {
             GameMenuView.output("oxTetherError");
         } else {
             mapCell.setBuilding(type);
