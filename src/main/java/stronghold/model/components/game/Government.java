@@ -102,6 +102,10 @@ public class Government {
         // i have no idea what should i do
     }
 
+    public LinkedHashMap<BuildingType, Integer> getBuildingHash() {
+        return buildingHash;
+    }
+
     public int getPopularity() {
         return popularity;
     }

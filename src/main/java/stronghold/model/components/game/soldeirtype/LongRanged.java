@@ -9,7 +9,7 @@ public class LongRanged extends People {
 
     private LongRangedEnum longRangedEnum;
     public LongRanged(  LongRangedEnum longRangedEnum){
-        super(longRangedEnum.getSpeed(), longRangedEnum.getPrice(),longRangedEnum.getDefense(),longRangedEnum.getOffense(), GameMenuController.getCurrentPlayer());
+        super(longRangedEnum.getSpeed(), longRangedEnum.getPrice(),longRangedEnum.getDefense(),longRangedEnum.getOffense(), GameMenuController.getCurrentPlayer(), longRangedEnum.isArab());
 
         this.range=longRangedEnum.getRange();
         this.isHorsed=longRangedEnum.isHorsed();

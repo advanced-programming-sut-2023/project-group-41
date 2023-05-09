@@ -19,21 +19,24 @@ public class People {
     private int defence;
     private Government owner;
     private boolean hasOil;
+    private boolean isArab;
 
-
-
+    public void setArab(boolean arab) {
+        isArab = arab;
+    }
 
     //////Arraylists
     ArrayList<Resource> equipments= new ArrayList<>();
 
 
-   public People( int speed, int price,int defence,int offense,Government owner){
+   public People( int speed, int price,int defence,int offense,Government owner,boolean isArab){
        this.hasOil=false;
        this.owner=owner;
        this.speed=speed;
        this.price=price;
        this.offense=offense;
        this.defence=defence;
+       this.isArab=isArab;
       // this.loyalty=mainMenu.getCurrentUser();
 
     }

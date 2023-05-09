@@ -1,12 +1,12 @@
 package stronghold.model.components.game.soldeirtype;
 
 public enum LongRangedEnum {
-    archer(4,2,2,1,3,false),
-    crossbowMen(2,3,2,1,2,false),
-    archerBow(4,2,2,1,3,false),
-    slingers(4,1,2,1,1,false),
-    horseArcher(5,3,2,1,2,true),
-    fireThrowers(5,3,4,1,2,false);
+    archer(4,2,2,1,3,false,false),
+    crossbowMen(2,3,2,1,2,false,false),
+    archerBow(4,2,2,1,3,false,false),
+    slingers(4,1,2,1,1,false,true),
+    horseArcher(5,3,2,1,2,true,true),
+    fireThrowers(5,3,4,1,2,false,true);
 
 
     private int speed;
@@ -15,7 +15,8 @@ public enum LongRangedEnum {
     private int price;
     private int range;
     private boolean isHorsed;
-    LongRangedEnum(  int speed, int defense, int offense, int price,int  range, boolean isHorsed){
+    boolean isArab;
+    LongRangedEnum(  int speed, int defense, int offense, int price,int  range, boolean isHorsed,boolean isArab){
 
         this.defense=defense;
         this.offense=offense;
@@ -23,6 +24,7 @@ public enum LongRangedEnum {
         this.isHorsed=isHorsed;
         this.speed=speed;
         this.price=price;
+        this.isArab=isArab;
 
     }
 
@@ -48,6 +50,10 @@ public enum LongRangedEnum {
 
     public boolean isHorsed() {
         return isHorsed;
+    }
+
+    public boolean isArab() {
+        return isArab;
     }
 }
 
