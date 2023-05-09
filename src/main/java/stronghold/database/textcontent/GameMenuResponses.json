@@ -46,6 +46,18 @@
   "enterMapMenu": "you are now in map menu",
   "enterTradeMenu": "you are now in trade menu",
   "oilError": "you dont Have OilMaker",
-  "engineerGotOil": "the engineer went to get oil"
+  "engineerGotOil": "the engineer went to get oil",
+  "enemyBond": "enemy out of bond",
+  "enemyError": "Error! no enemy",
+  "fightLoss": "your troop have been eleminated",
+  "fightWin": "your troop have killed enemy",
+  "notOil": "there is not oil in this place",
+  "fillDitchError": "there is not a ditch in this place ",
+  "invalidEngNum": "invalid Engineer Number",
+  "Texture": "texture: $VAR1",
+  "People": "$VAR1 :  $VAR2",
+  "Building": "---$VAR3"
+
+
 
 }

@@ -32,6 +32,10 @@ public abstract class Building {
         return health;
     }
 
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
     public int getCost() { return cost;}
     public int getWorkerNum() {
         return workerNum;
