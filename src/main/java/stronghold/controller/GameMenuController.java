@@ -346,10 +346,10 @@ public class GameMenuController extends MenuController{
 
     public static void selectUnit(int X, int Y){
         if(Map.getMapCell(X, Y).getUnits() == null){
-            System.out.println("there is no unit in the mentioned coordinates!");
+            GameMenuView.output("unitError");
         } else {
             currentUnits =Map.getMapCell(X, Y).getUnits();
-            System.out.println("unit selected successfully!!!");
+            GameMenuView.output("success");
         }
     }
     public static void moveUnitTo(int X, int Y){
@@ -454,6 +454,20 @@ public class GameMenuController extends MenuController{
 
     }
     public static void digTunnel(int X, int Y){
+        if(!Map.validMapCell(X,Y)){
+            GameMenuView.output("invalidLocation");
+            return;
+        }
+
+            Unit unit1=Map.getUnarmed(Map.getMapCell(currentUnits.get(0).getX(),currentUnits.get(0).getY()),"tunneler");
+            if(unit1!=null){
+                Map.getMapCell(X,Y).setHasTunnel(true);
+                GameMenuView.output("success");
+
+            }
+            GameMenuView.output("tunnelerError");
+
+
 
     }
     public static void build(String equipmentName){
@@ -491,7 +505,7 @@ public class GameMenuController extends MenuController{
         }
     }
     public static void setTexture(int X1, int Y1, int X2, int Y2, Texture type){
-        Map map = new Map(200);
+
 
         if(!Map.validMapCell(X1, Y1) || !Map.validMapCell(X2, Y2) || X2 < X1 || Y2 < Y1){
             GameMenuView.output("cantMakeBlock");
