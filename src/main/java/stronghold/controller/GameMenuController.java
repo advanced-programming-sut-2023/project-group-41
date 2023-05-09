@@ -311,11 +311,11 @@ public class GameMenuController extends MenuController{
         } else if (type.getClass().getSimpleName().equals("ResourceMaker")
             && !(resourceMaker = (ResourceMaker) type).checkTexture(mapCell.getTexture())){
                 GameMenuView.output("textureProblem");
-        } else if (type.getBuildingType().equals(StorageType.STOCK_PILE) && !Map.isBuildingHere(X, Y, type.getBuildingType())){
+        } else if (type.getBuildingType().equals(StorageType.STOCK_PILE) && !Map.getInstanceMap().isBuildingHere(X, Y, type.getBuildingType())){
             GameMenuView.output("nearBuilding", (Object) type.getBuildingType().getRegex());
-        } else if (type.getBuildingType().equals(StorageType.FOOD_STOCK_PILE) && !Map.isBuildingHere(X, Y, type.getBuildingType())) {
+        } else if (type.getBuildingType().equals(StorageType.FOOD_STOCK_PILE) && !Map.getInstanceMap().isBuildingHere(X, Y, type.getBuildingType())) {
             GameMenuView.output("nearBuilding", (Object) type.getBuildingType().getRegex());
-        } else if (type.getBuildingType().equals(ConverterType.Ox_TETHER) && !Map.isBuildingNear(X, Y, ResourceMakerType.QUARRY)) {
+        } else if (type.getBuildingType().equals(ConverterType.Ox_TETHER) && !Map.getInstanceMap().isBuildingNear(X, Y, ResourceMakerType.QUARRY)) {
             GameMenuView.output("nearBuilding", (Object) ResourceMakerType.QUARRY.getRegex());
         } else {
             mapCell.setBuilding(type);
