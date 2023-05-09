@@ -8,7 +8,7 @@ public class Unarmed extends People {
 
     private UnarmedEnum unarmedEnum;
     public Unarmed(UnarmedEnum unarmedEnum){
-        super(unarmedEnum.getSpeed(), unarmedEnum.getPrice(),unarmedEnum.getDefense(),unarmedEnum.getDefense(), GameMenuController.getCurrentPlayer());
+        super(unarmedEnum.getSpeed(), unarmedEnum.getPrice(),unarmedEnum.getDefense(),unarmedEnum.getDefense(), GameMenuController.getCurrentPlayer(),false);
         this.type= unarmedEnum.getType();
 
 

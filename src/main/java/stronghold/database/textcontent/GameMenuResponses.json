@@ -31,8 +31,17 @@
   "bondError": "out of bonds",
   "engineerError": "not an engineer!",
   "foodtypenum": "$VAR1: VAR2",
-  "playerCenter": "Enter players Center cordinate:  -x -y",
+  "playerCenter": "Enter players Center coordinate:  -x -y",
   "invalidType": "Error!: invalid type",
   "foodError": "Error! not enough food!",
-  "nextplayer": "nextPlayer"
+  "nextplayer": "nextPlayer",
+  "tunnelerError": "Error! no tunneler found!",
+  "unitError": "there is no unit in the mentioned coordinates!",
+
+  "shopError": "select shop to continue to shop menu!",
+  "enterShopMenu": "you are now in shop menu",
+  "enterMapMenu": "you are now in map menu",
+  "enterTradeMenu": "you are now in trade menu",
+  "oilError": "you dont Have OilMaker",
+  "engineerGotOil": "the engineer went to get oil"
 }

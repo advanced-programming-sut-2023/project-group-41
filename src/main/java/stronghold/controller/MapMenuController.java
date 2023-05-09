@@ -116,7 +116,7 @@ public class MapMenuController extends MenuController {
                         System.out.print("\033[0m");
                         System.out.print("|");
                     } else if (j % 6 == 3) {
-                        System.out.print(Map.getMapCell(x, y).showBuilding());
+                        System.out.print(Map.getInstanceMap().getMapCell(x, y).showBuilding());
                         x++;
                     } else {
                         System.out.print(" ");
@@ -139,7 +139,7 @@ public class MapMenuController extends MenuController {
                         System.out.print("\033[0m");
                         System.out.print("|");
                     } else if (j % 6 == 3) {
-                        System.out.print(Map.getMapCell(x, y).showTree());
+                        System.out.print(Map.getInstanceMap().getMapCell(x, y).showTree());
                         x++;
                     } else {
                         System.out.print(" ");
@@ -182,7 +182,7 @@ public class MapMenuController extends MenuController {
               xCordinate-=distance;
 
           }
-          if(xCordinate>Map.getSize()||xCordinate<0||yCordinate>Map.getSize()||yCordinate<0){
+          if(xCordinate>Map.getInstanceMap().getSize()||xCordinate<0||yCordinate>Map.getInstanceMap().getSize()||yCordinate<0){
               MapMenuView.output("bondError");
               return;
           }
@@ -191,7 +191,7 @@ public class MapMenuController extends MenuController {
     }
 
     public static void showMapCellDetails(int X, int Y) {
-        if(Map.getMapCell(X,Y)==null){
+        if(Map.getInstanceMap().getMapCell(X,Y)==null){
             MapMenuView.output("bondError");
             return;
         }

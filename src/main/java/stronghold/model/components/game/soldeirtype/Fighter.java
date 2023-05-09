@@ -10,7 +10,7 @@ public class Fighter extends People {
 
     private FighterEnum fighterEnum;
     public Fighter( FighterEnum fighterEnum){
-        super(fighterEnum.getSpeed(), fighterEnum.getPrice(),fighterEnum.getDefense(),fighterEnum.getOffense(), GameMenuController.getCurrentPlayer());
+        super(fighterEnum.getSpeed(), fighterEnum.getPrice(),fighterEnum.getDefense(),fighterEnum.getOffense(), GameMenuController.getCurrentPlayer(),fighterEnum.isArab());
 
         this.isAssassin=fighterEnum.isAssassin();
         this.isHorsed=fighterEnum.isHorsed();

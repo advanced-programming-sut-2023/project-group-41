@@ -14,6 +14,7 @@ public class MapCell {
     private final int y;
     private boolean isPassable;
     private boolean hasOil;
+    private boolean hasTunnel;
     private ArrayList<Unit> units;
     private Texture texture;
     private Building building;
@@ -28,6 +29,7 @@ public class MapCell {
         tree=null;
         isPassable=true;
         this.hasOil=false;
+        this.hasTunnel=false;
     }
 
     public void setHasOil(boolean hasOil) {
@@ -40,6 +42,10 @@ public class MapCell {
 
     public int getY() {
         return y;
+    }
+
+    public void setHasTunnel(boolean hasTunnel) {
+        this.hasTunnel = hasTunnel;
     }
 
     public Building getBuilding() {

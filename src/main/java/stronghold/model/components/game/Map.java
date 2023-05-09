@@ -27,7 +27,7 @@ public class Map {
             instanceMap = new Map();
         return instanceMap;
     }
-     public static MapCell getMapCell(int X, int Y){
+     public  MapCell getMapCell(int X, int Y){
             for(MapCell mapCell: instanceMap.cells){
                 if(mapCell.getX()==X&&mapCell.getY()==Y){
                     return mapCell;
@@ -36,14 +36,14 @@ public class Map {
             return null;
      }
 
-    public static int getSize() {
+    public  int getSize() {
         return instanceMap.size;
     }
     public void startGameMap(User user1,User user2){
 
     }
 
-    public static boolean validMapCell(int X, int Y){
+    public  boolean validMapCell(int X, int Y){
         return X >= 0 && X <= instanceMap.size && Y >= 0 && Y <= instanceMap.size;
     }
 
@@ -62,7 +62,7 @@ public class Map {
     public static ArrayList<MapCell> getCells() {
         return instanceMap.cells;
     }
-    public static Unit getUnarmed(MapCell mapCell,String type){
+    public  Unit getUnarmed(MapCell mapCell,String type){
         for(Unit unit: mapCell.getUnits()){
             if(unit.getPeople() instanceof Unarmed){
                 if(((Unarmed) unit.getPeople()).getType().equals(type)){
@@ -78,7 +78,7 @@ public class Map {
         return null;
     }
 
-    public static boolean isBuildingNear(int X, int Y, BuildingType buildingType){
+    public  boolean isBuildingNear(int X, int Y, BuildingType buildingType){
         for (int i = -1; i <= 1 ; i++) {
             for (int j = -1; j <= 1; j++) {
                 if (isBuildingHere(X + i, Y + j, buildingType)) return true;
@@ -87,10 +87,10 @@ public class Map {
         return false;
     }
 
-    public static boolean isBuildingHere(int X, int Y, BuildingType buildingType){
-        if (Map.validMapCell(X, Y)){
+    public  boolean isBuildingHere(int X, int Y, BuildingType buildingType){
+        if (this.validMapCell(X, Y)){
             try {
-                return Objects.requireNonNull(Map.getMapCell(X, Y)).getBuilding().getRegex().matches(buildingType.getRegex());
+                return Objects.requireNonNull(this.getMapCell(X, Y)).getBuilding().getRegex().matches(buildingType.getRegex());
             } catch (Exception ignored){}
         }
         return false;

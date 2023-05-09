@@ -3,10 +3,8 @@ package stronghold.controller;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import stronghold.model.components.game.Government;
-import stronghold.model.components.game.Map;
-import stronghold.model.components.game.MapCell;
-import stronghold.model.components.game.Unit;
+import stronghold.model.components.game.*;
+
 import java.lang.Math;
 
 import stronghold.model.components.game.building.Building;
@@ -42,6 +40,7 @@ public class GameMenuController extends MenuController{
 
     //private static Government currentGovernment;
     private static ArrayList<Government> governments=new ArrayList<>();
+    private static ArrayList<Unit> patrolingUnits=new ArrayList<>();
 
 
 
@@ -254,14 +253,13 @@ public class GameMenuController extends MenuController{
     public static void endOfRound(){
         currentPlayer.allBuildingActions();
     }
-
-
     
     public static void showPopularityFactors(){
         GameMenuView.output("showPopularityFactors");
 
     }
     public static void showPopularity(){
+
 
     }
     public static void showFoodList(){
@@ -276,6 +274,7 @@ public class GameMenuController extends MenuController{
 
     }
     public static void foodRateShow(){
+
         GameMenuView.output("rate");
         System.out.println(currentPlayer.getFoodRate());
 
@@ -299,8 +298,8 @@ public class GameMenuController extends MenuController{
     public static void dropBuilding(int X, int Y, Building type){
         MapCell mapCell;
         ResourceMaker resourceMaker;
-        if (Map.validMapCell(X, Y)){
-            mapCell = Map.getMapCell(X, Y);
+        if (Map.getInstanceMap().validMapCell(X, Y)){
+            mapCell = Map.getInstanceMap().getMapCell(X, Y);
         } else {
             GameMenuView.output("invalidLocation");
             return;
@@ -324,7 +323,7 @@ public class GameMenuController extends MenuController{
         }
     }
     public static void selectBuilding(int X, int Y){
-        Building building = Map.getMapCell(X, Y).getBuilding();
+        Building building = Map.getInstanceMap().getMapCell(X, Y).getBuilding();
         if (building == null){
             GameMenuView.output("noBuildingAvailable");
         } else {
@@ -347,26 +346,26 @@ public class GameMenuController extends MenuController{
     }
 
     public static void selectUnit(int X, int Y){
-        if(Map.getMapCell(X, Y).getUnits() == null){
-            System.out.println("there is no unit in the mentioned coordinates!");
+        if(Map.getInstanceMap().getMapCell(X, Y).getUnits() == null){
+            GameMenuView.output("unitError");
         } else {
-            currentUnits =Map.getMapCell(X, Y).getUnits();
-            System.out.println("unit selected successfully!!!");
+            currentUnits =Map.getInstanceMap().getMapCell(X, Y).getUnits();
+            GameMenuView.output("success");
         }
     }
     public static void moveUnitTo(int X, int Y){
-        if(Map.getMapCell(X,Y).getTexture().equals(Texture.RIVER)||Map.getMapCell(X,Y).getTexture().equals(Texture.SEA)||Map.getMapCell(X,Y).getTexture().equals(Texture.SHALLOW_LAKE)||Map.getMapCell(X,Y).getTexture().equals(Texture.SMALL_POND)||Map.getMapCell(X,Y).getTexture().equals(Texture.BIG_POND)){
+        if(Map.getInstanceMap().getMapCell(X,Y).getTexture().equals(Texture.RIVER)||Map.getInstanceMap().getMapCell(X,Y).getTexture().equals(Texture.SEA)||Map.getInstanceMap().getMapCell(X,Y).getTexture().equals(Texture.SHALLOW_LAKE)||Map.getInstanceMap().getMapCell(X,Y).getTexture().equals(Texture.SMALL_POND)||Map.getInstanceMap().getMapCell(X,Y).getTexture().equals(Texture.BIG_POND)){
             GameMenuView.output("waterError");
         }
-        else  if(X>(currentUnits.get(0).getPeople().getSpeed()*4)+ currentUnits.get(0).getX()||X<(currentUnits.get(0).getPeople().getSpeed()*4)-  currentUnits.get(0).getX()||Y>(currentUnits.get(0).getPeople().getSpeed()*4)+  currentUnits.get(0).getY()||Y<(currentUnits.get(0).getPeople().getSpeed()*4)+ currentUnits.get(0).getY()){
+        else  if(X>(currentUnits.get(0).getPeople().getSpeed()*5)+ currentUnits.get(0).getX()||X<(currentUnits.get(0).getPeople().getSpeed()*5)-  currentUnits.get(0).getX()||Y>(currentUnits.get(0).getPeople().getSpeed()*5)+  currentUnits.get(0).getY()||Y<(currentUnits.get(0).getPeople().getSpeed()*5)+ currentUnits.get(0).getY()){
             GameMenuView.output("speedError");
 
         }
 
         else{
-            Map.getMapCell(currentUnits.get(0).getX(), currentUnits.get(0).getY()).getUnits().clear();
+            Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(), currentUnits.get(0).getY()).getUnits().clear();
             for(Unit unit:currentUnits){
-                Map.getMapCell(X,Y).addUnit(unit);
+                Map.getInstanceMap().getMapCell(X,Y).addUnit(unit);
 
             }
 
@@ -384,6 +383,7 @@ public class GameMenuController extends MenuController{
                 unit.setPatrolX2(X2);
                 unit.setPatrolY1(Y1);
                 unit.setPatrolY2(Y2);
+                patrolingUnits.add(unit);
 
 
 
@@ -394,7 +394,7 @@ public class GameMenuController extends MenuController{
     }
     public static void setStateOfUnit(int X, int Y, State state){
         // State is an enum class and have three obj: standing|defensive|offensive
-        for(Unit unit:currentUnits){
+        for(Unit unit:Map.getInstanceMap().getMapCell(X,Y).getUnits()){
             unit.setState(state);
 
         }
@@ -418,7 +418,7 @@ public class GameMenuController extends MenuController{
                 yDistance*=-1;
             if(xDistance<=((LongRanged) currentUnits.get(i).getPeople()).getRange()*5&&yDistance<=((LongRanged) currentUnits.get(i).getPeople()).getRange()*5){
                    //building
-                    Map.getMapCell(currentUnits.get(i).getX(), currentUnits.get(i).getY()).getUnits().clear();
+                Map.getInstanceMap().getMapCell(currentUnits.get(i).getX(), currentUnits.get(i).getY()).getUnits().clear();
                     //System.out.println("you have eliminated all troops in the coordinates!");
 
             }else {
@@ -429,27 +429,35 @@ public class GameMenuController extends MenuController{
     }
     public static void pourOil(Direction direction){
         for (Unit unit:currentUnits){
-            Unit unit1=Map.getUnarmed(Map.getMapCell(currentUnits.get(0).getX(),currentUnits.get(0).getY()),"engineer");
+            Unit unit1=Map.getInstanceMap().getUnarmed(Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(),currentUnits.get(0).getY()),"engineer");
             if(unit1!=null){
                 if(unit1.getPeople().getHasOil()){
                     if(direction.getRegex().equals("r")){
-                        Map.getMapCell(currentUnits.get(0).getX()+1,currentUnits.get(0).getY()).setHasOil(true);
+                        Map.getInstanceMap().getMapCell(currentUnits.get(0).getX()+1,currentUnits.get(0).getY()).setHasOil(true);
                         GameMenuView.output("success");
                     } if(direction.getRegex().equals("n")){
-                        Map.getMapCell(currentUnits.get(0).getX(),currentUnits.get(0).getY()+1).setHasOil(true);
+                        Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(),currentUnits.get(0).getY()+1).setHasOil(true);
                         GameMenuView.output("success");
                     } if(direction.getRegex().equals("s")){
-                        Map.getMapCell(currentUnits.get(0).getX(),currentUnits.get(0).getY()-1).setHasOil(true);
+                        Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(),currentUnits.get(0).getY()-1).setHasOil(true);
                         GameMenuView.output("success");
                     } if(direction.getRegex().equals("w")){
-                        Map.getMapCell(currentUnits.get(0).getX()-1,currentUnits.get(0).getY()).setHasOil(true);
+                        Map.getInstanceMap().getMapCell(currentUnits.get(0).getX()-1,currentUnits.get(0).getY()).setHasOil(true);
                         GameMenuView.output("success");
                     } if(direction.getRegex().equals("e")){
-                        Map.getMapCell(currentUnits.get(0).getX()+1,currentUnits.get(0).getY()).setHasOil(true);
+                        Map.getInstanceMap().getMapCell(currentUnits.get(0).getX()+1,currentUnits.get(0).getY()).setHasOil(true);
                         GameMenuView.output("success");
                     }
 
         }else{
+                    if(currentPlayer.getBuildingHash().get(CastleType.OIL_SMELTER)==0){
+                        GameMenuView.output("oilError");
+                    }else{
+
+                        unit1.getPeople().setHasOil(true);
+                        GameMenuView.output("engineerGotOil");
+                        return;
+                    }
 
                 }
             }
@@ -457,6 +465,20 @@ public class GameMenuController extends MenuController{
 
     }
     public static void digTunnel(int X, int Y){
+        if(!Map.getInstanceMap().validMapCell(X,Y)){
+            GameMenuView.output("invalidLocation");
+            return;
+        }
+
+            Unit unit1=Map.getInstanceMap().getUnarmed(Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(),currentUnits.get(0).getY()),"tunneler");
+            if(unit1!=null){
+                Map.getInstanceMap().getMapCell(X,Y).setHasTunnel(true);
+                GameMenuView.output("success");
+
+            }
+            GameMenuView.output("tunnelerError");
+
+
 
     }
     public static void build(String equipmentName){
@@ -469,11 +491,11 @@ public class GameMenuController extends MenuController{
         if(!currentUnits.get(0).checkBondsForDisband(currentPlayer.findRuler(currentPlayer.getRuler()).getX(),currentPlayer.findRuler(currentPlayer.getRuler()).getY())){
             GameMenuView.output("bondError");
         }else {
-            Map.getMapCell(currentUnits.get(0).getX(),currentUnits.get(0).getY()).getUnits().clear();
+            Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(),currentUnits.get(0).getY()).getUnits().clear();
             for(Unit unit:currentUnits){
                 unit.setX(currentPlayer.findRuler(currentPlayer.getRuler()).getX()+3);
                 unit.setY(currentPlayer.findRuler(currentPlayer.getRuler()).getY()+3);
-                Map.getMapCell(currentPlayer.findRuler(currentPlayer.getRuler()).getX()+3,currentPlayer.findRuler(currentPlayer.getRuler()).getY()+3).addUnit(unit);
+                Map.getInstanceMap().getMapCell(currentPlayer.findRuler(currentPlayer.getRuler()).getX()+3,currentPlayer.findRuler(currentPlayer.getRuler()).getY()+3).addUnit(unit);
             }
             GameMenuView.output("success");
         }
@@ -484,24 +506,25 @@ public class GameMenuController extends MenuController{
 
     
     public static void setTexture(int X, int Y, Texture type){
-        if (!Map.validMapCell(X, Y)) {
+        if (!Map.getInstanceMap().validMapCell(X, Y)) {
             GameMenuView.output("invalidLocation");
-        } else if (Map.getMapCell(X, Y).getBuilding() != null){
+        } else if (Map.getInstanceMap().getMapCell(X, Y).getBuilding() != null){
             GameMenuView.output("buildingPlaced");
         } else {
-            Map.getMapCell(X, Y).setTexture(type);
+            Map.getInstanceMap().getMapCell(X, Y).setTexture(type);
             GameMenuView.output("textureSet");
         }
     }
     public static void setTexture(int X1, int Y1, int X2, int Y2, Texture type){
-        if(!Map.validMapCell(X1, Y1) || !Map.validMapCell(X2, Y2) || X2 < X1 || Y2 < Y1){
+
+        if(!Map.getInstanceMap().validMapCell(X1, Y1) || !Map.getInstanceMap().validMapCell(X2, Y2) || X2 < X1 || Y2 < Y1){
             GameMenuView.output("cantMakeBlock");
             return;
         }
 
         for(int i=X1;i<X2;i++){
             for(int j=Y1;j<Y2;j++){
-                if (Map.getMapCell(i, j).getBuilding()!= null){
+                if (Map.getInstanceMap().getMapCell(i, j).getBuilding()!= null){
                     GameMenuView.output("buildingPlaced");
                     return;
                 }
@@ -510,24 +533,24 @@ public class GameMenuController extends MenuController{
 
         for(int i=X1;i<X2;i++){
             for(int j=Y1;j<Y2;j++){
-                Map.getMapCell(i, j).setTexture(type);
+                Map.getInstanceMap().getMapCell(i, j).setTexture(type);
             }
         }
         GameMenuView.output("textureSet");
     }
     public static void clear(int X, int Y){
        // Map.getMapCell(X,Y).setTexture();default texture
-        Map.getMapCell(X,Y).setBuilding(null);
-        Map.getMapCell(X,Y).setPassable(true);
-        Map.getMapCell(X,Y).getUnits().clear();
-        Map.getMapCell(X,Y).setRockDirection(null);
-        Map.getMapCell(X,Y).setTree(null);
+        Map.getInstanceMap().getMapCell(X,Y).setBuilding(null);
+        Map.getInstanceMap().getMapCell(X,Y).setPassable(true);
+        Map.getInstanceMap().getMapCell(X,Y).getUnits().clear();
+        Map.getInstanceMap().getMapCell(X,Y).setRockDirection(null);
+        Map.getInstanceMap().getMapCell(X,Y).setTree(null);
         GameMenuView.output("success");
 
 
     }
     public static void dropRock(int X, int Y, Direction direction){
-        if (!Map.validMapCell(X, Y)){
+        if (!Map.getInstanceMap().validMapCell(X, Y)){
             GameMenuView.output("invalidLocation");
         } else if (direction == null) {
             GameMenuView.output("invalidDirection");
@@ -535,11 +558,11 @@ public class GameMenuController extends MenuController{
 
 
         }else if (direction.equals(RANDOM)) {
-            Map.getMapCell(X,Y).setRockDirection(Direction.getRandom());
+            Map.getInstanceMap().getMapCell(X,Y).setRockDirection(Direction.getRandom());
             GameMenuView.output("rockDrop");
         } else{
 
-            Map.getMapCell(X,Y).setRockDirection(direction);
+            Map.getInstanceMap().getMapCell(X,Y).setRockDirection(direction);
             GameMenuView.output("rockDrop");
         }
     }
@@ -548,7 +571,7 @@ public class GameMenuController extends MenuController{
             GameMenuView.output("invalidType");
 
         }else{
-            Map.getMapCell(X,Y).setTree(type);
+            Map.getInstanceMap().getMapCell(X,Y).setTree(type);
         }
 
     }
@@ -565,14 +588,29 @@ public class GameMenuController extends MenuController{
 
 
     public static void enterTradeMenu(){
+        Scanner scanner=new Scanner(System.in);
+        GameMenuView.output("enterTradeMenu");
+        TradeMenuController.run(scanner);
 
     }
 
 
     public static void enterShopMenu(){
+        if(currentBuilding.getRegex().equals("Shop")){
+            Scanner scanner=new Scanner(System.in);
+            GameMenuView.output("enterShopMenu");
+            ShopMenuController.run(scanner);
+
+        }else{
+            GameMenuView.output("shopError");
+            return;
+        }
 
     }
     public static void enterMapMenu(){
+        Scanner scanner=new Scanner(System.in);
+        GameMenuView.output("enterMapMenu");
+        MapMenuController.run(scanner);
 
     }
 
@@ -617,7 +655,7 @@ public class GameMenuController extends MenuController{
             currentPlayer.setPopularity(currentPlayer.getPopularity()-(12+((currentPlayer.getTaxRate()-5)*4)));
 
         }
-        //TODO:relgion ;
+       currentPlayer.setPopularity(currentPlayer.getPopularity()+ (currentPlayer.getBuildingHash().get(DevelopmentType.CHURCH)*2+currentPlayer.getBuildingHash().get(DevelopmentType.CATHEDRAL)*2));
         currentPlayer.setPopularity(currentPlayer.getPopularity()+currentPlayer.getFearRate());
     }
     private static void foodLogic(){
@@ -671,9 +709,9 @@ public class GameMenuController extends MenuController{
 
     }
 
-//    public static void main(String[] args) {
-//        GameMenuController.run(null,null, new Scanner(System.in), 1);
-//    }
+    public static void main(String[] args) {
+       foodRateShow();
+   }
 
 
 }
