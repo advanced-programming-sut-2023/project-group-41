@@ -1,0 +1,6 @@
+{
+  "welcome": "Welcome, $VAR1$!",
+  "logout": "User logged out!",
+  "enterUsers": "Enter usernames in each line and write FINISH when its done",
+  "invalid": "Error!: Invalid command!"
+}

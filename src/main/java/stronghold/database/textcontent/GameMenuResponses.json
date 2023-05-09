@@ -11,6 +11,7 @@
 
   "noBuildingAvailable": "Error!: there is no building in the mentioned coordinates!",
   "buildingDrop": "Success!: building dropped successfully",
+  "oxTetherError": "Error!: you should place oxTether near Quarry",
   "buildingSelected": "building selected successfully!!!",
 
   "invalidDirection": "Error!: invalid direction",
@@ -20,8 +21,7 @@
   "welcome": "Welcome, $VAR1$!",
   "logout": "User logged out!",
   "success": "Success",
-  "enterUsers": "Enter usernames in each line and write FINISH when its done",
- "showPopularityFactors" : "food/tax/religion/fear",
+  "showPopularityFactors" : "food/tax/religion/fear",
   "rate": "rate: ",
   "waterError": "cant move to WATER or HIGHLANDS!",
   "speedError": "move out of speed capacity!",
@@ -40,5 +40,5 @@
   "tunnelerError": "Error! no tunneler found!",
   "unitError": "there is no unit in the mentioned coordinates!"
 
-
+  "invalidType": "invalid type"
 }

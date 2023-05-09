@@ -34,7 +34,7 @@ import static stronghold.model.components.game.enums.Resource.*;
 public class GameMenuController extends MenuController{
     private static int roundNum;
     private static Map map;
-    private static String pathToRegexJSON = "src/main/java/stronghold/database/utils/regex/MainGameRegex.json";
+    private static String pathToRegexJSON = "src/main/java/stronghold/database/utils/regex/GameMenuRegex.json";
     ///////////
     private static ArrayList<Unit> currentUnits;
     private static Building currentBuilding;
@@ -217,15 +217,11 @@ public class GameMenuController extends MenuController{
             GameMenuView.output("playerCenter");
             int x=scanner.nextInt();
             int y=scanner.nextInt();
-            Map map =new Map(200);
+            Map map = Map.getInstanceMap();
+            map.setSize(200);
             map.getMapCell(x,y).setBuilding(government.getRuler());
            // System.out.println(map.getMapCell(x,y).getBuilding()2);
-
-            
         }
-
-
-
     }
     public static void setCurrentPlayer(Government government){
         currentPlayer=government;
@@ -304,9 +300,8 @@ public class GameMenuController extends MenuController{
     public static void dropBuilding(int X, int Y, Building type){
         MapCell mapCell;
         ResourceMaker resourceMaker;
-        Map.setSize(40);
         if (Map.validMapCell(X, Y)){
-            mapCell = new MapCell(X, Y , Texture.IRON);//Map.getMapCell(X, Y);
+            mapCell = Map.getMapCell(X, Y);
         } else {
             GameMenuView.output("invalidLocation");
             return;
@@ -316,6 +311,8 @@ public class GameMenuController extends MenuController{
         } else if (type.getClass().getSimpleName().equals("ResourceMaker")
             && !(resourceMaker = (ResourceMaker) type).checkTexture(mapCell.getTexture())){
                 GameMenuView.output("textureProblem");
+        } else if (type.getRegex().matches("\\s*oxTether\\s*") && !Map.isBuildingNear(X, Y, ResourceMakerType.QUARRY)) {
+            GameMenuView.output("oxTetherError");
         } else {
             mapCell.setBuilding(type);
             GameMenuView.output("buildingDrop");
@@ -447,6 +444,7 @@ public class GameMenuController extends MenuController{
                         GameMenuView.output("success");
                     }
 
+        }else{
 
                 }
             }
@@ -505,8 +503,11 @@ public class GameMenuController extends MenuController{
         }
     }
     public static void setTexture(int X1, int Y1, int X2, int Y2, Texture type){
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 12de9a89fa0c6e855c6ab0cbb7f35f121afcb6e6
         if(!Map.validMapCell(X1, Y1) || !Map.validMapCell(X2, Y2) || X2 < X1 || Y2 < Y1){
             GameMenuView.output("cantMakeBlock");
             return;

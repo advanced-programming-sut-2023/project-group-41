@@ -1,5 +1,6 @@
 package stronghold.model.components.game;
 
+import stronghold.model.components.game.building.*;
 
 import stronghold.model.components.game.building.Building;
 import stronghold.model.components.game.building.Ruler;
@@ -10,22 +11,45 @@ import stronghold.model.components.general.User;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class Government {
     private User owner;
     private int color;
     private String[] popularityFactors;
     private int popularity;
+    private int population;
     private int foodRate;
     private double balance;
     private int taxRate;
     private int fearRate;
+    private int freeStockSpace;
+    private int freeFoodStockSpace;
     private HashMap<Resource, Integer> resources;
+    private LinkedHashMap<BuildingType, Integer> buildingHash;
     private ArrayList<Unit> units;
     private ArrayList<People> people;
+    private ArrayList<People> normalPeople;
 
 
+    public void incPopularity(int num) {
+        popularity += num;
+    }
 
+    public void incPopulation(int num) {
+        population += num;
+        for (int i = 0; i < num; i++) {
+            normalPeople.add(new People(0, 0, 0,0, this));
+        }
+    }
+
+    public void incFreeStockSpace(int num) {
+        freeStockSpace += num;
+    }
+
+    public void incFreeFoodStockSpace(int num) {
+        freeFoodStockSpace += num;
+    }
 
 
     public void setPopularity(int popularity) {
@@ -36,7 +60,7 @@ public class Government {
         this.people = people;
     }
 
-;
+    ;
     private Building Ruler;
 
     public Building getRuler() {
@@ -46,21 +70,27 @@ public class Government {
     public void setRuler(Building ruler) {
         Ruler = ruler;
     }
-// i think we shoud remove units arraylist and people arraylist because they should put in mapCellClass
+
 
     public Government(int color) {
-       // owner.setGovernment(this);
+        // owner.setGovernment(this);
         this.color = color;
-        Building ruler=new Ruler(this);
+        Building ruler = new Ruler(this);
         this.setRuler(ruler);
         resources = new HashMap<>();
         for (Resource resource : EnumSet.allOf(Resource.class)) {
             resources.put(resource, 0);
         }
-        foodRate=-2;
-        taxRate=0;
 
-   
+        buildingHash = new LinkedHashMap<>();
+        listAllBuilding(buildingHash);
+
+        normalPeople = new ArrayList<>();
+        foodRate = -2;
+        taxRate = 0;
+
+        popularity = 0;
+        population = 5;
     }
 
 
@@ -108,8 +138,33 @@ public class Government {
         this.fearRate = fearRate;
     }
 
-    public void addResources(Resource resource, int amount) {
-        resources.put(resource, resources.get(resource) + amount);
+    public void addResources(Resource resource, int amount, boolean doesItHaveStockEffect) {
+        if (doesItHaveStockEffect) {
+            if (resource.equals(Resource.APPLE) ||
+                    resource.equals(Resource.CHEESE) ||
+                    resource.equals(Resource.BREAD) ||
+                    resource.equals(Resource.MEAT)) {
+                for (int i = 0; i < amount && freeFoodStockSpace > 0; i++, freeFoodStockSpace--) {
+                    resources.put(resource, resources.get(resource) + 1);
+                }
+            } else {
+                for (int i = 0; i < amount && freeStockSpace > 0; i++, freeStockSpace--) {
+                    resources.put(resource, resources.get(resource) + 1);
+                }
+            }
+        } else {
+            resources.put(resource, resources.get(resource) + amount);
+        }
+    }
+
+    public boolean useResource(Resource resource, int count) {
+        int available = resources.get(resource);
+        if (available >= count) {
+            resources.put(resource, available - count);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public HashMap<Resource, Integer> getResourcesMap() {
@@ -135,9 +190,10 @@ public class Government {
     public void setColor(int color) {
         this.color = color;
     }
-    public MapCell findRuler(Building ruler){
-        for(MapCell mapCell:Map.getCells()){
-            if(ruler.equals(mapCell.getBuilding())){
+
+    public MapCell findRuler(Building ruler) {
+        for (MapCell mapCell : Map.getCells()) {
+            if (ruler.equals(mapCell.getBuilding())) {
                 return mapCell;
             }
 
@@ -145,9 +201,35 @@ public class Government {
         return null;
 
     }
+
+    private void listAllBuilding(HashMap<BuildingType, Integer> buildingHash) {
+        for (CastleType castleType : EnumSet.allOf(CastleType.class)) {
+            buildingHash.put(castleType, 0);
+        }
+        for (ConverterType converterType : EnumSet.allOf(ConverterType.class)) {
+            buildingHash.put(converterType, 0);
+        }
+        for (DevelopmentType developmentType : EnumSet.allOf(DevelopmentType.class)) {
+            buildingHash.put(developmentType, 0);
+        }
+        for (ResourceMakerType resourceMakerType : EnumSet.allOf(ResourceMakerType.class)) {
+            buildingHash.put(resourceMakerType, 0);
+        }
+        for (StorageType storageType : EnumSet.allOf(StorageType.class)) {
+            buildingHash.put(storageType, 0);
+        }
+    }
+
+    public void addBuilding(BuildingType buildingType) {
+        int count = buildingHash.get(buildingType);
+        buildingHash.put(buildingType, count + 1);
+    }
+
+
 //method from
     // dropBuilding in UML
     // to
     // disBand
     // have already made in mainMenuController
+
 }

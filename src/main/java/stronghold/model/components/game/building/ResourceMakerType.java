@@ -1,5 +1,6 @@
 package stronghold.model.components.game.building;
 
+import stronghold.model.components.game.Government;
 import stronghold.model.components.game.enums.Resource;
 import stronghold.model.components.game.enums.Texture;
 
@@ -8,7 +9,7 @@ import java.util.EnumSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public enum ResourceMakerType {
+public enum ResourceMakerType implements BuildingType {
     WHEAT_FARM("wheatFarm", 100, 0, 1, 15, Resource.WHEAT, 0,  100),
     HUNT_POST("huntPost", 100, 0, 1, 5, Resource.MEAT, 0,100),
     HOPS_FARM("hopsFarm", 100, 0, 1, 15, Resource.HOPS, 0,100),
@@ -95,4 +96,8 @@ public enum ResourceMakerType {
         return rate;
     }
 
+    @Override
+    public void action(Government government, int buildingCount) {
+
+    }
 }

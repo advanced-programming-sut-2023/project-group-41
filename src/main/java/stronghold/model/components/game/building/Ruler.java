@@ -11,4 +11,9 @@ public class Ruler extends  Building {
 
 
     }
+
+    @Override
+    public String getRegex() {
+        return null;
+    }
 }
