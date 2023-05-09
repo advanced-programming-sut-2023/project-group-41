@@ -29,14 +29,16 @@
   "notLongRanged": "the unit is not LongRanged",
   "bondError": "out of bonds",
   "engineerError": "not an engineer!",
- "textureSet": "texture has been set!",
+  "textureSet": "texture has been set!",
   "invalidDirection": "invalid Direction",
   "invalidType": "invalid type",
   "foodtypenum": "$VAR1: VAR2",
   "playerCenter": "Enter players Center cordinate:  -x -y",
   "invalidType": "invalid type",
   "foodError": "Error! not enough food!",
-  "nextplayer": "nextPlayer"
+  "nextplayer": "nextPlayer",
+  "tunnelerError": "Error! no tunneler found!",
+  "unitError": "there is no unit in the mentioned coordinates!"
 
 
 }
