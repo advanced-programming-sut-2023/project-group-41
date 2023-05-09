@@ -15,7 +15,7 @@ public class Development extends Building {
 
 
     Development(Government ownership, DevelopmentType developmentType) {
-        super(ownership, developmentType.getHealth(), developmentType.getCost(), developmentType.getWorkerNum(),
+        super(ownership, developmentType, developmentType.getHealth(), developmentType.getCost(), developmentType.getWorkerNum(),
                 developmentType.isEngineerWorkers(), developmentType.getNeededResource(), developmentType.getNeededResourceCount());
         ownership.addBuilding(developmentType);
         this.developmentType = developmentType;

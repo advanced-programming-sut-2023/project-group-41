@@ -10,6 +10,7 @@ public class Unit {
    private int X;
     private int Y;
     private int patrolX1;
+    private Tool tool;
     private int patrolY1;
     private int patrolX2;
     private int patrolY2;
@@ -31,8 +32,25 @@ public class Unit {
         this.patrolY1=0;
         this.patrolX2=0;
         this.patrolY2=0;
+        this.tool=null;
 
 
+    }
+
+    public Tool getTool() {
+        return tool;
+    }
+
+    public int getPatrolX2() {
+        return patrolX2;
+    }
+
+    public int getPatrolY2() {
+        return patrolY2;
+    }
+
+    public void setTool(Tool tool) {
+        this.tool = tool;
     }
 
     public int getPatrolX1() {
@@ -103,5 +121,16 @@ public class Unit {
         }
         return true;
 
+    }
+    public boolean isInRange(int X2,int Y2){
+        if(Math.abs(X2-X)<people.getSpeed()*5||Math.abs(Y2-Y)<people.getSpeed()*5){
+            return  true;
+
+        }
+        return  false;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 }

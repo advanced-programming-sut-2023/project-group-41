@@ -5,7 +5,7 @@ import stronghold.model.components.general.User;
 
 import java.util.ArrayList;
 
-public class People {
+public abstract class People {
 
     ////////Strings
     private String name;
@@ -39,6 +39,10 @@ public class People {
        this.isArab=isArab;
       // this.loyalty=mainMenu.getCurrentUser();
 
+    }
+
+    public Government getOwner() {
+        return owner;
     }
 
     public void setHasOil(boolean hasOil) {
@@ -95,4 +99,5 @@ public class People {
     public int getDefence() {
         return defence;
     }
+    public abstract String getRegex();
 }

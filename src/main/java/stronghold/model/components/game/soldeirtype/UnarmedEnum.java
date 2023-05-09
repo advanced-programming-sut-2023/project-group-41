@@ -18,6 +18,9 @@ public enum UnarmedEnum {
         this.offense=offense;
 
     }
+    public String getRegex() {
+        return type;
+    }
 
 
 

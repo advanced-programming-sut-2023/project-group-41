@@ -13,6 +13,7 @@ public class MapCell {
     private final int x;
     private final int y;
     private boolean isPassable;
+    private boolean hasDitch;
     private boolean hasOil;
     private boolean hasTunnel;
     private ArrayList<Unit> units;
@@ -20,6 +21,7 @@ public class MapCell {
     private Building building;
     private Direction rockDirection;
     private Tree tree;
+    private Tool tool;
     public MapCell(int x,int y,Texture texture){
         this.x=x;
         this.y=y;
@@ -30,6 +32,28 @@ public class MapCell {
         isPassable=true;
         this.hasOil=false;
         this.hasTunnel=false;
+        this.hasDitch=false;
+        this.tool=null;
+    }
+
+    public Tool getTool() {
+        return tool;
+    }
+
+    public void setTool(Tool tool1) {
+        this.tool = tool1;
+    }
+
+    public boolean isHasOil() {
+        return hasOil;
+    }
+
+    public boolean isHasDitch() {
+        return hasDitch;
+    }
+
+    public void setHasDitch(boolean hasDitch) {
+        this.hasDitch = hasDitch;
     }
 
     public void setHasOil(boolean hasOil) {

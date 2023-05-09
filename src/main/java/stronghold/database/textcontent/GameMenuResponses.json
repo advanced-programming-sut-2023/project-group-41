@@ -4,6 +4,7 @@
   "incorrectBuildingType": "Error!: incorrect building type",
   "textureProblem": "Error!: cannot place building in this texture",
   "invalidLocation": "Error!: coordinates out of Map bonds!",
+  "lackOfResource": "Error!: you don't have enough resources",
 
   "cantMakeBlock": "Error!: cannot make block with this coordinates",
   "textureSet": "Success!: texture has been set!",
@@ -11,7 +12,7 @@
 
   "noBuildingAvailable": "Error!: there is no building in the mentioned coordinates!",
   "buildingDrop": "Success!: building dropped successfully",
-  "oxTetherError": "Error!: you should place oxTether near Quarry",
+  "nearBuilding": "Error!: you should place your building near $VAR1$",
   "buildingSelected": "building selected successfully!!!",
 
   "invalidDirection": "Error!: invalid direction",
@@ -29,23 +30,20 @@
   "notLongRanged": "the unit is not LongRanged",
   "bondError": "out of bonds",
   "engineerError": "not an engineer!",
-  "textureSet": "texture has been set!",
-  "invalidDirection": "invalid Direction",
-  "invalidType": "invalid type",
   "foodtypenum": "$VAR1: VAR2",
-  "playerCenter": "Enter players Center cordinate:  -x -y",
-  "invalidType": "invalid type",
+  "playerCenter": "Enter players Center coordinate:  -x -y",
+  "invalidType": "Error!: invalid type",
   "foodError": "Error! not enough food!",
   "nextplayer": "nextPlayer",
   "tunnelerError": "Error! no tunneler found!",
   "unitError": "there is no unit in the mentioned coordinates!",
 
-  "invalidType": "invalid type",
   "shopError": "select shop to continue to shop menu!",
   "enterShopMenu": "you are now in shop menu",
   "enterMapMenu": "you are now in map menu",
   "enterTradeMenu": "you are now in trade menu",
   "oilError": "you dont Have OilMaker",
+
   "engineerGotOil": "the engineer went to get oil",
   "enemyBond": "enemy out of bond",
   "enemyError": "Error! no enemy",
@@ -59,5 +57,8 @@
   "Building": "---$VAR3"
 
 
+
+
+  "engineerGotOil": "the engineer went to get oil"
 
 }

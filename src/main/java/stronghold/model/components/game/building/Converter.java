@@ -18,7 +18,7 @@ public class Converter extends Building {
     private int rate;
 
     public Converter(Government ownership, ConverterType converterType) {
-        super(ownership, converterType.getHealth(), converterType.getGold(), converterType.getWorkerNum(), converterType.isEngineerWorkers(), converterType.getNeededResource(), converterType.getNeededResourceCount());
+        super(ownership, converterType, converterType.getHealth(), converterType.getGold(), converterType.getWorkerNum(), converterType.isEngineerWorkers(), converterType.getNeededResource(), converterType.getNeededResourceCount());
         ownership.addBuilding(converterType);
         this.converterType = converterType;
         this.inpResource = converterType.getInpResource();

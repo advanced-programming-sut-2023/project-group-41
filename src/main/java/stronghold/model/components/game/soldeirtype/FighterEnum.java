@@ -1,15 +1,15 @@
 package stronghold.model.components.game.soldeirtype;
 
 public enum FighterEnum {
-    spearMan(3,1,3,1,false,false,false),
-    pikeMan(2,4,3,1,false,false,false),
-    maceMan(3,3,4,1,false,false,false),
-    swordsMan(1,1,5,1,false,false,false),
-    Knight(5,4,5,1,false,true,false),
-    blackMonk(2,3,3,1,false,false,false),
-    slaves(4,0,1,1,false,false,true),
-    assassins(3,3,3,1,true,false,true),
-    arabianSwordsMen(5,4,4,1,false,false,true);
+    spearMan("spearMan",3,1,3,1,false,false,false),
+    pikeMan("pikeMan",2,4,3,1,false,false,false),
+    maceMan("maceMan",3,3,4,1,false,false,false),
+    swordsMan("swordsMan",1,1,5,1,false,false,false),
+    Knight("Knight",5,4,5,1,false,true,false),
+    blackMonk("blackMonk",2,3,3,1,false,false,false),
+    slaves("slaves",4,0,1,1,false,false,true),
+    assassins("assassins",3,3,3,1,true,false,true),
+    arabianSwordsMen("arabianSwordsMen",5,4,4,1,false,false,true);
 
 
     private int speed;
@@ -19,7 +19,8 @@ public enum FighterEnum {
     private boolean isAssassin;
     private boolean isHorsed;
     private boolean isArab;
-   FighterEnum(  int speed, int defense, int offense, int price,boolean isAssassin, boolean isHorsed,boolean isArab){
+    private String regex;
+   FighterEnum(  String regex,int speed, int defense, int offense, int price,boolean isAssassin, boolean isHorsed,boolean isArab){
 
         this.defense=defense;
         this.offense=offense;
@@ -28,7 +29,12 @@ public enum FighterEnum {
         this.speed=speed;
         this.price=price;
         this.isArab=isArab;
+        this.regex=regex;
 
+    }
+
+    public String getRegex() {
+        return regex;
     }
 
     public int getPrice() {

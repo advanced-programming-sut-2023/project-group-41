@@ -15,9 +15,10 @@ public class Castle extends Building {
     private int defendRange;
 
     public Castle(Government ownership, CastleType castleType) {
-        super(ownership, castleType.getHealth(), castleType.getGold(), castleType.getWorkerNum(), castleType.isEngineerWorkers(),
+        super(ownership, castleType, castleType.getHealth(), castleType.getGold(), castleType.getWorkerNum(), castleType.isEngineerWorkers(),
                 castleType.getNeededResource(), castleType.getNeededResourceCount());
         ownership.addBuilding(castleType);
+        this.castleType = castleType;
         this.size = castleType.getSize();
         this.peopleMap = new HashMap<>();
         this.fireRange = castleType.getFireRange();

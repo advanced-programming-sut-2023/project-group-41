@@ -5,9 +5,11 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import stronghold.model.components.game.Map;
+import stronghold.model.components.game.Unit;
 import stronghold.model.components.game.enums.Texture;
 import stronghold.model.components.game.MapCell;
 import stronghold.model.components.game.building.Castle;
+import stronghold.model.components.game.soldeirtype.Unarmed;
 import stronghold.view.MapMenuView;
 import stronghold.view.ShopMenuView;
 
@@ -194,11 +196,15 @@ public class MapMenuController extends MenuController {
         if(Map.getInstanceMap().getMapCell(X,Y)==null){
             MapMenuView.output("bondError");
             return;
+        }else{
+            MapMenuView.output("Texture",(Object) Map.getInstanceMap().getMapCell(X,Y).getTexture().getRegex());
+            MapMenuView.output("Building",(Object) Map.getInstanceMap().getMapCell(X,Y).getBuilding().getRegex());
+            for (Unit unit : GameMenuController.getCurrentPlayer().getUnits()) {
+                    MapMenuView.output("People",((Object)unit.getPeople().getRegex()),unit.getCount());
+            }
+
         }
-        //Resource too
-        //System.out.println("Building: "+Map.getMapCell(X,Y).getBuilding());
-        ///System.out.println("Texture: "+ Texture.Map.getMapCell(X,Y).getTexture());
-        //System.out.println("Unit: "+Map.getMapCell(X,Y).getUnit()+" >>"+Map.getMapCell(X,Y).getUnit().getPeople().size());
+
 
     }
 

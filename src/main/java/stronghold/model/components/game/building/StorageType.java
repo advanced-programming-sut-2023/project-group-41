@@ -10,9 +10,9 @@ import java.util.regex.Pattern;
 
 public enum StorageType implements BuildingType {
     ENGINEER_GUILD("engineerGuild", 100, 100, 0, false, Resource.WOOD, 10,0),
-    STOCK_PILE("stockPile", 100, 0, 0, false, null, 0, 100),
-    FOOD_STOCK_PILE("foodStockPile", 100, 0, 0, false, null, 0, 100),
-    Ox_TETHER("oxTether", 100,0, 1, false, Resource.WOOD,  5, 12),
+    STOCK_PILE("stockPile", 100, 0, 0, false, null, 0, 120),
+    FOOD_STOCK_PILE("foodStockPile", 100, 0, 0, false, null, 0, 80),
+    STABLE("stable", 100, 400, 0, false, Resource.WOOD, 20, 4),
     ARMOURY("armoury", 100, 0, 0, false, Resource.WOOD, 5, 0);
 
     public static final ArrayList<StorageType> storageTypeArr = new ArrayList<>(EnumSet.allOf(StorageType.class));

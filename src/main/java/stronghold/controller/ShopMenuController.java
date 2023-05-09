@@ -16,10 +16,19 @@ import java.util.regex.Matcher;
 
 public class ShopMenuController extends MenuController{
     private static Government currentGovernment;
+
+    public static void setCurrentGovernment(Government currentGovernment) {
+        ShopMenuController.currentGovernment = currentGovernment;
+    }
+
     private static String pathToRegexJSON = "src/main/java/stronghold/database/utils/regex/ShopMenuRegex.json";
 
-    private static HashMap<Resource,Integer> prices;//not valued yet
+    private static HashMap<Resource,Integer> prices=new HashMap<>();//not valued yet
     public static void run(Scanner scanner){
+        setCurrentGovernment(GameMenuController.getCurrentPlayer());
+        for(Resource resource:currentGovernment.getResourcesMap().keySet()){
+            prices.put(resource,10);
+        }
         JsonElement regexElement = null;
         try {
             regexElement = JsonParser.parseReader(new FileReader(pathToRegexJSON));
@@ -73,7 +82,7 @@ public class ShopMenuController extends MenuController{
     }
     public static void showPriceList(){
         for(Resource resource:prices.keySet()){
-            System.out.println(resource+": "+prices.get(resource));
+            System.out.println(resource.getRegex()+": "+prices.get(resource)+" sell: "+prices.get(resource)*0.8+" num: "+currentGovernment.getResourcesMap().get(resource));
         }
     }
 

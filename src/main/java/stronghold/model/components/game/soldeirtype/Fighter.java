@@ -16,6 +16,9 @@ public class Fighter extends People {
         this.isHorsed=fighterEnum.isHorsed();
 
     }
+    public String getRegex() {
+        return fighterEnum.getRegex();
+    }
 
 
 }

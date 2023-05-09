@@ -19,4 +19,7 @@ public class Unarmed extends People {
     public String getType() {
         return type;
     }
+    public String getRegex() {
+        return unarmedEnum.getRegex();
+    }
 }

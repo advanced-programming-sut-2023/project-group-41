@@ -1,4 +1,4 @@
-package stronghold.model.components.game.building;
+package stronghold.model.components.game;
 
 public class Tool {
     private boolean movable;
