@@ -22,6 +22,7 @@ public enum ConverterType implements BuildingType{
     BARRACKS("barracks", 100, 0, 0, false, Resource.STONE, 15, null, 0, null, 100 ),
     MERCENARY_POST("mercenaryPost", 100, 0, 0, false, Resource.WOOD, 10, null, 0, null, 100),
     SHOP("post", 100, 0, 1, false, Resource.WOOD, 5, null, 0, null, 0);
+    // what happened to shop regex?
 
     public int getInpResourceCount() {
         return inpResourceCount;

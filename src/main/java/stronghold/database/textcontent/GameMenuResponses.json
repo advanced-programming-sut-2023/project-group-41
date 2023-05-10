@@ -14,6 +14,8 @@
   "buildingDrop": "Success!: building dropped successfully",
   "nearBuilding": "Error!: you should place your building near $VAR1$",
   "buildingSelected": "building selected successfully!!!",
+  "selectBuilding": "please select building first",
+  "selectUnitBuilding": "please select a building that can create unit",
 
   "invalidDirection": "Error!: invalid direction",
   "rockDrop": "Success!: rock dropped",
@@ -54,7 +56,7 @@
   "invalidEngNum": "invalid Engineer Number",
   "Texture": "texture: $VAR1",
   "People": "$VAR1 :  $VAR2",
-  "Building": "---$VAR3"
+  "Building": "---$VAR3",
 
 
 

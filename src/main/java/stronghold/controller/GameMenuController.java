@@ -21,6 +21,7 @@ import stronghold.view.GameMenuView;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 
@@ -257,7 +258,6 @@ public class GameMenuController extends MenuController {
 
     public static void endOfRound(){
         currentPlayer.allBuildingActions();
-
     }
 
     public static void showPopularityFactors() {
@@ -349,7 +349,20 @@ public class GameMenuController extends MenuController {
     }
 
     public static void createUnit(String type, int count) {
-        // Todo: need completed drop unit command;
+        if (currentBuilding == null){
+
+        } else if (currentBuilding.getBuildingType().equals(ConverterType.SHOP)){
+
+        } else if (currentBuilding.getBuildingType().equals(ConverterType.MERCENARY_POST)){
+            
+        } else if (currentBuilding.getBuildingType().equals(ConverterType.BARRACKS)){
+            
+        } else if (currentBuilding.getBuildingType().equals(DevelopmentType.CHURCH) ||
+                currentBuilding.getBuildingType().equals(DevelopmentType.CATHEDRAL)) {
+
+        } else {
+            GameMenuView.output("selectUnitBuilding");
+        }
     }
 
     public static void repair() {
@@ -694,7 +707,7 @@ public class GameMenuController extends MenuController {
     }
 
     public static void dropTree(int X, int Y, Tree type) {
-        if (type.equals(null)) {
+        if (type == null) {
             GameMenuView.output("invalidType");
 
         } else {
@@ -933,7 +946,7 @@ public class GameMenuController extends MenuController {
 
 
     public static void main(String[] args) {
-        foodRateShow();
+        createUnit("agsg", 3);
     }
 
 
