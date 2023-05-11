@@ -47,7 +47,7 @@ public class MainMenuController extends MenuController{
                         //Todo: handel uncorrected user names
                     }
                 }
-                GameMenuController.run(currentUser.getGovernment(), users, scanner, 1);
+                GameMenuController.run( scanner, 1,1,1);
             } else{
                 MainMenuView.output("invalid");
             } // TODO: adding if statement for entering profile menu
