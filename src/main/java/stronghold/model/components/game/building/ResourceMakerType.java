@@ -97,7 +97,9 @@ public enum ResourceMakerType implements BuildingType {
     @Override
     public void action(Government government, int buildingCount) {
         if (this.equals(QUARRY)) {
-            government.addResources(resource, rate, false);
+            for (int i = 0; i < buildingCount; i++) {
+                government.addResources(resource, rate, false);
+            }
             government.limitStoneInQuarry();
         }
         else {

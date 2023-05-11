@@ -113,10 +113,12 @@ public enum ConverterType implements BuildingType{
         if (inpResource == null) return;
         for (int i = 0; i < buildingCount; i++) {
             for (int j = 0; j < rate; j++) {
-                if (government.useResource(inpResource, inpResourceCount))
+                if (government.useResource(inpResource, inpResourceCount)) {
                     government.addResources(outResource, 1, true);
-                else
+                }
+                else {
                     return;
+                }
             }
         }
     }
