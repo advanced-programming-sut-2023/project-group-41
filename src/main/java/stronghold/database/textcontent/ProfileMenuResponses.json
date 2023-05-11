@@ -1,10 +1,27 @@
 {
-  "usernameChanged": "Success!: username has changed!",
+  "usernameChanged": "Success!: username has been changed!",
+  "nicknameChanged": "Success!: nickname has been changed!",
+  "passwordChanged": "Success!: password has been changed!",
+  "emailChanged": "Success!: email has been changed!",
+  "sloganChanged": "Success!: email has been changed!",
 
   "invalid": "Error!: Invalid command!",
-  "again": "Error! Please enter your new password again",
-  "passwordError": "Error! Current password is incorrect!",
-  "newPassWord": "Error! Please enter a new password!",
-  "emptySlogan": "Error! Slogan is empty!",
-  "usernameEmpty": "Error! Username not provided"
+  "again": "Error!: Please enter your new password again",
+  "passwordError": "Error!: Current password is incorrect!",
+  "oldPass404": "Error!: Please enter your old password!",
+  "newPass404": "Error!: Please enter a new password!",
+  "emptySlogan": "Error!: Slogan is empty!",
+  "slogan404": "Error!: Slogan not provided!",
+  "usernameEmpty": "Error!: Username not provided",
+  "nicknameEmpty": "Error!: Nickname not provided",
+  "invalidEmail": "Error!: provided email's format is invalid!",
+  "emailExists": "Error!: email already in use by you or another user!",
+
+  "captcha": "To verify that you are not a bot, please enter the following captcha:\n$VAR1$",
+  "captchainvalid": "Error!: entered captcha was wrong!",
+
+  "highscore": "Players highest score is: $VAR1$",
+  "rank": "Your rank amongst players is: $VAR1$",
+  "showSlogan": "Your slogan is: $VAR1$",
+  "show": "YOUR PROFILE:\nUsername: $VAR1$\nEmail: $VAR2$\nSlogan: $VAR3$\nScore: $VAR4$\nNickname: $VAR5$"
 }

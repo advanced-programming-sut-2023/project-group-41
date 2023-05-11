@@ -226,7 +226,6 @@ public class GameMenuController extends MenuController {
             Map map = Map.getInstanceMap();
             map.setSize(200);
             map.getMapCell(x, y).setBuilding(government.getRuler());
-            // System.out.println(map.getMapCell(x,y).getBuilding()2);
         }
     }
 

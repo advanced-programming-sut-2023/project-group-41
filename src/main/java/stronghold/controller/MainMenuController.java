@@ -32,9 +32,14 @@ public class MainMenuController extends MenuController{
             throw new RuntimeException(e);
         }
         JsonObject MainMenuRegexObj = regexElement.getAsJsonObject();
+
         while (true) {
             String command = MainMenuView.input(scanner).trim();
+
             Matcher startGameMatcher = getJSONRegexMatcher(command, "startNewGame", MainMenuRegexObj);
+            Matcher loadGameMatcher = getJSONRegexMatcher(command, "loadGame", MainMenuRegexObj);
+            Matcher profileMenuMatcher = getJSONRegexMatcher(command, "profileMenu", MainMenuRegexObj);
+
             if (command.matches("user\\s+logout")) {
                 MainMenuView.output("logout");
                 JsonElement prefsElement;
@@ -67,14 +72,23 @@ public class MainMenuController extends MenuController{
                     if (input.matches("FINISH")){
                         break;
                     } else{
-                        users.add(UsersDB.usersDB.getUserByUsername(input));
-                        //TODO: handle uncorrected user names
+                        // TODO: Handle the case where player wants to play with themselves (?)
+                        if(!MenuController.usernameExists(input)){
+                            MainMenuView.output("username404");
+                        }
+                        else
+                            users.add(UsersDB.usersDB.getUserByUsername(input));
                     }
                 }
                 GameMenuController.run( scanner, 1,1,1);
+            } else if(profileMenuMatcher.find()){
+                ProfileMenuController.run(scanner, currentUser);
+
+            } else if(loadGameMatcher.find()){
+
             } else{
                 MainMenuView.output("invalid");
-            } // TODO: adding if statement for entering profile menu
+            }
         }
     }
 }

@@ -1,5 +1,8 @@
 {
   "startNewGame": "^\\s*start\\s+new\\s+game\\s*$",
+  "loadGame": "^\\s*load\\s+last\\s+game\\s*$",
+
+  "profileMenu": "^\\s*enter\\s+profile\\s+menu\\s*$",
 
   "showPopularityFactors": "show\\s+popularity\\s+factors",
   "showPopularity": "show\\s+popularity",
