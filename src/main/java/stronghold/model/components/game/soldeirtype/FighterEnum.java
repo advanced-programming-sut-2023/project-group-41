@@ -1,5 +1,10 @@
 package stronghold.model.components.game.soldeirtype;
 
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public enum FighterEnum {
     spearMan("spearMan",3,1,3,1,false,false,false),
     pikeMan("pikeMan",2,4,3,1,false,false,false),
@@ -20,7 +25,7 @@ public enum FighterEnum {
     private boolean isHorsed;
     private boolean isArab;
     private String regex;
-   FighterEnum(  String regex,int speed, int defense, int offense, int price,boolean isAssassin, boolean isHorsed,boolean isArab){
+    FighterEnum(  String regex,int speed, int defense, int offense, int price,boolean isAssassin, boolean isHorsed,boolean isArab){
 
         this.defense=defense;
         this.offense=offense;
@@ -63,5 +68,18 @@ public enum FighterEnum {
 
     public boolean isArab() {
         return isArab;
+    }
+    private static final ArrayList<FighterEnum> fighterArr = new ArrayList<>(EnumSet.allOf(FighterEnum.class));
+    public static Matcher getMatcher(String input, FighterEnum castleType) {
+        String regex = castleType.getRegex();
+        Pattern pattern = Pattern.compile(regex);
+        return pattern.matcher(input);
+    }
+
+    public static FighterEnum getFighterType(String input) {
+        for (FighterEnum castleType : fighterArr) {
+            if(getMatcher(input, castleType).find()) return castleType;
+        }
+        return null;
     }
 }
