@@ -1,5 +1,10 @@
 package stronghold.model.components.game.soldeirtype;
 
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public enum LongRangedEnum {
     archer("archer",4,2,2,1,3,false,false),
     crossbowMen("crossbowMen",2,3,2,1,2,false,false),
@@ -58,6 +63,19 @@ public enum LongRangedEnum {
 
     public boolean isArab() {
         return isArab;
+    }
+    private static final ArrayList<LongRangedEnum> longRangedArr = new ArrayList<>(EnumSet.allOf(LongRangedEnum.class));
+    public static Matcher getMatcher(String input, LongRangedEnum castleType) {
+        String regex = castleType.getRegex();
+        Pattern pattern = Pattern.compile(regex);
+        return pattern.matcher(input);
+    }
+
+    public static LongRangedEnum getLongRangedType(String input) {
+        for (LongRangedEnum castleType : longRangedArr) {
+            if(getMatcher(input, castleType).find()) return castleType;
+        }
+        return null;
     }
 }
 
