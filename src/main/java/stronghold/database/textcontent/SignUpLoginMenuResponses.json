@@ -38,7 +38,8 @@
   "loginerror": "Error!: Username and password didn’t match!",
   "incorrectsecurityanswer": "Error!: Your answer to your security question is incorrect!",
 
-  "invalid": "Error!: Invalid command!"
+  "invalid": "Error!: Invalid command!",
 
-
+  "captcha": "To verify that you are not a bot, please enter the following captcha:\n$VAR1$",
+  "captchainvalid": "Error!: entered captcha was wrong!"
 }

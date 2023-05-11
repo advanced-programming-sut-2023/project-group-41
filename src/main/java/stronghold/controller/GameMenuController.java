@@ -246,9 +246,11 @@ public class GameMenuController extends MenuController {
             int y = scanner.nextInt();
 
 
+
             Castle castle=new Castle(government,CastleType.Ruler);
             government.setRuler(castle);
             Map.getInstanceMap().getMapCell(x, y).setBuilding(castle);
+
 
         }
     }

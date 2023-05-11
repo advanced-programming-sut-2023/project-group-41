@@ -3,6 +3,7 @@ package stronghold.controller;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import stronghold.model.components.general.Captcha;
 import stronghold.model.database.UsersDB;
 import stronghold.model.components.general.User;
 import stronghold.model.utils.Encryption;
@@ -185,7 +186,20 @@ public class SignUpMenuController extends MenuController{
                     SignUpLoginView.output("unmatchingpasswords");
                     continue;
                 }
-
+                Captcha captcha = new Captcha();
+                SignUpLoginView.output("captcha",(Object) captcha.getGeneratedCaptcha());
+                String enteredCaptcha = SignUpLoginView.input(scanner);
+                boolean captchaSucceed = true;
+                while(!enteredCaptcha.equals(captcha.getAccordingNum())){
+                    if(enteredCaptcha.equals("back")){
+                        captchaSucceed = false;
+                        break;
+                    }
+                    SignUpLoginView.output("captchainvalid");
+                    enteredCaptcha = SignUpLoginView.input(scanner);
+                }
+                if(!captchaSucceed)
+                    continue;
                 User user = new User(username, Encryption.toSHA256(password)
                         , nickname, email, passwordRecoveryQuestion, passwordRecoveryAnswer, slogan);
                 UsersDB.usersDB.addUser(user);
@@ -293,6 +307,21 @@ public class SignUpMenuController extends MenuController{
                     SignUpLoginView.output("unmatchingpasswords");
                     continue;
                 }
+
+                Captcha captcha = new Captcha();
+                SignUpLoginView.output("captcha",(Object) captcha.getGeneratedCaptcha());
+                String enteredCaptcha = SignUpLoginView.input(scanner);
+                boolean captchaSucceed = true;
+                while(!enteredCaptcha.equals(captcha.getAccordingNum())){
+                    if(enteredCaptcha.equals("back")){
+                        captchaSucceed = false;
+                        break;
+                    }
+                    SignUpLoginView.output("captchainvalid");
+                    enteredCaptcha = SignUpLoginView.input(scanner);
+                }
+                if(!captchaSucceed)
+                    continue;
 
                 User user = new User(username, Encryption.toSHA256(password)
                         , nickname, email, passwordRecoveryQuestion, passwordRecoveryAnswer, slogan);
@@ -422,6 +451,21 @@ public class SignUpMenuController extends MenuController{
                     SignUpLoginView.output("passwordweak");
                     continue;
                 }
+
+                Captcha captcha = new Captcha();
+                SignUpLoginView.output("captcha",(Object) captcha.getGeneratedCaptcha());
+                String enteredCaptcha = SignUpLoginView.input(scanner);
+                boolean captchaSucceed = true;
+                while(!enteredCaptcha.equals(captcha.getAccordingNum())){
+                    if(enteredCaptcha.equals("back")){
+                        captchaSucceed = false;
+                        break;
+                    }
+                    SignUpLoginView.output("captchainvalid");
+                    enteredCaptcha = SignUpLoginView.input(scanner);
+                }
+                if(!captchaSucceed)
+                    continue;
 
                 pendingUser.setPassword(Encryption.toSHA256(newPassword));
                 UsersDB.usersDB.update(pendingUser);

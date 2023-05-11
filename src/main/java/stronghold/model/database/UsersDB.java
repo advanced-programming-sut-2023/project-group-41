@@ -6,7 +6,10 @@ import com.google.gson.reflect.TypeToken;
 import stronghold.model.components.general.User;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class UsersDB {
@@ -79,5 +82,16 @@ public class UsersDB {
                 return;
             }
         }
+    }
+
+    public List<User> sortByScore() {
+
+        List<User> users = this.users;
+        Collections.sort(users, new Comparator<User>() {
+            public int compare(User u1, User u2) {
+                return u2.getScore() - u1.getScore();
+            }
+        });
+        return users;
     }
 }
