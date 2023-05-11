@@ -15,6 +15,7 @@
   "createUnit": "createunit\\s+((-t\\s+(?<type>\\S+)\\s*)|(-c\\s+(?<count>\\d+)\\s*)){2}",
   "repair": "repair",
 
+
   "selectUnit": "select\\s+unit\\s+((-x\\s+(?<X>\\d+)\\s*)|(-y\\s+(?<Y>\\d+)\\s*)){2}",
   "moveUnitTo": "move\\s+unit\\s+to\\s+((-x\\s+(?<X>\\d+)\\s*)|(-y\\s+(?<Y>\\d+)\\s*)){2}",
   "patrolUnit": "patrol\\s+unit\\s+((-x1\\s+(?<X1>\\d+)\\s*)|(-y1\\s+(?<Y1>\\d+)\\s*)|(-x2\\s+(?<X2>\\d+)\\s*)|(-y2\\s+(?<Y2>\\d+)\\s*)){4}",
@@ -35,5 +36,9 @@
   "enterMapMenu": "enter\\s+map\\s+menu",
   "enterShopMenu": "enter\\s+shop\\s+menu",
   "enterTradeMenu": "enter\\s+trade\\s+menu",
-  "playerCoordinate": "\\s*(?<X>\\d+)\\s+(?<Y>\\d+)\\s*"
+  "playerCoordinate": "\\s*(?<X>\\d+)\\s+(?<Y>\\d+)\\s*",
+
+
+  "nextPlayer": "\\s*next\\s+player\\s*"
+
 }
