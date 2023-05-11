@@ -45,7 +45,7 @@ public class ShopMenuController extends MenuController{
 
             if(command.matches("back")){
                 ShopMenuView.output("back");
-                break;
+                return;
             } else if ((buy =getJSONRegexMatcher(command, "buy", menuRegexPatternsObject)).matches()) {
                 buy(Resource.valueOf(buy.group("int")),Integer.parseInt(buy.group(2)));
             } else if ((sell=getJSONRegexMatcher(command, "showHistory", menuRegexPatternsObject)).matches()) {
