@@ -66,6 +66,8 @@ public class MainMenuController extends MenuController{
             if(command.matches("user\\s+logout")){
                 SignUpMenuController.run(scanner);
 
+
+
                 break;
             } else if (getJSONRegexMatcher(command, "showPopularityFactors", mainMenuRegexObj).matches()) {
                 showPopularityFactors();
