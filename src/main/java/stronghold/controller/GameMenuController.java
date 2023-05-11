@@ -754,13 +754,11 @@ public class GameMenuController extends MenuController {
     }
 
     public static void dropTree(int X, int Y, Tree type) {
-<<<<<<< HEAD
+
 
         if (type == null) {
 
-=======
-        if (type == null) {
->>>>>>> ee1cfc99b9e333f6d5fdbe86dea9bdd82954547f
+
             GameMenuView.output("invalidType");
 
         } else if(Map.getInstanceMap().getMapCell(X,Y).getBuilding()!=null||Map.getInstanceMap().getMapCell(X,Y).getRockDirection()!=null||Map.getInstanceMap().getMapCell(X,Y).getTree()!=null){
@@ -1024,7 +1022,7 @@ public class GameMenuController extends MenuController {
 
 
     public static void main(String[] args) {
-<<<<<<< HEAD
+
 
         Scanner s=new Scanner(System.in);
         Unarmed unarmed=new Unarmed(UnarmedEnum.engineer);
@@ -1034,11 +1032,7 @@ public class GameMenuController extends MenuController {
         run(s,1,2,200);
 
 
-        createUnit("agsg", 3);
 
-=======
-        createUnit("agsg", 3);
->>>>>>> ee1cfc99b9e333f6d5fdbe86dea9bdd82954547f
     }
 
 
