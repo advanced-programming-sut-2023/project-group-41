@@ -4,16 +4,24 @@ import stronghold.model.components.game.building.Building;
 import stronghold.model.components.game.enums.Direction;
 import stronghold.model.components.game.enums.Texture;
 import stronghold.model.components.game.enums.Tree;
+import stronghold.model.components.game.soldeirtype.Unarmed;
+import stronghold.model.components.game.soldeirtype.UnarmedEnum;
+
+import java.util.ArrayList;
 
 public class MapCell {
     private final int x;
     private final int y;
     private boolean isPassable;
-    private Unit unit;
+    private boolean hasDitch;
+    private boolean hasOil;
+    private boolean hasTunnel;
+    private ArrayList<Unit> units;
     private Texture texture;
     private Building building;
     private Direction rockDirection;
     private Tree tree;
+    private Tool tool;
     public MapCell(int x,int y,Texture texture){
         this.x=x;
         this.y=y;
@@ -22,6 +30,34 @@ public class MapCell {
         rockDirection=null;
         tree=null;
         isPassable=true;
+        this.hasOil=false;
+        this.hasTunnel=false;
+        this.hasDitch=false;
+        this.tool=null;
+    }
+
+    public Tool getTool() {
+        return tool;
+    }
+
+    public void setTool(Tool tool1) {
+        this.tool = tool1;
+    }
+
+    public boolean isHasOil() {
+        return hasOil;
+    }
+
+    public boolean isHasDitch() {
+        return hasDitch;
+    }
+
+    public void setHasDitch(boolean hasDitch) {
+        this.hasDitch = hasDitch;
+    }
+
+    public void setHasOil(boolean hasOil) {
+        this.hasOil = hasOil;
     }
 
     public int getX() {
@@ -32,12 +68,16 @@ public class MapCell {
         return y;
     }
 
+    public void setHasTunnel(boolean hasTunnel) {
+        this.hasTunnel = hasTunnel;
+    }
+
     public Building getBuilding() {
         return building;
     }
 
-    public Unit getUnit() {
-        return unit;
+    public ArrayList<Unit> getUnits() {
+        return units;
     }
 
     public Direction getRockDirection() {
@@ -73,7 +113,7 @@ public class MapCell {
     }
 
     public char showMovingSoldier(){
-        if(getUnit()!=null)
+        if(getUnits()!=null)
             return 'S';
         else
             return ' ';
@@ -90,7 +130,7 @@ public class MapCell {
 
     }
     public char showTree(){
-        if(getUnit()!=null)
+        if(getTree()!=null)
             return 'T';
         else
             return ' ';
@@ -98,9 +138,21 @@ public class MapCell {
 
     }
 
-    public void setUnit(Unit unit) {
-        this.unit = unit;
+  public void addUnit(Unit unit){
+        this.getUnits().add(unit);
+  }
+    public void removeUnit(Unit unit){
+        this.getUnits().remove(unit);
     }
+    public Unit searchUnit(Unit unit){
+        for(Unit unit1:units){
+            if(unit1.equals(unit)){
+                return unit1;
+            }
+        }
+        return null;
+    }
+
 
 
 }

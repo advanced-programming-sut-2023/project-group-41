@@ -1,5 +1,6 @@
 package stronghold.model.components.game.building;
 
+import stronghold.controller.GameMenuController;
 import stronghold.model.components.game.Government;
 import stronghold.model.components.game.People;
 import stronghold.model.components.general.User;
@@ -14,22 +15,27 @@ public class Development extends Building {
 
 
     Development(Government ownership, DevelopmentType developmentType) {
-        super(ownership, developmentType.getHealth(), developmentType.getCost(), developmentType.getWorkerNum(),
+        super(ownership, developmentType, developmentType.getHealth(), developmentType.getCost(), developmentType.getWorkerNum(),
                 developmentType.isEngineerWorkers(), developmentType.getNeededResource(), developmentType.getNeededResourceCount());
+        ownership.addBuilding(developmentType);
         this.developmentType = developmentType;
         this.incPopularity = developmentType.getIncPopularity();
         this.incPopulation = developmentType.getIncPopulation();
         this.wineUsageRate = developmentType.getWineUsageRate();
+        ownership.incPopulation(incPopularity);
+        ownership.incPopularity(incPopularity);
     }
 
     public void action(Government government) {
         government.setPopularity(government.getPopularity() + incPopularity);
         ArrayList<People> peopleArr = new ArrayList<>();
         for (int i = 0; i < incPopulation; i++) {
-            peopleArr.add(new People(0, 0, 0, 0));
+            //peopleArr.add(new People(0, 0, 0, 0, GameMenuController.getCurrentPlayer()));
         }
         government.setPeople(peopleArr);
     }
+
+
 
     public DevelopmentType getDevelopmentType() {
         return developmentType;
@@ -45,5 +51,11 @@ public class Development extends Building {
 
     public int getWineUsageRate() {
         return wineUsageRate;
+    }
+
+
+    @Override
+    public String getRegex() {
+        return developmentType.getRegex();
     }
 }

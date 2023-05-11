@@ -12,7 +12,8 @@ public class ResourceMaker extends Building {
     private int rate;
 
     public ResourceMaker(Government ownership, ResourceMakerType resourceMakerType) {
-        super(ownership, resourceMakerType.getHealth(), resourceMakerType.getGold(), resourceMakerType.getWorkerNum(), resourceMakerType.isEngineerWorkers(), resourceMakerType.getNeededResource(), resourceMakerType.getNeededResourceCount());
+        super(ownership, resourceMakerType, resourceMakerType.getHealth(), resourceMakerType.getGold(), resourceMakerType.getWorkerNum(), resourceMakerType.isEngineerWorkers(), resourceMakerType.getNeededResource(), resourceMakerType.getNeededResourceCount());
+        ownership.addBuilding(resourceMakerType);
         this.resourceMakerType = resourceMakerType;
         this.resource = resourceMakerType.getResource();
         this.rate = resourceMakerType.getRate();
@@ -52,6 +53,11 @@ public class ResourceMaker extends Building {
         } else {
             return true;
         }
+    }
+
+    @Override
+    public String getRegex() {
+        return resourceMakerType.getRegex();
     }
 }
 

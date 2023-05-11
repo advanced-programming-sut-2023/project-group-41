@@ -1,5 +1,6 @@
 package stronghold.model.components.game.building;
 
+import stronghold.model.components.game.Government;
 import stronghold.model.components.game.Map;
 import stronghold.model.components.game.enums.Resource;
 
@@ -8,18 +9,24 @@ import java.util.EnumSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public enum ConverterType {
+public enum ConverterType implements BuildingType{
 
-    MILL("mill", 100, 0, 3, false, Resource.WOOD, 20, Resource.WHEAT, Resource.FLOUR, 100 ),
-    ARMOURER("armourer", 100, 100, 1, false, Resource.WOOD, 20, Resource.IRON, Resource.ARMOR, 100),
-    BLACKSMITH("blacksmith", 100, 100, 1, false, Resource.WOOD, 20, Resource.IRON, Resource.SWORD, 100),
-    FLETCHER("fletcher", 100, 100, 1, false, Resource.WOOD, 20, Resource.WOOD, Resource.CROSS_BOW, 100),
-    POLETURNER("poleturner", 100, 100, 1, false, Resource.WOOD, 10, Resource.WOOD, Resource.SPEAR, 100),
-    BAKERY("bakery", 100, 0, 1, false, Resource.WOOD, 10, Resource.FLOUR, Resource.BREAD, 100),
-    BREWING("brewing", 100, 0, 1, false, Resource.WOOD, 10,Resource.HOPS, Resource.ALE,  100),
-    BARRACKS("barracks", 100, 0, 0, false, Resource.STONE, 15, Resource.GOLD, Resource.PEOPLE, 100 ),
-    MERCENARY_POST("mercenaryPost", 100, 0, 0, false, Resource.WOOD, 10, Resource.GOLD, Resource.PEOPLE, 100),
-    SHOP("post", 100, 0, 1, false, Resource.WOOD, 5, Resource.GOLD, Resource.GOLD, 0);
+    MILL("mill", 100, 0, 3, false, Resource.WOOD, 20, Resource.WHEAT,5, Resource.FLOUR, 100 ),
+    ARMOURER("armourer", 100, 100, 1, false, Resource.WOOD, 20, Resource.IRON,20, Resource.ARMOR, 20),
+    BLACKSMITH("blacksmith", 100, 100, 1, false, Resource.WOOD, 20, Resource.IRON, 20, Resource.SWORD, 20),
+    FLETCHER("fletcher", 100, 100, 1, false, Resource.WOOD, 20, Resource.WOOD, 10, Resource.CROSS_BOW, 50),
+    POLETURNER("poleturner", 100, 100, 1, false, Resource.WOOD, 10, Resource.WOOD, 10, Resource.SPEAR, 50),
+    BAKERY("bakery", 100, 0, 1, false, Resource.WOOD, 10, Resource.FLOUR, 5, Resource.BREAD, 100),
+    BREWING("brewing", 100, 0, 1, false, Resource.WOOD, 10,Resource.HOPS, 10, Resource.ALE,  100),
+    Ox_TETHER("oxTether", 100,0, 1, false, Resource.WOOD,  5,  Resource.STONE_IN_QUARRY, 1, Resource.STONE, 12),
+    BARRACKS("barracks", 100, 0, 0, false, Resource.STONE, 15, null, 0, null, 100 ),
+    MERCENARY_POST("mercenaryPost", 100, 0, 0, false, Resource.WOOD, 10, null, 0, null, 100),
+    SHOP("post", 100, 0, 1, false, Resource.WOOD, 5, null, 0, null, 0);
+    // what happened to shop regex?
+
+    public int getInpResourceCount() {
+        return inpResourceCount;
+    }
 
     private static final ArrayList<ConverterType> converterTypeArr = new ArrayList<>(EnumSet.allOf(ConverterType.class));
     private String regex;
@@ -30,11 +37,12 @@ public enum ConverterType {
     private Resource  neededResource;
     private int neededResourceCount;
     private Resource inpResource;
+    private int inpResourceCount;
     private Resource outResource;
     private int rate;
 
     ConverterType(String regex, int health, int gold, int workerNum, boolean engineerWorkers,
-                  Resource neededResource, int neededResourceCount, Resource inpResource, Resource outResource, int rate) {
+                  Resource neededResource, int neededResourceCount, Resource inpResource, int inpResourceCount, Resource outResource, int rate) {
         this.regex = regex;
         this.health = health;
         this.gold = gold;
@@ -43,6 +51,7 @@ public enum ConverterType {
         this.neededResource = neededResource;
         this.neededResourceCount = neededResourceCount;
         this.inpResource = inpResource;
+        this.inpResourceCount = inpResourceCount;
         this.outResource = outResource;
         this.rate = rate;
     }
@@ -97,5 +106,18 @@ public enum ConverterType {
 
     public int getRate() {
         return rate;
+    }
+
+    @Override
+    public void action(Government government, int buildingCount) {
+        if (inpResource == null) return;
+        for (int i = 0; i < buildingCount; i++) {
+            for (int j = 0; j < rate; j++) {
+                if (government.useResource(inpResource, inpResourceCount))
+                    government.addResources(outResource, 1, true);
+                else
+                    return;
+            }
+        }
     }
 }

@@ -15,10 +15,14 @@ public class Storage extends Building {
     private HashMap<Resource, Integer> list;
 
     public Storage(Government ownership, StorageType storageType) {
-        super(ownership, storageType.getHealth(), storageType.getGold(), storageType.getWorkerNum(), storageType.isEngineerWorkers(), storageType.getNeededResource(), storageType.getNeededResourceCount());
+        super(ownership, storageType, storageType.getHealth(), storageType.getGold(), storageType.getWorkerNum(), storageType.isEngineerWorkers(), storageType.getNeededResource(), storageType.getNeededResourceCount());
+        ownership.addBuilding(storageType);
         this.storageType = storageType;
         this.capacity = storageType.getCapacity();
         list = new HashMap<>();
+        if (storageType.equals(StorageType.STOCK_PILE)) ownership.incFreeStockSpace(capacity);
+        else if (storageType.equals(StorageType.FOOD_STOCK_PILE)) ownership.incFreeFoodStockSpace(capacity);
+        else if (storageType.equals(StorageType.STABLE)) ownership.addResources(Resource.HORSE, 4, false);
     }
 
     public StorageType getStorageType() {
@@ -40,5 +44,10 @@ public class Storage extends Building {
 
     public HashMap<Resource, Integer> getList() {
         return list;
+    }
+
+    @Override
+    public String getRegex() {
+        return storageType.getRegex();
     }
 }

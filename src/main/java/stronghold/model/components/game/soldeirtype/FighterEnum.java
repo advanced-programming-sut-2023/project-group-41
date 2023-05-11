@@ -1,15 +1,20 @@
 package stronghold.model.components.game.soldeirtype;
 
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public enum FighterEnum {
-    spearMan(3,1,3,1,false,false),
-    pikeMan(2,4,3,1,false,false),
-    maceMan(3,3,4,1,false,false),
-    swordsMan(1,1,5,1,false,false),
-    Knight(5,4,5,1,false,true),
-    blackMonk(2,3,3,1,false,false),
-    slaves(4,0,1,1,false,false),
-    assassins(3,3,3,1,true,false),
-    arabianSwordsMen(5,4,4,1,false,false);
+    spearMan("spearMan",3,1,3,1,false,false,false),
+    pikeMan("pikeMan",2,4,3,1,false,false,false),
+    maceMan("maceMan",3,3,4,1,false,false,false),
+    swordsMan("swordsMan",1,1,5,1,false,false,false),
+    Knight("Knight",5,4,5,1,false,true,false),
+    blackMonk("blackMonk",2,3,3,1,false,false,false),
+    slaves("slaves",4,0,1,1,false,false,true),
+    assassins("assassins",3,3,3,1,true,false,true),
+    arabianSwordsMen("arabianSwordsMen",5,4,4,1,false,false,true);
 
 
     private int speed;
@@ -18,7 +23,9 @@ public enum FighterEnum {
     private int price;
     private boolean isAssassin;
     private boolean isHorsed;
-   FighterEnum(  int speed, int defense, int offense, int price,boolean isAssassin, boolean isHorsed){
+    private boolean isArab;
+    private String regex;
+    FighterEnum(  String regex,int speed, int defense, int offense, int price,boolean isAssassin, boolean isHorsed,boolean isArab){
 
         this.defense=defense;
         this.offense=offense;
@@ -26,7 +33,13 @@ public enum FighterEnum {
         this.isHorsed=isHorsed;
         this.speed=speed;
         this.price=price;
+        this.isArab=isArab;
+        this.regex=regex;
 
+    }
+
+    public String getRegex() {
+        return regex;
     }
 
     public int getPrice() {
@@ -51,5 +64,22 @@ public enum FighterEnum {
 
     public boolean isHorsed() {
         return isHorsed;
+    }
+
+    public boolean isArab() {
+        return isArab;
+    }
+    private static final ArrayList<FighterEnum> fighterArr = new ArrayList<>(EnumSet.allOf(FighterEnum.class));
+    public static Matcher getMatcher(String input, FighterEnum castleType) {
+        String regex = castleType.getRegex();
+        Pattern pattern = Pattern.compile(regex);
+        return pattern.matcher(input);
+    }
+
+    public static FighterEnum getFighterType(String input) {
+        for (FighterEnum castleType : fighterArr) {
+            if(getMatcher(input, castleType).find()) return castleType;
+        }
+        return null;
     }
 }

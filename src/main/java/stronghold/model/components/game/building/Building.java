@@ -5,8 +5,11 @@ import stronghold.model.components.game.Government;
 import stronghold.model.components.game.enums.Resource;
 import stronghold.model.components.general.User;
 
+import static stronghold.model.components.game.enums.Resource.*;
+
 public abstract class Building {
     protected Government ownership;
+    protected BuildingType buildingType;
     protected int health;
     protected int cost;
     protected int workerNum;
@@ -14,8 +17,9 @@ public abstract class Building {
     protected Resource neededResource;
     protected int neededResourceCount;
 
-    public Building(Government ownership, int health,int cost, int workerNum, boolean engineerWorkers, Resource neededResources, int neededResourceCount) {
+    public Building(Government ownership, BuildingType buildingType, int health,int cost, int workerNum, boolean engineerWorkers, Resource neededResources, int neededResourceCount) {
         this.ownership = ownership;
+        this.buildingType = buildingType;
         this.health = health;
         this.cost = cost;
         this.workerNum = workerNum;
@@ -30,6 +34,16 @@ public abstract class Building {
 
     public int getHealth() {
         return health;
+    }
+
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public BuildingType getBuildingType() {
+        return buildingType;
+
     }
 
     public int getCost() { return cost;}
@@ -60,4 +74,21 @@ public abstract class Building {
         else
             return null;
     }
+
+    public boolean haveEnoughResource(Government government){
+        if (government.getBalance() >= cost &&
+                ((!engineerWorkers && government.resourceCheck(WORKER, workerNum)) ||
+                        (engineerWorkers && government.resourceCheck(ENGINEER, workerNum))) &&
+                government.resourceCheck(neededResource, neededResourceCount)){
+            government.setBalance(government.getBalance() - cost);
+            if (engineerWorkers) government.useResource(ENGINEER, workerNum);
+            else government.useResource(WORKER, workerNum);
+            government.useResource(neededResource, neededResourceCount);
+            return true;
+        }
+        return false;
+    }
+
+    public abstract String getRegex();
+    //public abstract void action();
 }

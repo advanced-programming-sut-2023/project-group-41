@@ -12,6 +12,7 @@ public enum Resource {
     FLOUR("flour"),
     HOPS("hops"),
     ALE("ale"),
+    STONE_IN_QUARRY("stoneInQuarry"),
     STONE("stone"),
     IRON("iron"),
     WOOD("wood"),

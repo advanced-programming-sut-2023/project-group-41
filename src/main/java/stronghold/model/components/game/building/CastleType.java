@@ -1,6 +1,6 @@
 package stronghold.model.components.game.building;
 
-import stronghold.model.components.game.enums.Food;
+import stronghold.model.components.game.Government;
 import stronghold.model.components.game.enums.Resource;
 
 import java.util.ArrayList;
@@ -8,7 +8,7 @@ import java.util.EnumSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public enum CastleType {
+public enum CastleType implements BuildingType{
     SMALL_STONE_GATEHOUSE("smallStoneGatehouse", 100, 0, 0, false, null, 0, 8, 0, 0),
     BIG_STONE_GATEHOUSE("bigStoneGatehouse", 100, 0 , 0, false, Resource.STONE, 20, 10, 0, 0),
     DRAWBRIDGE("drawbridge", 100, 0 , 0, false, Resource.WOOD, 10, 0, 1, 0),
@@ -99,5 +99,11 @@ public enum CastleType {
 
     public int getDefendRange() {
         return defendRange;
+    }
+
+
+    @Override
+    public void action(Government government, int buildingCount) {
+
     }
 }

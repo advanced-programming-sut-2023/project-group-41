@@ -1,5 +1,6 @@
 package stronghold.model.components.game.building;
 
+import stronghold.model.components.game.Government;
 import stronghold.model.components.game.enums.Resource;
 
 import java.util.ArrayList;
@@ -7,13 +8,14 @@ import java.util.EnumSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public enum DevelopmentType {
+public enum DevelopmentType implements BuildingType{
+    MAIN_KEEP("mainKeep", 100, 0, 0, false, null, 0, 0, 0, 0),
     CHURCH("church", 100, 250, 0, false, null, 0, 2, 0, 0),//monk satay here
     CATHEDRAL("cathedral", 100, 1000, 0, false, null, 0, 2, 1, 0),
-    INN("inn", 100, 100, 1, false, Resource.WOOD, 20, 100, 0, 100),
+    INN("inn", 100, 100, 1, false, Resource.WOOD, 20, 100, 0, 40),
     HOUSE("house", 100, 0, 0, false, Resource.WOOD, 6, 8, 0, 0);
 
-    public static final ArrayList<DevelopmentType> developmentTypeArr = new ArrayList<>(EnumSet.allOf(DevelopmentType.class));
+    private static final ArrayList<DevelopmentType> developmentTypeArr = new ArrayList<>(EnumSet.allOf(DevelopmentType.class));
     private String regex;
     private int health;
     private int cost;
@@ -88,5 +90,13 @@ public enum DevelopmentType {
 
     public int getWineUsageRate() {
         return wineUsageRate;
+    }
+
+    @Override
+    public void action(Government government, int buildingCount) {
+        if (wineUsageRate == 0) return;
+        for (int i = 0; i < buildingCount; i++) {
+            if (government.useResource(Resource.ALE, wineUsageRate)) government.incPopularity(incPopularity);
+        }
     }
 }

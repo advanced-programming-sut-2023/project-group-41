@@ -5,9 +5,11 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import stronghold.model.components.game.Map;
+import stronghold.model.components.game.Unit;
 import stronghold.model.components.game.enums.Texture;
 import stronghold.model.components.game.MapCell;
 import stronghold.model.components.game.building.Castle;
+import stronghold.model.components.game.soldeirtype.Unarmed;
 import stronghold.view.MapMenuView;
 import stronghold.view.ShopMenuView;
 
@@ -17,7 +19,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 
 public class MapMenuController extends MenuController {
-    private static Map map;
+
     private static int xCordinate;
     private static int yCordinate;
     private static String pathToRegexJSON = "src/main/java/stronghold/database/utils/regex/MapMenuRegex.json";
@@ -44,7 +46,18 @@ public class MapMenuController extends MenuController {
             } else if ((showMap =getJSONRegexMatcher(command, "showMap", menuRegexPatternsObject)).matches()) {
                  showMap(Integer.parseInt(showMap.group("x")),Integer.parseInt(showMap.group("y")));
             } else if ((mapShift=getJSONRegexMatcher(command, "mapShift", menuRegexPatternsObject)).matches()) {
-                mapShift(mapShift.group("x"),mapShift.group("y"),Integer.parseInt(mapShift.group(3)));
+                String  x="!23123",y="rewrwe rw";
+                if(mapShift.group("x")!=null){
+                    x=mapShift.group("x");
+                }
+                if(mapShift.group("y")!=null){
+                    y=mapShift.group("y");
+                }
+                int num=1;
+                if(mapShift.group("num")!=null){
+                    num=Integer.parseInt(mapShift.group("num"));
+                }
+                mapShift(x,y,num);
             } else if (( showMapCellDetails = getJSONRegexMatcher(command, "showMapCellDetails", menuRegexPatternsObject)).matches()) {
                showMapCellDetails(Integer.parseInt(showMapCellDetails.group("x")),Integer.parseInt(showMapCellDetails.group("y")));
             }   else {
@@ -61,8 +74,8 @@ public class MapMenuController extends MenuController {
         if (Y - 2 < 0) {
             Y = 1;
         }
-        xCordinate=X;
-        yCordinate=Y;
+        setxCordinate(X);
+        setyCordinate(Y);
         if (X - 4 >= 1 && Y - 2 >= 1) {
             X -= 4;
             Y -= 2;
@@ -81,7 +94,7 @@ public class MapMenuController extends MenuController {
 
             } else if (i % 4 == 1) {
                 for (int j = 0; j <= 54; j++) {
-                    String color = map.getMapCell(x, y).getTexture().getColor();
+                    String color = Map.getInstanceMap().getMapCell(x, y).getTexture().getColor();
                     if(color.equals("GREEN")){
                         System.out.print("\033[0;102m");
                     }
@@ -91,9 +104,10 @@ public class MapMenuController extends MenuController {
                     if (j % 6 == 0) {
                         System.out.print("\033[0m");
                         System.out.print("|");
-                    } else if (j % 6 == 3) {
-                        System.out.print(map.getMapCell(x, y).showMovingSoldier());
                         x++;
+                    } else if (j % 6 == 3) {
+                        System.out.print(Map.getInstanceMap().getMapCell(x, y).showMovingSoldier());
+
                     } else {
                         System.out.print(" ");
                     }
@@ -105,7 +119,7 @@ public class MapMenuController extends MenuController {
 
             } else if (i % 4 == 2) {
                 for (int j = 0; j <= 54; j++) {
-                    String color = map.getMapCell(x, y).getTexture().getColor();
+                    String color = Map.getInstanceMap().getMapCell(x, y).getTexture().getColor();
                     if(color.equals("GREEN")){
                         System.out.print("\033[0;102m");
                     }
@@ -115,9 +129,10 @@ public class MapMenuController extends MenuController {
                     if (j % 6 == 0) {
                         System.out.print("\033[0m");
                         System.out.print("|");
-                    } else if (j % 6 == 3) {
-                        System.out.print(Map.getMapCell(x, y).showBuilding());
                         x++;
+                    } else if (j % 6 == 3) {
+                        System.out.print(Map.getInstanceMap().getMapCell(x, y).showBuilding());
+
                     } else {
                         System.out.print(" ");
                     }
@@ -128,7 +143,7 @@ public class MapMenuController extends MenuController {
 
             } else {
                 for (int j = 0; j <= 54; j++) {
-                    String color = map.getMapCell(x, y).getTexture().getColor();
+                    String color = Map.getInstanceMap().getMapCell(x, y).getTexture().getColor();
                     if(color.equals("GREEN")){
                         System.out.print("\033[0;102m");
                     }
@@ -138,9 +153,10 @@ public class MapMenuController extends MenuController {
                     if (j % 6 == 0) {
                         System.out.print("\033[0m");
                         System.out.print("|");
-                    } else if (j % 6 == 3) {
-                        System.out.print(Map.getMapCell(x, y).showTree());
                         x++;
+                    } else if (j % 6 == 3) {
+                        System.out.print(Map.getInstanceMap().getMapCell(x, y).showTree());
+
                     } else {
                         System.out.print(" ");
                     }
@@ -163,43 +179,71 @@ public class MapMenuController extends MenuController {
             return;
         }
 
-        if(direction.equals("up")||direction2.equals("up")){
+        if(direction2.equals("up")){
             yCordinate+=distance;
         }
-         if(direction.equals("down")||direction2.equals("down")){
+         if(direction2.equals("down")){
 
              yCordinate-=distance;
 
          }
-          if(direction.equals("down")||direction2.equals("down")){
+          if(direction.equals("right")){
 
               xCordinate+=distance;
 
           }
 
-          if(direction.equals("down")||direction2.equals("down")){
+          if(direction.equals("left")){
 
-              xCordinate-=distance;
+              //xCordinate-=distance;
+              setxCordinate(getxCordinate()-distance);
+              System.out.println(xCordinate);
 
           }
-          if(xCordinate>Map.getSize()||xCordinate<0||yCordinate>Map.getSize()||yCordinate<0){
+          if(xCordinate>Map.getInstanceMap().getSize()||xCordinate<0||yCordinate>Map.getInstanceMap().getSize()||yCordinate<0){
               MapMenuView.output("bondError");
               return;
           }
-          showMap(xCordinate,yCordinate);
+        System.out.println(getxCordinate()+getyCordinate());
+          showMap(getxCordinate(),getyCordinate());
+        System.out.println(getxCordinate());
 
     }
 
     public static void showMapCellDetails(int X, int Y) {
-        if(Map.getMapCell(X,Y)==null){
+        if(Map.getInstanceMap().getMapCell(X,Y)==null){
             MapMenuView.output("bondError");
             return;
+        }else{
+            MapMenuView.output("texture",(Object) Map.getInstanceMap().getMapCell(X,Y).getTexture().getRegex());
+            if(Map.getInstanceMap().getMapCell(X,Y).getBuilding()!=null){
+
+                MapMenuView.output("building", (Object) Map.getInstanceMap().getMapCell(X,Y).getBuilding().getRegex());
+            }
+            if(Map.getInstanceMap().getMapCell(X,Y).getUnits()!=null) {
+                for (Unit unit : GameMenuController.getCurrentPlayer().getUnits()) {
+                    MapMenuView.output("unit", ((Object) unit.getPeople().getRegex()), unit.getCount());
+                }
+            }
+
         }
-        //Resource too
-        //System.out.println("Building: "+Map.getMapCell(X,Y).getBuilding());
-        ///System.out.println("Texture: "+ Texture.Map.getMapCell(X,Y).getTexture());
-        //System.out.println("Unit: "+Map.getMapCell(X,Y).getUnit()+" >>"+Map.getMapCell(X,Y).getUnit().getPeople().size());
+
 
     }
 
+    public static void setxCordinate(int xCordinate) {
+        MapMenuController.xCordinate = xCordinate;
+    }
+
+    public static void setyCordinate(int yCordinate) {
+        MapMenuController.yCordinate = yCordinate;
+    }
+
+    public static int getxCordinate() {
+        return xCordinate;
+    }
+
+    public static int getyCordinate() {
+        return yCordinate;
+    }
 }

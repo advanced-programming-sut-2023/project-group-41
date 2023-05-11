@@ -1,0 +1,68 @@
+{
+  "welcome": "Welcome, $VAR1$!",
+  "logout": "User logged out!",
+  "enterUsers": "Enter usernames in each line and write FINISH when its done",
+  "invalid": "Error!: Invalid command!",
+
+
+  "foodList": "Number of $VAR1$ available in storage is $VAR2$",
+
+  "incorrectBuildingType": "Error!: incorrect building type",
+  "textureProblem": "Error!: cannot place building in this texture",
+  "invalidLocation": "Error!: coordinates out of Map bonds!",
+  "lackOfResource": "Error!: you don't have enough resources",
+
+  "cantMakeBlock": "Error!: cannot make block with this coordinates",
+  "textureSet": "Success!: texture has been set!",
+  "buildingPlaced": "Error!: can not change texture where building placed",
+
+  "noBuildingAvailable": "Error!: there is no building in the mentioned coordinates!",
+  "buildingDrop": "Success!: building dropped successfully",
+  "nearBuilding": "Error!: you should place your building near $VAR1$",
+  "buildingSelected": "building selected successfully!!!",
+
+  "invalidDirection": "Error!: invalid direction",
+  "rockDrop": "Success!: rock dropped",
+  "invalid": "Error!: Invalid command!",
+
+  "welcome": "Welcome, $VAR1$!",
+  "logout": "User logged out!",
+  "success": "Success",
+  "showPopularityFactors" : "food/tax/religion/fear",
+  "rate": "rate: ",
+  "waterError": "cant move to WATER or HIGHLANDS!",
+  "speedError": "move out of speed capacity!",
+  "notFighter": "the selected unit can not fight man to man!",
+  "notLongRanged": "the unit is not LongRanged",
+  "bondError": "out of bonds",
+  "engineerError": "not an engineer!",
+  "foodtypenum": "$VAR1: VAR2",
+  "playerCenter": "Enter players Center coordinate:  -x -y",
+  "invalidType": "Error!: invalid type",
+  "foodError": "Error! not enough food!",
+  "nextplayer": "nextPlayer",
+  "tunnelerError": "Error! no tunneler found!",
+  "unitError": "there is no unit in the mentioned coordinates!",
+
+  "shopError": "select shop to continue to shop menu!",
+  "enterShopMenu": "you are now in shop menu",
+  "enterMapMenu": "you are now in map menu",
+  "enterTradeMenu": "you are now in trade menu",
+  "oilError": "you dont Have OilMaker",
+
+  "engineerGotOil": "the engineer went to get oil",
+  "enemyBond": "enemy out of bond",
+  "enemyError": "Error! no enemy",
+  "fightLoss": "your troop have been eleminated",
+  "fightWin": "your troop have killed enemy",
+  "notOil": "there is not oil in this place",
+  "fillDitchError": "there is not a ditch in this place ",
+  "invalidEngNum": "invalid Engineer Number",
+  "Texture": "texture: $VAR1$",
+  "People": "$VAR1 :  $VAR2$",
+  "Building": "---$VAR3$",
+  "engineerGotOil": "the engineer went to get oil",
+  "wrongSoldierType": "Error! entered a wrong type",
+  "sthIsHere": "there is sth in here",
+  "popularity": "popularity: $VAR1$"
+}

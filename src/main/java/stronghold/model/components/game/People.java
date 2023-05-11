@@ -5,7 +5,7 @@ import stronghold.model.components.general.User;
 
 import java.util.ArrayList;
 
-public class People {
+public abstract class People {
 
     ////////Strings
     private String name;
@@ -17,23 +17,42 @@ public class People {
     private int price;
     private int offense;
     private int defence;
+    private Government owner;
+    private boolean hasOil;
+    private boolean isArab;
 
+    public void setArab(boolean arab) {
+        isArab = arab;
+    }
 
     //////Arraylists
     ArrayList<Resource> equipments= new ArrayList<>();
 
 
-   public People( int speed, int price,int defence,int offense){
-
+   public People( int speed, int price,int defence,int offense,Government owner,boolean isArab){
+       this.hasOil=false;
+       this.owner=owner;
        this.speed=speed;
        this.price=price;
        this.offense=offense;
        this.defence=defence;
+       this.isArab=isArab;
       // this.loyalty=mainMenu.getCurrentUser();
 
     }
 
-    /////getters
+    public Government getOwner() {
+        return owner;
+    }
+
+    public void setHasOil(boolean hasOil) {
+        this.hasOil = hasOil;
+    }
+    public boolean getHasOil(){
+       return hasOil;
+
+    }
+/////getters
 
 
     public String getName() {
@@ -80,4 +99,5 @@ public class People {
     public int getDefence() {
         return defence;
     }
+    public abstract String getRegex();
 }

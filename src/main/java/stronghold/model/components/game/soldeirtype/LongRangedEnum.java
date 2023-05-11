@@ -1,29 +1,40 @@
 package stronghold.model.components.game.soldeirtype;
 
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public enum LongRangedEnum {
-    archer(4,2,2,1,3,false),
-    crossbowMen(2,3,2,1,2,false),
-    archerBow(4,2,2,1,3,false),
-    slingers(4,1,2,1,1,false),
-    horseArcher(5,3,2,1,2,true),
-    fireThrowers(5,3,4,1,2,false);
+    archer("archer",4,2,2,1,3,false,false),
+    crossbowMen("crossbowMen",2,3,2,1,2,false,false),
+    archerBow("archerBow",4,2,2,1,3,false,false),
+    slingers("slingers",4,1,2,1,1,false,true),
+    horseArcher("horseArcher",5,3,2,1,2,true,true),
+    fireThrowers("fireThrowers",5,3,4,1,2,false,true);
 
 
     private int speed;
+    private String regex;
     private int defense;
     private int offense;
     private int price;
     private int range;
     private boolean isHorsed;
-    LongRangedEnum(  int speed, int defense, int offense, int price,int  range, boolean isHorsed){
-
+    boolean isArab;
+    LongRangedEnum(  String regex,int speed, int defense, int offense, int price,int  range, boolean isHorsed,boolean isArab){
+        this.regex=regex;
         this.defense=defense;
         this.offense=offense;
         this.range=range;
         this.isHorsed=isHorsed;
         this.speed=speed;
         this.price=price;
+        this.isArab=isArab;
 
+    }
+    public String getRegex() {
+        return regex;
     }
 
     public int getPrice() {
@@ -48,6 +59,23 @@ public enum LongRangedEnum {
 
     public boolean isHorsed() {
         return isHorsed;
+    }
+
+    public boolean isArab() {
+        return isArab;
+    }
+    private static final ArrayList<LongRangedEnum> longRangedArr = new ArrayList<>(EnumSet.allOf(LongRangedEnum.class));
+    public static Matcher getMatcher(String input, LongRangedEnum castleType) {
+        String regex = castleType.getRegex();
+        Pattern pattern = Pattern.compile(regex);
+        return pattern.matcher(input);
+    }
+
+    public static LongRangedEnum getLongRangedType(String input) {
+        for (LongRangedEnum castleType : longRangedArr) {
+            if(getMatcher(input, castleType).find()) return castleType;
+        }
+        return null;
     }
 }
 

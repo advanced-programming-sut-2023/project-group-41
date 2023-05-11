@@ -20,9 +20,9 @@ public class Trade {
         return number;
     }
 
-    public Trade(Resource r, Government receiver, Government sender, String message, int price,int number){
+    public Trade(Resource r,  Government sender, String message, int price,int number){
         this.resourceType=r;
-        this.receiver=receiver;
+        this.receiver=null;
         this.sender=sender;
         this.message=message;
         this.price=price;
@@ -31,6 +31,14 @@ public class Trade {
         this.number=number;
         this.id=TradeDataBase.getIdCounter();
         TradeDataBase.setIdCounter(TradeDataBase.getIdCounter()+1);
+    }
+
+    public void setReceiver(Government receiver) {
+        this.receiver = receiver;
+    }
+
+    public void setSender(Government sender) {
+        this.sender = sender;
     }
 
     public Government getReceiver() {

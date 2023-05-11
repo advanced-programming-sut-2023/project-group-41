@@ -1,0 +1,6 @@
+{
+  "buy": "\\s*buy\\s+((-a\\s+(?<id>\\d+)\\s*)|(-a\\s+(?<int>\\d+){2}\\s*$",
+  "sell": "\\s*sell\\s+((-a\\s+(?<id>\\d+)\\s*)|(-a\\s+(?<int>\\d+){2}\\s*$",
+  "showPriceList": "\\s*show\\s+price\\s+list\\s*",
+  "back": "\\s*back\\s*"
+}

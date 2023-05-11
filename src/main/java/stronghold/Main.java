@@ -8,6 +8,7 @@ import stronghold.controller.SignUpMenuController;
 import stronghold.model.components.general.User;
 import stronghold.model.database.UsersDB;
 import stronghold.model.utils.StringParser;
+import stronghold.view.MainMenuView;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
