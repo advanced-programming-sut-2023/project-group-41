@@ -23,7 +23,8 @@ import java.util.regex.Matcher;
 public class MainMenuController extends MenuController{
     private static String pathToRegexJSON = "src/main/java/stronghold/database/utils/regex/MainMenuRegex.json";
     public static void run(User currentUser, Scanner scanner) {
-        
+
+        MainMenuView.welcome(currentUser);
         JsonElement regexElement = null;
         try {
             regexElement = JsonParser.parseReader(new FileReader(pathToRegexJSON));

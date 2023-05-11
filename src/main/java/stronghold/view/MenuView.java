@@ -18,7 +18,7 @@ public class MenuView {
             response = response.substring(1,response.length()-1);
 
             response = response.replaceAll("^Error!:", "\u001B[41m\u001B[30mError!\u001B[0m\u001B[31m:");
-            response = response.replaceAll("^Error!:", "\u001B[42m\u001B[30mError!\u001B[0m\u001B[32m:");
+            response = response.replaceAll("^Success!:", "\u001B[42m\u001B[30mSuccess!\u001B[0m\u001B[32m:");
             response = response.replaceAll("\\\\n","\n");
             response = response.replaceAll("\\\\\"","\"");
             response = response.replaceAll("^(.+)(\\r\\n|[\\r\\n])","\u001B[47m\u001B[30m$1\u001B[0m\n");
