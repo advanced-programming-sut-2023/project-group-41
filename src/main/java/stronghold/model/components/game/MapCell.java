@@ -16,7 +16,7 @@ public class MapCell {
     private boolean hasDitch;
     private boolean hasOil;
     private boolean hasTunnel;
-    private ArrayList<Unit> units;
+    private ArrayList<Unit> units=new ArrayList<>();
     private Texture texture;
     private Building building;
     private Direction rockDirection;
@@ -153,6 +153,7 @@ public class MapCell {
         return null;
     }
 
-
-
+    public boolean isPassable() {
+        return isPassable;
+    }
 }

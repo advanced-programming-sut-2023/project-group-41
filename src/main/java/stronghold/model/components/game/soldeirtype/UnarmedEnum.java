@@ -1,5 +1,10 @@
 package stronghold.model.components.game.soldeirtype;
 
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public enum UnarmedEnum {
     tunneler("tunneler",4,1,1,3),
     ladderMen("ladderMen",4,1,1,0),
@@ -42,5 +47,18 @@ public enum UnarmedEnum {
 
     public String getType() {
         return type;
+    }
+    private static final ArrayList<UnarmedEnum> unarmedArr = new ArrayList<>(EnumSet.allOf(UnarmedEnum.class));
+    public static Matcher getMatcher(String input, UnarmedEnum castleType) {
+        String regex = castleType.getRegex();
+        Pattern pattern = Pattern.compile(regex);
+        return pattern.matcher(input);
+    }
+
+    public static UnarmedEnum getUnarmedType(String input) {
+        for (UnarmedEnum castleType : unarmedArr) {
+            if(getMatcher(input, castleType).find()) return castleType;
+        }
+        return null;
     }
 }

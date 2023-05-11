@@ -10,6 +10,7 @@ public class Unarmed extends People {
     public Unarmed(UnarmedEnum unarmedEnum){
         super(unarmedEnum.getSpeed(), unarmedEnum.getPrice(),unarmedEnum.getDefense(),unarmedEnum.getDefense(), GameMenuController.getCurrentPlayer(),false);
         this.type= unarmedEnum.getType();
+        this.unarmedEnum=unarmedEnum;
 
 
 

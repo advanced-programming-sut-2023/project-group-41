@@ -27,7 +27,7 @@ public class Government {
     private int freeFoodStockSpace = 60;
     private HashMap<Resource, Integer> resources;
     private LinkedHashMap<BuildingType, Integer> buildingHash = listAllBuilding();
-    private ArrayList<Unit> units;
+    private ArrayList<Unit> units = new ArrayList<>();
     private ArrayList<People> people;
 
 
@@ -275,4 +275,12 @@ public class Government {
     // disBand
     // have already made in mainMenuController
 
+
+    public void setPopulation(int population) {
+        this.population = population;
+    }
+
+    public int getPopulation() {
+        return population;
+    }
 }

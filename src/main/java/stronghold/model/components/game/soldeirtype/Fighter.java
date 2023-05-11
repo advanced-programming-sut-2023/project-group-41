@@ -10,14 +10,15 @@ public class Fighter extends People {
 
     private FighterEnum fighterEnum;
     public Fighter( FighterEnum fighterEnum){
-        super(fighterEnum.getSpeed(), fighterEnum.getPrice(),fighterEnum.getDefense(),fighterEnum.getOffense(), GameMenuController.getCurrentPlayer(),fighterEnum.isArab());
 
+        super(fighterEnum.getSpeed(), fighterEnum.getPrice(),fighterEnum.getDefense(),fighterEnum.getOffense(), GameMenuController.getCurrentPlayer(),fighterEnum.isArab());
+        this.fighterEnum=fighterEnum;
         this.isAssassin=fighterEnum.isAssassin();
         this.isHorsed=fighterEnum.isHorsed();
 
     }
     public String getRegex() {
-        return fighterEnum.getRegex();
+        return this.fighterEnum.getRegex();
     }
 
 

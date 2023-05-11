@@ -14,13 +14,21 @@ import stronghold.view.MainMenuView;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 
 public class MainMenuController extends MenuController{
     private static String pathToRegexJSON = "src/main/java/stronghold/database/utils/regex/MainMenuRegex.json";
-    public static void run(User currentUser, Scanner scanner) {
+
+    public static void run( User currentUser,Scanner scanner) {
+
+
+
+        MainMenuView.welcome(currentUser);
+
         JsonElement regexElement = null;
         try {
             regexElement = JsonParser.parseReader(new FileReader(pathToRegexJSON));
@@ -29,28 +37,64 @@ public class MainMenuController extends MenuController{
             throw new RuntimeException(e);
         }
         JsonObject MainMenuRegexObj = regexElement.getAsJsonObject();
+
         while (true) {
             String command = MainMenuView.input(scanner).trim();
-            Matcher startGameMatcher;
+
+            Matcher startGameMatcher = getJSONRegexMatcher(command, "startNewGame", MainMenuRegexObj);
+            Matcher loadGameMatcher = getJSONRegexMatcher(command, "loadGame", MainMenuRegexObj);
+            Matcher profileMenuMatcher = getJSONRegexMatcher(command, "profileMenu", MainMenuRegexObj);
+
             if (command.matches("user\\s+logout")) {
                 MainMenuView.output("logout");
-                break;
-            } else if ((startGameMatcher = getJSONRegexMatcher(command, "startGame", MainMenuRegexObj)).matches()){
-                MainMenuView.output("enterUsers");
-                ArrayList<User> users = new ArrayList<>();
-                while (true){
-                    String input = MainMenuView.input(scanner).trim();
-                    if (input.matches("FINISH")){
-                        break;
-                    } else{
-                        users.add(UsersDB.usersDB.getUserByUsername(input));
-                        //Todo: handel uncorrected user names
-                    }
+                JsonElement prefsElement;
+                String pathToPrefs = "src/main/java/stronghold/database/datasets/preferences.json";
+                try {
+                    prefsElement = JsonParser.parseReader(
+                            new FileReader(pathToPrefs));
+                } catch (
+                        FileNotFoundException e) {
+                    throw new RuntimeException(e);
                 }
-                GameMenuController.run(currentUser.getGovernment(), users, scanner, 1);
+
+                try {
+                    String toBeWritten = prefsElement.toString();
+                    toBeWritten = toBeWritten.replace(currentUser.getUsername(),"!NULLUSER");
+                    FileWriter fileWriter = new FileWriter(pathToPrefs);
+                    fileWriter.write(toBeWritten);
+                    fileWriter.close();
+                } catch (
+                        IOException e) {
+                    throw new RuntimeException(e);
+                }
+                SignUpMenuController.run(scanner);
+                break;
+
+            } else if ((startGameMatcher = getJSONRegexMatcher(command, "startGame", MainMenuRegexObj)).matches()){
+                int i=Integer.parseInt(startGameMatcher.group("opponent"));
+                int j=Integer.parseInt(startGameMatcher.group("rounds"));
+                Scanner scanner1=new Scanner(System.in);
+                System.out.println("enter map size:");
+                int mapSize=scanner1.nextInt();
+
+
+                GameMenuController.run( scanner, j,i,mapSize);
+
+            }  else if(profileMenuMatcher.find()){
+                ProfileMenuController.run(scanner, currentUser);
+
+            } else if(loadGameMatcher.find()){
+
+
             } else{
                 MainMenuView.output("invalid");
-            } // TODO: adding if statement for entering profile menu
+            }
         }
+    }
+
+    public static void main(String[] args) {
+        User user=new User("asdf","Asdf","Asd","sdfa",1,"1","!");
+        Scanner scanner=new Scanner(System.in);
+        run(user,scanner);
     }
 }

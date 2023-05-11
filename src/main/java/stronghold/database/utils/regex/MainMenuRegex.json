@@ -1,4 +1,10 @@
 {
+
+  "startNewGame": "^\\s*start\\s+new\\s+game\\s*$",
+  "loadGame": "^\\s*load\\s+last\\s+game\\s*$",
+
+  "profileMenu": "^\\s*enter\\s+profile\\s+menu\\s*$",
+
   "showPopularityFactors": "show\\s+popularity\\s+factors",
   "showPopularity": "show\\s+popularity",
   "showFoodList": "show\\s+food\\s+list",
@@ -30,4 +36,5 @@
   "dropRock": "droprock\\s+((-x\\s+(?<X>\\d+)\\s*)|(-y\\s+(?<Y>\\d+)\\s*)|(-d\\s+(?<direction>\\S+)\\s*)){3}",
   "dropTree": "droptree\\s+((-x\\s+(?<X>\\d+)\\s*)|(-y\\s+(?<Y>\\d+)\\s*)|(-t\\s+(?<type>\\S+)\\s*)){3}",
   "dropUnit": "dropunit\\s+((-x\\s+(?<X>\\d+)\\s*)|(-y\\s+(?<Y>\\d+)\\s*)|(-t\\s+(?<type>\\S+)\\s*)|(-c\\s+(?<count>\\d+)\\s*)){4}"
+
 }

@@ -16,6 +16,8 @@ import java.util.Scanner;
 
 public class Main {
 
+    /* !!!!!FOR THE SAKE OF F*CK, DO NOT COMMENT YOUR CODES!!!!! */
+
 
     public static void main(String[] args){
         JsonElement prefsElement;

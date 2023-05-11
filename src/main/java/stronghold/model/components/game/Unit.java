@@ -108,13 +108,7 @@ public class Unit {
     public int getX() {
         return X;
     }
-    public boolean checkBonds(int X1,int Y1){
-        if((X1>X+(people.getSpeed()*5))||(X1<X-(people.getSpeed()*5))||(Y1>Y+(people.getSpeed()*5))||(Y1>Y-(people.getSpeed()*5))){
-            return false;
-        }
-        return true;
 
-    }
     public boolean checkBondsForDisband(int X1,int Y1){
         if((X1>X+(people.getSpeed()*40))||(X1<X-(people.getSpeed()*40))||(Y1>Y+(people.getSpeed()*40))||(Y1>Y-(people.getSpeed()*40))){
             return false;

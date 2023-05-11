@@ -1,5 +1,5 @@
 {
-  "startGame": "\\s*start\\s+game\\s+(?<opponent>[2345678])\\s+(?<rounds>\\d+)\\s*",
+
 
   "showPopularityFactors": "show\\s+popularity\\s+factors",
   "showPopularity": "show\\s+popularity",
@@ -14,6 +14,7 @@
   "selectBuilding": "select\\s+building\\s+((-x\\s+(?<X>\\d+)\\s*)|(-y\\s+(?<Y>\\d+)\\s*)){2}",
   "createUnit": "createunit\\s+((-t\\s+(?<type>\\S+)\\s*)|(-c\\s+(?<count>\\d+)\\s*)){2}",
   "repair": "repair",
+
 
   "selectUnit": "select\\s+unit\\s+((-x\\s+(?<X>\\d+)\\s*)|(-y\\s+(?<Y>\\d+)\\s*)){2}",
   "moveUnitTo": "move\\s+unit\\s+to\\s+((-x\\s+(?<X>\\d+)\\s*)|(-y\\s+(?<Y>\\d+)\\s*)){2}",
@@ -35,5 +36,9 @@
   "enterMapMenu": "enter\\s+map\\s+menu",
   "enterShopMenu": "enter\\s+shop\\s+menu",
   "enterTradeMenu": "enter\\s+trade\\s+menu",
-  "playerCoordinate": "\\s*(?<X>\\d+)\\s+(?<Y>\\d+)\\s*"
+  "playerCoordinate": "\\s*(?<X>\\d+)\\s+(?<Y>\\d+)\\s*",
+
+
+  "nextPlayer": "\\s*next\\s+player\\s*"
+
 }
