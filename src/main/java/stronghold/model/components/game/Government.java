@@ -23,8 +23,9 @@ public class Government {
     private double balance = 2000;
     private int taxRate = 0;
     private int fearRate;
-    private int freeStockSpace = 100;
-    private int freeFoodStockSpace = 60;
+    private int freeStockSpace = 0;
+    private int freeFoodStockSpace = 0;
+    private int freeArmourySpace = 0;
     private HashMap<Resource, Integer> resources;
     private LinkedHashMap<BuildingType, Integer> buildingHash = listAllBuilding();
     private ArrayList<Unit> units = new ArrayList<>();
@@ -38,7 +39,7 @@ public class Government {
         this.setRuler(ruler);
         resources = new HashMap<>();
         for (Resource resource : EnumSet.allOf(Resource.class)) {
-            resources.put(resource, 0);
+            resources.put(resource, 20);
         }
     }
     public void incPopularity(int num) {
@@ -135,6 +136,14 @@ public class Government {
                 for (int i = 0; i < amount && freeFoodStockSpace > 0; i++, freeFoodStockSpace--) {
                     resources.put(resource, resources.get(resource) + 1);
                 }
+            } else if (resource.equals(Resource.ARMOR) ||
+                    resource.equals(Resource.LEATHER_VEST) ||
+                    resource.equals(Resource.SWORD) ||
+                    resource.equals(Resource.SPEAR) ||
+                    resource.equals(Resource.CROSS_BOW)) {
+                for (int i = 0; i < amount && freeArmourySpace > 0; i++, freeArmourySpace--) {
+                    resources.put(resource, resources.get(resource) + 1);
+                }
             } else {
                 for (int i = 0; i < amount && freeStockSpace > 0; i++, freeStockSpace--) {
                     resources.put(resource, resources.get(resource) + 1);
@@ -154,7 +163,20 @@ public class Government {
                     resource.equals(Resource.BREAD) ||
                     resource.equals(Resource.MEAT)) {
                 freeFoodStockSpace += count;
-            } else {
+            } else if (resource.equals(Resource.ARMOR) ||
+                    resource.equals(Resource.LEATHER_VEST) ||
+                    resource.equals(Resource.SWORD) ||
+                    resource.equals(Resource.SPEAR) ||
+                    resource.equals(Resource.CROSS_BOW)) {
+                freeArmourySpace += count;
+            } else if (resource.equals(Resource.WHEAT) ||
+                    resource.equals(Resource.FLOUR) ||
+                    resource.equals(Resource.HOPS) ||
+                    resource.equals(Resource.ALE) ||
+                    resource.equals(Resource.STONE) ||
+                    resource.equals(Resource.IRON) ||
+                    resource.equals(Resource.WOOD) ||
+                    resource.equals(Resource.PITCH)){
                 freeStockSpace += count;
             }
             return true;
@@ -282,5 +304,9 @@ public class Government {
 
     public int getPopulation() {
         return population;
+    }
+
+    public void incFreeArmourySpace(int capacity) {
+        freeArmourySpace += capacity;
     }
 }

@@ -22,6 +22,7 @@ public class Storage extends Building {
         list = new HashMap<>();
         if (storageType.equals(StorageType.STOCK_PILE)) ownership.incFreeStockSpace(capacity);
         else if (storageType.equals(StorageType.FOOD_STOCK_PILE)) ownership.incFreeFoodStockSpace(capacity);
+        else if (storageType.equals(StorageType.ARMOURY)) ownership.incFreeArmourySpace(capacity);
         else if (storageType.equals(StorageType.STABLE)) ownership.addResources(Resource.HORSE, 4, false);
     }
 

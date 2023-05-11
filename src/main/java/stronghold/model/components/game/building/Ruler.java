@@ -3,6 +3,7 @@ package stronghold.model.components.game.building;
 import stronghold.model.components.game.Government;
 
 public class Ruler extends  Building {
+    // todo: remove ruler class
 
     private Government owner;
 
