@@ -39,7 +39,7 @@ public class Government {
         this.setRuler(ruler);
         resources = new HashMap<>();
         for (Resource resource : EnumSet.allOf(Resource.class)) {
-            resources.put(resource, 0);
+            resources.put(resource, 20);
         }
 
         buildingHash = new LinkedHashMap<>();

@@ -195,7 +195,7 @@ public class GameMenuController extends MenuController {
                 int count = Integer.parseInt(dropUnitMatcher.group("count"));
                 dropUnit(X, Y, type, count);
             } else if (getJSONRegexMatcher(command, "enterMapMenu", gameMenuRegexObj).matches()) {
-                ///da1
+                enterMapMenu();
 
             } else if (getJSONRegexMatcher(command, "enterShopMenu", gameMenuRegexObj).matches()) {
                 ///da2
