@@ -1,4 +1,6 @@
 {
+  "startNewGame": "^\\s*start\\s+new\\s+game\\s*$",
+
   "showPopularityFactors": "show\\s+popularity\\s+factors",
   "showPopularity": "show\\s+popularity",
   "showFoodList": "show\\s+food\\s+list",
