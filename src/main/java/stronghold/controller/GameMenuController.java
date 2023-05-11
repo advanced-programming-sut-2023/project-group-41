@@ -21,6 +21,7 @@ import stronghold.view.GameMenuView;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 
@@ -266,7 +267,6 @@ public class GameMenuController extends MenuController {
 
     public static void endOfRound(){
         currentPlayer.allBuildingActions();
-
     }
 
     public static void showPopularityFactors() {
@@ -368,7 +368,20 @@ public class GameMenuController extends MenuController {
     }
 
     public static void createUnit(String type, int count) {
-        // Todo: need completed drop unit command;
+        if (currentBuilding == null){
+
+        } else if (currentBuilding.getBuildingType().equals(ConverterType.SHOP)){
+
+        } else if (currentBuilding.getBuildingType().equals(ConverterType.MERCENARY_POST)){
+            
+        } else if (currentBuilding.getBuildingType().equals(ConverterType.BARRACKS)){
+            
+        } else if (currentBuilding.getBuildingType().equals(DevelopmentType.CHURCH) ||
+                currentBuilding.getBuildingType().equals(DevelopmentType.CATHEDRAL)) {
+
+        } else {
+            GameMenuView.output("selectUnitBuilding");
+        }
     }
 
     public static void repair() {
@@ -742,7 +755,8 @@ public class GameMenuController extends MenuController {
 
     public static void dropTree(int X, int Y, Tree type) {
 
-        if (type==null) {
+        if (type == null) {
+
             GameMenuView.output("invalidType");
 
         } else if(Map.getInstanceMap().getMapCell(X,Y).getBuilding()!=null||Map.getInstanceMap().getMapCell(X,Y).getRockDirection()!=null||Map.getInstanceMap().getMapCell(X,Y).getTree()!=null){
@@ -1006,12 +1020,16 @@ public class GameMenuController extends MenuController {
 
 
     public static void main(String[] args) {
+
         Scanner s=new Scanner(System.in);
         Unarmed unarmed=new Unarmed(UnarmedEnum.engineer);
         Unit unit=new Unit(3,4, unarmed,5);
         currentUnits.add(unit);
 
         run(s,1,2,200);
+
+
+        createUnit("agsg", 3);
 
     }
 

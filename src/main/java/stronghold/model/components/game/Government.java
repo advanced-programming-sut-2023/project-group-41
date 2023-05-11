@@ -256,4 +256,12 @@ public class Government {
     // disBand
     // have already made in mainMenuController
 
+
+    public void setPopulation(int population) {
+        this.population = population;
+    }
+
+    public int getPopulation() {
+        return population;
+    }
 }
