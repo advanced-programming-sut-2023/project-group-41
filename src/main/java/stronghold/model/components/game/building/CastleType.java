@@ -21,6 +21,7 @@ public enum CastleType implements BuildingType{
     OIL_SMELTER("oilSmelter", 100, 100, 1, true, Resource.IRON, 10, 0, 1, 0),
     PITCH_DITCH("pitchDitch", 100, 0, 0, false, Resource.PITCH, 2, 5, 1, 0),
     CAGED_WAR_DOGS("cagedWarDogs", 100, 100, 0, false, Resource.WOOD, 10, 0, 0, 100),
+    Ruler("ruler",200,0,0,false,null,0,0,0,0),
     SIEGE_TENT("siegeTent", 100, 0, 1, true, null, 0, 0, 100, 0);
     private static final ArrayList<CastleType> castleTypeArr = new ArrayList<>(EnumSet.allOf(CastleType.class));
     private String regex;

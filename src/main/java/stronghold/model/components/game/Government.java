@@ -27,7 +27,7 @@ public class Government {
     private int freeFoodStockSpace;
     private HashMap<Resource, Integer> resources;
     private LinkedHashMap<BuildingType, Integer> buildingHash;
-    private ArrayList<Unit> units;
+    private ArrayList<Unit> units=new ArrayList<>();
     private ArrayList<People> people;
     private ArrayList<People> normalPeople;
 
@@ -45,7 +45,7 @@ public class Government {
         buildingHash = new LinkedHashMap<>();
         listAllBuilding(buildingHash);
 
-        normalPeople = new ArrayList<>();
+
         foodRate = -2;
         taxRate = 0;
 

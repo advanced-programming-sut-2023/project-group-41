@@ -58,7 +58,10 @@
   "wrongSoldierType": "Error! entered a wrong type",
   "sthIsHere": "there is sth in here",
   "popularity": "popularity: $VAR1$",
-
+  "buildingError": "there is a building here!",
+  "notyourtroop": "Error! not your troops",
+  "wellcome" : "the game has started: player 1",
+  "prebuilding": "Error!: there is a building here",
 
 
 

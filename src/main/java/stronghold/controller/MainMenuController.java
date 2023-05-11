@@ -20,7 +20,7 @@ import java.util.regex.Matcher;
 
 public class MainMenuController extends MenuController{
     private static String pathToRegexJSON = "src/main/java/stronghold/database/utils/regex/MainMenuRegex.json";
-    public static void run(User currentUser, Scanner scanner) {
+    public static void run( User currentUser,Scanner scanner) {
         JsonElement regexElement = null;
         try {
             regexElement = JsonParser.parseReader(new FileReader(pathToRegexJSON));
@@ -36,21 +36,23 @@ public class MainMenuController extends MenuController{
                 MainMenuView.output("logout");
                 break;
             } else if ((startGameMatcher = getJSONRegexMatcher(command, "startGame", MainMenuRegexObj)).matches()){
-                MainMenuView.output("enterUsers");
-                ArrayList<User> users = new ArrayList<>();
-                while (true){
-                    String input = MainMenuView.input(scanner).trim();
-                    if (input.matches("FINISH")){
-                        break;
-                    } else{
-                        users.add(UsersDB.usersDB.getUserByUsername(input));
-                        //Todo: handel uncorrected user names
-                    }
-                }
-                GameMenuController.run( scanner, 1,1,1);
+                int i=Integer.parseInt(startGameMatcher.group("opponent"));
+                int j=Integer.parseInt(startGameMatcher.group("rounds"));
+                Scanner scanner1=new Scanner(System.in);
+                System.out.println("enter map size:");
+                int mapSize=scanner1.nextInt();
+
+
+                GameMenuController.run( scanner, j,i,mapSize);
             } else{
                 MainMenuView.output("invalid");
             } // TODO: adding if statement for entering profile menu
         }
+    }
+
+    public static void main(String[] args) {
+        User user=new User("asdf","Asdf","Asd","sdfa",1,"1","!");
+        Scanner scanner=new Scanner(System.in);
+        run(user,scanner);
     }
 }
