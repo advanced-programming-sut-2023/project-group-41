@@ -757,6 +757,7 @@ public class GameMenuController extends MenuController {
 
 
 
+
         if (type == null) {
 
 
@@ -1026,12 +1027,14 @@ public class GameMenuController extends MenuController {
 
 
 
+
         Scanner s=new Scanner(System.in);
         Unarmed unarmed=new Unarmed(UnarmedEnum.engineer);
         Unit unit=new Unit(3,4, unarmed,5);
         currentUnits.add(unit);
 
         run(s,1,2,200);
+
 
 
 

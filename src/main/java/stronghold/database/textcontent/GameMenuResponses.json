@@ -11,6 +11,11 @@
   "buildingDrop": "Success!: building dropped successfully",
   "nearBuilding": "Error!: you should place your building near $VAR1$",
   "buildingSelected": "building selected successfully!!!",
+
+  "selectBuilding": "please select building first",
+  "selectUnitBuilding": "please select a building that can create unit",
+
+
   "invalidDirection": "Error!: invalid direction",
   "rockDrop": "Success!: rock dropped",
   "invalid": "Error!: Invalid command!",
@@ -45,11 +50,20 @@
   "notOil": "there is not oil in this place",
   "fillDitchError": "there is not a ditch in this place ",
   "invalidEngNum": "invalid Engineer Number",
+
   "Texture": "texture: $VAR1$",
   "People": "$VAR1 :  $VAR2$",
   "Building": "---$VAR3$",
   "engineerGotOil": "the engineer went to get oil",
   "wrongSoldierType": "Error! entered a wrong type",
   "sthIsHere": "there is sth in here",
-  "popularity": "popularity: $VAR1$"
+  "popularity": "popularity: $VAR1$",
+
+
+
+
+
+  "engineerGotOil": "the engineer went to get oil"
+
+
 }

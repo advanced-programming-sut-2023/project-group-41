@@ -35,6 +35,8 @@ public class Development extends Building {
         government.setPeople(peopleArr);
     }
 
+
+
     public DevelopmentType getDevelopmentType() {
         return developmentType;
     }
