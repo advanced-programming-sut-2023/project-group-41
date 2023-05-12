@@ -41,18 +41,17 @@ public class Government {
         for (Resource resource : EnumSet.allOf(Resource.class)) {
             resources.put(resource, 20);
         }
-<<<<<<< HEAD
+
 
         buildingHash = new LinkedHashMap<>();
-        listAllBuilding(buildingHash);
+        //listAllBuilding(buildingHash);
 
 
         foodRate = -2;
         taxRate = 0;
         balance=100;
 
-=======
->>>>>>> 298e054ff205cdb2fa9284ea16254d8b83f136fb
+
     }
     public void incPopularity(int num) {
         popularity += num;
