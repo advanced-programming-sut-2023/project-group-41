@@ -38,6 +38,9 @@
   "enterTradeMenu": "enter\\s+trade\\s+menu",
   "playerCoordinate": "\\s*(?<X>\\d+)\\s+(?<Y>\\d+)\\s*",
 
+  "catcherGate": "catcher\\s+gate",
+  "moveToStair": "move\\s+to\\s+stair",
+  "moveToSiegeTent": "move\\s+to\\s+siege\\s+tent\\s+((-x\\s+(?<X>\\d+)\\s*)|(-y\\s+(?<Y>\\d+)\\s*)){2}",
 
   "nextPlayer": "\\s*next\\s+player\\s*"
 

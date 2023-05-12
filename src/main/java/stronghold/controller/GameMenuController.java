@@ -1,8 +1,5 @@
 package stronghold.controller;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import stronghold.model.components.game.*;
 
 import java.lang.Math;
@@ -15,15 +12,10 @@ import stronghold.model.components.game.building.*;
 
 import stronghold.model.components.game.enums.*;
 import stronghold.model.components.game.soldeirtype.*;
-import stronghold.model.components.general.User;
 import stronghold.view.GameMenuView;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Scanner;
-import java.util.regex.Matcher;
 
 import static stronghold.model.components.game.enums.Direction.RANDOM;
 import static stronghold.model.components.game.enums.Resource.*;
@@ -259,6 +251,13 @@ public class GameMenuController extends MenuController {
         } else if (currentPlayer.getBuildingNum(type.getBuildingType()) != 1 && type.getBuildingType().equals(StorageType.FOOD_STOCK_PILE) && !Map.getInstanceMap().isBuildingHere(X, Y, type.getBuildingType())) {
             GameMenuView.output("nearBuilding", (Object) type.getBuildingType().getRegex());
             currentPlayer.removeBuilding(type);
+        }  else if (type.getBuildingType().equals(CastleType.STAIR) &&
+                !Map.getInstanceMap().isBuildingHere(X, Y, CastleType.SHORT_WALL) &&
+                !Map.getInstanceMap().isBuildingHere(X, Y, CastleType.THICK_WALL) &&
+                !Map.getInstanceMap().isBuildingHere(X, Y, CastleType.SMALL_STONE_GATEHOUSE) &&
+                !Map.getInstanceMap().isBuildingHere(X, Y, CastleType.BIG_STONE_GATEHOUSE)) {
+            GameMenuView.output("nearBuilding", (Object) type.getBuildingType().getRegex());
+            currentPlayer.removeBuilding(type);
         } else if (type.getBuildingType().equals(ConverterType.Ox_TETHER) && !Map.getInstanceMap().isBuildingNear(X, Y, ResourceMakerType.QUARRY)) {
             GameMenuView.output("nearBuilding", (Object) ResourceMakerType.QUARRY.getRegex());
             currentPlayer.removeBuilding(type);
@@ -279,6 +278,8 @@ public class GameMenuController extends MenuController {
         Building building = Map.getInstanceMap().getMapCell(X, Y).getBuilding();
         if (building == null) {
             GameMenuView.output("noBuildingAvailable");
+        } else if (!building.getOwnership().equals(currentPlayer)) {
+            GameMenuView.output("notyourtroop");
         } else {
             currentBuilding = building;
             setSelectedBuildingX(X);
@@ -421,10 +422,12 @@ public class GameMenuController extends MenuController {
     }
 
     public static void repair() {
-        if (!currentBuilding.getClass().getSimpleName().equals("Castle")) {
+        if (currentBuilding == null) {
+            GameMenuView.output("selectBuilding");
+        } else if (!currentBuilding.getClass().getSimpleName().equals("Castle")){
             GameMenuView.output("incorrectBuildingType");
-        } else if (false) {
-            // TODO: stopping repair when soldier are near
+        } else if (Map.isSoldierNear(getSelectedBuildingX(), getSelectedBuildingY(), currentPlayer)) {
+            GameMenuView.output("nearSoldier");
         } else {
             Castle castle = (Castle) currentBuilding;
             castle.repair();
@@ -714,7 +717,7 @@ public class GameMenuController extends MenuController {
         if(equipmentName.equals("airDefense")){
             buildUnitAirDefense(currentUnits.get(0).getX(),currentUnits.get(0).getY());
         } else if(equipmentName.equals("seigeTower")){
-            buildSeigeTower(currentUnits.get(0).getX(),currentUnits.get(0).getY());
+            buildSiegeTower(currentUnits.get(0).getX(),currentUnits.get(0).getY());
         } else if(equipmentName.equals("fireThrower")){
             buildFireThrower(currentUnits.get(0).getX(),currentUnits.get(0).getY());
         }else if(equipmentName.equals("catapult")){
@@ -1144,12 +1147,12 @@ public class GameMenuController extends MenuController {
 
 
     }
-    public static void buildSeigeTower(int x, int y) {
+    public static void buildSiegeTower(int x, int y) {
 
         Unit unit1 = Map.getInstanceMap().getUnarmed(Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(), currentUnits.get(0).getY()), "engineer");
         if (unit1 != null) {
             if( unit1.getCount() >= 4){
-                Tool tool = new Tool(4, "seigeTower", unit1.getX(), unit1.getY(), true);
+                Tool tool = new Tool(4, "siegeTower", unit1.getX(), unit1.getY(), true);
                 Map.getInstanceMap().getMapCell(x, y).setTool(tool);
                 GameMenuView.output("success");
                 //TODO: wall break
@@ -1159,6 +1162,44 @@ public class GameMenuController extends MenuController {
             }}
 
 
+    }
+
+    public static void catcherGate(){
+        if (currentBuilding == null){
+            GameMenuView.output("selectBuilding");
+        } else if(currentBuilding.getBuildingType().equals(CastleType.SMALL_STONE_GATEHOUSE) ||
+                currentBuilding.getBuildingType().equals(CastleType.BIG_STONE_GATEHOUSE) ) {
+            Map.getInstanceMap().getMapCell(getSelectedBuildingX(), getSelectedBuildingY()).setPassable(true);
+            GameMenuView.output("Success");
+        } else {
+            GameMenuView.output("incorrectBuildingType");
+        }
+    }
+
+    public static void moveToStair(){
+        if (currentBuilding == null){
+            GameMenuView.output("selectBuilding");
+        } else if (currentBuilding.getBuildingType().equals(CastleType.STAIR)) {
+            for (int i = -1; i <= 1 ; i++) {
+                for (int j = -1; j <= 1; j++) {
+                    if (Map.getInstanceMap().validMapCell(getSelectedBuildingX() + i, getSelectedBuildingY() + j)){
+                        Map.getInstanceMap().getMapCell(getSelectedBuildingX() + i, getSelectedBuildingY() + j).setPassable(true);
+                    }
+                }
+            }
+            GameMenuView.output("Success");
+        } else {
+            GameMenuView.output("incorrectBuildingType");
+        }
+    }
+
+    public static void moveToSiegeTent(int X, int Y){
+        if (Map.getInstanceMap().getMapCell(X, Y).getTool().getName().equals("siegeTower")) {
+            Map.getInstanceMap().getMapCell(X, Y).setPassable(true);
+            GameMenuView.output("Success");
+        } else {
+            GameMenuView.output("incorrectBuildingType");
+        }
     }
 
 

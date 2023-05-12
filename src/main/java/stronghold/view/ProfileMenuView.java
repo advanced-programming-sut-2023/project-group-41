@@ -51,7 +51,10 @@ public class ProfileMenuView {
             Matcher displayAllMatcher =
                     getJSONRegexMatcher(input, "displayAll" , menuRegexPatternsObject);;
 
-            if(changeUsernameMatcher.find()){
+            if (input.matches("\\s*back\\s*")) {
+                ProfileMenuView.output("back");
+                break;
+            } else if(changeUsernameMatcher.find()){
                 String username = changeUsernameMatcher.group("username");
                 if(username == null){
                     ProfileMenuView.output("usernameEmpty");

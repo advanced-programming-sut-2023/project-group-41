@@ -80,7 +80,8 @@ public class GameMenuView extends MenuView {
             Matcher pourOilMatcher;
             Matcher digTunnelMatcher;
             Matcher buildMatcher;
-
+            Matcher catcherGateMatcher;
+            
             Matcher setTextureMatcher;
             Matcher setRectangleTextureMatcher;
             Matcher clearMatcher;
@@ -91,6 +92,8 @@ public class GameMenuView extends MenuView {
             Matcher enterShopMenu;
             Matcher enterTradeMenu;
 
+            Matcher moveToStairMatcher;
+            Matcher moveToSiegeTentMatcher;
             if (command.matches("user\\s+logout")) {
                 GameMenuView.output("back");
                 break;
@@ -198,7 +201,15 @@ public class GameMenuView extends MenuView {
                 String type = dropUnitMatcher.group("type");
                 int count = Integer.parseInt(dropUnitMatcher.group("count"));
                 dropUnit(X, Y, type, count);
-            } else if (getJSONRegexMatcher(command, "enterMapMenu", gameMenuRegexObj).matches()) {
+            } else if ((catcherGateMatcher = getJSONRegexMatcher(command, "catcherGate", gameMenuRegexObj)).matches()) {
+                catcherGate();
+            } else if ((moveToStairMatcher = getJSONRegexMatcher(command, "moveToStair", gameMenuRegexObj)).matches()) {
+                moveToStair();
+            } else if ((moveToSiegeTentMatcher = getJSONRegexMatcher(command, "moveToSiegeTent", gameMenuRegexObj)).matches()) {
+                int X = Integer.parseInt(moveToStairMatcher.group("X"));
+                int Y = Integer.parseInt(moveToSiegeTentMatcher.group("Y"));
+                moveToSiegeTent(X, Y);
+            }  else if (getJSONRegexMatcher(command, "enterMapMenu", gameMenuRegexObj).matches()) {
                 enterMapMenu();
 
             } else if (getJSONRegexMatcher(command, "enterShopMenu", gameMenuRegexObj).matches()) {

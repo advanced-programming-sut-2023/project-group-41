@@ -25,6 +25,7 @@
   "rockDrop": "Success!: rock dropped",
   "invalid": "Error!: Invalid command!",
 
+  "exit": "Success!: end of our program",
   "welcome": "Welcome, $VAR1$!",
   "logout": "User logged out!",
   "success": "Success",
