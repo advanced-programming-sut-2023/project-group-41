@@ -1,20 +1,22 @@
 package stronghold.model.components.game.soldeirtype;
 
+import stronghold.model.components.game.enums.Resource;
+
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum FighterEnum {
-    spearMan("spearMan",3,1,3,1,false,false,false),
-    pikeMan("pikeMan",2,4,3,1,false,false,false),
-    maceMan("maceMan",3,3,4,1,false,false,false),
-    swordsMan("swordsMan",1,1,5,1,false,false,false),
-    Knight("Knight",5,4,5,1,false,true,false),
-    blackMonk("blackMonk",2,3,3,1,false,false,false),
-    slaves("slaves",4,0,1,1,false,false,true),
-    assassins("assassins",3,3,3,1,true,false,true),
-    arabianSwordsMen("arabianSwordsMen",5,4,4,1,false,false,true);
+    spearMan("spearMan",3,1,3,1,false,false,false,Resource.SPEAR),
+    pikeMan("pikeMan",2,4,3,1,false,false,false,Resource.STONE),
+    maceMan("maceMan",3,3,4,1,false,false,false,null),
+    swordsMan("swordsMan",1,1,5,1,false,false,false,Resource.SWORD),
+    Knight("Knight",5,4,5,1,false,true,false,Resource.HORSE),
+    blackMonk("blackMonk",2,3,3,1,false,false,false,null),
+    slaves("slaves",4,0,1,1,false,false,true,null ),
+    assassins("assassins",3,3,3,1,true,false,true,null),
+    arabianSwordsMen("arabianSwordsMen",5,4,4,1,false,false,true,Resource.SWORD);
 
 
     private int speed;
@@ -25,8 +27,9 @@ public enum FighterEnum {
     private boolean isHorsed;
     private boolean isArab;
     private String regex;
-    FighterEnum(  String regex,int speed, int defense, int offense, int price,boolean isAssassin, boolean isHorsed,boolean isArab){
-
+    private Resource resource;
+    FighterEnum(  String regex,int speed, int defense, int offense, int price,boolean isAssassin, boolean isHorsed,boolean isArab,Resource resource){
+        this.resource=resource;
         this.defense=defense;
         this.offense=offense;
         this.isAssassin=isAssassin;
@@ -81,5 +84,9 @@ public enum FighterEnum {
             if(getMatcher(input, castleType).find()) return castleType;
         }
         return null;
+    }
+
+    public Resource getResource() {
+        return resource;
     }
 }

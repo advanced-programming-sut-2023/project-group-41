@@ -48,6 +48,7 @@ public class Government {
 
         foodRate = -2;
         taxRate = 0;
+        balance=100;
 
     }
     public void incPopularity(int num) {

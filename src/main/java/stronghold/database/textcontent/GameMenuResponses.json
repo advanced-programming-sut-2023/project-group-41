@@ -14,6 +14,11 @@
 
   "selectBuilding": "please select building first",
   "selectUnitBuilding": "please select a building that can create unit",
+  "balanceError": "Error! not enough balance",
+  "notArab": "Error! the troop is not Arab",
+  "blackMonk": "the troop is blackMonk",
+  "resourceError": "Error! not enough resource",
+  "notblackMonk": "the troop is not blackMonk",
 
 
   "invalidDirection": "Error!: invalid direction",
@@ -58,10 +63,10 @@
   "wrongSoldierType": "Error! entered a wrong type",
   "sthIsHere": "there is sth in here",
   "popularity": "popularity: $VAR1$",
-  "buildingError": "there is a building here!",
+  "buildingError": "Error! there is a building here!",
   "notyourtroop": "Error! not your troops",
   "wellcome" : "the game has started: player 1",
-  "prebuilding": "Error!: there is a building here",
+  "prebuilding": "Error!  there is a building here",
 
 
 
