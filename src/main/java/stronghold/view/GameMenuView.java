@@ -233,7 +233,7 @@ public class GameMenuView extends MenuView {
             }else if((toolAction= getJSONRegexMatcher(command, "actionTool", gameMenuRegexObj)).matches()){
                 int X = Integer.parseInt(selectTool.group("X"));
                 int Y = Integer.parseInt(selectTool.group("Y"));
-                toolAction(X,Y);
+                actionTool(X,Y);
             }else {
                 GameMenuView.output("invalid");
             }
