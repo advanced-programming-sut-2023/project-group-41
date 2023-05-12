@@ -97,12 +97,6 @@ public class Navigator {
         }
         return mapIsPassable;
     }
-    public static void main(String[] args) {
-        Map.getInstanceMap().setSize(200);
 
-        boolean f=shortestPathIsLessThanLimit(mapPassable(),30,30,40,30,20);
-
-        System.out.println(f);
-    }
 }
 

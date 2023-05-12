@@ -1,6 +1,6 @@
 {
   "invalid": "Invalid command!",
-  "back": "you are back in MainMenu!",
+  "back": "you are back in GameMenu!",
   "moneyError": "Not enough balance!",
   "success":"Done successfully!",
   "shortage": "not enough!"

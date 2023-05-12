@@ -21,43 +21,7 @@ public class ShopMenuController extends MenuController{
         ShopMenuController.currentGovernment = currentGovernment;
     }
 
-    private static String pathToRegexJSON = "src/main/java/stronghold/database/utils/regex/ShopMenuRegex.json";
-
-    private static HashMap<Resource,Integer> prices=new HashMap<>();//not valued yet
-    public static void run(Scanner scanner){
-        setCurrentGovernment(GameMenuController.getCurrentPlayer());
-        for(Resource resource:currentGovernment.getResourcesMap().keySet()){
-            prices.put(resource,10);
-        }
-        JsonElement regexElement = null;
-        try {
-            regexElement = JsonParser.parseReader(new FileReader(pathToRegexJSON));
-        } catch (
-                FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        JsonObject menuRegexPatternsObject = regexElement.getAsJsonObject();
-        while (true){
-            String command = ShopMenuView.input(scanner).trim();
-            Matcher buy;
-            Matcher sell;
-
-
-            if(command.matches("back")){
-                ShopMenuView.output("back");
-                return;
-            } else if ((buy =getJSONRegexMatcher(command, "buy", menuRegexPatternsObject)).matches()) {
-                buy(Resource.getResource(buy.group("id")),Integer.parseInt(buy.group("int")));
-            } else if ((sell=getJSONRegexMatcher(command, "sell", menuRegexPatternsObject)).matches()) {
-                sell(Resource.getResource(sell.group("id")),Integer.parseInt(sell.group("int")));
-            } else if (( getJSONRegexMatcher(command, "showPriceList", menuRegexPatternsObject)).matches()) {
-                showPriceList();
-            }   else {
-                ShopMenuView.output("invalid");
-            }
-        }
-
-    }
+    public static HashMap<Resource,Integer> prices=new HashMap<>();//not valued yet
     //add prices
     public static void buy(Resource resource,int number){
         if(prices.get(resource)*number> currentGovernment.getBalance())

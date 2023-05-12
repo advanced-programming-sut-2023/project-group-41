@@ -16,48 +16,13 @@ import java.util.regex.Matcher;
 
 public class TradeMenuController extends MenuController{
     private static Government currentGovernment;
-    private static String pathToRegexJSON = "src/main/java/stronghold/database/utils/regex/TradeMenuRegex.json";
+
 
     public static void setCurrentGovernment(Government currentGovernment) {
         TradeMenuController.currentGovernment = currentGovernment;
     }
 
-    public static void run(Scanner scanner){
-        setCurrentGovernment(GameMenuController.getCurrentPlayer());
-        showNotification();
-        JsonElement regexElement = null;
-        try {
-            regexElement = JsonParser.parseReader(new FileReader(pathToRegexJSON));
-        } catch (
-                FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        JsonObject menuRegexPatternsObject = regexElement.getAsJsonObject();
-        while (true){
-            String command = TradeMenuView.input(scanner).trim();
-            Matcher sendTrade;
-            Matcher acceptTradeMatcher;
 
-
-            if(command.matches("back")){
-                TradeMenuView.output("back");
-
-                break;
-            } else if ((sendTrade = getJSONRegexMatcher(command, "sendTrade", menuRegexPatternsObject)).matches()) {
-                sendTrade(currentGovernment,Resource.getResource(sendTrade.group("resource")), Integer.parseInt(sendTrade.group("price")),sendTrade.group("message"),Integer.parseInt(sendTrade.group("amount")));
-
-            } else if ((acceptTradeMatcher =getJSONRegexMatcher(command, "acceptTrade", menuRegexPatternsObject)).matches()) {
-                acceptTrade(TradeDataBase.getTradeById(Integer.parseInt(acceptTradeMatcher.group("id"))));
-            } else if (getJSONRegexMatcher(command, "showHistory", menuRegexPatternsObject).matches()) {
-                showHistory();
-            } else if (( getJSONRegexMatcher(command, "tradeList", menuRegexPatternsObject)).matches()) {
-                showTradeList();
-            }   else {
-                TradeMenuView.output("invalid");
-            }
-        }
-
-    }
     public static Government getCurrentGovernment() {
         return currentGovernment;
     }
