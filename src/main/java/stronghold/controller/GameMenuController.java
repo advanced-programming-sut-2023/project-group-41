@@ -444,6 +444,8 @@ public class GameMenuController extends MenuController {
                         Unit unit = new Unit(selectedBuildingX, selectedBuildingY, fighter, count);
                         currentPlayer.setBalance(currentPlayer.getBalance() - count * FighterEnum.getFighterType(type).getPrice());
                         Map.getInstanceMap().getMapCell(getSelectedBuildingX(), getSelectedBuildingY()).getUnits().add(unit);
+                        currentPlayer.setPopulation(currentPlayer.getPopulation()-count);
+                        currentPlayer.getUnits().add(unit);
                         GameMenuView.output("success");
                     }
                 }
@@ -457,6 +459,8 @@ public class GameMenuController extends MenuController {
                         LongRanged fighter = new LongRanged(LongRangedEnum.getLongRangedType(type));
                         Unit unit = new Unit(selectedBuildingX, selectedBuildingY, fighter, count);
                         currentPlayer.setBalance(currentPlayer.getBalance() - count * LongRangedEnum.getLongRangedType(type).getPrice());
+                        currentPlayer.setPopulation(currentPlayer.getPopulation()-count);
+                        currentPlayer.getUnits().add(unit);
                         Map.getInstanceMap().getMapCell(getSelectedBuildingX(), getSelectedBuildingY()).getUnits().add(unit);
                         GameMenuView.output("success");
                     }
@@ -487,6 +491,8 @@ public class GameMenuController extends MenuController {
                     }
                     currentPlayer.setBalance(currentPlayer.getBalance()-count*FighterEnum.getFighterType(type).getPrice());
                     Map.getInstanceMap().getMapCell(getSelectedBuildingX(),getSelectedBuildingY()).getUnits().add(unit);
+                    currentPlayer.setPopulation(currentPlayer.getPopulation()-count);
+                    currentPlayer.getUnits().add(unit);
                     GameMenuView.output("success");
 
                 }
@@ -506,6 +512,8 @@ public class GameMenuController extends MenuController {
                     }
                     currentPlayer.setBalance(currentPlayer.getBalance()-count*LongRangedEnum.getLongRangedType(type).getPrice());
                     Map.getInstanceMap().getMapCell(getSelectedBuildingX(),getSelectedBuildingY()).getUnits().add(unit);
+                    currentPlayer.setPopulation(currentPlayer.getPopulation()-count);
+                    currentPlayer.getUnits().add(unit);
                     GameMenuView.output("success");
                 }
             }else  if(UnarmedEnum.getUnarmedType(type)!=null){
@@ -516,6 +524,8 @@ public class GameMenuController extends MenuController {
                     Unit unit=new Unit(selectedBuildingX,selectedBuildingY,fighter,count);
                     currentPlayer.setBalance(currentPlayer.getBalance()-count*UnarmedEnum.getUnarmedType(type).getPrice());
                     Map.getInstanceMap().getMapCell(getSelectedBuildingX(),getSelectedBuildingY()).getUnits().add(unit);
+                    currentPlayer.setPopulation(currentPlayer.getPopulation()-count);
+                    currentPlayer.getUnits().add(unit);
                     GameMenuView.output("success");
                 }
             }
@@ -531,6 +541,8 @@ public class GameMenuController extends MenuController {
                 Fighter fighter =new Fighter(FighterEnum.blackMonk);
                 Unit unit=new Unit(getSelectedBuildingX(),getSelectedBuildingY(),fighter,count);
                 Map.getInstanceMap().getMapCell(getSelectedBuildingX(),getSelectedBuildingY()).getUnits().add(unit);
+                currentPlayer.setPopulation(currentPlayer.getPopulation()-count);
+                currentPlayer.getUnits().add(unit);
                 GameMenuView.output("success");
             }else{
                 GameMenuView.output("notblackMonk");
@@ -621,23 +633,51 @@ public class GameMenuController extends MenuController {
 
     public static void setStateOfUnit(int X, int Y, State state) {
         // State is an enum class and have three obj: standing|defensive|offensive
-        for (Unit unit : Map.getInstanceMap().getMapCell(X, Y).getUnits()) {
-            unit.setState(state);
+        int range=0;
+        if(state.equals(State.OFFENSIVE))
+            range=4;
+        else if (state.equals(State.DEFENSIVE))
+            range=2;
 
+        setCurrentUnits( Map.getInstanceMap().getMapCell(X, Y).getUnits());
+        for(int i=X-range;i<X+range;i++){
+            for(int j=Y-range;j<Y+range;j++){
+                if(Map.getInstanceMap().getMapCell(i,j).getUnits().size()!=0) {
+                    if (!Map.getInstanceMap().getMapCell(i, j).getUnits().get(0).getPeople().getOwner().equals(Map.getInstanceMap().getMapCell(X, Y).getUnits().get(0).getPeople().getOwner())){
+
+                        for (Unit unit : Map.getInstanceMap().getMapCell(i, j).getUnits()) {
+                            unit.setCount(0);
+                        }
+
+                }
+
+                }
+
+
+
+            }
         }
+
+
         GameMenuView.output("success");
     }
 
     public static void attackEnemy(int enemyX, int enemyY) {
         //command: attack -e [enemy’s x] [enemy’
         //buildings attack
+
         if (!currentUnits.get(0).isInRange(enemyX, enemyY)) {
             GameMenuView.output("enemyBond");
             return;
-        } else if (Map.getInstanceMap().getMapCell(enemyX, enemyY).getUnits().size() == 0) {
+        } else if (Map.getInstanceMap().getMapCell(enemyX, enemyY).getUnits().size() == 0&&Map.getInstanceMap().getMapCell(enemyX, enemyY).getBuilding()==null) {
             GameMenuView.output("enemyError");
+            return;
 
-        } else {
+        } else if(Map.getInstanceMap().getMapCell(enemyX, enemyY).getUnits().get(0).getPeople().getOwner().equals(currentPlayer)){
+            GameMenuView.output("ally");
+            return;
+
+        }else {
             int allyOffense = 0, allyDefense = 0, enemyOffense = 0, enemyDefense = 0;
             for (Unit unit : currentUnits) {
                 allyOffense += unit.getPeople().getOffense() * unit.getCount();
@@ -716,10 +756,12 @@ public class GameMenuController extends MenuController {
 
 
             for (Unit unit1 : Map.getInstanceMap().getMapCell(X, Y).getUnits()) {
+                if(!unit1.isHasAirDefense()) {
 
-                int j = longRanged - unit1.getCount();
-                unit1.setCount(Math.max(0, unit1.getCount() - longRanged));
-                longRanged = j;
+                    int j = longRanged - unit1.getCount();
+                    unit1.setCount(Math.max(0, unit1.getCount() - longRanged));
+                    longRanged = j;
+                }
 
 
 
@@ -792,7 +834,10 @@ public class GameMenuController extends MenuController {
         Unit unit1 = Map.getInstanceMap().getUnarmed(Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(), currentUnits.get(0).getY()), "tunneler");
         if (unit1 != null) {
             Map.getInstanceMap().getMapCell(X, Y).setHasTunnel(true);
+            Map.getInstanceMap().getMapCell(X,Y).setBuilding(null);
+
             GameMenuView.output("success");
+            return;
 
         }
         GameMenuView.output("tunnelerError");
@@ -811,7 +856,7 @@ public class GameMenuController extends MenuController {
         }else if(equipmentName.equals("catapult")){
             buildCatapult(currentUnits.get(0).getX(),currentUnits.get(0).getY());
         }else if(equipmentName.equals("bigCatapult")){
-            buildSeigeTower(currentUnits.get(0).getX(),currentUnits.get(0).getY());
+            buildBigCatapult(currentUnits.get(0).getX(),currentUnits.get(0).getY());
         }else if(equipmentName.equals("battleRam")){
             buildBattleRam(currentUnits.get(0).getX(),currentUnits.get(0).getY());
         }
@@ -866,6 +911,9 @@ public class GameMenuController extends MenuController {
             GameMenuView.output("buildingPlaced");
         } else {
             Map.getInstanceMap().getMapCell(X, Y).setTexture(type);
+            if(type.equals("sea")||type.equals("river")||type.equals("big pound")||type.equals("small pound")||type.equals("sttone")){
+                Map.getInstanceMap().getMapCell(X, Y).setPassable(false);
+            }
             GameMenuView.output("textureSet");
         }
     }
@@ -889,6 +937,9 @@ public class GameMenuController extends MenuController {
         for (int i = X1; i < X2; i++) {
             for (int j = Y1; j < Y2; j++) {
                 Map.getInstanceMap().getMapCell(i, j).setTexture(type);
+                if(type.equals("sea")||type.equals("river")||type.equals("big pound")||type.equals("small pound")||type.equals("sttone")){
+                    Map.getInstanceMap().getMapCell(i, j).setPassable(false);
+                }
             }
         }
         GameMenuView.output("textureSet");
@@ -962,6 +1013,8 @@ public class GameMenuController extends MenuController {
 
             Unit unit = new Unit(X,Y,people,count);
             Map.getInstanceMap().getMapCell(X,Y).getUnits().add(unit);
+            System.out.println(Map.getInstanceMap().getMapCell(X,Y).getUnits().get(0));
+            MapMenuController.showMapCellDetails(X,Y);
 
             GameMenuView.output("success");
         }else if(LongRangedEnum.getLongRangedType(type)!=null){
@@ -1062,7 +1115,14 @@ public class GameMenuController extends MenuController {
             return;
 
         } else {
-            double neededFood = currentPlayer.getPeople().size() * ((currentPlayer.getFoodRate() + 2) * 0.5);
+            double n=currentPlayer.getPopulation();
+            if(currentPlayer.getUnits()!=null) {
+                for (Unit unit : currentPlayer.getUnits()) {
+                    n += unit.getCount();
+                }
+            }
+
+            double neededFood = n * ((currentPlayer.getFoodRate() + 2) * 0.5);
             double j = Math.max(0, currentPlayer.getResourcesNum(APPLE) - neededFood);
             double i = Math.max(0, neededFood - currentPlayer.getResourcesNum(APPLE));
             currentPlayer.getResourcesMap().put(APPLE, ((int) j));
@@ -1105,6 +1165,33 @@ public class GameMenuController extends MenuController {
         }
 
     }
+    public static void endOfRoundBuildingAttacker(MapCell mapCell){
+        if(CastleType.getCastleType(mapCell.getBuilding().getRegex())!=null){
+            Castle castle=(Castle)mapCell.getBuilding();
+            for(int i=-castle.getFireRange();i<castle.getFireRange();i++){
+                for (int j = -castle.getFireRange(); j < castle.getFireRange(); j++) {
+                    ArrayList<Unit> units=new ArrayList<>();
+                    for(Unit unit:Map.getInstanceMap().getMapCell(i,j).getUnits()){
+                        if(!unit.getPeople().getOwner().equals(castle.getOwnership())){
+                            unit.setCount(Math.max(0,unit.getCount()-10));
+                            if(unit.getCount()>0){
+                                units.add(unit);
+
+                            }
+                        }
+                    }
+                    Map.getInstanceMap().getMapCell(i,j).getUnits().clear();
+                    for (Unit unit : units) {
+                        Map.getInstanceMap().getMapCell(i,j).getUnits().add(unit);
+                    }
+
+
+                }
+            }
+
+        }
+
+    }
 
     public static void buildUnitAirDefense(int x, int y) {
         Unit unit1 = Map.getInstanceMap().getUnarmed(Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(), currentUnits.get(0).getY()), "engineer");
@@ -1113,6 +1200,7 @@ public class GameMenuController extends MenuController {
                 Tool tool = new Tool(1, "airDefense", unit1.getX(), unit1.getY(), false);
                 for (Unit unit : Map.getInstanceMap().getMapCell(x, y).getUnits()) {
                     unit.setTool(tool);
+                    unit.setHasAirDefense(true);
 
                 }
 
@@ -1237,22 +1325,8 @@ public class GameMenuController extends MenuController {
 
 
     }
-    public static int[][] mapPassable(){
-        int[][] mapIsPassable= new int[Map.getInstanceMap().getSize()][Map.getInstanceMap().getSize()];
-        for(int i=0;i< Map.getInstanceMap().getSize();i++){
-            for (int j = 0; j < Map.getInstanceMap().getSize(); j++) {
-                if(Map.getInstanceMap().getMapCell(i,j).isPassable()){
-                    mapIsPassable[i][j]=1;
 
-                }else{
-                    mapIsPassable[i][j]=0;
 
-                }
-
-            }
-        }
-        return mapIsPassable;
-    }
 
 
 }
