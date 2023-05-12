@@ -10,6 +10,7 @@ public class Unit {
    private int X;
     private int Y;
     private int patrolX1;
+    private boolean hasAirDefense=false;
     private Tool tool;
     private int patrolY1;
     private int patrolX2;
@@ -23,7 +24,15 @@ public class Unit {
 
     private State state;
 
-    public Unit(int x,int y,People type,int count){
+    public void setHasAirDefense(boolean hasAirDefense) {
+        this.hasAirDefense = hasAirDefense;
+    }
+
+    public boolean isHasAirDefense() {
+        return hasAirDefense;
+    }
+
+    public Unit(int x, int y, People type, int count){
         this.people=type;
         this.X=x;
         this.Y=y;

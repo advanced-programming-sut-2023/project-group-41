@@ -41,6 +41,12 @@ public class Government {
         for (Resource resource : EnumSet.allOf(Resource.class)) {
             resources.put(resource, 20);
         }
+
+
+
+
+
+
     }
     public void incPopularity(int num) {
         popularity += num;
@@ -67,7 +73,7 @@ public class Government {
         this.people = people;
     }
 
-    ;
+
     private Building Ruler;
 
     public Building getRuler() {
@@ -268,6 +274,17 @@ public class Government {
 
     public void removeBuilding(Building type) {
         buildingHash.put(type.getBuildingType(), getBuildingNum(type.getBuildingType()) - 1);
+    }
+    public void unitKiller(){
+        ArrayList<Unit >alive=new ArrayList<>();
+
+        for (Unit unit : units) {
+            if(unit.getCount()>0)
+                alive.add(unit);
+        }
+        units.clear();
+        units.addAll(alive);
+
     }
 
 
