@@ -90,6 +90,11 @@ public class GameMenuView extends MenuView {
             Matcher enterMapMenu;
             Matcher enterShopMenu;
             Matcher enterTradeMenu;
+            Matcher selectTool;
+            Matcher burnOil;
+            Matcher digDitch;
+            Matcher fillDitch;
+            Matcher toolAction;
 
             if (command.matches("user\\s+logout")) {
                 break;
@@ -209,6 +214,26 @@ public class GameMenuView extends MenuView {
             } else if (getJSONRegexMatcher(command, "nextPlayer", gameMenuRegexObj).matches()) {
                 nextPlayer();
 
+            }else if((digDitch= getJSONRegexMatcher(command, "digDitch", gameMenuRegexObj)).matches()){
+                int X = Integer.parseInt(digDitch.group("X"));
+                int Y = Integer.parseInt(digDitch.group("Y"));
+                digDitch(X,Y);
+            }else if((fillDitch= getJSONRegexMatcher(command, "fillDitch", gameMenuRegexObj)).matches()){
+                int X = Integer.parseInt(fillDitch.group("X"));
+                int Y = Integer.parseInt(fillDitch.group("Y"));
+                fillDitch(X,Y);
+            }else if((burnOil= getJSONRegexMatcher(command, "burnOil", gameMenuRegexObj)).matches()){
+                int X = Integer.parseInt(burnOil.group("X"));
+                int Y = Integer.parseInt(burnOil.group("Y"));
+                burnOil(X,Y);
+            }else if((selectTool= getJSONRegexMatcher(command, "selectTool", gameMenuRegexObj)).matches()){
+                int X = Integer.parseInt(selectTool.group("X"));
+                int Y = Integer.parseInt(selectTool.group("Y"));
+                selectTool(X,Y);
+            }else if((toolAction= getJSONRegexMatcher(command, "actionTool", gameMenuRegexObj)).matches()){
+                int X = Integer.parseInt(selectTool.group("X"));
+                int Y = Integer.parseInt(selectTool.group("Y"));
+                toolAction(X,Y);
             }else {
                 GameMenuView.output("invalid");
             }
