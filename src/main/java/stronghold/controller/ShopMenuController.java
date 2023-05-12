@@ -47,9 +47,9 @@ public class ShopMenuController extends MenuController{
                 ShopMenuView.output("back");
                 return;
             } else if ((buy =getJSONRegexMatcher(command, "buy", menuRegexPatternsObject)).matches()) {
-                buy(Resource.valueOf(buy.group("int")),Integer.parseInt(buy.group(2)));
-            } else if ((sell=getJSONRegexMatcher(command, "showHistory", menuRegexPatternsObject)).matches()) {
-                buy(Resource.valueOf(buy.group("int")),Integer.parseInt(buy.group(2)));
+                buy(Resource.getResource(buy.group("id")),Integer.parseInt(buy.group("int")));
+            } else if ((sell=getJSONRegexMatcher(command, "sell", menuRegexPatternsObject)).matches()) {
+                sell(Resource.getResource(sell.group("id")),Integer.parseInt(sell.group("int")));
             } else if (( getJSONRegexMatcher(command, "showPriceList", menuRegexPatternsObject)).matches()) {
                 showPriceList();
             }   else {
@@ -70,7 +70,7 @@ public class ShopMenuController extends MenuController{
 
     }
     public static void sell(Resource resource,int number){
-        if(currentGovernment.getResourcesMap().get(resource)>number){
+        if(currentGovernment.getResourcesMap().get(resource)<number){
             ShopMenuView.output("shortage");
             return;
         }

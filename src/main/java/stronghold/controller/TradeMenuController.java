@@ -18,10 +18,13 @@ public class TradeMenuController extends MenuController{
     private static Government currentGovernment;
     private static String pathToRegexJSON = "src/main/java/stronghold/database/utils/regex/TradeMenuRegex.json";
 
-
-
+    public static void setCurrentGovernment(Government currentGovernment) {
+        TradeMenuController.currentGovernment = currentGovernment;
+    }
 
     public static void run(Scanner scanner){
+        setCurrentGovernment(GameMenuController.getCurrentPlayer());
+        showNotification();
         JsonElement regexElement = null;
         try {
             regexElement = JsonParser.parseReader(new FileReader(pathToRegexJSON));
@@ -41,13 +44,13 @@ public class TradeMenuController extends MenuController{
 
                 break;
             } else if ((sendTrade = getJSONRegexMatcher(command, "sendTrade", menuRegexPatternsObject)).matches()) {
-                sendTrade(currentGovernment,Resource.valueOf(sendTrade.group("resource")), Integer.parseInt(sendTrade.group("price")),sendTrade.group("message"),Integer.parseInt(sendTrade.group("amount")));
+                sendTrade(currentGovernment,Resource.getResource(sendTrade.group("resource")), Integer.parseInt(sendTrade.group("price")),sendTrade.group("message"),Integer.parseInt(sendTrade.group("amount")));
 
             } else if ((acceptTradeMatcher =getJSONRegexMatcher(command, "acceptTrade", menuRegexPatternsObject)).matches()) {
                 acceptTrade(TradeDataBase.getTradeById(Integer.parseInt(acceptTradeMatcher.group("id"))));
             } else if (getJSONRegexMatcher(command, "showHistory", menuRegexPatternsObject).matches()) {
                 showHistory();
-            } else if (( getJSONRegexMatcher(command, "showTradeList", menuRegexPatternsObject)).matches()) {
+            } else if (( getJSONRegexMatcher(command, "tradeList", menuRegexPatternsObject)).matches()) {
                 showTradeList();
             }   else {
                 TradeMenuView.output("invalid");
@@ -60,21 +63,25 @@ public class TradeMenuController extends MenuController{
     }
     public static void showTradeList(){
         System.out.println("Trade list:");
+        if(TradeDataBase.getTrades().size()==0){
+            System.out.println("no trades");
+            return;
+        }
         for(Trade trade: TradeDataBase.getTrades()){
-            System.out.println(trade.getId()+">> "+trade.getReceiver()+", "+trade.getReceiver()+", "+trade.getResourceType()+", \nMessage: "+trade.getMessage());
+            System.out.println(trade.getId()+">> Sender: "+trade.getSender().getColor()+", "+trade.getResourceType()+", \nMessage: "+trade.getMessage());
         }
     }
     public static void showHistory(){
         for(Trade trade: TradeDataBase.getTrades()){
             if(TradeMenuController.getCurrentGovernment().equals(trade.getSender())||TradeMenuController.getCurrentGovernment().equals(trade.getReceiver())) {
-                System.out.println(trade.getId() + ">> " + trade.getReceiver() + ", " + trade.getReceiver() + ", " + trade.getResourceType() + ", \nMessage: " + trade.getMessage());
+                System.out.println(trade.getId() + ">> receiver: player" + trade.getReceiver().getColor() + ", Sender: player" + trade.getReceiver().getColor() + ", " + trade.getResourceType() + ", \nMessage: " + trade.getMessage());
             }
         }
     }
     public static void showNotification(){
         for(Trade trade: TradeDataBase.getTrades()){
                 if (!trade.getIsSeen()) {
-                    System.out.println(trade.getId() + ">> " + trade.getReceiver() + ", " + trade.getReceiver() + ", " + trade.getResourceType() + ", \nMessage: " + trade.getMessage());
+                    System.out.println(trade.getId() + ">> " + trade.getReceiver().getColor() + ", Sender: " + trade.getSender().getColor() + ", " + trade.getResourceType() + ", \nMessage: " + trade.getMessage());
                     trade.setSeen(true);
                 }
 
@@ -84,7 +91,7 @@ public class TradeMenuController extends MenuController{
     public static void acceptTrade(Trade trade){
         //if(!trade.getReceiver().equals(currentGovernment))
             //System.out.println("You are not the receiver!");
-        if(trade.getReceiver().getBalance()<trade.getPrice())
+        if(currentGovernment.getBalance()<trade.getPrice())
                  System.out.println("Not enough coins!");
         else{
             trade.setReceiver(currentGovernment);
@@ -94,7 +101,7 @@ public class TradeMenuController extends MenuController{
             trade.getSender().getResourcesMap().put(trade.getResourceType(),trade.getSender().getResourcesMap().get(trade.getResourceType())-trade.getNumber());
             //TradeDataBase.deleteTrade(trade);
             trade.setAccepted(true);
-            System.out.println("You have done trade "+trade.getId()+"with "+trade.getSender()+"successfully!");
+            System.out.println("You have done trade "+trade.getId()+" with player "+trade.getSender().getColor()+"successfully!");
         }
 
     }

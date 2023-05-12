@@ -32,6 +32,24 @@ public class GameMenuController extends MenuController {
     private static int roundNum;
     private static int currentRound;
     private static int playerNum;
+    private static int selectedBuildingX;
+    private static int selectedBuildingY;
+
+    public static int getSelectedBuildingX() {
+        return selectedBuildingX;
+    }
+
+    public static int getSelectedBuildingY() {
+        return selectedBuildingY;
+    }
+
+    public static void setSelectedBuildingX(int selectedBuildingX) {
+        GameMenuController.selectedBuildingX = selectedBuildingX;
+    }
+
+    public static void setSelectedBuildingY(int selectedBuildingY) {
+        GameMenuController.selectedBuildingY = selectedBuildingY;
+    }
 
     private static String pathToRegexJSON = "src/main/java/stronghold/database/utils/regex/GameMenuRegex.json";
     ///////////
@@ -127,10 +145,6 @@ public class GameMenuController extends MenuController {
     public static int getRoundNum() {
         return roundNum;
     }
-
-
-
-
 
     public static void endOfRound(){
         currentPlayer.allBuildingActions();
@@ -244,26 +258,125 @@ public class GameMenuController extends MenuController {
     }
 
     public static void selectBuilding(int X, int Y) {
+
         Building building = Map.getInstanceMap().getMapCell(X, Y).getBuilding();
         if (building == null) {
             GameMenuView.output("noBuildingAvailable");
         } else {
             currentBuilding = building;
+            setSelectedBuildingX(X);
+            setSelectedBuildingY(Y);
             GameMenuView.output("buildingSelected");
         }
     }
 
     public static void createUnit(String type, int count) {
         if (currentBuilding == null){
+            GameMenuView.output("selectBuilding");
+            return;
 
-        } else if (currentBuilding.getBuildingType().equals(ConverterType.SHOP)){
+        }  else if (currentBuilding.getBuildingType().equals(ConverterType.MERCENARY_POST)){
+            if(FighterEnum.getFighterType(type)!=null) {
+                if (FighterEnum.getFighterType(type).isArab()) {
+                    if (currentPlayer.getBalance() < count * FighterEnum.getFighterType(type).getPrice()) {
+                        GameMenuView.output("balanceError");
+                        return;
+                    } else {
+                        Fighter fighter = new Fighter(FighterEnum.getFighterType(type));
+                        Unit unit = new Unit(selectedBuildingX, selectedBuildingY, fighter, count);
+                        currentPlayer.setBalance(currentPlayer.getBalance() - count * FighterEnum.getFighterType(type).getPrice());
+                        Map.getInstanceMap().getMapCell(getSelectedBuildingX(), getSelectedBuildingY()).getUnits().add(unit);
+                        GameMenuView.output("success");
+                    }
+                }
+            }
+            else if(LongRangedEnum.getLongRangedType(type)!=null) {
+           if (LongRangedEnum.getLongRangedType(type).isArab()) {
+                    if (currentPlayer.getBalance() < count * LongRangedEnum.getLongRangedType(type).getPrice()) {
+                        GameMenuView.output("balanceError");
+                        return;
+                    } else {
+                        LongRanged fighter = new LongRanged(LongRangedEnum.getLongRangedType(type));
+                        Unit unit = new Unit(selectedBuildingX, selectedBuildingY, fighter, count);
+                        currentPlayer.setBalance(currentPlayer.getBalance() - count * LongRangedEnum.getLongRangedType(type).getPrice());
+                        Map.getInstanceMap().getMapCell(getSelectedBuildingX(), getSelectedBuildingY()).getUnits().add(unit);
+                        GameMenuView.output("success");
+                    }
 
-        } else if (currentBuilding.getBuildingType().equals(ConverterType.MERCENARY_POST)){
+                }
+            }else{
+              GameMenuView.output("notArab");
+            }
             
         } else if (currentBuilding.getBuildingType().equals(ConverterType.BARRACKS)){
-            
+            if(type.equals("blackMonk")){
+                GameMenuView.output("blackMonk");
+                return;
+            }
+            if(!FighterEnum.getFighterType(type).isArab()){
+                if(currentPlayer.getBalance()<count*FighterEnum.getFighterType(type).getPrice()){
+                    GameMenuView.output("balanceError");
+                    if(FighterEnum.getFighterType(type).getResource()!=null&&currentPlayer.getResourcesMap().get(FighterEnum.getFighterType(type).getResource())<count){
+                        GameMenuView.output("resourceError");
+                    }
+                    return;
+
+                }else{
+                    Fighter fighter=new Fighter(FighterEnum.getFighterType(type));
+                    Unit unit=new Unit(selectedBuildingX,selectedBuildingY,fighter,count);
+                    if(FighterEnum.getFighterType(type).getResource()!=null){
+                        currentPlayer.getResourcesMap().put(FighterEnum.getFighterType(type).getResource(), currentPlayer.getResourcesMap().get(FighterEnum.getFighterType(type).getResource())-count);
+                    }
+                    currentPlayer.setBalance(currentPlayer.getBalance()-count*FighterEnum.getFighterType(type).getPrice());
+                    Map.getInstanceMap().getMapCell(getSelectedBuildingX(),getSelectedBuildingY()).getUnits().add(unit);
+                    GameMenuView.output("success");
+
+                }
+            }else if(!LongRangedEnum.getLongRangedType(type).isArab()){
+                if(currentPlayer.getBalance()<count*LongRangedEnum.getLongRangedType(type).getPrice()){
+                    GameMenuView.output("balanceError");
+                    if(LongRangedEnum.getLongRangedType(type).getResource()!=null&&currentPlayer.getResourcesMap().get(LongRangedEnum.getLongRangedType(type).getResource())<count){
+                        GameMenuView.output("resourceError");
+                    }
+                    return;
+
+                }else{
+                    LongRanged fighter=new LongRanged(LongRangedEnum.getLongRangedType(type));
+                    Unit unit=new Unit(selectedBuildingX,selectedBuildingY,fighter,count);
+                    if(FighterEnum.getFighterType(type).getResource()!=null){
+                        currentPlayer.getResourcesMap().put(LongRangedEnum.getLongRangedType(type).getResource(), currentPlayer.getResourcesMap().get(LongRangedEnum.getLongRangedType(type).getResource())-count);
+                    }
+                    currentPlayer.setBalance(currentPlayer.getBalance()-count*LongRangedEnum.getLongRangedType(type).getPrice());
+                    Map.getInstanceMap().getMapCell(getSelectedBuildingX(),getSelectedBuildingY()).getUnits().add(unit);
+                    GameMenuView.output("success");
+                }
+            }else  if(UnarmedEnum.getUnarmedType(type)!=null){
+                if(currentPlayer.getBalance()<count*UnarmedEnum.getUnarmedType(type).getPrice()){
+                    GameMenuView.output("balanceError");
+                }else{
+                    Unarmed fighter=new Unarmed(UnarmedEnum.getUnarmedType(type));
+                    Unit unit=new Unit(selectedBuildingX,selectedBuildingY,fighter,count);
+                    currentPlayer.setBalance(currentPlayer.getBalance()-count*UnarmedEnum.getUnarmedType(type).getPrice());
+                    Map.getInstanceMap().getMapCell(getSelectedBuildingX(),getSelectedBuildingY()).getUnits().add(unit);
+                    GameMenuView.output("success");
+                }
+            }
+
+
         } else if (currentBuilding.getBuildingType().equals(DevelopmentType.CHURCH) ||
                 currentBuilding.getBuildingType().equals(DevelopmentType.CATHEDRAL)) {
+            if(type.equals("blackMonk")){
+                if(FighterEnum.blackMonk.getPrice()*count>currentPlayer.getBalance()){
+                    GameMenuView.output("balanceError");
+                    return;
+                }
+                Fighter fighter =new Fighter(FighterEnum.blackMonk);
+                Unit unit=new Unit(getSelectedBuildingX(),getSelectedBuildingY(),fighter,count);
+                Map.getInstanceMap().getMapCell(getSelectedBuildingX(),getSelectedBuildingY()).getUnits().add(unit);
+                GameMenuView.output("success");
+            }else{
+                GameMenuView.output("notblackMonk");
+            }
 
         } else {
             GameMenuView.output("selectUnitBuilding");
@@ -707,7 +820,12 @@ public class GameMenuController extends MenuController {
 
 
     public static void enterShopMenu() {
-        if (currentBuilding.getRegex().equals("Shop")) {
+        if(currentBuilding==null){
+            GameMenuView.output("shopError");
+            return;
+
+        }
+        if (currentBuilding.getRegex().equals("post")) {
             Scanner scanner = new Scanner(System.in);
             GameMenuView.output("enterShopMenu");
             ShopMenuController.run(scanner);
@@ -933,6 +1051,39 @@ public class GameMenuController extends MenuController {
 //        System.out.println(government.getResourcesMap().values());
 //        //createUnit("agsg", 3);
 //    }
+    public static void main(String[] args) {
+
+
+
+
+        Scanner s=new Scanner(System.in);
+        Unarmed unarmed=new Unarmed(UnarmedEnum.engineer);
+        Unit unit=new Unit(3,4, unarmed,5);
+        currentUnits.add(unit);
+
+        run(s,1,2,200);
+
+
+
+
+
+    }
+    public static int[][] mapPassable(){
+        int[][] mapIsPassable= new int[Map.getInstanceMap().getSize()][Map.getInstanceMap().getSize()];
+        for(int i=0;i< Map.getInstanceMap().getSize();i++){
+            for (int j = 0; j < Map.getInstanceMap().getSize(); j++) {
+                if(Map.getInstanceMap().getMapCell(i,j).isPassable()){
+                    mapIsPassable[i][j]=1;
+
+                }else{
+                    mapIsPassable[i][j]=0;
+
+                }
+
+            }
+        }
+        return mapIsPassable;
+    }
 //    public static void main(String[] args) {
 //
 //

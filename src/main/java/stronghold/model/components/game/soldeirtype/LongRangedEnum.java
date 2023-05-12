@@ -1,18 +1,23 @@
 package stronghold.model.components.game.soldeirtype;
 
+import stronghold.model.components.game.enums.Resource;
+
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum LongRangedEnum {
-    archer("archer",4,2,2,1,3,false,false),
-    crossbowMen("crossbowMen",2,3,2,1,2,false,false),
-    archerBow("archerBow",4,2,2,1,3,false,false),
-    slingers("slingers",4,1,2,1,1,false,true),
-    horseArcher("horseArcher",5,3,2,1,2,true,true),
-    fireThrowers("fireThrowers",5,3,4,1,2,false,true);
+    archer("archer",4,2,2,1,3,false,false,Resource.CROSS_BOW),
+    crossbowMen("crossbowMen",2,3,2,1,2,false,false,Resource.CROSS_BOW),
+    archerBow("archerBow",4,2,2,1,3,false,false,Resource.CROSS_BOW),
+    slingers("slingers",4,1,2,1,1,false,true,null ),
+    horseArcher("horseArcher",5,3,2,1,2,true,true,Resource.CROSS_BOW),
+    fireThrowers("fireThrowers",5,3,4,1,2,false,true,null);
 
+    public Resource getResource() {
+        return resource;
+    }
 
     private int speed;
     private String regex;
@@ -22,7 +27,9 @@ public enum LongRangedEnum {
     private int range;
     private boolean isHorsed;
     boolean isArab;
-    LongRangedEnum(  String regex,int speed, int defense, int offense, int price,int  range, boolean isHorsed,boolean isArab){
+    Resource resource;
+    LongRangedEnum(  String regex,int speed, int defense, int offense, int price,int  range, boolean isHorsed,boolean isArab,Resource resource){
+        this.resource=resource;
         this.regex=regex;
         this.defense=defense;
         this.offense=offense;

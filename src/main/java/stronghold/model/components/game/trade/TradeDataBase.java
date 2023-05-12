@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class TradeDataBase {
     private static int idCounter;
-    private static  ArrayList<Trade> trades;
+    private static  ArrayList<Trade> trades=new ArrayList<>();
     public TradeDataBase(){
         trades=new ArrayList<>();
         idCounter=1;
