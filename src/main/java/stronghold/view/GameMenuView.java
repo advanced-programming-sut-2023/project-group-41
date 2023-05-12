@@ -44,8 +44,8 @@ public class GameMenuView extends MenuView {
     public static void run(Scanner scanner, int round, int playerNum1, int mapSize) {
         Map.getInstanceMap().setSize(mapSize);
         startGame(playerNum1);
-        setCurrentPlayer(getGovernmentByColor(1));
         Government currentPlayer = getGovernmentByColor(1);
+        setCurrentPlayer(currentPlayer);
         setCurrentRound(1);
         setRoundNum(round);
         setPlayerNum(playerNum1);
@@ -214,4 +214,10 @@ public class GameMenuView extends MenuView {
             }
         }
     }
+
+
+//    public static void main(String[] args) {
+//        Scanner s=new Scanner(System.in);
+//        run(s,1,2,200);
+//    }
 }

@@ -100,9 +100,9 @@ public class MainMenuView extends MenuView{
         return scanner.nextLine();
     }
 
-        public static void main(String[] args) {
-        User user=new User("asdf","Asdf","Asd","sdfa",1,"1","!");
-        Scanner scanner=new Scanner(System.in);
-        run(user,scanner);
-    }
+//    public static void main(String[] args) {
+//        User user=new User("asdf","Asdf","Asd","sdfa",1,"1","!");
+//        Scanner scanner=new Scanner(System.in);
+//        run(user,scanner);
+//    }
 }

@@ -8,6 +8,7 @@ import stronghold.model.database.UsersDB;
 import stronghold.model.components.general.User;
 import stronghold.model.utils.Encryption;
 import stronghold.model.utils.StringParser;
+import stronghold.view.MainMenuView;
 import stronghold.view.SignUpLoginView;
 
 import java.io.FileNotFoundException;
@@ -363,7 +364,7 @@ public class SignUpMenuController extends MenuController{
 
                 currentUser = UsersDB.usersDB.getUserByUsername(username);
                 SignUpLoginView.output("successfulLogin");
-                MainMenuController.run(currentUser, scanner);
+                MainMenuView.run(currentUser, scanner);
             }
             else if (loginStayLoggedInMatcher.find()) {
 
@@ -415,7 +416,7 @@ public class SignUpMenuController extends MenuController{
 
                 currentUser = UsersDB.usersDB.getUserByUsername(username);
                 SignUpLoginView.output("successfulLogin");
-                MainMenuController.run(currentUser, scanner);
+                MainMenuView.run(currentUser, scanner);
 
             }
             else if (forgotMyPassMatcher.find()) {

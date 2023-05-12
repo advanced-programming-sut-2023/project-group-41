@@ -1051,23 +1051,23 @@ public class GameMenuController extends MenuController {
 //        System.out.println(government.getResourcesMap().values());
 //        //createUnit("agsg", 3);
 //    }
-    public static void main(String[] args) {
-
-
-
-
-        Scanner s=new Scanner(System.in);
-        Unarmed unarmed=new Unarmed(UnarmedEnum.engineer);
-        Unit unit=new Unit(3,4, unarmed,5);
-        currentUnits.add(unit);
-
-        run(s,1,2,200);
-
-
-
-
-
-    }
+//    public static void main(String[] args) {
+//
+//
+//
+//
+//        Scanner s=new Scanner(System.in);
+//        Unarmed unarmed=new Unarmed(UnarmedEnum.engineer);
+//        Unit unit=new Unit(3,4, unarmed,5);
+//        currentUnits.add(unit);
+//
+//        run(s,1,2,200);
+//
+//
+//
+//
+//
+//    }
     public static int[][] mapPassable(){
         int[][] mapIsPassable= new int[Map.getInstanceMap().getSize()][Map.getInstanceMap().getSize()];
         for(int i=0;i< Map.getInstanceMap().getSize();i++){

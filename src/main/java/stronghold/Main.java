@@ -39,7 +39,7 @@ public class Main {
         else{
 
             User currentUser = UsersDB.usersDB.getUserByUsername(loggedinuser);
-            MainMenuController.run(currentUser, scanner);
+            MainMenuView.run(currentUser, scanner);
         }
     }
 }
