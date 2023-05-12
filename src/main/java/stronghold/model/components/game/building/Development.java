@@ -28,7 +28,9 @@ public class Development extends Building {
 
     public void action(Government government) {
         government.setPopularity(government.getPopularity() + incPopularity);
+
         government.setPopulation(government.getPopulation()+incPopulation);
+
     }
 
 

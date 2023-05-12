@@ -16,8 +16,8 @@ import static stronghold.model.components.game.enums.Texture.SEA;
 
 public class Map {
     private static Map instanceMap = null;
-    private int size;
-    private ArrayList<MapCell> cells;
+    private static int size;
+    private static ArrayList<MapCell> cells;
 
     private Map(){
     }
@@ -60,7 +60,7 @@ public class Map {
     }
 
     public static ArrayList<MapCell> getCells() {
-        return instanceMap.cells;
+        return cells;
     }
     public  Unit getUnarmed(MapCell mapCell,String type){
         for(Unit unit: mapCell.getUnits()){

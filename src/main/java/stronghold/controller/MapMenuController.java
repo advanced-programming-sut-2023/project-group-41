@@ -211,22 +211,19 @@ public class MapMenuController extends MenuController {
     }
 
     public static void showMapCellDetails(int X, int Y) {
-        if(Map.getInstanceMap().getMapCell(X,Y)==null){
-            MapMenuView.output("bondError");
-            return;
-        }else{
+
             MapMenuView.output("texture",(Object) Map.getInstanceMap().getMapCell(X,Y).getTexture().getRegex());
             if(Map.getInstanceMap().getMapCell(X,Y).getBuilding()!=null){
 
                 MapMenuView.output("building", (Object) Map.getInstanceMap().getMapCell(X,Y).getBuilding().getRegex());
             }
             if(Map.getInstanceMap().getMapCell(X,Y).getUnits()!=null) {
-                for (Unit unit : GameMenuController.getCurrentPlayer().getUnits()) {
-                    MapMenuView.output("unit", ((Object) unit.getPeople().getRegex()), unit.getCount());
+                for (Unit unit : Map.getInstanceMap().getMapCell(X,Y).getUnits()) {
+                    MapMenuView.output("unit",  unit.getPeople().getRegex(), (Object) Integer.toString(unit.getCount()));
                 }
             }
 
-        }
+
 
 
     }
