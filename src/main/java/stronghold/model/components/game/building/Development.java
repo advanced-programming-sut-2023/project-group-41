@@ -28,11 +28,6 @@ public class Development extends Building {
 
     public void action(Government government) {
         government.setPopularity(government.getPopularity() + incPopularity);
-        ArrayList<People> peopleArr = new ArrayList<>();
-        for (int i = 0; i < incPopulation; i++) {
-            //peopleArr.add(new People(0, 0, 0, 0, GameMenuController.getCurrentPlayer()));
-        }
-        government.setPeople(peopleArr);
     }
 
 
