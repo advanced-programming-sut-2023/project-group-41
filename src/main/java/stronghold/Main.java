@@ -9,6 +9,7 @@ import stronghold.model.components.general.User;
 import stronghold.model.database.UsersDB;
 import stronghold.model.utils.StringParser;
 import stronghold.view.MainMenuView;
+import stronghold.view.SignUpLoginView;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -34,7 +35,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         if(loggedinuser.equals("!NULLUSER")) {
 
-            SignUpMenuController.run(scanner);
+            SignUpLoginView.run(scanner);
         }
         else{
 

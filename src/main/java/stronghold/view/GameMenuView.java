@@ -92,6 +92,7 @@ public class GameMenuView extends MenuView {
             Matcher enterTradeMenu;
 
             if (command.matches("user\\s+logout")) {
+                GameMenuView.output("back");
                 break;
             } else if (getJSONRegexMatcher(command, "showPopularityFactors", gameMenuRegexObj).matches()) {
                 showPopularityFactors();

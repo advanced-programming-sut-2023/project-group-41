@@ -79,7 +79,7 @@ public class MainMenuView extends MenuView{
                 GameMenuView.run( scanner, j,i,mapSize);
 
             }  else if(profileMenuMatcher.find()){
-                ProfileMenuController.run(scanner, currentUser);
+                ProfileMenuView.run(scanner, currentUser);
 
             } else if(loadGameMatcher.find()){
 

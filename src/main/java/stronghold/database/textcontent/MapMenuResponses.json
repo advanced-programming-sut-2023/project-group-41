@@ -1,7 +1,7 @@
 {
 
   "invalid": "Invalid command!",
-  "back": "you are back in MainMenu!",
+  "back": "you are back in GameMenu!",
   "bondError": "out of bonds!",
   "texture": "texture: $VAR1$",
   "building": "building: $VAR1$",

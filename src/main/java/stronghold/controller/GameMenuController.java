@@ -53,7 +53,7 @@ public class GameMenuController extends MenuController {
 
     private static String pathToRegexJSON = "src/main/java/stronghold/database/utils/regex/GameMenuRegex.json";
     ///////////
-    private static ArrayList<Unit> currentUnits=new ArrayList<>();
+    private static ArrayList<Unit> currentUnits = new ArrayList<>();
     private static Building currentBuilding;
     private static Government currentPlayer;
 
@@ -82,23 +82,21 @@ public class GameMenuController extends MenuController {
     }
 
 
-
     public static void startGame(int playerNum) {
 
         Scanner scanner = new Scanner(System.in);
 
         for (int i = 1; i <= playerNum; i++) {
             Government government = new Government(i);
-            if(i==1)
-                currentPlayer=government;
+            if (i == 1)
+                currentPlayer = government;
             governments.add(government);
             GameMenuView.output("playerCenter");
             int x = scanner.nextInt();
             int y = scanner.nextInt();
 
 
-
-            Castle castle=new Castle(government,CastleType.Ruler);
+            Castle castle = new Castle(government, CastleType.Ruler);
             government.setRuler(castle);
             Map.getInstanceMap().getMapCell(x, y).setBuilding(castle);
 
@@ -122,18 +120,18 @@ public class GameMenuController extends MenuController {
 
     public static void nextPlayer() {
 
-       if(currentPlayer.getColor()==playerNum){
-           //endofround
-           currentRound++;
-           if(currentRound>roundNum){
-               //endGame
-           }
-           setCurrentPlayer(getGovernmentByColor(1));
-       }else{
-           setCurrentPlayer(getGovernmentByColor(currentPlayer.getColor() + 1));
-       }
-        System.out.println("player: "+currentPlayer.getColor());
-        System.out.println("round"+currentRound);
+        if (currentPlayer.getColor() == playerNum) {
+            //endofround
+            currentRound++;
+            if (currentRound > roundNum) {
+                //endGame
+            }
+            setCurrentPlayer(getGovernmentByColor(1));
+        } else {
+            setCurrentPlayer(getGovernmentByColor(currentPlayer.getColor() + 1));
+        }
+        System.out.println("player: " + currentPlayer.getColor());
+        System.out.println("round" + currentRound);
 
 
     }
@@ -146,7 +144,7 @@ public class GameMenuController extends MenuController {
         return roundNum;
     }
 
-    public static void endOfRound(){
+    public static void endOfRound() {
         currentPlayer.allBuildingActions();
     }
 
@@ -161,16 +159,16 @@ public class GameMenuController extends MenuController {
 
 
     }
-    public  static void populationLogic(Government government){
-       int leftOver= government.getResourcesNum(APPLE)+government.getResourcesNum(MEAT)+government.getResourcesNum(CHEESE)+government.getResourcesNum(BREAD);
-       government.setPopulation(government.getPopulation()+leftOver);
-       GameMenuView.output("success");
+
+    public static void populationLogic(Government government) {
+        int leftOver = government.getResourcesNum(APPLE) + government.getResourcesNum(MEAT) + government.getResourcesNum(CHEESE) + government.getResourcesNum(BREAD);
+        government.setPopulation(government.getPopulation() + leftOver);
+        GameMenuView.output("success");
 
     }
 
 
-
-    public static void showFoodList(){
+    public static void showFoodList() {
         GameMenuView.output("foodList", (Object) "APPLE", Integer.toString(currentPlayer.getResourcesNum(APPLE)));
         GameMenuView.output("foodList", (Object) "CHEESE", Integer.toString(currentPlayer.getResourcesNum(CHEESE)));
         GameMenuView.output("foodList", (Object) "BREAD", Integer.toString(currentPlayer.getResourcesNum(BREAD)));
@@ -213,15 +211,15 @@ public class GameMenuController extends MenuController {
         GameMenuController.currentUnits = currentUnits;
     }
 
-    public static void dropBuilding(int X, int Y, Building type){
+    public static void dropBuilding(int X, int Y, Building type) {
         boolean useResource = false;
         MapCell mapCell;
         ResourceMaker resourceMaker;
-        if (type == null){
+        if (type == null) {
             GameMenuView.output("incorrectBuildingType");
             return;
         }
-        if (Map.getInstanceMap().validMapCell(X, Y)){
+        if (Map.getInstanceMap().validMapCell(X, Y)) {
             mapCell = Map.getInstanceMap().getMapCell(X, Y);
         } else {
             GameMenuView.output("invalidLocation");
@@ -229,14 +227,14 @@ public class GameMenuController extends MenuController {
             return;
         }
 
-        if (Map.getInstanceMap().getMapCell(X,Y).getBuilding()!=null){
+        if (Map.getInstanceMap().getMapCell(X, Y).getBuilding() != null) {
             GameMenuView.output("prebuilding");
             currentPlayer.removeBuilding(type);
-        }else if (type.getClass().getSimpleName().equals("ResourceMaker")
-                && !(resourceMaker = (ResourceMaker) type).checkTexture(mapCell.getTexture())){
+        } else if (type.getClass().getSimpleName().equals("ResourceMaker")
+                && !(resourceMaker = (ResourceMaker) type).checkTexture(mapCell.getTexture())) {
             GameMenuView.output("textureProblem");
             currentPlayer.removeBuilding(type);
-        } else if (type.getBuildingType().equals(StorageType.STOCK_PILE) && !Map.getInstanceMap().isBuildingHere(X, Y, type.getBuildingType())){
+        } else if (type.getBuildingType().equals(StorageType.STOCK_PILE) && !Map.getInstanceMap().isBuildingHere(X, Y, type.getBuildingType())) {
             GameMenuView.output("nearBuilding", (Object) type.getBuildingType().getRegex());
             currentPlayer.removeBuilding(type);
         } else if (currentPlayer.getBuildingNum(type.getBuildingType()) != 1 && type.getBuildingType().equals(StorageType.FOOD_STOCK_PILE) && !Map.getInstanceMap().isBuildingHere(X, Y, type.getBuildingType())) {
@@ -246,13 +244,13 @@ public class GameMenuController extends MenuController {
             GameMenuView.output("nearBuilding", (Object) ResourceMakerType.QUARRY.getRegex());
             currentPlayer.removeBuilding(type);
         } else if (useResource) {
-            if (!type.haveEnoughResource(currentPlayer)){
+            if (!type.haveEnoughResource(currentPlayer)) {
                 GameMenuView.output("lackOfResource");
                 currentPlayer.removeBuilding(type);
             }
         } else {
             mapCell.setBuilding(type);
-            Map.getInstanceMap().getMapCell(X,Y).setPassable(false);
+            Map.getInstanceMap().getMapCell(X, Y).setPassable(false);
             GameMenuView.output("buildingDrop");
         }
     }
@@ -271,12 +269,12 @@ public class GameMenuController extends MenuController {
     }
 
     public static void createUnit(String type, int count) {
-        if (currentBuilding == null){
+        if (currentBuilding == null) {
             GameMenuView.output("selectBuilding");
             return;
 
-        }  else if (currentBuilding.getBuildingType().equals(ConverterType.MERCENARY_POST)){
-            if(FighterEnum.getFighterType(type)!=null) {
+        } else if (currentBuilding.getBuildingType().equals(ConverterType.MERCENARY_POST)) {
+            if (FighterEnum.getFighterType(type) != null) {
                 if (FighterEnum.getFighterType(type).isArab()) {
                     if (currentPlayer.getBalance() < count * FighterEnum.getFighterType(type).getPrice()) {
                         GameMenuView.output("balanceError");
@@ -289,9 +287,8 @@ public class GameMenuController extends MenuController {
                         GameMenuView.output("success");
                     }
                 }
-            }
-            else if(LongRangedEnum.getLongRangedType(type)!=null) {
-           if (LongRangedEnum.getLongRangedType(type).isArab()) {
+            } else if (LongRangedEnum.getLongRangedType(type) != null) {
+                if (LongRangedEnum.getLongRangedType(type).isArab()) {
                     if (currentPlayer.getBalance() < count * LongRangedEnum.getLongRangedType(type).getPrice()) {
                         GameMenuView.output("balanceError");
                         return;
@@ -304,60 +301,60 @@ public class GameMenuController extends MenuController {
                     }
 
                 }
-            }else{
-              GameMenuView.output("notArab");
+            } else {
+                GameMenuView.output("notArab");
             }
-            
-        } else if (currentBuilding.getBuildingType().equals(ConverterType.BARRACKS)){
-            if(type.equals("blackMonk")){
+
+        } else if (currentBuilding.getBuildingType().equals(ConverterType.BARRACKS)) {
+            if (type.equals("blackMonk")) {
                 GameMenuView.output("blackMonk");
                 return;
             }
-            if(!FighterEnum.getFighterType(type).isArab()){
-                if(currentPlayer.getBalance()<count*FighterEnum.getFighterType(type).getPrice()){
+            if (!FighterEnum.getFighterType(type).isArab()) {
+                if (currentPlayer.getBalance() < count * FighterEnum.getFighterType(type).getPrice()) {
                     GameMenuView.output("balanceError");
-                    if(FighterEnum.getFighterType(type).getResource()!=null&&currentPlayer.getResourcesMap().get(FighterEnum.getFighterType(type).getResource())<count){
+                    if (FighterEnum.getFighterType(type).getResource() != null && currentPlayer.getResourcesMap().get(FighterEnum.getFighterType(type).getResource()) < count) {
                         GameMenuView.output("resourceError");
                     }
                     return;
 
-                }else{
-                    Fighter fighter=new Fighter(FighterEnum.getFighterType(type));
-                    Unit unit=new Unit(selectedBuildingX,selectedBuildingY,fighter,count);
-                    if(FighterEnum.getFighterType(type).getResource()!=null){
-                        currentPlayer.getResourcesMap().put(FighterEnum.getFighterType(type).getResource(), currentPlayer.getResourcesMap().get(FighterEnum.getFighterType(type).getResource())-count);
+                } else {
+                    Fighter fighter = new Fighter(FighterEnum.getFighterType(type));
+                    Unit unit = new Unit(selectedBuildingX, selectedBuildingY, fighter, count);
+                    if (FighterEnum.getFighterType(type).getResource() != null) {
+                        currentPlayer.getResourcesMap().put(FighterEnum.getFighterType(type).getResource(), currentPlayer.getResourcesMap().get(FighterEnum.getFighterType(type).getResource()) - count);
                     }
-                    currentPlayer.setBalance(currentPlayer.getBalance()-count*FighterEnum.getFighterType(type).getPrice());
-                    Map.getInstanceMap().getMapCell(getSelectedBuildingX(),getSelectedBuildingY()).getUnits().add(unit);
+                    currentPlayer.setBalance(currentPlayer.getBalance() - count * FighterEnum.getFighterType(type).getPrice());
+                    Map.getInstanceMap().getMapCell(getSelectedBuildingX(), getSelectedBuildingY()).getUnits().add(unit);
                     GameMenuView.output("success");
 
                 }
-            }else if(!LongRangedEnum.getLongRangedType(type).isArab()){
-                if(currentPlayer.getBalance()<count*LongRangedEnum.getLongRangedType(type).getPrice()){
+            } else if (!LongRangedEnum.getLongRangedType(type).isArab()) {
+                if (currentPlayer.getBalance() < count * LongRangedEnum.getLongRangedType(type).getPrice()) {
                     GameMenuView.output("balanceError");
-                    if(LongRangedEnum.getLongRangedType(type).getResource()!=null&&currentPlayer.getResourcesMap().get(LongRangedEnum.getLongRangedType(type).getResource())<count){
+                    if (LongRangedEnum.getLongRangedType(type).getResource() != null && currentPlayer.getResourcesMap().get(LongRangedEnum.getLongRangedType(type).getResource()) < count) {
                         GameMenuView.output("resourceError");
                     }
                     return;
 
-                }else{
-                    LongRanged fighter=new LongRanged(LongRangedEnum.getLongRangedType(type));
-                    Unit unit=new Unit(selectedBuildingX,selectedBuildingY,fighter,count);
-                    if(FighterEnum.getFighterType(type).getResource()!=null){
-                        currentPlayer.getResourcesMap().put(LongRangedEnum.getLongRangedType(type).getResource(), currentPlayer.getResourcesMap().get(LongRangedEnum.getLongRangedType(type).getResource())-count);
+                } else {
+                    LongRanged fighter = new LongRanged(LongRangedEnum.getLongRangedType(type));
+                    Unit unit = new Unit(selectedBuildingX, selectedBuildingY, fighter, count);
+                    if (FighterEnum.getFighterType(type).getResource() != null) {
+                        currentPlayer.getResourcesMap().put(LongRangedEnum.getLongRangedType(type).getResource(), currentPlayer.getResourcesMap().get(LongRangedEnum.getLongRangedType(type).getResource()) - count);
                     }
-                    currentPlayer.setBalance(currentPlayer.getBalance()-count*LongRangedEnum.getLongRangedType(type).getPrice());
-                    Map.getInstanceMap().getMapCell(getSelectedBuildingX(),getSelectedBuildingY()).getUnits().add(unit);
+                    currentPlayer.setBalance(currentPlayer.getBalance() - count * LongRangedEnum.getLongRangedType(type).getPrice());
+                    Map.getInstanceMap().getMapCell(getSelectedBuildingX(), getSelectedBuildingY()).getUnits().add(unit);
                     GameMenuView.output("success");
                 }
-            }else  if(UnarmedEnum.getUnarmedType(type)!=null){
-                if(currentPlayer.getBalance()<count*UnarmedEnum.getUnarmedType(type).getPrice()){
+            } else if (UnarmedEnum.getUnarmedType(type) != null) {
+                if (currentPlayer.getBalance() < count * UnarmedEnum.getUnarmedType(type).getPrice()) {
                     GameMenuView.output("balanceError");
-                }else{
-                    Unarmed fighter=new Unarmed(UnarmedEnum.getUnarmedType(type));
-                    Unit unit=new Unit(selectedBuildingX,selectedBuildingY,fighter,count);
-                    currentPlayer.setBalance(currentPlayer.getBalance()-count*UnarmedEnum.getUnarmedType(type).getPrice());
-                    Map.getInstanceMap().getMapCell(getSelectedBuildingX(),getSelectedBuildingY()).getUnits().add(unit);
+                } else {
+                    Unarmed fighter = new Unarmed(UnarmedEnum.getUnarmedType(type));
+                    Unit unit = new Unit(selectedBuildingX, selectedBuildingY, fighter, count);
+                    currentPlayer.setBalance(currentPlayer.getBalance() - count * UnarmedEnum.getUnarmedType(type).getPrice());
+                    Map.getInstanceMap().getMapCell(getSelectedBuildingX(), getSelectedBuildingY()).getUnits().add(unit);
                     GameMenuView.output("success");
                 }
             }
@@ -365,16 +362,16 @@ public class GameMenuController extends MenuController {
 
         } else if (currentBuilding.getBuildingType().equals(DevelopmentType.CHURCH) ||
                 currentBuilding.getBuildingType().equals(DevelopmentType.CATHEDRAL)) {
-            if(type.equals("blackMonk")){
-                if(FighterEnum.blackMonk.getPrice()*count>currentPlayer.getBalance()){
+            if (type.equals("blackMonk")) {
+                if (FighterEnum.blackMonk.getPrice() * count > currentPlayer.getBalance()) {
                     GameMenuView.output("balanceError");
                     return;
                 }
-                Fighter fighter =new Fighter(FighterEnum.blackMonk);
-                Unit unit=new Unit(getSelectedBuildingX(),getSelectedBuildingY(),fighter,count);
-                Map.getInstanceMap().getMapCell(getSelectedBuildingX(),getSelectedBuildingY()).getUnits().add(unit);
+                Fighter fighter = new Fighter(FighterEnum.blackMonk);
+                Unit unit = new Unit(getSelectedBuildingX(), getSelectedBuildingY(), fighter, count);
+                Map.getInstanceMap().getMapCell(getSelectedBuildingX(), getSelectedBuildingY()).getUnits().add(unit);
                 GameMenuView.output("success");
-            }else{
+            } else {
                 GameMenuView.output("notblackMonk");
             }
 
@@ -382,6 +379,7 @@ public class GameMenuController extends MenuController {
             GameMenuView.output("selectUnitBuilding");
         }
     }
+
 
     public static void repair() {
         if (!currentBuilding.getClass().getSimpleName().equals("Castle")) {
@@ -395,13 +393,13 @@ public class GameMenuController extends MenuController {
     }
 
     public static void selectUnit(int X, int Y) {
-        if (Map.getInstanceMap().getMapCell(X, Y).getUnits().size()==0) {
+        if (Map.getInstanceMap().getMapCell(X, Y).getUnits().size() == 0) {
             GameMenuView.output("unitError");
-        } else if(!Map.getInstanceMap().getMapCell(X, Y).getUnits().get(0).getPeople().getOwner().equals(currentPlayer)){
+        } else if (!Map.getInstanceMap().getMapCell(X, Y).getUnits().get(0).getPeople().getOwner().equals(currentPlayer)) {
             System.out.println("notyourtroop");
 
-        }else {
-            setCurrentUnits( Map.getInstanceMap().getMapCell(X, Y).getUnits());
+        } else {
+            setCurrentUnits(Map.getInstanceMap().getMapCell(X, Y).getUnits());
             for (Unit unit : currentUnits) {
                 System.out.println(unit.getPeople().getRegex());
             }
@@ -412,7 +410,7 @@ public class GameMenuController extends MenuController {
     public static void moveUnitTo(int X, int Y) {
         if (Map.getInstanceMap().getMapCell(X, Y).getTexture().equals(Texture.RIVER) || Map.getInstanceMap().getMapCell(X, Y).getTexture().equals(Texture.SEA) || Map.getInstanceMap().getMapCell(X, Y).getTexture().equals(Texture.SHALLOW_LAKE) || Map.getInstanceMap().getMapCell(X, Y).getTexture().equals(Texture.SMALL_POND) || Map.getInstanceMap().getMapCell(X, Y).getTexture().equals(Texture.BIG_POND)) {
             GameMenuView.output("waterError");
-        } else if (Math.abs(X-currentUnits.get(0).getX() )> (currentUnits.get(0).getPeople().getSpeed() * 5)  ||  Math.abs(Y-currentUnits.get(0).getY() ) > (currentUnits.get(0).getPeople().getSpeed() * 5) ) {
+        } else if (Math.abs(X - currentUnits.get(0).getX()) > (currentUnits.get(0).getPeople().getSpeed() * 5) || Math.abs(Y - currentUnits.get(0).getY()) > (currentUnits.get(0).getPeople().getSpeed() * 5)) {
             GameMenuView.output("speedError");
         } else {
 
@@ -442,20 +440,21 @@ public class GameMenuController extends MenuController {
         }
 
     }
-    public static void patroller(){
+
+    public static void patroller() {
         for (Unit unit : patrolingUnits) {
-            if(unit.getX()!=unit.getPatrolX1()||unit.getY()!=unit.getPatrolY1()){
-                int x=unit.getX(),y=unit.getY();
+            if (unit.getX() != unit.getPatrolX1() || unit.getY() != unit.getPatrolY1()) {
+                int x = unit.getX(), y = unit.getY();
                 unit.setX(unit.getPatrolX1());
                 unit.setY(unit.getPatrolY1());
-                Map.getInstanceMap().getMapCell(unit.getPatrolX1(),unit.getPatrolY1()).getUnits().add(unit);
-                Map.getInstanceMap().getMapCell(x,y).getUnits().remove(unit);
-            }else if(unit.getX()!=unit.getPatrolX2()||unit.getY()!=unit.getPatrolY2()){
-                int x=unit.getX(),y=unit.getY();
+                Map.getInstanceMap().getMapCell(unit.getPatrolX1(), unit.getPatrolY1()).getUnits().add(unit);
+                Map.getInstanceMap().getMapCell(x, y).getUnits().remove(unit);
+            } else if (unit.getX() != unit.getPatrolX2() || unit.getY() != unit.getPatrolY2()) {
+                int x = unit.getX(), y = unit.getY();
                 unit.setX(unit.getPatrolX2());
                 unit.setY(unit.getPatrolY2());
-                Map.getInstanceMap().getMapCell(unit.getPatrolX2(),unit.getPatrolY2()).getUnits().add(unit);
-                Map.getInstanceMap().getMapCell(x,y).getUnits().remove(unit);
+                Map.getInstanceMap().getMapCell(unit.getPatrolX2(), unit.getPatrolY2()).getUnits().add(unit);
+                Map.getInstanceMap().getMapCell(x, y).getUnits().remove(unit);
 
             }
         }
@@ -499,8 +498,8 @@ public class GameMenuController extends MenuController {
 
                 Map.getInstanceMap().getMapCell(enemyX, enemyY).getUnits().clear();
                 Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(), currentUnits.get(0).getY()).getUnits().clear();
-                if(Map.getInstanceMap().getMapCell(enemyX, enemyY).getBuilding()!=null){
-                    Map.getInstanceMap().getMapCell(enemyX, enemyY).getBuilding().setHealth(Map.getInstanceMap().getMapCell(enemyX, enemyY).getBuilding().getHealth()-allyOffense);
+                if (Map.getInstanceMap().getMapCell(enemyX, enemyY).getBuilding() != null) {
+                    Map.getInstanceMap().getMapCell(enemyX, enemyY).getBuilding().setHealth(Map.getInstanceMap().getMapCell(enemyX, enemyY).getBuilding().getHealth() - allyOffense);
 
                 }
 
@@ -513,8 +512,8 @@ public class GameMenuController extends MenuController {
                 Map.getInstanceMap().getMapCell(enemyX, enemyY).getUnits().clear();
 
 
-                if(Map.getInstanceMap().getMapCell(enemyX, enemyY).getBuilding()!=null){
-                    Map.getInstanceMap().getMapCell(enemyX, enemyY).getBuilding().setHealth(Map.getInstanceMap().getMapCell(enemyX, enemyY).getBuilding().getHealth()-allyOffense);
+                if (Map.getInstanceMap().getMapCell(enemyX, enemyY).getBuilding() != null) {
+                    Map.getInstanceMap().getMapCell(enemyX, enemyY).getBuilding().setHealth(Map.getInstanceMap().getMapCell(enemyX, enemyY).getBuilding().getHealth() - allyOffense);
 
                 }
                 GameMenuView.output("fightWin");
@@ -548,7 +547,7 @@ public class GameMenuController extends MenuController {
 
             }
         }
-        if (Map.getInstanceMap().getMapCell(X, Y).getBuilding() != null ) {
+        if (Map.getInstanceMap().getMapCell(X, Y).getBuilding() != null) {
             Map.getInstanceMap().getMapCell(X, Y).getBuilding().setHealth(Map.getInstanceMap().getMapCell(X, Y).getBuilding().getHealth() - longRanged);
             if (Map.getInstanceMap().getMapCell(X, Y).getBuilding().getHealth() <= 0) {
                 Map.getInstanceMap().getMapCell(X, Y).setBuilding(null);
@@ -557,18 +556,17 @@ public class GameMenuController extends MenuController {
         }
 
 
-            for (Unit unit1 : Map.getInstanceMap().getMapCell(X, Y).getUnits()) {
+        for (Unit unit1 : Map.getInstanceMap().getMapCell(X, Y).getUnits()) {
 
-                int j = longRanged - unit1.getCount();
-                unit1.setCount(Math.max(0, unit1.getCount() - longRanged));
-                longRanged = j;
+            int j = longRanged - unit1.getCount();
+            unit1.setCount(Math.max(0, unit1.getCount() - longRanged));
+            longRanged = j;
 
 
-
-            }
-            ArrayList<Unit>alive=new ArrayList<>();
+        }
+        ArrayList<Unit> alive = new ArrayList<>();
         for (Unit unit : Map.getInstanceMap().getMapCell(X, Y).getUnits()) {
-            if(unit.getCount()<=0){
+            if (unit.getCount() <= 0) {
                 alive.add(unit);
 
             }
@@ -578,9 +576,7 @@ public class GameMenuController extends MenuController {
         for (Unit unit : alive) {
             Map.getInstanceMap().getMapCell(X, Y).getUnits().add(unit);
         }
-            GameMenuView.output("fightWin");
-
-
+        GameMenuView.output("fightWin");
 
 
     }
@@ -641,18 +637,18 @@ public class GameMenuController extends MenuController {
     }
 
     public static void build(String equipmentName) {
-        if(equipmentName.equals("airDefense")){
-            buildUnitAirDefense(currentUnits.get(0).getX(),currentUnits.get(0).getY());
-        } else if(equipmentName.equals("seigeTower")){
-            buildSeigeTower(currentUnits.get(0).getX(),currentUnits.get(0).getY());
-        } else if(equipmentName.equals("fireThrower")){
-            buildFireThrower(currentUnits.get(0).getX(),currentUnits.get(0).getY());
-        }else if(equipmentName.equals("catapult")){
-            buildCatapult(currentUnits.get(0).getX(),currentUnits.get(0).getY());
-        }else if(equipmentName.equals("bigCatapult")){
-            buildSeigeTower(currentUnits.get(0).getX(),currentUnits.get(0).getY());
-        }else if(equipmentName.equals("battleRam")){
-            buildBattleRam(currentUnits.get(0).getX(),currentUnits.get(0).getY());
+        if (equipmentName.equals("airDefense")) {
+            buildUnitAirDefense(currentUnits.get(0).getX(), currentUnits.get(0).getY());
+        } else if (equipmentName.equals("seigeTower")) {
+            buildSeigeTower(currentUnits.get(0).getX(), currentUnits.get(0).getY());
+        } else if (equipmentName.equals("fireThrower")) {
+            buildFireThrower(currentUnits.get(0).getX(), currentUnits.get(0).getY());
+        } else if (equipmentName.equals("catapult")) {
+            buildCatapult(currentUnits.get(0).getX(), currentUnits.get(0).getY());
+        } else if (equipmentName.equals("bigCatapult")) {
+            buildSeigeTower(currentUnits.get(0).getX(), currentUnits.get(0).getY());
+        } else if (equipmentName.equals("battleRam")) {
+            buildBattleRam(currentUnits.get(0).getX(), currentUnits.get(0).getY());
         }
 
     }
@@ -685,14 +681,13 @@ public class GameMenuController extends MenuController {
 
     public static void disbandUnit() {
 
-            Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(), currentUnits.get(0).getY()).getUnits().clear();
-            for (Unit unit : currentUnits) {
-                unit.setX(currentPlayer.findRuler(currentPlayer.getRuler()).getX() + 3);
-                unit.setY(currentPlayer.findRuler(currentPlayer.getRuler()).getY() + 3);
-                Map.getInstanceMap().getMapCell(currentPlayer.findRuler(currentPlayer.getRuler()).getX() + 3, currentPlayer.findRuler(currentPlayer.getRuler()).getY() + 3).addUnit(unit);
-            }
-            GameMenuView.output("success");
-
+        Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(), currentUnits.get(0).getY()).getUnits().clear();
+        for (Unit unit : currentUnits) {
+            unit.setX(currentPlayer.findRuler(currentPlayer.getRuler()).getX() + 3);
+            unit.setY(currentPlayer.findRuler(currentPlayer.getRuler()).getY() + 3);
+            Map.getInstanceMap().getMapCell(currentPlayer.findRuler(currentPlayer.getRuler()).getX() + 3, currentPlayer.findRuler(currentPlayer.getRuler()).getY() + 3).addUnit(unit);
+        }
+        GameMenuView.output("success");
 
 
     }
@@ -750,14 +745,14 @@ public class GameMenuController extends MenuController {
             GameMenuView.output("invalidLocation");
         } else if (direction == null) {
             GameMenuView.output("invalidDirection");
-        } else if(Map.getInstanceMap().getMapCell(X,Y).getBuilding()!=null||Map.getInstanceMap().getMapCell(X,Y).getRockDirection()!=null||Map.getInstanceMap().getMapCell(X,Y).getTree()!=null){
+        } else if (Map.getInstanceMap().getMapCell(X, Y).getBuilding() != null || Map.getInstanceMap().getMapCell(X, Y).getRockDirection() != null || Map.getInstanceMap().getMapCell(X, Y).getTree() != null) {
             GameMenuView.output("sthIsHere");
-        }else if (direction.equals(RANDOM)) {
+        } else if (direction.equals(RANDOM)) {
             Map.getInstanceMap().getMapCell(X, Y).setRockDirection(Direction.getRandom());
             GameMenuView.output("rockDrop");
         } else {
             Map.getInstanceMap().getMapCell(X, Y).setRockDirection(direction);
-            Map.getInstanceMap().getMapCell(X,Y).setPassable(false);
+            Map.getInstanceMap().getMapCell(X, Y).setPassable(false);
             GameMenuView.output("rockDrop");
         }
     }
@@ -765,45 +760,43 @@ public class GameMenuController extends MenuController {
     public static void dropTree(int X, int Y, Tree type) {
 
 
-
-
         if (type == null) {
             GameMenuView.output("invalidType");
-        } else if(Map.getInstanceMap().getMapCell(X,Y).getBuilding()!=null||Map.getInstanceMap().getMapCell(X,Y).getRockDirection()!=null||Map.getInstanceMap().getMapCell(X,Y).getTree()!=null){
+        } else if (Map.getInstanceMap().getMapCell(X, Y).getBuilding() != null || Map.getInstanceMap().getMapCell(X, Y).getRockDirection() != null || Map.getInstanceMap().getMapCell(X, Y).getTree() != null) {
             GameMenuView.output("sthIsHere");
-        }else {
+        } else {
             Map.getInstanceMap().getMapCell(X, Y).setTree(type);
-            Map.getInstanceMap().getMapCell(X,Y).setPassable(false);
+            Map.getInstanceMap().getMapCell(X, Y).setPassable(false);
             GameMenuView.output("success");
         }
     }
 
     public static void dropUnit(int X, int Y, String type, int count) {
-        if(Map.getInstanceMap().getMapCell(X,Y).isPassable()==false){
+        if (Map.getInstanceMap().getMapCell(X, Y).isPassable() == false) {
             GameMenuView.output("buildingError");
             return;
         }
 
-        if(UnarmedEnum.getUnarmedType(type)!=null){
+        if (UnarmedEnum.getUnarmedType(type) != null) {
             Unarmed people = new Unarmed(UnarmedEnum.getUnarmedType(type));
-            Unit unit = new Unit(X,Y,people,count);
-            Map.getInstanceMap().getMapCell(X,Y).getUnits().add(unit);
+            Unit unit = new Unit(X, Y, people, count);
+            Map.getInstanceMap().getMapCell(X, Y).getUnits().add(unit);
 
             GameMenuView.output("success");
-        }else if(FighterEnum.getFighterType(type)!=null){
+        } else if (FighterEnum.getFighterType(type) != null) {
             Fighter people = new Fighter(FighterEnum.getFighterType(type));
 
-            Unit unit = new Unit(X,Y,people,count);
-            Map.getInstanceMap().getMapCell(X,Y).getUnits().add(unit);
+            Unit unit = new Unit(X, Y, people, count);
+            Map.getInstanceMap().getMapCell(X, Y).getUnits().add(unit);
 
             GameMenuView.output("success");
-        }else if(LongRangedEnum.getLongRangedType(type)!=null){
+        } else if (LongRangedEnum.getLongRangedType(type) != null) {
             LongRanged people = new LongRanged(LongRangedEnum.getLongRangedType(type));
-            Unit unit = new Unit(X,Y,people,count);
-            Map.getInstanceMap().getMapCell(X,Y).getUnits().add(unit);
+            Unit unit = new Unit(X, Y, people, count);
+            Map.getInstanceMap().getMapCell(X, Y).getUnits().add(unit);
 
             GameMenuView.output("success");
-        }else{
+        } else {
 
             GameMenuView.output("wrongSoldierType");
         }
@@ -820,7 +813,7 @@ public class GameMenuController extends MenuController {
 
 
     public static void enterShopMenu() {
-        if(currentBuilding==null){
+        if (currentBuilding == null) {
             GameMenuView.output("shopError");
             return;
 
@@ -991,15 +984,16 @@ public class GameMenuController extends MenuController {
     public static void buildCatapult(int x, int y) {
 
         Unit unit1 = Map.getInstanceMap().getUnarmed(Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(), currentUnits.get(0).getY()), "engineer");
-        if (unit1 != null ) {
-            if(unit1.getCount() > 1){
-            Tool tool = new Tool(2, "catapult", unit1.getX(), unit1.getY(), false);
-            Map.getInstanceMap().getMapCell(x, y).setTool(tool);
-            GameMenuView.output("success");
+        if (unit1 != null) {
+            if (unit1.getCount() > 1) {
+                Tool tool = new Tool(2, "catapult", unit1.getX(), unit1.getY(), false);
+                Map.getInstanceMap().getMapCell(x, y).setTool(tool);
+                GameMenuView.output("success");
 
-        } else {
-            GameMenuView.output("invalidEngNum");
-        }}
+            } else {
+                GameMenuView.output("invalidEngNum");
+            }
+        }
 
 
     }
@@ -1008,22 +1002,24 @@ public class GameMenuController extends MenuController {
 
         Unit unit1 = Map.getInstanceMap().getUnarmed(Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(), currentUnits.get(0).getY()), "engineer");
         if (unit1 != null) {
-            if( unit1.getCount() > 1){
-            Tool tool = new Tool(2, "fireThrower", unit1.getX(), unit1.getY(), true);
-            Map.getInstanceMap().getMapCell(x, y).setTool(tool);
-            GameMenuView.output("success");
+            if (unit1.getCount() > 1) {
+                Tool tool = new Tool(2, "fireThrower", unit1.getX(), unit1.getY(), true);
+                Map.getInstanceMap().getMapCell(x, y).setTool(tool);
+                GameMenuView.output("success");
 
-        } else {
-            GameMenuView.output("invalidEngNum");
-        }}
+            } else {
+                GameMenuView.output("invalidEngNum");
+            }
+        }
 
 
     }
+
     public static void buildSeigeTower(int x, int y) {
 
         Unit unit1 = Map.getInstanceMap().getUnarmed(Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(), currentUnits.get(0).getY()), "engineer");
         if (unit1 != null) {
-            if( unit1.getCount() >= 4){
+            if (unit1.getCount() >= 4) {
                 Tool tool = new Tool(4, "seigeTower", unit1.getX(), unit1.getY(), true);
                 Map.getInstanceMap().getMapCell(x, y).setTool(tool);
                 GameMenuView.output("success");
@@ -1031,14 +1027,14 @@ public class GameMenuController extends MenuController {
 
             } else {
                 GameMenuView.output("invalidEngNum");
-            }}
+            }
+        }
 
 
     }
 
 
-
-//    public static void main(String[] args) {
+    //    public static void main(String[] args) {
 //        Map map = Map.getInstanceMap();
 //        map.setSize(50);
 //        Government government = new Government(4);
@@ -1068,15 +1064,15 @@ public class GameMenuController extends MenuController {
 //
 //
 //    }
-    public static int[][] mapPassable(){
-        int[][] mapIsPassable= new int[Map.getInstanceMap().getSize()][Map.getInstanceMap().getSize()];
-        for(int i=0;i< Map.getInstanceMap().getSize();i++){
+    public static int[][] mapPassable() {
+        int[][] mapIsPassable = new int[Map.getInstanceMap().getSize()][Map.getInstanceMap().getSize()];
+        for (int i = 0; i < Map.getInstanceMap().getSize(); i++) {
             for (int j = 0; j < Map.getInstanceMap().getSize(); j++) {
-                if(Map.getInstanceMap().getMapCell(i,j).isPassable()){
-                    mapIsPassable[i][j]=1;
+                if (Map.getInstanceMap().getMapCell(i, j).isPassable()) {
+                    mapIsPassable[i][j] = 1;
 
-                }else{
-                    mapIsPassable[i][j]=0;
+                } else {
+                    mapIsPassable[i][j] = 0;
 
                 }
 
