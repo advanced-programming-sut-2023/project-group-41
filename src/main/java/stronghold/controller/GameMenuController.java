@@ -15,6 +15,7 @@ import stronghold.model.components.game.soldeirtype.*;
 import stronghold.view.GameMenuView;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 import static stronghold.model.components.game.enums.Direction.RANDOM;
@@ -415,6 +416,8 @@ public class GameMenuController extends MenuController {
                     Map.getInstanceMap().getMapCell(getSelectedBuildingX(), getSelectedBuildingY()).getUnits().add(unit);
                     currentPlayer.setPopulation(currentPlayer.getPopulation() - count);
                     currentPlayer.getUnits().add(unit);
+                    if (UnarmedEnum.getUnarmedType(type).equals(UnarmedEnum.engineer)) currentPlayer.addResources(ENGINEER, count, false);
+                    else if (UnarmedEnum.getUnarmedType(type).equals(UnarmedEnum.worker)) currentPlayer.addResources(WORKER, count, false);
                     GameMenuView.output("success");
                 }
             }
@@ -501,15 +504,24 @@ public class GameMenuController extends MenuController {
     }
 
     public static void moveUnitTo(int X, int Y) {
-        if (!Map.getInstanceMap().getMapCell(X, Y).isPassable()) {
+        if (Objects.requireNonNull(Map.getInstanceMap().getMapCell(X, Y).getBuilding(), "") instanceof Castle || !Map.getInstanceMap().getMapCell(X, Y).isPassable()) {
             GameMenuView.output("waterError");
         } else if (NavigatorController.shortestPathIsLessThanLimit(NavigatorController.mapPassable(),currentUnits.get(0).getX(),currentUnits.get(0).getY(),X,Y,currentUnits.get(0).getPeople().getSpeed()*5 ) ){
             GameMenuView.output("speedError");
         } else {
 
             for (Unit unit : currentUnits) {
-
-                Map.getInstanceMap().getMapCell(X, Y).addUnit(unit);
+                if (Map.getInstanceMap().getMapCell(X, Y).getBuilding() != null){
+                    if (Map.getInstanceMap().getMapCell(X, Y).getBuilding() instanceof Castle){
+                        Castle castle = (Castle) Map.getInstanceMap().getMapCell(X, Y).getBuilding();
+                        if (castle.getSize() > unit.getCount()) {
+                            Map.getInstanceMap().getMapCell(X, Y).addUnit(unit);
+                            castle.setSize(castle.getSize() - unit.getCount());
+                        }
+                    }
+                } else {
+                    Map.getInstanceMap().getMapCell(X, Y).addUnit(unit);
+                }
 
             }
             Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(), currentUnits.get(0).getY()).getUnits().clear();
