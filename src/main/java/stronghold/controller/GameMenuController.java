@@ -390,23 +390,7 @@ public class GameMenuController extends MenuController {
                         GameMenuView.output("success");
                     }
                 }
-            }else  if(FighterEnum.getFighterType(type)!=null) {
-                if (UnarmedEnum.getUnarmedType(type) != null) {
-                    if (currentPlayer.getBalance() < count * UnarmedEnum.getUnarmedType(type).getPrice()) {
-                        GameMenuView.output("balanceError");
-                    } else {
-                        Unarmed fighter = new Unarmed(UnarmedEnum.getUnarmedType(type));
-                        Unit unit = new Unit(selectedBuildingX, selectedBuildingY, fighter, count);
-                        currentPlayer.setBalance(currentPlayer.getBalance() - count * UnarmedEnum.getUnarmedType(type).getPrice());
-                        Map.getInstanceMap().getMapCell(getSelectedBuildingX(), getSelectedBuildingY()).getUnits().add(unit);
-                        currentPlayer.setPopulation(currentPlayer.getPopulation() - count);
-                        currentPlayer.getUnits().add(unit);
-                        GameMenuView.output("success");
-                    }
-                }
             }
-
-
         } else if (currentBuilding.getBuildingType().equals(DevelopmentType.CHURCH) ||
                 currentBuilding.getBuildingType().equals(DevelopmentType.CATHEDRAL)) {
             if(type.equals("blackMonk")){
@@ -424,10 +408,27 @@ public class GameMenuController extends MenuController {
                 GameMenuView.output("notblackMonk");
             }
 
-        } else {
+        } else if(currentBuilding.getBuildingType().equals(StorageType.ENGINEER_GUILD) ){
+            if (UnarmedEnum.getUnarmedType(type) != null) {
+                if (currentPlayer.getBalance() < count * UnarmedEnum.getUnarmedType(type).getPrice()) {
+                    GameMenuView.output("balanceError");
+                } else {
+                    Unarmed fighter = new Unarmed(UnarmedEnum.getUnarmedType(type));
+                    Unit unit = new Unit(selectedBuildingX, selectedBuildingY, fighter, count);
+                    currentPlayer.setBalance(currentPlayer.getBalance() - count * UnarmedEnum.getUnarmedType(type).getPrice());
+                    Map.getInstanceMap().getMapCell(getSelectedBuildingX(), getSelectedBuildingY()).getUnits().add(unit);
+                    currentPlayer.setPopulation(currentPlayer.getPopulation() - count);
+                    currentPlayer.getUnits().add(unit);
+                    GameMenuView.output("success");
+                }
+            }
+        }else {
             GameMenuView.output("selectUnitBuilding");
         }
-    }
+
+        }
+
+
 
     public static void repair() {
         if (!currentBuilding.getClass().getSimpleName().equals("Castle")) {
@@ -458,12 +459,20 @@ public class GameMenuController extends MenuController {
         if (Map.getInstanceMap().getMapCell(X, Y).getTool()==null) {
             GameMenuView.output("toolError");
         } else if(!Map.getInstanceMap().getMapCell(X, Y).getTool().getOwner().equals(currentPlayer)){
-            System.out.println("notyourtool");
+            GameMenuView.output("notyourtool");
 
         }else {
             setCurrentTool( Map.getInstanceMap().getMapCell(X, Y).getTool());
 
             GameMenuView.output("success");
+        }
+    }
+    public static void actionTool(int X,int Y){
+        if (Map.getInstanceMap().getMapCell(X, Y).getTool()==null) {
+            GameMenuView.output("toolError");
+        }else if(!Map.getInstanceMap().getMapCell(X, Y).getTool().getOwner().equals(currentPlayer)){
+            GameMenuView.output("notyourtool");
+
         }
     }
 
