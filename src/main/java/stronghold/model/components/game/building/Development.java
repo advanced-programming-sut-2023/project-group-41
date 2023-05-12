@@ -14,7 +14,7 @@ public class Development extends Building {
     private int wineUsageRate;
 
 
-    Development(Government ownership, DevelopmentType developmentType) {
+    public Development(Government ownership, DevelopmentType developmentType) {
         super(ownership, developmentType, developmentType.getHealth(), developmentType.getCost(), developmentType.getWorkerNum(),
                 developmentType.isEngineerWorkers(), developmentType.getNeededResource(), developmentType.getNeededResourceCount());
         ownership.addBuilding(developmentType);

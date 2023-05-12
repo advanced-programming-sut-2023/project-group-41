@@ -284,7 +284,6 @@ public class GameMenuController extends MenuController {
             }
         }
         return null;
-
     }
 
 
@@ -320,7 +319,6 @@ public class GameMenuController extends MenuController {
 
     public static void showPopularityFactors() {
         GameMenuView.output("showPopularityFactors");
-
     }
 
     public static void showPopularity() {
@@ -400,6 +398,7 @@ public class GameMenuController extends MenuController {
             return;
         } else if (!type.haveEnoughResource(currentPlayer)) {
             GameMenuView.output("lackOfResource");
+            currentPlayer.removeBuilding(type);
         } else if (type.getClass().getSimpleName().equals("ResourceMaker")
                 && !(resourceMaker = (ResourceMaker) type).checkTexture(mapCell.getTexture())){
             GameMenuView.output("textureProblem");
@@ -573,7 +572,6 @@ public class GameMenuController extends MenuController {
             GameMenuView.output("waterError");
         } else if (Math.abs(X-currentUnits.get(0).getX() )> (currentUnits.get(0).getPeople().getSpeed() * 5)  ||  Math.abs(Y-currentUnits.get(0).getY() ) > (currentUnits.get(0).getPeople().getSpeed() * 5) ) {
             GameMenuView.output("speedError");
-
         } else {
 
             for (Unit unit : currentUnits) {
@@ -590,7 +588,6 @@ public class GameMenuController extends MenuController {
         if (!currentUnits.get(0).isInRange(X1, Y1) || !currentUnits.get(0).isInRange(X2, Y2)) {
             GameMenuView.output("bondError");
         } else {
-
             //bondError
             for (Unit unit : currentUnits) {
                 unit.setPatrolX1(X1);
@@ -598,8 +595,6 @@ public class GameMenuController extends MenuController {
                 unit.setPatrolY1(Y1);
                 unit.setPatrolY2(Y2);
                 patrolingUnits.add(unit);
-
-
             }
             GameMenuView.output("success");
         }
@@ -636,7 +631,6 @@ public class GameMenuController extends MenuController {
     public static void attackEnemy(int enemyX, int enemyY) {
         //command: attack -e [enemy’s x] [enemy’
         //buildings attack
-
         if (!currentUnits.get(0).isInRange(enemyX, enemyY)) {
             GameMenuView.output("enemyBond");
             return;
@@ -784,11 +778,9 @@ public class GameMenuController extends MenuController {
                         GameMenuView.output("engineerGotOil");
                         return;
                     }
-
                 }
             }
         }
-
     }
 
     public static void digTunnel(int X, int Y) {
@@ -919,15 +911,12 @@ public class GameMenuController extends MenuController {
             GameMenuView.output("invalidLocation");
         } else if (direction == null) {
             GameMenuView.output("invalidDirection");
-
-
         } else if(Map.getInstanceMap().getMapCell(X,Y).getBuilding()!=null||Map.getInstanceMap().getMapCell(X,Y).getRockDirection()!=null||Map.getInstanceMap().getMapCell(X,Y).getTree()!=null){
             GameMenuView.output("sthIsHere");
         }else if (direction.equals(RANDOM)) {
             Map.getInstanceMap().getMapCell(X, Y).setRockDirection(Direction.getRandom());
             GameMenuView.output("rockDrop");
         } else {
-
             Map.getInstanceMap().getMapCell(X, Y).setRockDirection(direction);
             Map.getInstanceMap().getMapCell(X,Y).setPassable(false);
             GameMenuView.output("rockDrop");
@@ -1218,6 +1207,19 @@ public class GameMenuController extends MenuController {
 
 
 
+//    public static void main(String[] args) {
+//        Map map = Map.getInstanceMap();
+//        map.setSize(50);
+//        Government government = new Government(4);
+//        currentPlayer = government;
+//        System.out.println(government.getResourcesMap().values());
+//        System.out.println(government.getBalance());
+//        dropBuilding(10, 20, new Converter(government, ConverterType.MILL));
+//        //government.allBuildingActions();
+//        System.out.println(government.getBuildingNum(ConverterType.MILL));
+//        System.out.println(government.getResourcesMap().values());
+//        //createUnit("agsg", 3);
+//    }
     public static void main(String[] args) {
 
 

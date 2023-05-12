@@ -19,17 +19,17 @@ public class Government {
     private String[] popularityFactors;
     private int popularity = 0;
     private int population = 5;
-    private int foodRate;
-    private double balance;
-    private int taxRate;
+    private int foodRate = -2;
+    private double balance = 2000;
+    private int taxRate = 0;
     private int fearRate;
-    private int freeStockSpace;
-    private int freeFoodStockSpace;
+    private int freeStockSpace = 0;
+    private int freeFoodStockSpace = 0;
+    private int freeArmourySpace = 0;
     private HashMap<Resource, Integer> resources;
-    private LinkedHashMap<BuildingType, Integer> buildingHash;
-    private ArrayList<Unit> units=new ArrayList<>();
+    private LinkedHashMap<BuildingType, Integer> buildingHash = listAllBuilding();
+    private ArrayList<Unit> units = new ArrayList<>();
     private ArrayList<People> people;
-    private ArrayList<People> normalPeople;
 
 
     public Government(int color) {
@@ -41,6 +41,7 @@ public class Government {
         for (Resource resource : EnumSet.allOf(Resource.class)) {
             resources.put(resource, 20);
         }
+<<<<<<< HEAD
 
         buildingHash = new LinkedHashMap<>();
         listAllBuilding(buildingHash);
@@ -50,6 +51,8 @@ public class Government {
         taxRate = 0;
         balance=100;
 
+=======
+>>>>>>> 298e054ff205cdb2fa9284ea16254d8b83f136fb
     }
     public void incPopularity(int num) {
         popularity += num;
@@ -145,6 +148,14 @@ public class Government {
                 for (int i = 0; i < amount && freeFoodStockSpace > 0; i++, freeFoodStockSpace--) {
                     resources.put(resource, resources.get(resource) + 1);
                 }
+            } else if (resource.equals(Resource.ARMOR) ||
+                    resource.equals(Resource.LEATHER_VEST) ||
+                    resource.equals(Resource.SWORD) ||
+                    resource.equals(Resource.SPEAR) ||
+                    resource.equals(Resource.CROSS_BOW)) {
+                for (int i = 0; i < amount && freeArmourySpace > 0; i++, freeArmourySpace--) {
+                    resources.put(resource, resources.get(resource) + 1);
+                }
             } else {
                 for (int i = 0; i < amount && freeStockSpace > 0; i++, freeStockSpace--) {
                     resources.put(resource, resources.get(resource) + 1);
@@ -159,6 +170,27 @@ public class Government {
         int available = resources.get(resource);
         if (available >= count) {
             resources.put(resource, available - count);
+            if (resource.equals(Resource.APPLE) ||
+                    resource.equals(Resource.CHEESE) ||
+                    resource.equals(Resource.BREAD) ||
+                    resource.equals(Resource.MEAT)) {
+                freeFoodStockSpace += count;
+            } else if (resource.equals(Resource.ARMOR) ||
+                    resource.equals(Resource.LEATHER_VEST) ||
+                    resource.equals(Resource.SWORD) ||
+                    resource.equals(Resource.SPEAR) ||
+                    resource.equals(Resource.CROSS_BOW)) {
+                freeArmourySpace += count;
+            } else if (resource.equals(Resource.WHEAT) ||
+                    resource.equals(Resource.FLOUR) ||
+                    resource.equals(Resource.HOPS) ||
+                    resource.equals(Resource.ALE) ||
+                    resource.equals(Resource.STONE) ||
+                    resource.equals(Resource.IRON) ||
+                    resource.equals(Resource.WOOD) ||
+                    resource.equals(Resource.PITCH)){
+                freeStockSpace += count;
+            }
             return true;
         } else {
             return false;
@@ -205,23 +237,24 @@ public class Government {
 
     }
 
-    private void listAllBuilding(HashMap<BuildingType, Integer> buildingHash) {
-
+    private LinkedHashMap<BuildingType, Integer> listAllBuilding() {
+        LinkedHashMap<BuildingType, Integer> hash = new LinkedHashMap<>();
         for (ResourceMakerType resourceMakerType : EnumSet.allOf(ResourceMakerType.class)) {
-            buildingHash.put(resourceMakerType, 0);
+            hash.put(resourceMakerType, 0);
         }
         for (ConverterType converterType : EnumSet.allOf(ConverterType.class)) {
-            buildingHash.put(converterType, 0);
+            hash.put(converterType, 0);
         }
         for (DevelopmentType developmentType : EnumSet.allOf(DevelopmentType.class)) {
-            buildingHash.put(developmentType, 0);
+            hash.put(developmentType, 0);
         }
         for (CastleType castleType : EnumSet.allOf(CastleType.class)) {
-            buildingHash.put(castleType, 0);
+            hash.put(castleType, 0);
         }
         for (StorageType storageType : EnumSet.allOf(StorageType.class)) {
-            buildingHash.put(storageType, 0);
+            hash.put(storageType, 0);
         }
+        return hash;
     }
 
     public void addBuilding(BuildingType buildingType) {
@@ -245,12 +278,31 @@ public class Government {
         }
     }
 
+    public void removeBuilding(Building type) {
+        buildingHash.put(type.getBuildingType(), getBuildingNum(type.getBuildingType()) - 1);
+    }
 
-//    public static void main(String[] args) {
-//        Government government = new Government(4);
-//        government.addBuilding(ConverterType.ARMOURER);
-//        System.out.println(government.buildingHash.values());
-//    }
+
+    public static void main(String[] args) {
+        Government government = new Government(4);
+        System.out.println(government.resources);
+        new Storage(government, StorageType.STOCK_PILE);
+        //new Storage(government, StorageType.STOCK_PILE);
+        //new ResourceMaker(government, ResourceMakerType.WHEAT_FARM);
+        new ResourceMaker(government, ResourceMakerType.HOPS_FARM);
+        new ResourceMaker(government, ResourceMakerType.HOPS_FARM);
+        new ResourceMaker(government, ResourceMakerType.HOPS_FARM);
+        new Converter(government, ConverterType.BREWING);
+        //new Development(government, DevelopmentType.INN);
+        //new Converter(government, ConverterType.MILL);
+        //new Converter(government, ConverterType.BAKERY);
+
+        government.allBuildingActions();
+        government.allBuildingActions();
+        //government.allBuildingActions();
+        System.out.println(government.buildingHash);
+        System.out.println(government.resources);
+    }
     //method from
     // dropBuilding in UML
     // to
@@ -264,5 +316,9 @@ public class Government {
 
     public int getPopulation() {
         return population;
+    }
+
+    public void incFreeArmourySpace(int capacity) {
+        freeArmourySpace += capacity;
     }
 }

@@ -9,20 +9,20 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum CastleType implements BuildingType{
-    SMALL_STONE_GATEHOUSE("smallStoneGatehouse", 100, 0, 0, false, null, 0, 8, 0, 0),
-    BIG_STONE_GATEHOUSE("bigStoneGatehouse", 100, 0 , 0, false, Resource.STONE, 20, 10, 0, 0),
+    SMALL_STONE_GATEHOUSE("smallStoneGatehouse", 1000, 0, 0, false, null, 0, 8, 0, 0),
+    BIG_STONE_GATEHOUSE("bigStoneGatehouse", 2000, 0 , 0, false, Resource.STONE, 20, 10, 0, 0),
     DRAWBRIDGE("drawbridge", 100, 0 , 0, false, Resource.WOOD, 10, 0, 1, 0),
-    LOOKOUT_TOWER("lookoutTower", 100, 0, 0, false, Resource.STONE, 10, 0, 0, 0),
-    PERIMETER_TOWER("perimeterTower", 100, 0, 0, false, Resource.STONE, 10, 0, 0, 100),
-    DEFENSIVE_TURRET("defensiveTower", 200, 0, 0, false, Resource.STONE, 15,0, 0, 100),
-    SQUARE_TOWER("squareTower", 100, 0, 0, false, Resource.STONE, 35, 100, 0, 100),
-    CIRCLE_TOWER("circleTower", 100, 0, 0, false, Resource.STONE, 40, 100, 0, 100),
+    LOOKOUT_TOWER("lookoutTower", 1000, 0, 0, false, Resource.STONE, 10, 0, 0, 0),
+    PERIMETER_TOWER("perimeterTower", 1000, 0, 0, false, Resource.STONE, 10, 0, 0, 5),
+    DEFENSIVE_TURRET("defensiveTower", 2000, 0, 0, false, Resource.STONE, 15,0, 0, 5),
+    SQUARE_TOWER("squareTower", 1000, 0, 0, false, Resource.STONE, 35, 5, 0, 5),
+    CIRCLE_TOWER("circleTower", 2000, 0, 0, false, Resource.STONE, 40, 10, 0, 0),
     KILLING_PIT("killingPit",100, 0, 0, false, Resource.WOOD, 6, 0, 0, 1),
-    OIL_SMELTER("oilSmelter", 100, 100, 1, true, Resource.IRON, 10, 0, 1, 0),
+    OIL_SMELTER("oilSmelter", 400, 100, 1, true, Resource.IRON, 10, 0, 1, 0),
     PITCH_DITCH("pitchDitch", 100, 0, 0, false, Resource.PITCH, 2, 5, 1, 0),
-    CAGED_WAR_DOGS("cagedWarDogs", 100, 100, 0, false, Resource.WOOD, 10, 0, 0, 100),
-    Ruler("ruler",200,0,0,false,null,0,0,0,0),
-    SIEGE_TENT("siegeTent", 100, 0, 1, true, null, 0, 0, 100, 0);
+    CAGED_WAR_DOGS("cagedWarDogs", 400, 100, 0, false, Resource.WOOD, 10, 0, 0, 3),
+    Ruler("ruler",1000,0,0,false,null,0,0,0,0),
+    SIEGE_TENT("siegeTent", 10, 0, 1, true, null, 0, 0, 100, 0);
     private static final ArrayList<CastleType> castleTypeArr = new ArrayList<>(EnumSet.allOf(CastleType.class));
     private String regex;
     private int health;
@@ -101,6 +101,7 @@ public enum CastleType implements BuildingType{
     public int getDefendRange() {
         return defendRange;
     }
+
 
 
     @Override

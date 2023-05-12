@@ -6,8 +6,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum Resource {
-    GOLD("gold"),
-
     WHEAT("wheat"),
     FLOUR("flour"),
     HOPS("hops"),
@@ -24,16 +22,15 @@ public enum Resource {
     MEAT("meat"),
 
     ARMOR("armor"),
+    LEATHER_VEST("leatherVest"),
     SWORD("sword"),
     SPEAR("spear"),
-    HORSE("horse"),
     CROSS_BOW("cross bow"),
 
+    HORSE("horse"),
     COW("cow"),
     WORKER("worker"),
-    ENGINEER("engineer"),
-
-    PEOPLE("people");
+    ENGINEER("engineer");
 
     private String regex;
 

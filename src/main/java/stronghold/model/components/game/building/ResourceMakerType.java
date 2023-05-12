@@ -12,11 +12,11 @@ public enum ResourceMakerType implements BuildingType {
     WHEAT_FARM("wheatFarm", 100, 0, 1, 15, Resource.WHEAT, 0,  100),
     HUNT_POST("huntPost", 100, 0, 1, 5, Resource.MEAT, 0,40),
     HOPS_FARM("hopsFarm", 100, 0, 1, 15, Resource.HOPS, 0,80),
-    DAIRY("dairy", 100, 0, 1, 15, Resource.CHEESE, 0,60),//also make Leather Vest
+    DAIRY("dairy", 200, 0, 1, 15, Resource.CHEESE, 0,60),//also make Leather Vest
     APPLE_GARDEN("appleGarden", 100, 0, 1, 5, Resource.APPLE, 0, 80),
     PITCH_RIG("pitchRig", 100, 0, 1, 20, Resource.PITCH, 0, 20),
-    QUARRY("quarry", 100, 0, 3, 20, Resource.STONE_IN_QUARRY, 100, 50),
-    IRON_MINE("ironMine", 100, 0, 2, 20, Resource.IRON, 0, 20),
+    QUARRY("quarry", 200, 0, 3, 20, Resource.STONE_IN_QUARRY, 100, 50),
+    IRON_MINE("ironMine", 200, 0, 2, 20, Resource.IRON, 0, 20),
     WOOD_CUTTER("woodCutter", 100, 0, 1, 3, Resource.WOOD, 0, 120);
 
 
@@ -96,11 +96,17 @@ public enum ResourceMakerType implements BuildingType {
 
     @Override
     public void action(Government government, int buildingCount) {
-        if (this.equals(QUARRY)) {
-            government.addResources(resource, rate, false);
-            government.limitStoneInQuarry();
+        if (this.equals(DAIRY)){
+            for (int i = 0; i < buildingCount; i++) {
+                government.addResources(Resource.LEATHER_VEST, 10, true);
+            }
         }
-        else {
+        if (this.equals(QUARRY)) {
+            for (int i = 0; i < buildingCount; i++) {
+                government.addResources(resource, rate, false);
+            }
+            government.limitStoneInQuarry();
+        } else {
             for (int i = 0; i < buildingCount; i++) {
                 government.addResources(resource, rate, true);
             }
