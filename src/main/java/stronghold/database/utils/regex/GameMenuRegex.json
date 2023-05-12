@@ -39,6 +39,13 @@
   "playerCoordinate": "\\s*(?<X>\\d+)\\s+(?<Y>\\d+)\\s*",
 
 
-  "nextPlayer": "\\s*next\\s+player\\s*"
+  "nextPlayer": "\\s*next\\s+player\\s*",
+
+
+  "burnOil": "\\s*burn\\s+oil\\s+((-x\\s+(?<X>\\d+)\\s*)|(-y\\s+(?<Y>\\d+)\\s*))]{2}",
+  "digDitch": "\\s*dig\\s+ditch\\s+((-x\\s+(?<X>\\d+)\\s*)|(-y\\s+(?<Y>\\d+)\\s*))]{2}",
+  "fillDitch": "\\s*fill\\s+ditch\\s+((-x\\s+(?<X>\\d+)\\s*)|(-y\\s+(?<Y>\\d+)\\s*))]{2}",
+  "selectTool": "select\\s+tool\\s+((-x\\s+(?<X>\\d+)\\s*)|(-y\\s+(?<Y>\\d+)\\s*)){2}",
+  "actionTool": "action\\s+tool\\s+((-x\\s+(?<X>\\d+)\\s*)|(-y\\s+(?<Y>\\d+)\\s*)){2}"
 
 }

@@ -126,7 +126,9 @@ public class Unit {
 
     }
     public boolean isInRange(int X2,int Y2){
-        if(Math.abs(X2-X)<people.getSpeed()*5||Math.abs(Y2-Y)<people.getSpeed()*5){
+        if(Math.abs(X2-X)<people.getSpeed()*5&&Math.abs(Y2-Y)<people.getSpeed()*5){
+            System.out.println((Math.abs(X2-X)));
+            System.out.println((Math.abs(Y2-Y)));
             return  true;
 
         }

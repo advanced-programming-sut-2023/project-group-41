@@ -1,11 +1,19 @@
 package stronghold.model.components.game;
 
+import stronghold.controller.GameMenuController;
+import stronghold.view.GameMenuView;
+
 public class Tool {
     private boolean movable;
     private int engineerNum;
     private int X;
     private int Y;
     private String name;
+    private Government owner;
+
+    public Government getOwner() {
+        return owner;
+    }
 
     public String getName() {
         return name;
@@ -52,6 +60,7 @@ public class Tool {
         this.X=x;
         this.Y=y;
         this.movable=isMovable;
+        this.owner= GameMenuController.getCurrentPlayer();
 
     }
 }

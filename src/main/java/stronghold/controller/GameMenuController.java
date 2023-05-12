@@ -562,8 +562,12 @@ public class GameMenuController extends MenuController {
             }
             if (allyOffense == enemyDefense) {
 
-                Map.getInstanceMap().getMapCell(enemyX, enemyY).getUnits().clear();
-                Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(), currentUnits.get(0).getY()).getUnits().clear();
+                for (Unit unit : Map.getInstanceMap().getMapCell(enemyX, enemyY).getUnits()) {
+                    unit.setCount(0);
+                }
+                for (Unit unit : Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(), currentUnits.get(0).getY()).getUnits()) {
+                    unit.setCount(0);
+                }
                 if(Map.getInstanceMap().getMapCell(enemyX, enemyY).getBuilding()!=null){
                     Map.getInstanceMap().getMapCell(enemyX, enemyY).getBuilding().setHealth(Map.getInstanceMap().getMapCell(enemyX, enemyY).getBuilding().getHealth()-allyOffense);
 
@@ -575,7 +579,9 @@ public class GameMenuController extends MenuController {
 
             } else if (allyOffense >= enemyDefense) {
 
-                Map.getInstanceMap().getMapCell(enemyX, enemyY).getUnits().clear();
+                for (Unit unit : Map.getInstanceMap().getMapCell(enemyX, enemyY).getUnits()) {
+                    unit.setCount(0);
+                }
 
 
                 if(Map.getInstanceMap().getMapCell(enemyX, enemyY).getBuilding()!=null){
@@ -586,7 +592,9 @@ public class GameMenuController extends MenuController {
 
 
             } else {
-                Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(), currentUnits.get(0).getY()).getUnits().clear();
+                for (Unit unit : Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(), currentUnits.get(0).getY()).getUnits()) {
+                    unit.setCount(0);
+                }
                 GameMenuView.output("fightLoss");
 
 
@@ -775,7 +783,7 @@ public class GameMenuController extends MenuController {
             GameMenuView.output("buildingPlaced");
         } else {
             Map.getInstanceMap().getMapCell(X, Y).setTexture(type);
-            if(type.equals("sea")||type.equals("river")||type.equals("big pound")||type.equals("small pound")||type.equals("sttone")){
+            if(type.equals("sea")||type.equals("river")||type.equals("big pound")||type.equals("small pound")||type.equals("stone")){
                 Map.getInstanceMap().getMapCell(X, Y).setPassable(false);
             }
             GameMenuView.output("textureSet");
@@ -1152,7 +1160,7 @@ public class GameMenuController extends MenuController {
                 Tool tool = new Tool(4, "seigeTower", unit1.getX(), unit1.getY(), true);
                 Map.getInstanceMap().getMapCell(x, y).setTool(tool);
                 GameMenuView.output("success");
-                //TODO: wall break
+                
 
             } else {
                 GameMenuView.output("invalidEngNum");
