@@ -34,6 +34,15 @@ public class GameMenuController extends MenuController {
     private static int playerNum;
     private static int selectedBuildingX;
     private static int selectedBuildingY;
+    private static Tool currentTool;
+
+    public static Tool getCurrentTool() {
+        return currentTool;
+    }
+
+    public static void setCurrentTool(Tool currentTool) {
+        GameMenuController.currentTool = currentTool;
+    }
 
     public static int getSelectedBuildingX() {
         return selectedBuildingX;
@@ -442,6 +451,18 @@ public class GameMenuController extends MenuController {
             for (Unit unit : currentUnits) {
                 System.out.println(unit.getPeople().getRegex());
             }
+            GameMenuView.output("success");
+        }
+    }
+    public static void selectTool(int X, int Y) {
+        if (Map.getInstanceMap().getMapCell(X, Y).getTool()==null) {
+            GameMenuView.output("toolError");
+        } else if(!Map.getInstanceMap().getMapCell(X, Y).getTool().getOwner().equals(currentPlayer)){
+            System.out.println("notyourtool");
+
+        }else {
+            setCurrentTool( Map.getInstanceMap().getMapCell(X, Y).getTool());
+
             GameMenuView.output("success");
         }
     }
