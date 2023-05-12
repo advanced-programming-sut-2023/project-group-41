@@ -156,7 +156,7 @@ public class GameMenuController extends MenuController {
     }
 
     public static void endOfRound(){
-
+         patroller();
         for (int i = 1; i < playerNum; i++) {
            setCurrentPlayer( getGovernmentByColor(i));
             currentPlayer.allBuildingActions();
@@ -167,12 +167,7 @@ public class GameMenuController extends MenuController {
             currentPlayer.unitKiller();
 
         }
-        for (int i = 0; i < Map.getInstanceMap().getSize(); i++) {
-            for (int j = 0; j < Map.getInstanceMap().getSize(); j++) {
-                endOfRoundBuildingAttacker(Map.getInstanceMap().getMapCell(i,j));
-            }
 
-        }
 
     }
 
@@ -473,7 +468,33 @@ public class GameMenuController extends MenuController {
         }else if(!Map.getInstanceMap().getMapCell(X, Y).getTool().getOwner().equals(currentPlayer)){
             GameMenuView.output("notyourtool");
 
-        }
+        }else if(currentTool.getName().equals("catapult")||currentTool.getName().equals("bigCatapult")){
+            Map.getInstanceMap().getMapCell(X,Y).setBuilding(null);
+            Map.getInstanceMap().getMapCell(X,Y).setPassable(true);
+            for (Unit unit : Map.getInstanceMap().getMapCell(X, Y).getUnits()) {
+                unit.setCount(0);
+            }
+            GameMenuView.output("success");
+
+        }else if(currentTool.getName().equals("fireThrower")){
+            for (Unit unit : Map.getInstanceMap().getMapCell(X, Y).getUnits()) {
+                unit.setCount(0);
+            }
+            Map.getInstanceMap().getMapCell(X,Y).setTool(currentTool);
+            currentTool.setX(X);
+            currentTool.setY(Y);
+            Map.getInstanceMap().getMapCell(currentTool.getX(),currentTool.getY()).setTool(null);
+
+            GameMenuView.output("success");
+        }else if(currentTool.getName().equals("battleRam")){
+            Map.getInstanceMap().getMapCell(X,Y).setBuilding(null);Map.getInstanceMap().getMapCell(X,Y).setPassable(true);
+        Map.getInstanceMap().getMapCell(X,Y).setTool(currentTool);
+        currentTool.setX(X);
+        currentTool.setY(Y);
+        Map.getInstanceMap().getMapCell(currentTool.getX(),currentTool.getY()).setTool(null);
+
+        GameMenuView.output("success");
+    }
     }
 
     public static void moveUnitTo(int X, int Y) {
@@ -510,6 +531,7 @@ public class GameMenuController extends MenuController {
 
     }
     public static void patroller(){
+
         for (Unit unit : patrolingUnits) {
             if(unit.getX()!=unit.getPatrolX1()||unit.getY()!=unit.getPatrolY1()){
                 int x=unit.getX(),y=unit.getY();
