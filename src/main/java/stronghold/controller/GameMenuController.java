@@ -1237,6 +1237,22 @@ public class GameMenuController extends MenuController {
 
 
     }
+    public static int[][] mapPassable(){
+        int[][] mapIsPassable= new int[Map.getInstanceMap().getSize()][Map.getInstanceMap().getSize()];
+        for(int i=0;i< Map.getInstanceMap().getSize();i++){
+            for (int j = 0; j < Map.getInstanceMap().getSize(); j++) {
+                if(Map.getInstanceMap().getMapCell(i,j).isPassable()){
+                    mapIsPassable[i][j]=1;
+
+                }else{
+                    mapIsPassable[i][j]=0;
+
+                }
+
+            }
+        }
+        return mapIsPassable;
+    }
 
 
 }
