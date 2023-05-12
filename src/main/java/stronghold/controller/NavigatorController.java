@@ -5,12 +5,7 @@ import stronghold.model.components.game.Map;
 import java.util.*;
 
 public class NavigatorController {
-    static int[][] matrix = { { 0, 1, 0, 0, 1 },
-            { 1, 1, 1, 1, 1 },
-            { 1, 0, 0, 1, 0 },
-            { 0, 0, 1, 1, 1 } };
-    static int startingCoordinateX = 2, startingCoordinateY = 0;
-    static int endingCoordinateX = 3, endingCoordinateY = 4;
+
 
     public static boolean isAbleToNavigate(int[][] matrix, int startingCoordinateX, int startingCoordinateY,
                                            int endingCoordinateX, int endingCoordinateY) {
