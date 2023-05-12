@@ -26,6 +26,15 @@ public class GameMenuController extends MenuController {
     private static int playerNum;
     private static int selectedBuildingX;
     private static int selectedBuildingY;
+    private static Tool currentTool;
+
+    public static Tool getCurrentTool() {
+        return currentTool;
+    }
+
+    public static void setCurrentTool(Tool currentTool) {
+        GameMenuController.currentTool = currentTool;
+    }
 
     public static int getSelectedBuildingX() {
         return selectedBuildingX;
@@ -139,7 +148,7 @@ public class GameMenuController extends MenuController {
     }
 
     public static void endOfRound(){
-
+         patroller();
         for (int i = 1; i < playerNum; i++) {
            setCurrentPlayer( getGovernmentByColor(i));
             currentPlayer.allBuildingActions();
@@ -150,12 +159,7 @@ public class GameMenuController extends MenuController {
             currentPlayer.unitKiller();
 
         }
-        for (int i = 0; i < Map.getInstanceMap().getSize(); i++) {
-            for (int j = 0; j < Map.getInstanceMap().getSize(); j++) {
-                endOfRoundBuildingAttacker(Map.getInstanceMap().getMapCell(i,j));
-            }
 
-        }
 
     }
 
@@ -382,23 +386,7 @@ public class GameMenuController extends MenuController {
                         GameMenuView.output("success");
                     }
                 }
-            }else  if(FighterEnum.getFighterType(type)!=null) {
-                if (UnarmedEnum.getUnarmedType(type) != null) {
-                    if (currentPlayer.getBalance() < count * UnarmedEnum.getUnarmedType(type).getPrice()) {
-                        GameMenuView.output("balanceError");
-                    } else {
-                        Unarmed fighter = new Unarmed(UnarmedEnum.getUnarmedType(type));
-                        Unit unit = new Unit(selectedBuildingX, selectedBuildingY, fighter, count);
-                        currentPlayer.setBalance(currentPlayer.getBalance() - count * UnarmedEnum.getUnarmedType(type).getPrice());
-                        Map.getInstanceMap().getMapCell(getSelectedBuildingX(), getSelectedBuildingY()).getUnits().add(unit);
-                        currentPlayer.setPopulation(currentPlayer.getPopulation() - count);
-                        currentPlayer.getUnits().add(unit);
-                        GameMenuView.output("success");
-                    }
-                }
             }
-
-
         } else if (currentBuilding.getBuildingType().equals(DevelopmentType.CHURCH) ||
                 currentBuilding.getBuildingType().equals(DevelopmentType.CATHEDRAL)) {
             if(type.equals("blackMonk")){
@@ -416,10 +404,27 @@ public class GameMenuController extends MenuController {
                 GameMenuView.output("notblackMonk");
             }
 
-        } else {
+        } else if(currentBuilding.getBuildingType().equals(StorageType.ENGINEER_GUILD) ){
+            if (UnarmedEnum.getUnarmedType(type) != null) {
+                if (currentPlayer.getBalance() < count * UnarmedEnum.getUnarmedType(type).getPrice()) {
+                    GameMenuView.output("balanceError");
+                } else {
+                    Unarmed fighter = new Unarmed(UnarmedEnum.getUnarmedType(type));
+                    Unit unit = new Unit(selectedBuildingX, selectedBuildingY, fighter, count);
+                    currentPlayer.setBalance(currentPlayer.getBalance() - count * UnarmedEnum.getUnarmedType(type).getPrice());
+                    Map.getInstanceMap().getMapCell(getSelectedBuildingX(), getSelectedBuildingY()).getUnits().add(unit);
+                    currentPlayer.setPopulation(currentPlayer.getPopulation() - count);
+                    currentPlayer.getUnits().add(unit);
+                    GameMenuView.output("success");
+                }
+            }
+        }else {
             GameMenuView.output("selectUnitBuilding");
         }
-    }
+
+        }
+
+
 
     public static void repair() {
         if (currentBuilding == null) {
@@ -448,11 +453,57 @@ public class GameMenuController extends MenuController {
             GameMenuView.output("success");
         }
     }
+    public static void selectTool(int X, int Y) {
+        if (Map.getInstanceMap().getMapCell(X, Y).getTool()==null) {
+            GameMenuView.output("toolError");
+        } else if(!Map.getInstanceMap().getMapCell(X, Y).getTool().getOwner().equals(currentPlayer)){
+            GameMenuView.output("notyourtool");
+
+        }else {
+            setCurrentTool( Map.getInstanceMap().getMapCell(X, Y).getTool());
+
+            GameMenuView.output("success");
+        }
+    }
+    public static void actionTool(int X,int Y){
+        if (Map.getInstanceMap().getMapCell(X, Y).getTool()==null) {
+            GameMenuView.output("toolError");
+        }else if(!Map.getInstanceMap().getMapCell(X, Y).getTool().getOwner().equals(currentPlayer)){
+            GameMenuView.output("notyourtool");
+
+        }else if(currentTool.getName().equals("catapult")||currentTool.getName().equals("bigCatapult")){
+            Map.getInstanceMap().getMapCell(X,Y).setBuilding(null);
+            Map.getInstanceMap().getMapCell(X,Y).setPassable(true);
+            for (Unit unit : Map.getInstanceMap().getMapCell(X, Y).getUnits()) {
+                unit.setCount(0);
+            }
+            GameMenuView.output("success");
+
+        }else if(currentTool.getName().equals("fireThrower")){
+            for (Unit unit : Map.getInstanceMap().getMapCell(X, Y).getUnits()) {
+                unit.setCount(0);
+            }
+            Map.getInstanceMap().getMapCell(X,Y).setTool(currentTool);
+            currentTool.setX(X);
+            currentTool.setY(Y);
+            Map.getInstanceMap().getMapCell(currentTool.getX(),currentTool.getY()).setTool(null);
+
+            GameMenuView.output("success");
+        }else if(currentTool.getName().equals("battleRam")){
+            Map.getInstanceMap().getMapCell(X,Y).setBuilding(null);Map.getInstanceMap().getMapCell(X,Y).setPassable(true);
+        Map.getInstanceMap().getMapCell(X,Y).setTool(currentTool);
+        currentTool.setX(X);
+        currentTool.setY(Y);
+        Map.getInstanceMap().getMapCell(currentTool.getX(),currentTool.getY()).setTool(null);
+
+        GameMenuView.output("success");
+    }
+    }
 
     public static void moveUnitTo(int X, int Y) {
-        if (Map.getInstanceMap().getMapCell(X, Y).getTexture().equals(Texture.RIVER) || Map.getInstanceMap().getMapCell(X, Y).getTexture().equals(Texture.SEA) || Map.getInstanceMap().getMapCell(X, Y).getTexture().equals(Texture.SHALLOW_LAKE) || Map.getInstanceMap().getMapCell(X, Y).getTexture().equals(Texture.SMALL_POND) || Map.getInstanceMap().getMapCell(X, Y).getTexture().equals(Texture.BIG_POND)) {
+        if (!Map.getInstanceMap().getMapCell(X, Y).isPassable()) {
             GameMenuView.output("waterError");
-        } else if (Math.abs(X-currentUnits.get(0).getX() )> (currentUnits.get(0).getPeople().getSpeed() * 5)  ||  Math.abs(Y-currentUnits.get(0).getY() ) > (currentUnits.get(0).getPeople().getSpeed() * 5) ) {
+        } else if (NavigatorController.shortestPathIsLessThanLimit(NavigatorController.mapPassable(),currentUnits.get(0).getX(),currentUnits.get(0).getY(),X,Y,currentUnits.get(0).getPeople().getSpeed()*5 ) ){
             GameMenuView.output("speedError");
         } else {
 
@@ -483,6 +534,7 @@ public class GameMenuController extends MenuController {
 
     }
     public static void patroller(){
+
         for (Unit unit : patrolingUnits) {
             if(unit.getX()!=unit.getPatrolX1()||unit.getY()!=unit.getPatrolY1()){
                 int x=unit.getX(),y=unit.getY();
@@ -565,8 +617,12 @@ public class GameMenuController extends MenuController {
             }
             if (allyOffense == enemyDefense) {
 
-                Map.getInstanceMap().getMapCell(enemyX, enemyY).getUnits().clear();
-                Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(), currentUnits.get(0).getY()).getUnits().clear();
+                for (Unit unit : Map.getInstanceMap().getMapCell(enemyX, enemyY).getUnits()) {
+                    unit.setCount(0);
+                }
+                for (Unit unit : Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(), currentUnits.get(0).getY()).getUnits()) {
+                    unit.setCount(0);
+                }
                 if(Map.getInstanceMap().getMapCell(enemyX, enemyY).getBuilding()!=null){
                     Map.getInstanceMap().getMapCell(enemyX, enemyY).getBuilding().setHealth(Map.getInstanceMap().getMapCell(enemyX, enemyY).getBuilding().getHealth()-allyOffense);
 
@@ -578,7 +634,9 @@ public class GameMenuController extends MenuController {
 
             } else if (allyOffense >= enemyDefense) {
 
-                Map.getInstanceMap().getMapCell(enemyX, enemyY).getUnits().clear();
+                for (Unit unit : Map.getInstanceMap().getMapCell(enemyX, enemyY).getUnits()) {
+                    unit.setCount(0);
+                }
 
 
                 if(Map.getInstanceMap().getMapCell(enemyX, enemyY).getBuilding()!=null){
@@ -589,7 +647,9 @@ public class GameMenuController extends MenuController {
 
 
             } else {
-                Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(), currentUnits.get(0).getY()).getUnits().clear();
+                for (Unit unit : Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(), currentUnits.get(0).getY()).getUnits()) {
+                    unit.setCount(0);
+                }
                 GameMenuView.output("fightLoss");
 
 
@@ -778,7 +838,7 @@ public class GameMenuController extends MenuController {
             GameMenuView.output("buildingPlaced");
         } else {
             Map.getInstanceMap().getMapCell(X, Y).setTexture(type);
-            if(type.equals("sea")||type.equals("river")||type.equals("big pound")||type.equals("small pound")||type.equals("sttone")){
+            if(type.equals("sea")||type.equals("river")||type.equals("big pound")||type.equals("small pound")||type.equals("stone")){
                 Map.getInstanceMap().getMapCell(X, Y).setPassable(false);
             }
             GameMenuView.output("textureSet");

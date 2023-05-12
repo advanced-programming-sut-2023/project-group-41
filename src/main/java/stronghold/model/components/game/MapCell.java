@@ -113,7 +113,7 @@ public class MapCell {
     }
 
     public char showMovingSoldier(){
-        if(getUnits()!=null)
+        if(getUnits().size()!=0)
             return 'S';
         else
             return ' ';

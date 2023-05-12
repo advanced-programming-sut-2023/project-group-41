@@ -31,7 +31,7 @@ public class SignUpMenuController extends MenuController{
     }
 
     public static String generateRandomString() {
-        int length = 6; // minimum length of 6
+        int length = 8; // minimum length of 6
         StringBuilder sb = new StringBuilder();
         // add at least 1 uppercase letter
         sb.append((char) (RANDOM.nextInt(26) + 'A'));
