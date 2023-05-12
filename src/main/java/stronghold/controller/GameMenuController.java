@@ -447,9 +447,9 @@ public class GameMenuController extends MenuController {
     }
 
     public static void moveUnitTo(int X, int Y) {
-        if (Map.getInstanceMap().getMapCell(X, Y).getTexture().equals(Texture.RIVER) || Map.getInstanceMap().getMapCell(X, Y).getTexture().equals(Texture.SEA) || Map.getInstanceMap().getMapCell(X, Y).getTexture().equals(Texture.SHALLOW_LAKE) || Map.getInstanceMap().getMapCell(X, Y).getTexture().equals(Texture.SMALL_POND) || Map.getInstanceMap().getMapCell(X, Y).getTexture().equals(Texture.BIG_POND)) {
+        if (!Map.getInstanceMap().getMapCell(X, Y).isPassable()) {
             GameMenuView.output("waterError");
-        } else if (Math.abs(X-currentUnits.get(0).getX() )> (currentUnits.get(0).getPeople().getSpeed() * 5)  ||  Math.abs(Y-currentUnits.get(0).getY() ) > (currentUnits.get(0).getPeople().getSpeed() * 5) ) {
+        } else if (NavigatorController.shortestPathIsLessThanLimit(NavigatorController.mapPassable(),currentUnits.get(0).getX(),currentUnits.get(0).getY(),X,Y,currentUnits.get(0).getPeople().getSpeed()*5 ) ){
             GameMenuView.output("speedError");
         } else {
 
@@ -1160,7 +1160,7 @@ public class GameMenuController extends MenuController {
                 Tool tool = new Tool(4, "seigeTower", unit1.getX(), unit1.getY(), true);
                 Map.getInstanceMap().getMapCell(x, y).setTool(tool);
                 GameMenuView.output("success");
-                
+                //TODO: wall break
 
             } else {
                 GameMenuView.output("invalidEngNum");
