@@ -5,8 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="72fd4c0e-f2c3-4e13-85b9-d70f04a31b27" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/controller/GameMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/controller/GameMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/controller/TradeMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/controller/TradeMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/stronghold_jar/stronghold.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/stronghold_jar/stronghold.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/database/textcontent/GameMenuResponses.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/database/textcontent/GameMenuResponses.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/stronghold/controller/NavigatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/stronghold/controller/NavigatorTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +70,7 @@
       <recent name="stronghold.controller" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Stronghold">
+  <component name="RunManager" selected="JUnit.NavigatorTest.isAbleToNavigate">
     <configuration name="NavigatorTest.isAbleToNavigate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="stronghold" />
       <extension name="coverage">
@@ -172,11 +174,11 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.SignUpMenuControllerTest.testAll" />
+        <item itemvalue="JUnit.NavigatorTest.isAbleToNavigate" />
         <item itemvalue="JUnit.NavigatorTest.testAll" />
+        <item itemvalue="JUnit.SignUpMenuControllerTest.testAll" />
         <item itemvalue="JUnit.NavigatorTest.mapPassable" />
         <item itemvalue="JUnit.NavigatorTest.shortestPathIsLessThanLimit" />
-        <item itemvalue="JUnit.NavigatorTest.isAbleToNavigate" />
       </list>
     </recent_temporary>
   </component>
@@ -220,7 +222,7 @@
     <SUITE FILE_PATH="coverage/stronghold$SignUpMenuControllerTest_testAll.ic" NAME="SignUpMenuControllerTest.testAll Coverage Results" MODIFIED="1684827485987" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>stronghold.controller.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/stronghold$NavigatorTest_testAll.ic" NAME="NavigatorTest.testAll Coverage Results" MODIFIED="1684827454580" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/stronghold$NavigatorTest_testAll.ic" NAME="NavigatorTest.testAll Coverage Results" MODIFIED="1684838186953" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>stronghold.controller.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/stronghold$SignUpMenuControllerTest_generateRandomString.ic" NAME="SignUpMenuControllerTest.generateRandomString Coverage Results" MODIFIED="1683906807281" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
