@@ -46,7 +46,7 @@ public class TradeMenuController extends MenuController{
     public static void showNotification(){
         for(Trade trade: TradeDataBase.getTrades()){
                 if (!trade.getIsSeen()) {
-                    System.out.println(trade.getId() + ">> " + trade.getReceiver().getColor() + ", Sender: " + trade.getSender().getColor() + ", " + trade.getResourceType() + ", \nMessage: " + trade.getMessage());
+                    System.out.println(trade.getId() + ">> " + ", Sender: " + trade.getSender().getColor() + ", " + trade.getResourceType() + ", \nMessage: " + trade.getMessage());
                     trade.setSeen(true);
                 }
 
@@ -79,6 +79,7 @@ public class TradeMenuController extends MenuController{
             TradeMenuView.output("success");
             Trade trade = new Trade(resource, sender, message, price, number);
             TradeDataBase.addTrade(trade);
+            System.out.println(TradeDataBase.getTrades().size());
         }
     }
     public static void GovernmentsTradeList(){

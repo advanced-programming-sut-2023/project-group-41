@@ -13,6 +13,7 @@ import stronghold.model.components.game.building.*;
 import stronghold.model.components.game.enums.*;
 import stronghold.model.components.game.soldeirtype.*;
 import stronghold.view.GameMenuView;
+import stronghold.view.TradeMenuView;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -967,7 +968,7 @@ public class GameMenuController extends MenuController {
     public static void enterTradeMenu() {
         Scanner scanner = new Scanner(System.in);
         GameMenuView.output("enterTradeMenu");
-        TradeMenuController.run(scanner);
+        TradeMenuView.run(scanner);
 
     }
 
