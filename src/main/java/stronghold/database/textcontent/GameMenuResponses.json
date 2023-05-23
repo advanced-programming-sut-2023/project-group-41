@@ -29,7 +29,7 @@
   "success": "Success",
   "showPopularityFactors": "food/tax/religion/fear",
   "rate": "rate: ",
-  "waterError": "cant move to WATER or HIGHLANDS!",
+  "waterError": "Error! cant move to WATER or HIGHLANDS or not Passables!",
   "speedError": "move out of speed capacity!",
   "notFighter": "the selected unit can not fight man to man!",
   "notLongRanged": "the unit is not LongRanged",
@@ -41,7 +41,9 @@
   "foodError": "Error! not enough food!",
   "nextplayer": "nextPlayer",
   "tunnelerError": "Error! no tunneler found!",
-  "unitError": "there is no unit in the mentioned coordinates!",
+  "unitError": "Error!: there is no unit in the mentioned coordinates!",
+  "toolError": "Error!: there is no tool in the mentioned coordinates!",
+
   "shopError": "select shop to continue to shop menu!",
   "enterShopMenu": "you are now in shop menu",
   "enterMapMenu": "you are now in map menu",
@@ -59,15 +61,17 @@
   "Texture": "texture: $VAR1$",
   "People": "$VAR1 :  $VAR2$",
   "Building": "---$VAR3$",
-  "engineerGotOil": "the engineer went to get oil",
+
   "wrongSoldierType": "Error! entered a wrong type",
   "sthIsHere": "there is sth in here",
   "popularity": "popularity: $VAR1$",
   "buildingError": "Error! there is a building here!",
   "notyourtroop": "Error! not your troops",
+  "notyourtool": "Error! not your tool",
   "wellcome" : "the game has started: player 1",
   "prebuilding": "Error!  there is a building here",
   "ally": "Error! you are hitting allies",
+  "nearSoldier": "there is soldier near here",
 
 
 

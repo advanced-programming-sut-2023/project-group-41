@@ -8,7 +8,8 @@ import java.util.regex.Pattern;
 public enum UnarmedEnum {
     tunneler("tunneler",4,1,1,3),
     ladderMen("ladderMen",4,1,1,0),
-    engineer("engineer",3,1,1,0);
+    engineer("engineer",3,1,1,0),
+    worker("worker", 3, 0, 0, 0);
     private String type;
     private int speed;
     private int price;

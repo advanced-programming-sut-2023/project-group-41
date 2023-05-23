@@ -1,5 +1,6 @@
 package stronghold.model.components.game;
 
+import stronghold.controller.GameMenuController;
 import stronghold.model.components.game.MapCell;
 import stronghold.model.components.game.building.BuildingType;
 import stronghold.model.components.game.building.Castle;
@@ -95,4 +96,19 @@ public class Map {
         }
         return false;
     }
+
+    public static boolean isSoldierNear(int X, int Y, Government government){
+        for (int i = -1; i <= 1 ; i++) {
+            for (int j = -1; j <= 1; j++) {
+                if (getInstanceMap().validMapCell(X + i, Y + j)){
+                    for (Unit unit : getInstanceMap().getMapCell(X + i, Y + j).getUnits()) {
+                        if (!unit.getPeople().getOwner().equals(government))
+                            return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
 }

@@ -1,8 +1,5 @@
 package stronghold.controller;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import stronghold.model.components.game.*;
 
 import java.lang.Math;
@@ -15,18 +12,14 @@ import stronghold.model.components.game.building.*;
 
 import stronghold.model.components.game.enums.*;
 import stronghold.model.components.game.soldeirtype.*;
-import stronghold.model.components.general.User;
 import stronghold.view.GameMenuView;
 import stronghold.view.MapMenuView;
 import stronghold.view.ShopMenuView;
 import stronghold.view.TradeMenuView;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
-import java.util.regex.Matcher;
 
 import static stronghold.model.components.game.enums.Direction.RANDOM;
 import static stronghold.model.components.game.enums.Resource.*;
@@ -37,6 +30,15 @@ public class GameMenuController extends MenuController {
     private static int playerNum;
     private static int selectedBuildingX;
     private static int selectedBuildingY;
+    private static Tool currentTool;
+
+    public static Tool getCurrentTool() {
+        return currentTool;
+    }
+
+    public static void setCurrentTool(Tool currentTool) {
+        GameMenuController.currentTool = currentTool;
+    }
 
     public static int getSelectedBuildingX() {
         return selectedBuildingX;
@@ -150,7 +152,7 @@ public class GameMenuController extends MenuController {
     }
 
     public static void endOfRound(){
-
+         patroller();
         for (int i = 1; i < playerNum; i++) {
            setCurrentPlayer( getGovernmentByColor(i));
             currentPlayer.allBuildingActions();
@@ -161,12 +163,7 @@ public class GameMenuController extends MenuController {
             currentPlayer.unitKiller();
 
         }
-        for (int i = 0; i < Map.getInstanceMap().getSize(); i++) {
-            for (int j = 0; j < Map.getInstanceMap().getSize(); j++) {
-                endOfRoundBuildingAttacker(Map.getInstanceMap().getMapCell(i,j));
-            }
 
-        }
 
     }
 
@@ -262,6 +259,13 @@ public class GameMenuController extends MenuController {
         } else if (currentPlayer.getBuildingNum(type.getBuildingType()) != 1 && type.getBuildingType().equals(StorageType.FOOD_STOCK_PILE) && !Map.getInstanceMap().isBuildingHere(X, Y, type.getBuildingType())) {
             GameMenuView.output("nearBuilding", (Object) type.getBuildingType().getRegex());
             currentPlayer.removeBuilding(type);
+        }  else if (type.getBuildingType().equals(CastleType.STAIR) &&
+                !Map.getInstanceMap().isBuildingHere(X, Y, CastleType.SHORT_WALL) &&
+                !Map.getInstanceMap().isBuildingHere(X, Y, CastleType.THICK_WALL) &&
+                !Map.getInstanceMap().isBuildingHere(X, Y, CastleType.SMALL_STONE_GATEHOUSE) &&
+                !Map.getInstanceMap().isBuildingHere(X, Y, CastleType.BIG_STONE_GATEHOUSE)) {
+            GameMenuView.output("nearBuilding", (Object) type.getBuildingType().getRegex());
+            currentPlayer.removeBuilding(type);
         } else if (type.getBuildingType().equals(ConverterType.Ox_TETHER) && !Map.getInstanceMap().isBuildingNear(X, Y, ResourceMakerType.QUARRY)) {
             GameMenuView.output("nearBuilding", (Object) ResourceMakerType.QUARRY.getRegex());
             currentPlayer.removeBuilding(type);
@@ -282,6 +286,8 @@ public class GameMenuController extends MenuController {
         Building building = Map.getInstanceMap().getMapCell(X, Y).getBuilding();
         if (building == null) {
             GameMenuView.output("noBuildingAvailable");
+        } else if (!building.getOwnership().equals(currentPlayer)) {
+            GameMenuView.output("notyourtroop");
         } else {
             currentBuilding = building;
             setSelectedBuildingX(X);
@@ -384,23 +390,7 @@ public class GameMenuController extends MenuController {
                         GameMenuView.output("success");
                     }
                 }
-            }else  if(FighterEnum.getFighterType(type)!=null) {
-                if (UnarmedEnum.getUnarmedType(type) != null) {
-                    if (currentPlayer.getBalance() < count * UnarmedEnum.getUnarmedType(type).getPrice()) {
-                        GameMenuView.output("balanceError");
-                    } else {
-                        Unarmed fighter = new Unarmed(UnarmedEnum.getUnarmedType(type));
-                        Unit unit = new Unit(selectedBuildingX, selectedBuildingY, fighter, count);
-                        currentPlayer.setBalance(currentPlayer.getBalance() - count * UnarmedEnum.getUnarmedType(type).getPrice());
-                        Map.getInstanceMap().getMapCell(getSelectedBuildingX(), getSelectedBuildingY()).getUnits().add(unit);
-                        currentPlayer.setPopulation(currentPlayer.getPopulation() - count);
-                        currentPlayer.getUnits().add(unit);
-                        GameMenuView.output("success");
-                    }
-                }
             }
-
-
         } else if (currentBuilding.getBuildingType().equals(DevelopmentType.CHURCH) ||
                 currentBuilding.getBuildingType().equals(DevelopmentType.CATHEDRAL)) {
             if(type.equals("blackMonk")){
@@ -418,16 +408,37 @@ public class GameMenuController extends MenuController {
                 GameMenuView.output("notblackMonk");
             }
 
-        } else {
+        } else if(currentBuilding.getBuildingType().equals(StorageType.ENGINEER_GUILD) ){
+            if (UnarmedEnum.getUnarmedType(type) != null) {
+                if (currentPlayer.getBalance() < count * UnarmedEnum.getUnarmedType(type).getPrice()) {
+                    GameMenuView.output("balanceError");
+                } else {
+                    Unarmed fighter = new Unarmed(UnarmedEnum.getUnarmedType(type));
+                    Unit unit = new Unit(selectedBuildingX, selectedBuildingY, fighter, count);
+                    currentPlayer.setBalance(currentPlayer.getBalance() - count * UnarmedEnum.getUnarmedType(type).getPrice());
+                    Map.getInstanceMap().getMapCell(getSelectedBuildingX(), getSelectedBuildingY()).getUnits().add(unit);
+                    currentPlayer.setPopulation(currentPlayer.getPopulation() - count);
+                    currentPlayer.getUnits().add(unit);
+                    if (UnarmedEnum.getUnarmedType(type).equals(UnarmedEnum.engineer)) currentPlayer.addResources(ENGINEER, count, false);
+                    else if (UnarmedEnum.getUnarmedType(type).equals(UnarmedEnum.worker)) currentPlayer.addResources(WORKER, count, false);
+                    GameMenuView.output("success");
+                }
+            }
+        }else {
             GameMenuView.output("selectUnitBuilding");
         }
-    }
+
+        }
+
+
 
     public static void repair() {
-        if (!currentBuilding.getClass().getSimpleName().equals("Castle")) {
+        if (currentBuilding == null) {
+            GameMenuView.output("selectBuilding");
+        } else if (!currentBuilding.getClass().getSimpleName().equals("Castle")){
             GameMenuView.output("incorrectBuildingType");
-        } else if (false) {
-            // TODO: stopping repair when soldier are near
+        } else if (Map.isSoldierNear(getSelectedBuildingX(), getSelectedBuildingY(), currentPlayer)) {
+            GameMenuView.output("nearSoldier");
         } else {
             Castle castle = (Castle) currentBuilding;
             castle.repair();
@@ -448,17 +459,72 @@ public class GameMenuController extends MenuController {
             GameMenuView.output("success");
         }
     }
+    public static void selectTool(int X, int Y) {
+        if (Map.getInstanceMap().getMapCell(X, Y).getTool()==null) {
+            GameMenuView.output("toolError");
+        } else if(!Map.getInstanceMap().getMapCell(X, Y).getTool().getOwner().equals(currentPlayer)){
+            GameMenuView.output("notyourtool");
+
+        }else {
+            setCurrentTool( Map.getInstanceMap().getMapCell(X, Y).getTool());
+
+            GameMenuView.output("success");
+        }
+    }
+    public static void actionTool(int X,int Y){
+        if (Map.getInstanceMap().getMapCell(X, Y).getTool()==null) {
+            GameMenuView.output("toolError");
+        }else if(!Map.getInstanceMap().getMapCell(X, Y).getTool().getOwner().equals(currentPlayer)){
+            GameMenuView.output("notyourtool");
+
+        }else if(currentTool.getName().equals("catapult")||currentTool.getName().equals("bigCatapult")){
+            Map.getInstanceMap().getMapCell(X,Y).setBuilding(null);
+            Map.getInstanceMap().getMapCell(X,Y).setPassable(true);
+            for (Unit unit : Map.getInstanceMap().getMapCell(X, Y).getUnits()) {
+                unit.setCount(0);
+            }
+            GameMenuView.output("success");
+
+        }else if(currentTool.getName().equals("fireThrower")){
+            for (Unit unit : Map.getInstanceMap().getMapCell(X, Y).getUnits()) {
+                unit.setCount(0);
+            }
+            Map.getInstanceMap().getMapCell(X,Y).setTool(currentTool);
+            currentTool.setX(X);
+            currentTool.setY(Y);
+            Map.getInstanceMap().getMapCell(currentTool.getX(),currentTool.getY()).setTool(null);
+
+            GameMenuView.output("success");
+        }else if(currentTool.getName().equals("battleRam")){
+            Map.getInstanceMap().getMapCell(X,Y).setBuilding(null);Map.getInstanceMap().getMapCell(X,Y).setPassable(true);
+        Map.getInstanceMap().getMapCell(X,Y).setTool(currentTool);
+        currentTool.setX(X);
+        currentTool.setY(Y);
+        Map.getInstanceMap().getMapCell(currentTool.getX(),currentTool.getY()).setTool(null);
+
+        GameMenuView.output("success");
+    }
+    }
 
     public static void moveUnitTo(int X, int Y) {
-        if (Map.getInstanceMap().getMapCell(X, Y).getTexture().equals(Texture.RIVER) || Map.getInstanceMap().getMapCell(X, Y).getTexture().equals(Texture.SEA) || Map.getInstanceMap().getMapCell(X, Y).getTexture().equals(Texture.SHALLOW_LAKE) || Map.getInstanceMap().getMapCell(X, Y).getTexture().equals(Texture.SMALL_POND) || Map.getInstanceMap().getMapCell(X, Y).getTexture().equals(Texture.BIG_POND)) {
+        if (Objects.requireNonNull(Map.getInstanceMap().getMapCell(X, Y).getBuilding(), "") instanceof Castle || !Map.getInstanceMap().getMapCell(X, Y).isPassable()) {
             GameMenuView.output("waterError");
-        } else if (Math.abs(X-currentUnits.get(0).getX() )> (currentUnits.get(0).getPeople().getSpeed() * 5)  ||  Math.abs(Y-currentUnits.get(0).getY() ) > (currentUnits.get(0).getPeople().getSpeed() * 5) ) {
+        } else if (NavigatorController.shortestPathIsLessThanLimit(NavigatorController.mapPassable(),currentUnits.get(0).getX(),currentUnits.get(0).getY(),X,Y,currentUnits.get(0).getPeople().getSpeed()*5 ) ){
             GameMenuView.output("speedError");
         } else {
 
             for (Unit unit : currentUnits) {
-
-                Map.getInstanceMap().getMapCell(X, Y).addUnit(unit);
+                if (Map.getInstanceMap().getMapCell(X, Y).getBuilding() != null){
+                    if (Map.getInstanceMap().getMapCell(X, Y).getBuilding() instanceof Castle){
+                        Castle castle = (Castle) Map.getInstanceMap().getMapCell(X, Y).getBuilding();
+                        if (castle.getSize() > unit.getCount()) {
+                            Map.getInstanceMap().getMapCell(X, Y).addUnit(unit);
+                            castle.setSize(castle.getSize() - unit.getCount());
+                        }
+                    }
+                } else {
+                    Map.getInstanceMap().getMapCell(X, Y).addUnit(unit);
+                }
 
             }
             Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(), currentUnits.get(0).getY()).getUnits().clear();
@@ -483,6 +549,7 @@ public class GameMenuController extends MenuController {
 
     }
     public static void patroller(){
+
         for (Unit unit : patrolingUnits) {
             if(unit.getX()!=unit.getPatrolX1()||unit.getY()!=unit.getPatrolY1()){
                 int x=unit.getX(),y=unit.getY();
@@ -565,8 +632,12 @@ public class GameMenuController extends MenuController {
             }
             if (allyOffense == enemyDefense) {
 
-                Map.getInstanceMap().getMapCell(enemyX, enemyY).getUnits().clear();
-                Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(), currentUnits.get(0).getY()).getUnits().clear();
+                for (Unit unit : Map.getInstanceMap().getMapCell(enemyX, enemyY).getUnits()) {
+                    unit.setCount(0);
+                }
+                for (Unit unit : Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(), currentUnits.get(0).getY()).getUnits()) {
+                    unit.setCount(0);
+                }
                 if(Map.getInstanceMap().getMapCell(enemyX, enemyY).getBuilding()!=null){
                     Map.getInstanceMap().getMapCell(enemyX, enemyY).getBuilding().setHealth(Map.getInstanceMap().getMapCell(enemyX, enemyY).getBuilding().getHealth()-allyOffense);
 
@@ -578,7 +649,9 @@ public class GameMenuController extends MenuController {
 
             } else if (allyOffense >= enemyDefense) {
 
-                Map.getInstanceMap().getMapCell(enemyX, enemyY).getUnits().clear();
+                for (Unit unit : Map.getInstanceMap().getMapCell(enemyX, enemyY).getUnits()) {
+                    unit.setCount(0);
+                }
 
 
                 if(Map.getInstanceMap().getMapCell(enemyX, enemyY).getBuilding()!=null){
@@ -589,7 +662,9 @@ public class GameMenuController extends MenuController {
 
 
             } else {
-                Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(), currentUnits.get(0).getY()).getUnits().clear();
+                for (Unit unit : Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(), currentUnits.get(0).getY()).getUnits()) {
+                    unit.setCount(0);
+                }
                 GameMenuView.output("fightLoss");
 
 
@@ -717,7 +792,7 @@ public class GameMenuController extends MenuController {
         if(equipmentName.equals("airDefense")){
             buildUnitAirDefense(currentUnits.get(0).getX(),currentUnits.get(0).getY());
         } else if(equipmentName.equals("seigeTower")){
-            buildSeigeTower(currentUnits.get(0).getX(),currentUnits.get(0).getY());
+            buildSiegeTower(currentUnits.get(0).getX(),currentUnits.get(0).getY());
         } else if(equipmentName.equals("fireThrower")){
             buildFireThrower(currentUnits.get(0).getX(),currentUnits.get(0).getY());
         }else if(equipmentName.equals("catapult")){
@@ -778,7 +853,7 @@ public class GameMenuController extends MenuController {
             GameMenuView.output("buildingPlaced");
         } else {
             Map.getInstanceMap().getMapCell(X, Y).setTexture(type);
-            if(type.equals("sea")||type.equals("river")||type.equals("big pound")||type.equals("small pound")||type.equals("sttone")){
+            if(type.equals("sea")||type.equals("river")||type.equals("big pound")||type.equals("small pound")||type.equals("stone")){
                 Map.getInstanceMap().getMapCell(X, Y).setPassable(false);
             }
             GameMenuView.output("textureSet");
@@ -1147,12 +1222,12 @@ public class GameMenuController extends MenuController {
 
 
     }
-    public static void buildSeigeTower(int x, int y) {
+    public static void buildSiegeTower(int x, int y) {
 
         Unit unit1 = Map.getInstanceMap().getUnarmed(Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(), currentUnits.get(0).getY()), "engineer");
         if (unit1 != null) {
             if( unit1.getCount() >= 4){
-                Tool tool = new Tool(4, "seigeTower", unit1.getX(), unit1.getY(), true);
+                Tool tool = new Tool(4, "siegeTower", unit1.getX(), unit1.getY(), true);
                 Map.getInstanceMap().getMapCell(x, y).setTool(tool);
                 GameMenuView.output("success");
                 //TODO: wall break
@@ -1162,6 +1237,44 @@ public class GameMenuController extends MenuController {
             }}
 
 
+    }
+
+    public static void catcherGate(){
+        if (currentBuilding == null){
+            GameMenuView.output("selectBuilding");
+        } else if(currentBuilding.getBuildingType().equals(CastleType.SMALL_STONE_GATEHOUSE) ||
+                currentBuilding.getBuildingType().equals(CastleType.BIG_STONE_GATEHOUSE) ) {
+            Map.getInstanceMap().getMapCell(getSelectedBuildingX(), getSelectedBuildingY()).setPassable(true);
+            GameMenuView.output("Success");
+        } else {
+            GameMenuView.output("incorrectBuildingType");
+        }
+    }
+
+    public static void moveToStair(){
+        if (currentBuilding == null){
+            GameMenuView.output("selectBuilding");
+        } else if (currentBuilding.getBuildingType().equals(CastleType.STAIR)) {
+            for (int i = -1; i <= 1 ; i++) {
+                for (int j = -1; j <= 1; j++) {
+                    if (Map.getInstanceMap().validMapCell(getSelectedBuildingX() + i, getSelectedBuildingY() + j)){
+                        Map.getInstanceMap().getMapCell(getSelectedBuildingX() + i, getSelectedBuildingY() + j).setPassable(true);
+                    }
+                }
+            }
+            GameMenuView.output("Success");
+        } else {
+            GameMenuView.output("incorrectBuildingType");
+        }
+    }
+
+    public static void moveToSiegeTent(int X, int Y){
+        if (Map.getInstanceMap().getMapCell(X, Y).getTool().getName().equals("siegeTower")) {
+            Map.getInstanceMap().getMapCell(X, Y).setPassable(true);
+            GameMenuView.output("Success");
+        } else {
+            GameMenuView.output("incorrectBuildingType");
+        }
     }
 
 

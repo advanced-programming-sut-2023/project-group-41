@@ -43,8 +43,12 @@ public class MainMenuView extends MenuView{
             Matcher loadGameMatcher = getJSONRegexMatcher(command, "loadGame", MainMenuRegexObj);
             Matcher profileMenuMatcher = getJSONRegexMatcher(command, "profileMenu", MainMenuRegexObj);
 
-            if (command.matches("user\\s+logout")) {
-                output("logout");
+            if (command.matches("\\s*exit\\s*")) {
+                MainMenuView.output("exit");
+                System.exit(0);
+            }
+            else if (command.matches("user\\s+logout")) {
+                MainMenuView.output("logout");
                 JsonElement prefsElement;
                 String pathToPrefs = "src/main/java/stronghold/database/datasets/preferences.json";
                 try {
@@ -88,6 +92,7 @@ public class MainMenuView extends MenuView{
                 output("invalid");
             }
         }
+
     }
     public static void output(String code, Object... params){
         String pathToJSON = "src/main/java/stronghold/database/textcontent/MainMenuResponses.json";
@@ -100,9 +105,5 @@ public class MainMenuView extends MenuView{
         return scanner.nextLine();
     }
 
-//    public static void main(String[] args) {
-//        User user=new User("asdf","Asdf","Asd","sdfa",1,"1","!");
-//        Scanner scanner=new Scanner(System.in);
-//        run(user,scanner);
-//    }
+
 }

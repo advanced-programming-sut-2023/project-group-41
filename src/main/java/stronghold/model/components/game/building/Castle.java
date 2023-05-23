@@ -8,6 +8,10 @@ import stronghold.model.components.game.People;
 import stronghold.model.components.general.User;
 
 public class Castle extends Building {
+    public void setSize(int size) {
+        this.size = size;
+    }
+
     private CastleType castleType;
     private int size;
     private HashMap<People, Integer> peopleMap;
