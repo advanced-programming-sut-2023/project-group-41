@@ -202,10 +202,10 @@ public class GameMenuView extends MenuView {
                 enterMapMenu();
 
             } else if (getJSONRegexMatcher(command, "enterShopMenu", gameMenuRegexObj).matches()) {
-                ///da2
+                enterShopMenu();
 
             } else if (getJSONRegexMatcher(command, "enterTradeMenu", gameMenuRegexObj).matches()) {
-                ///da3
+                enterTradeMenu();
 
             } else if (getJSONRegexMatcher(command, "nextPlayer", gameMenuRegexObj).matches()) {
                 nextPlayer();

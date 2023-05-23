@@ -37,14 +37,14 @@ public class MainMenuView extends MenuView{
         JsonObject MainMenuRegexObj = regexElement.getAsJsonObject();
 
         while (true) {
-            String command = MainMenuView.input(scanner).trim();
+            String command = input(scanner).trim();
 
             Matcher startGameMatcher = getJSONRegexMatcher(command, "startNewGame", MainMenuRegexObj);
             Matcher loadGameMatcher = getJSONRegexMatcher(command, "loadGame", MainMenuRegexObj);
             Matcher profileMenuMatcher = getJSONRegexMatcher(command, "profileMenu", MainMenuRegexObj);
 
             if (command.matches("user\\s+logout")) {
-                MainMenuView.output("logout");
+                output("logout");
                 JsonElement prefsElement;
                 String pathToPrefs = "src/main/java/stronghold/database/datasets/preferences.json";
                 try {
@@ -85,7 +85,7 @@ public class MainMenuView extends MenuView{
 
 
             } else{
-                MainMenuView.output("invalid");
+                output("invalid");
             }
         }
     }

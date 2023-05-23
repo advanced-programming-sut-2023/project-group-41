@@ -17,6 +17,9 @@ import stronghold.model.components.game.enums.*;
 import stronghold.model.components.game.soldeirtype.*;
 import stronghold.model.components.general.User;
 import stronghold.view.GameMenuView;
+import stronghold.view.MapMenuView;
+import stronghold.view.ShopMenuView;
+import stronghold.view.TradeMenuView;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -892,7 +895,7 @@ public class GameMenuController extends MenuController {
     public static void enterTradeMenu() {
         Scanner scanner = new Scanner(System.in);
         GameMenuView.output("enterTradeMenu");
-        TradeMenuController.run(scanner);
+        TradeMenuView.run(scanner);
 
     }
 
@@ -906,7 +909,7 @@ public class GameMenuController extends MenuController {
         if (currentBuilding.getRegex().equals("post")) {
             Scanner scanner = new Scanner(System.in);
             GameMenuView.output("enterShopMenu");
-            ShopMenuController.run(scanner);
+            ShopMenuView.run(scanner);
 
         } else {
             GameMenuView.output("shopError");
@@ -918,7 +921,7 @@ public class GameMenuController extends MenuController {
     public static void enterMapMenu() {
         Scanner scanner = new Scanner(System.in);
         GameMenuView.output("enterMapMenu");
-        MapMenuController.run(scanner);
+        MapMenuView.run(scanner);
 
     }
 
