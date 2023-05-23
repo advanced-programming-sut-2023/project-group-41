@@ -69,10 +69,10 @@ public class MainMenuView extends MenuView{
                         IOException e) {
                     throw new RuntimeException(e);
                 }
-                SignUpMenuController.run(scanner);
+                SignUpLoginView.run(scanner);
                 break;
 
-            } else if ((startGameMatcher = getJSONRegexMatcher(command, "startGame", MainMenuRegexObj)).matches()){
+            } else if ((startGameMatcher = getJSONRegexMatcher(command, "startNewGame", MainMenuRegexObj)).matches()){
                 int i=Integer.parseInt(startGameMatcher.group("opponent"));
                 int j=Integer.parseInt(startGameMatcher.group("rounds"));
                 Scanner scanner1=new Scanner(System.in);
