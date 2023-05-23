@@ -221,8 +221,9 @@ public class GameMenuController extends MenuController {
     }
 
     public static void fearRate(int rate) {
-        GameMenuView.output("rate");
-        System.out.println(currentPlayer.getFearRate());
+        currentPlayer.setFearRate(rate);
+        GameMenuView.output("success");
+        //System.out.println(currentPlayer.getFearRate());
 
     }
 
@@ -507,7 +508,7 @@ public class GameMenuController extends MenuController {
     }
 
     public static void moveUnitTo(int X, int Y) {
-        if (Objects.requireNonNull(Map.getInstanceMap().getMapCell(X, Y).getBuilding(), "") instanceof Castle || !Map.getInstanceMap().getMapCell(X, Y).isPassable()) {
+        if ( !Map.getInstanceMap().getMapCell(X, Y).isPassable()) {
             GameMenuView.output("waterError");
         } else if (NavigatorController.shortestPathIsLessThanLimit(NavigatorController.mapPassable(),currentUnits.get(0).getX(),currentUnits.get(0).getY(),X,Y,currentUnits.get(0).getPeople().getSpeed()*5 ) ){
             GameMenuView.output("speedError");
@@ -1029,7 +1030,7 @@ public class GameMenuController extends MenuController {
             i++;
         }
         currentPlayer.setPopularity(currentPlayer.getPopularity() + i - 1);
-        currentPlayer.setPopularity(currentPlayer.getPopularity() + (-4 * currentPlayer.getFoodRate()));
+        currentPlayer.setPopularity(currentPlayer.getPopularity() - (-4 * currentPlayer.getFoodRate()));
         if (currentPlayer.getTaxRate() <= 0) {
             currentPlayer.setPopularity(currentPlayer.getPopularity() + ((-2 * currentPlayer.getTaxRate()) + 1));
         } else if (currentPlayer.getTaxRate() > 0 && currentPlayer.getTaxRate() <= 4) {
