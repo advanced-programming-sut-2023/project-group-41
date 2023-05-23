@@ -17,6 +17,10 @@ public class Unarmed extends People {
 
     }
 
+    public UnarmedEnum getUnarmedEnum() {
+        return unarmedEnum;
+    }
+
     public String getType() {
         return type;
     }
