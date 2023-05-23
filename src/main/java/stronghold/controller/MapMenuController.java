@@ -24,6 +24,7 @@ public class MapMenuController extends MenuController {
     private static int yCordinate;
 
     public static void showMap(int X, int Y) {
+
         if (X - 4 < 1) {
             X = 1;
         }
