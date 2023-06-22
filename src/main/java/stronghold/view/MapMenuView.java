@@ -3,10 +3,10 @@ package stronghold.view;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import stronghold.model.components.game.Map;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.Map;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 
@@ -35,7 +35,7 @@ public class MapMenuView {
             if(command.matches("back")){
                 MapMenuView.output("back");
                 break;
-            } else if ((showMap =getJSONRegexMatcher(command, "showMap", menuRegexPatternsObject)).matches()) {
+            } else if ((showMap = getJSONRegexMatcher(command, "showMap", menuRegexPatternsObject)).matches()) {
                 showMap(Integer.parseInt(showMap.group("x")),Integer.parseInt(showMap.group("y")));
             } else if ((mapShift=getJSONRegexMatcher(command, "mapShift", menuRegexPatternsObject)).matches()) {
                 String  x="!23123",y="rewrwe rw";

@@ -37,7 +37,7 @@ public class MainMenuView extends MenuView{
         JsonObject MainMenuRegexObj = regexElement.getAsJsonObject();
 
         while (true) {
-            String command = MainMenuView.input(scanner).trim();
+            String command = input(scanner).trim();
 
             Matcher startGameMatcher = getJSONRegexMatcher(command, "startNewGame", MainMenuRegexObj);
             Matcher loadGameMatcher = getJSONRegexMatcher(command, "loadGame", MainMenuRegexObj);
@@ -69,10 +69,10 @@ public class MainMenuView extends MenuView{
                         IOException e) {
                     throw new RuntimeException(e);
                 }
-                SignUpMenuController.run(scanner);
+                SignUpLoginView.run(scanner);
                 break;
 
-            } else if ((startGameMatcher = getJSONRegexMatcher(command, "startGame", MainMenuRegexObj)).matches()){
+            } else if ((startGameMatcher = getJSONRegexMatcher(command, "startNewGame", MainMenuRegexObj)).matches()){
                 int i=Integer.parseInt(startGameMatcher.group("opponent"));
                 int j=Integer.parseInt(startGameMatcher.group("rounds"));
                 Scanner scanner1=new Scanner(System.in);
@@ -89,7 +89,7 @@ public class MainMenuView extends MenuView{
 
 
             } else{
-                MainMenuView.output("invalid");
+                output("invalid");
             }
         }
 
@@ -105,9 +105,5 @@ public class MainMenuView extends MenuView{
         return scanner.nextLine();
     }
 
-//    public static void main(String[] args) {
-//        User user=new User("asdf","Asdf","Asd","sdfa",1,"1","!");
-//        Scanner scanner=new Scanner(System.in);
-//        run(user,scanner);
-//    }
+
 }

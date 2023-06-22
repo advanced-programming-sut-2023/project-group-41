@@ -1,8 +1,8 @@
 {
 
-  "invalid": "Invalid command!",
+  "invalid": "Error!: Invalid command!",
   "back": "you are back in GameMenu!",
-  "bondError": "out of bonds!",
+  "bondError": "Error!: out of bounds!",
   "texture": "texture: $VAR1$",
   "building": "building: $VAR1$",
   "unit": "unit: $VAR1$ $VAR2$"

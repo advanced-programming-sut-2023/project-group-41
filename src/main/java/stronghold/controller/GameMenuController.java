@@ -13,6 +13,9 @@ import stronghold.model.components.game.building.*;
 import stronghold.model.components.game.enums.*;
 import stronghold.model.components.game.soldeirtype.*;
 import stronghold.view.GameMenuView;
+import stronghold.view.MapMenuView;
+import stronghold.view.ShopMenuView;
+import stronghold.view.TradeMenuView;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -218,8 +221,9 @@ public class GameMenuController extends MenuController {
     }
 
     public static void fearRate(int rate) {
-        GameMenuView.output("rate");
-        System.out.println(currentPlayer.getFearRate());
+        currentPlayer.setFearRate(rate);
+        GameMenuView.output("success");
+        //System.out.println(currentPlayer.getFearRate());
 
     }
 
@@ -504,7 +508,7 @@ public class GameMenuController extends MenuController {
     }
 
     public static void moveUnitTo(int X, int Y) {
-        if (Objects.requireNonNull(Map.getInstanceMap().getMapCell(X, Y).getBuilding(), "") instanceof Castle || !Map.getInstanceMap().getMapCell(X, Y).isPassable()) {
+        if ( !Map.getInstanceMap().getMapCell(X, Y).isPassable()) {
             GameMenuView.output("waterError");
         } else if (NavigatorController.shortestPathIsLessThanLimit(NavigatorController.mapPassable(),currentUnits.get(0).getX(),currentUnits.get(0).getY(),X,Y,currentUnits.get(0).getPeople().getSpeed()*5 ) ){
             GameMenuView.output("speedError");
@@ -967,7 +971,7 @@ public class GameMenuController extends MenuController {
     public static void enterTradeMenu() {
         Scanner scanner = new Scanner(System.in);
         GameMenuView.output("enterTradeMenu");
-        TradeMenuController.run(scanner);
+        TradeMenuView.run(scanner);
 
     }
 
@@ -981,7 +985,7 @@ public class GameMenuController extends MenuController {
         if (currentBuilding.getRegex().equals("post")) {
             Scanner scanner = new Scanner(System.in);
             GameMenuView.output("enterShopMenu");
-            ShopMenuController.run(scanner);
+            ShopMenuView.run(scanner);
 
         } else {
             GameMenuView.output("shopError");
@@ -993,7 +997,7 @@ public class GameMenuController extends MenuController {
     public static void enterMapMenu() {
         Scanner scanner = new Scanner(System.in);
         GameMenuView.output("enterMapMenu");
-        MapMenuController.run(scanner);
+        MapMenuView.run(scanner);
 
     }
 
@@ -1026,7 +1030,7 @@ public class GameMenuController extends MenuController {
             i++;
         }
         currentPlayer.setPopularity(currentPlayer.getPopularity() + i - 1);
-        currentPlayer.setPopularity(currentPlayer.getPopularity() + (-4 * currentPlayer.getFoodRate()));
+        currentPlayer.setPopularity(currentPlayer.getPopularity() - (-4 * currentPlayer.getFoodRate()));
         if (currentPlayer.getTaxRate() <= 0) {
             currentPlayer.setPopularity(currentPlayer.getPopularity() + ((-2 * currentPlayer.getTaxRate()) + 1));
         } else if (currentPlayer.getTaxRate() > 0 && currentPlayer.getTaxRate() <= 4) {
