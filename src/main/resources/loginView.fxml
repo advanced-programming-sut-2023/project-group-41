@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="300.0" prefWidth="400.0" style="-fx-background-color: #303056;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stronghold.database.graphical.resources.LoginView">
+   <children>
+      <VBox fillWidth="false" layoutX="1.0" prefHeight="300.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0" />
+      <Label alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="70.0" prefWidth="400.0" text="Login to your account" textAlignment="CENTER" textFill="#edb921">
+         <font>
+            <Font name="Arial Bold" size="25.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
