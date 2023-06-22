@@ -1,5 +1,9 @@
 package stronghold.view;
 
+import javafx.scene.effect.MotionBlur;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseDragEvent;
 import stronghold.controller.GameMenuController;
 import stronghold.controller.sampleController;
 
@@ -19,14 +23,21 @@ import javafx.stage.Popup;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import stronghold.model.components.game.Government;
+import stronghold.model.components.game.Map;
+import stronghold.model.components.game.MapCell;
 import stronghold.model.components.game.enums.Resource;
+import stronghold.model.components.game.enums.Texture;
 import stronghold.model.components.game.trade.Trade;
 import stronghold.model.components.game.trade.TradeDataBase;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import stronghold.view.graphics.GameView;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.Random;
+
+import static stronghold.view.graphics.GameView.motionBlurEffect;
 
 public class sampleView extends Application {
     public static Stage stage;
@@ -60,13 +71,39 @@ public class sampleView extends Application {
         Rectangle b=new Rectangle(1530,200);
         b.setX(0);
         b.setY(700);
-        b.setFill(new ImagePattern(new Image(new FileInputStream("F:\\Stronghold\\project-group-41\\src\\main\\java\\stronghold\\database\\Image\\back2.jpg"))));
+        b.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/back2.jpg"))));
+
+        Pane gamePane = new Pane();
+
+        MotionBlur motionBlur = new MotionBlur();
+
+        Map.getInstanceMap().setSize(200);
+
+        for(int i = 0; i < 9000;i++){
+            Map.getInstanceMap().getMapCell(new Random().nextInt(200),new Random().nextInt(200))
+                    .setTexture(Texture.SEA);
+        }
+        for(int i = 0;i < Map.getInstanceMap().getSize();i++){
+            for (int j = 0; j < Map.getInstanceMap().getSize(); j++){
+                MapCell mapCell = Map.getInstanceMap().getMapCell(i,j);
+                Rectangle cell = new Rectangle(i*20,j*20, 20, 20);
+                if(mapCell.getTexture().getColor().equals("GREEN")){
+                    cell.setFill(Color.GREEN);
+                }
+                else{
+                    cell.setFill(Color.BLUE);
+                }
+                gamePane.getChildren().add(cell);
+            }
+        }
+
+        root.getChildren().add(gamePane);
         root.getChildren().add(b);
         Label coin=new Label(Double.toString(currentUser.getBalance()));
         coin.setLayoutX(1460);
         coin.setLayoutY(707);
         coin.setTextFill(Color.WHITE);
-        Image image=new Image(new FileInputStream("F:\\Stronghold\\project-group-41\\src\\main\\java\\stronghold\\database\\Image\\coin.png"));
+        Image image=new Image(new FileInputStream("src/main/java/stronghold/database/Image/coin.png"));
         ImageView coinImage=new ImageView(image);
         coinImage.setX(1400);
         coinImage.setY(600);
@@ -98,9 +135,9 @@ public class sampleView extends Application {
         //////////////////////////////////////////////////////////////
         ImageView popularity=new ImageView();
 
-        Image happy=new Image(new FileInputStream("F:\\Stronghold\\project-group-41\\src\\main\\java\\stronghold\\database\\Image\\happy.jpg"));
-        Image sad=new Image(new FileInputStream("F:\\Stronghold\\project-group-41\\src\\main\\java\\stronghold\\database\\Image\\sad.png"));
-        Image poker=new Image(new FileInputStream("F:\\Stronghold\\project-group-41\\src\\main\\java\\stronghold\\database\\Image\\poker.png"));
+        Image happy=new Image(new FileInputStream("src/main/java/stronghold/database/Image/happy.jpg"));
+        Image sad=new Image(new FileInputStream("src/main/java/stronghold/database/Image/sad.png"));
+        Image poker=new Image(new FileInputStream("src/main/java/stronghold/database/Image/poker.png"));
         if(currentUser.getPopularity()>10){
             popularity.setImage(happy);
         }else if(currentUser.getPopularity()< -10){
@@ -127,19 +164,19 @@ public class sampleView extends Application {
 
         //////////////////////////
         Rectangle rectangle=new Rectangle(200,200);
-        rectangle.setFill(new ImagePattern(new Image(new FileInputStream("F:\\Stronghold\\project-group-41\\src\\main\\java\\stronghold\\database\\Image\\backg1.png"))));
+        rectangle.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/backg1.png"))));
         root.getChildren().add(rectangle);
         //////////////////////////////////////////Delete//////////////////////////////////////////////////////////////
         Rectangle delete=new Rectangle(40,40);
         delete.setX(1380);
         delete.setY(780);
-        delete.setFill(new ImagePattern(new Image(new FileInputStream("F:\\Stronghold\\project-group-41\\src\\main\\java\\stronghold\\database\\Image\\cross.png"))));
+        delete.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/cross.png"))));
         root.getChildren().add(delete);
         //////////////////////////////////////Briefing//////////////////////////////////////////////////////////////////////
         Rectangle briefing=new Rectangle(40,40);
         briefing.setX(1380);
         briefing.setY(740);
-        briefing.setFill(new ImagePattern(new Image(new FileInputStream("F:\\Stronghold\\project-group-41\\src\\main\\java\\stronghold\\database\\Image\\Briefing.jpg"))));
+        briefing.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/Briefing.jpg"))));
         root.getChildren().add(briefing);
          briefing.setOnMouseClicked(actionEvent -> {
              try {
@@ -152,7 +189,7 @@ public class sampleView extends Application {
         Rectangle undo=new Rectangle(40,40);
         undo.setX(1380);
         undo.setY(700);
-        undo.setFill(new ImagePattern(new Image(new FileInputStream("F:\\Stronghold\\project-group-41\\src\\main\\java\\stronghold\\database\\Image\\undo.jpg"))));
+        undo.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/undo.jpg"))));
         root.getChildren().add(undo);
         ////////////////////////////////////////////////////////////////////////////////
 
@@ -163,6 +200,52 @@ public class sampleView extends Application {
 
         Scene scene=new Scene(root);
 
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, k -> {
+            if(k.getCode() == KeyCode.W){
+                gamePane.setTranslateY(gamePane.getTranslateY() + 10);
+                motionBlurEffect(gamePane, motionBlur, 90);
+            }
+            if(k.getCode() == KeyCode.A){
+                gamePane.setTranslateX(gamePane.getTranslateX() + 10);
+                motionBlurEffect(gamePane, motionBlur, 0);
+            }
+            if(k.getCode() == KeyCode.S){
+                gamePane.setTranslateY(gamePane.getTranslateY() - 10);
+                motionBlurEffect(gamePane, motionBlur, 270);
+            }
+            if(k.getCode() == KeyCode.D){
+                gamePane.setTranslateX(gamePane.getTranslateX() -    10);
+                motionBlurEffect(gamePane, motionBlur, 180);
+            }
+            if(k.getCode() == KeyCode.I){
+                gamePane.setScaleX(gamePane.getScaleX() * 2);
+                gamePane.setScaleY(gamePane.getScaleY() * 2);
+            }
+            if(k.getCode() == KeyCode.O){
+                gamePane.setScaleX(gamePane.getScaleX() / 2);
+                gamePane.setScaleY(gamePane.getScaleY() / 2);
+            }
+            if(k.getCode() == KeyCode.E){
+                gamePane.setRotate(gamePane.getRotate() + 5);
+            }
+            if(k.getCode() == KeyCode.Q){
+                gamePane.setRotate(gamePane.getRotate() - 5);
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_RELEASED, key -> {
+            motionBlur.setRadius(0);
+            motionBlur.setAngle(0);
+            gamePane.setEffect(null);
+        });
+
+        scene.addEventHandler(MouseDragEvent.MOUSE_DRAGGED, mouse -> {
+            double deltaX = mouse.getSceneX() - scene.getWidth()/2;
+            double deltaY = mouse.getSceneY() - scene.getHeight()/2;
+            gamePane.setTranslateX(gamePane.getTranslateX() - deltaX/100);
+            gamePane.setTranslateY(gamePane.getTranslateY() - deltaY/100);
+
+        });
 
         stage.setScene(scene);
         stage.show();
