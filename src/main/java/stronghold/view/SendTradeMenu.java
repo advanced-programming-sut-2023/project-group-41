@@ -7,16 +7,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import stronghold.model.components.game.Government;
 import stronghold.model.components.game.enums.Resource;
 import stronghold.model.components.game.trade.Trade;
 import stronghold.model.components.game.trade.TradeDataBase;
 
-import static stronghold.controller.ShopMenuController.prices;
-
-public class ReceivedTradeMenu extends Application {
+public class SendTradeMenu extends Application {
     @FXML
     public static Stage stage;
     private static Government currentUser;
@@ -42,11 +39,10 @@ public class ReceivedTradeMenu extends Application {
             i++;
         }
         Button back=new Button("back");
-        back.setLayoutX(950);
-        back.setLayoutY(330);
+        back.setLayoutX(1200);
+        back.setLayoutY(530);
         back.setOnAction(actionEvent -> {
             try {
-                System.out.println("sfasdfsf");
                 new TradeHistoryMenu().start(this.getStage());
             } catch (Exception e) {
                 throw new RuntimeException(e);
@@ -63,7 +59,7 @@ public class ReceivedTradeMenu extends Application {
     }
 
     public static void setCurrentUser(Government currentUser) {
-        ReceivedTradeMenu.currentUser = currentUser;
+        SendTradeMenu.currentUser = currentUser;
     }
 
     public static void main
