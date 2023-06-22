@@ -58,6 +58,7 @@
   "fillDitchError": "Error!: there is not a ditch in this place ",
   "invalidEngNum": "Error!: invalid Engineer Number",
 
+  "fullHealth": "Error!: your building has full health",
   "Texture": "texture: $VAR1$",
   "People": "$VAR1 :  $VAR2$",
   "Building": "---$VAR3$",

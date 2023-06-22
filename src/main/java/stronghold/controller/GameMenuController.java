@@ -254,9 +254,6 @@ public class GameMenuController extends MenuController {
                 && !(resourceMaker = (ResourceMaker) type).checkTexture(mapCell.getTexture())){
             GameMenuView.output("textureProblem");
             currentPlayer.removeBuilding(type);
-        } else if (type.getBuildingType().equals(StorageType.STOCK_PILE) && !Map.getInstanceMap().isBuildingHere(X, Y, type.getBuildingType())){
-            GameMenuView.output("nearBuilding", (Object) type.getBuildingType().getRegex());
-            currentPlayer.removeBuilding(type);
         } else if (currentPlayer.getBuildingNum(type.getBuildingType()) != 1 && type.getBuildingType().equals(StorageType.FOOD_STOCK_PILE) && !Map.getInstanceMap().isBuildingHere(X, Y, type.getBuildingType())) {
             GameMenuView.output("nearBuilding", (Object) type.getBuildingType().getRegex());
             currentPlayer.removeBuilding(type);
@@ -443,6 +440,7 @@ public class GameMenuController extends MenuController {
         } else {
             Castle castle = (Castle) currentBuilding;
             castle.repair();
+            GameMenuView.output("success");
         }
     }
 
@@ -510,9 +508,7 @@ public class GameMenuController extends MenuController {
     public static void moveUnitTo(int X, int Y) {
         if ( !Map.getInstanceMap().getMapCell(X, Y).isPassable()) {
             GameMenuView.output("waterError");
-        } else if (NavigatorController.shortestPathIsLessThanLimit(NavigatorController.mapPassable(),currentUnits.get(0).getX(),currentUnits.get(0).getY(),X,Y,currentUnits.get(0).getPeople().getSpeed()*5 ) ){
-            GameMenuView.output("speedError");
-        } else {
+        }  else {
 
             for (Unit unit : currentUnits) {
                 if (Map.getInstanceMap().getMapCell(X, Y).getBuilding() != null){
@@ -693,6 +689,7 @@ public class GameMenuController extends MenuController {
             }
         }
         if (Map.getInstanceMap().getMapCell(X, Y).getBuilding() != null ) {
+            System.out.println(Map.getInstanceMap().getMapCell(X, Y).getBuilding().getHealth());
             Map.getInstanceMap().getMapCell(X, Y).getBuilding().setHealth(Map.getInstanceMap().getMapCell(X, Y).getBuilding().getHealth() - longRanged);
             if (Map.getInstanceMap().getMapCell(X, Y).getBuilding().getHealth() <= 0) {
                 Map.getInstanceMap().getMapCell(X, Y).setBuilding(null);

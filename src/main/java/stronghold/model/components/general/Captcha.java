@@ -51,9 +51,9 @@ public class Captcha {
 
     public Captcha(){
         Random random = new Random();
-        
+
         String firstRow = "", secondRow = "", thirdRow = "", fourthRow = "", fifthRow = "";
-        
+
         int size = 4 + random.nextInt(5);
         for(int i = 0;i<size;i++){
             int thisDigit = random.nextInt(10);
@@ -70,6 +70,32 @@ public class Captcha {
         thirdRow = colorify(noisify(thirdRow));
         fourthRow = colorify(noisify(fourthRow));
         fifthRow = colorify(noisify(fifthRow));
+
+
+        this.generatedCaptcha = firstRow + "\n" + secondRow + "\n" + thirdRow + "\n" + fourthRow + "\n" + fifthRow;
+    }
+
+    public Captcha(boolean colorized){
+        Random random = new Random();
+
+        String firstRow = "", secondRow = "", thirdRow = "", fourthRow = "", fifthRow = "";
+
+        int size = 4 + random.nextInt(5);
+        for(int i = 0;i<size;i++){
+            int thisDigit = random.nextInt(10);
+            this.accordingNum += String.valueOf(thisDigit);
+            firstRow += firstRows[thisDigit] + "   ";
+            secondRow += secondRows[thisDigit] + "   ";
+            thirdRow += thirdRows[thisDigit] + "   ";
+            fourthRow += fourthRows[thisDigit] + "   ";
+            fifthRow += fifthRows[thisDigit] + "   ";
+        }
+
+        firstRow = (noisify(firstRow));
+        secondRow = (noisify(secondRow));
+        thirdRow = (noisify(thirdRow));
+        fourthRow = (noisify(fourthRow));
+        fifthRow = (noisify(fifthRow));
 
 
         this.generatedCaptcha = firstRow + "\n" + secondRow + "\n" + thirdRow + "\n" + fourthRow + "\n" + fifthRow;
