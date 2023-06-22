@@ -4,8 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="72fd4c0e-f2c3-4e13-85b9-d70f04a31b27" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/database/textcontent/GameMenuResponses.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/database/textcontent/GameMenuResponses.json" afterDir="false" />
+    <list default="true" id="72fd4c0e-f2c3-4e13-85b9-d70f04a31b27" name="Changes" comment="added graphics basics">
+      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/controller/graphical/RegisterController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/view/graphics/RegisterView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/registerView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/controller/SignUpMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/controller/SignUpMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/loginView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/loginView.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,13 +25,27 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="JavaFXApplication" />
         <option value="JUnit5 Test Class" />
+        <option value="JavaFXApplication" />
+        <option value="FxmlFile" />
         <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <favorite-branches>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="main" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </favorite-branches>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -39,111 +59,103 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;F:/Stronghold/project-group-41&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "F:/Stronghold/project-group-41",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.externalResources",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\RSKALA\Documents\University\AP\Project\stronghold\src\main\java\stronghold\view\graphics" />
+      <recent name="C:\Users\RSKALA\Documents\University\AP\Project\stronghold\src" />
+      <recent name="C:\Users\RSKALA\Documents\University\AP\Project\stronghold" />
+      <recent name="C:\Users\RSKALA\Documents\University\AP\Project\stronghold\a" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
       <recent name="stronghold.controller" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.NavigatorTest.isAbleToNavigate">
-    <configuration name="NavigatorTest.isAbleToNavigate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Application.RegisterView">
+    <configuration name="Captcha" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="stronghold.model.components.general.Captcha" />
       <module name="stronghold" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="stronghold.controller.*" />
+          <option name="PATTERN" value="stronghold.model.components.general.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="stronghold.controller" />
-      <option name="MAIN_CLASS_NAME" value="stronghold.controller.NavigatorTest" />
-      <option name="METHOD_NAME" value="isAbleToNavigate" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="NavigatorTest.mapPassable" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="GameView" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="stronghold.view.graphics.GameView" />
       <module name="stronghold" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="stronghold.controller.*" />
+          <option name="PATTERN" value="stronghold.view.graphics.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="stronghold.controller" />
-      <option name="MAIN_CLASS_NAME" value="stronghold.controller.NavigatorTest" />
-      <option name="METHOD_NAME" value="mapPassable" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="NavigatorTest.shortestPathIsLessThanLimit" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MainTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="stronghold.MainTest" />
       <module name="stronghold" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="stronghold.controller.*" />
+          <option name="PATTERN" value="stronghold.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="stronghold.controller" />
-      <option name="MAIN_CLASS_NAME" value="stronghold.controller.NavigatorTest" />
-      <option name="METHOD_NAME" value="shortestPathIsLessThanLimit" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="NavigatorTest.testAll" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MyJavaFXApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="stronghold.view.MyJavaFXApp" />
       <module name="stronghold" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="stronghold.controller.*" />
+          <option name="PATTERN" value="stronghold.view.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="stronghold.controller" />
-      <option name="MAIN_CLASS_NAME" value="stronghold.controller.NavigatorTest" />
-      <option name="METHOD_NAME" value="testAll" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SignUpMenuControllerTest.testAll" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="RegisterView" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="stronghold.view.graphics.RegisterView" />
       <module name="stronghold" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="stronghold.controller.*" />
+          <option name="PATTERN" value="stronghold.view.graphics.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="stronghold.controller" />
-      <option name="MAIN_CLASS_NAME" value="stronghold.controller.SignUpMenuControllerTest" />
-      <option name="METHOD_NAME" value="testAll" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -163,19 +175,19 @@
     </configuration>
     <list>
       <item itemvalue="Application.Stronghold" />
-      <item itemvalue="JUnit.NavigatorTest.isAbleToNavigate" />
-      <item itemvalue="JUnit.NavigatorTest.mapPassable" />
-      <item itemvalue="JUnit.NavigatorTest.shortestPathIsLessThanLimit" />
-      <item itemvalue="JUnit.NavigatorTest.testAll" />
-      <item itemvalue="JUnit.SignUpMenuControllerTest.testAll" />
+      <item itemvalue="Application.MyJavaFXApp" />
+      <item itemvalue="Application.RegisterView" />
+      <item itemvalue="Application.Captcha" />
+      <item itemvalue="Application.MainTest" />
+      <item itemvalue="Application.GameView" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.NavigatorTest.isAbleToNavigate" />
-        <item itemvalue="JUnit.NavigatorTest.testAll" />
-        <item itemvalue="JUnit.SignUpMenuControllerTest.testAll" />
-        <item itemvalue="JUnit.NavigatorTest.mapPassable" />
-        <item itemvalue="JUnit.NavigatorTest.shortestPathIsLessThanLimit" />
+        <item itemvalue="Application.RegisterView" />
+        <item itemvalue="Application.MainTest" />
+        <item itemvalue="Application.GameView" />
+        <item itemvalue="Application.MyJavaFXApp" />
+        <item itemvalue="Application.Captcha" />
       </list>
     </recent_temporary>
   </component>
@@ -225,7 +237,12 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="files added" />
-    <option name="LAST_COMMIT_MESSAGE" value="files added" />
+    <MESSAGE value="added graphics basics" />
+    <option name="LAST_COMMIT_MESSAGE" value="added graphics basics" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/stronghold$SignUpMenuControllerTest_testAll.ic" NAME="SignUpMenuControllerTest.testAll Coverage Results" MODIFIED="1684827485987" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
