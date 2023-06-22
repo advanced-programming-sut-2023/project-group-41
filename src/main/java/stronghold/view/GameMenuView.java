@@ -44,8 +44,7 @@ public class GameMenuView extends MenuView {
     public static void run(Scanner scanner, int round, int playerNum1, int mapSize) {
         Map.getInstanceMap().setSize(mapSize);
         startGame(playerNum1);
-        Government currentPlayer = getGovernmentByColor(1);
-        setCurrentPlayer(currentPlayer);
+
         setCurrentRound(1);
         setRoundNum(round);
         setPlayerNum(playerNum1);
@@ -122,7 +121,7 @@ public class GameMenuView extends MenuView {
                 // commands: dropbuilding -x [x] -y [y] -type [type] || dropbuilding -x [x] -y [y] -t [type]
                 int X = Integer.parseInt(dropBuildingMatcher.group("X"));
                 int Y = Integer.parseInt(dropBuildingMatcher.group("Y"));
-                Building type = Building.getBuilding(currentPlayer, dropBuildingMatcher.group("type"));
+                Building type = Building.getBuilding(GameMenuController.getCurrentPlayer(), dropBuildingMatcher.group("type"));
                 dropBuilding(X, Y, type);
             } else if ((selectBuildingMatcher = getJSONRegexMatcher(command, "selectBuilding", gameMenuRegexObj)).matches()) {
                 int X = Integer.parseInt(selectBuildingMatcher.group("X"));

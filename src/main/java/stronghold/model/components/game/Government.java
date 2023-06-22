@@ -22,7 +22,7 @@ public class Government {
     private int foodRate = -2;
     private double balance = 2000;
     private int taxRate = 0;
-    private int fearRate;
+    private int fearRate=0;
     private int freeStockSpace = 0;
     private int freeFoodStockSpace = 0;
     private int freeArmourySpace = 0;
