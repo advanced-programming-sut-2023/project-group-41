@@ -2,6 +2,8 @@ package stronghold;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import javafx.application.Application;
+import javafx.stage.Stage;
 import stronghold.controller.GameMenuController;
 import stronghold.controller.MainMenuController;
 import stronghold.controller.SignUpMenuController;
@@ -10,6 +12,7 @@ import stronghold.model.database.UsersDB;
 import stronghold.model.utils.StringParser;
 import stronghold.view.MainMenuView;
 import stronghold.view.SignUpLoginView;
+import stronghold.view.graphics.LoginView;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -22,6 +25,9 @@ public class Main {
 
     public static void main(String[] args){
         JsonElement prefsElement;
+        boolean startInGraphical = true;
+
+
         try {
              prefsElement = JsonParser.parseReader(
                     new FileReader("src/main/java/stronghold/database/datasets/preferences.json"));
@@ -31,16 +37,23 @@ public class Main {
         }
         String loggedinuser = StringParser.removeQuotes(
                 String.valueOf(prefsElement.getAsJsonObject().get("logged-in user")));
-
-        Scanner scanner = new Scanner(System.in);
-        if(loggedinuser.equals("!NULLUSER")) {
-
-            SignUpLoginView.run(scanner);
+        if(startInGraphical){
+            LoginView.main(args);
         }
         else{
+            Scanner scanner = new Scanner(System.in);
 
-            User currentUser = UsersDB.usersDB.getUserByUsername(loggedinuser);
-            MainMenuView.run(currentUser, scanner);
+            if(loggedinuser.equals("!NULLUSER")) {
+
+                SignUpLoginView.run(scanner);
+            }
+            else{
+
+                User currentUser = UsersDB.usersDB.getUserByUsername(loggedinuser);
+                MainMenuView.run(currentUser, scanner);
+            }
         }
+
     }
+
 }
