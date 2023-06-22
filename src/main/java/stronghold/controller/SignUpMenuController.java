@@ -3,6 +3,7 @@ package stronghold.controller;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import javafx.scene.control.TextField;
 import stronghold.model.components.general.Captcha;
 import stronghold.model.database.UsersDB;
 import stronghold.model.components.general.User;
@@ -25,6 +26,7 @@ public class SignUpMenuController extends MenuController{
 
     private static final String CHARACTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-+={}[]|\\:;\"',.?/~`";
     private static final Random RANDOM = new SecureRandom();
+    public TextField usernameField;
 
     public static void setCurrentUser(User currentUser) {
         SignUpMenuController.currentUser = currentUser;
