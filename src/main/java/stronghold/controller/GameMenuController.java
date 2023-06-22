@@ -283,6 +283,8 @@ public class GameMenuController extends MenuController {
     }
 
     public static void selectBuilding(int X, int Y) {
+        System.out.println(currentPlayer.getColor());
+        System.out.println(Map.getInstanceMap().getMapCell(X, Y).getBuilding().getOwnership().getColor());
 
         Building building = Map.getInstanceMap().getMapCell(X, Y).getBuilding();
         if (building == null) {
@@ -434,6 +436,7 @@ public class GameMenuController extends MenuController {
 
 
     public static void repair() {
+        System.out.println(currentBuilding.getHealth());
         if (currentBuilding == null) {
             GameMenuView.output("selectBuilding");
         } else if (!currentBuilding.getClass().getSimpleName().equals("Castle")){
@@ -443,6 +446,7 @@ public class GameMenuController extends MenuController {
         } else {
             Castle castle = (Castle) currentBuilding;
             castle.repair();
+            System.out.println(currentBuilding.getHealth());
         }
     }
 
@@ -678,8 +682,16 @@ public class GameMenuController extends MenuController {
     public static void airAttack(int X, int Y) {
         int longRanged = 0;
         if (Map.getInstanceMap().getMapCell(X, Y).getUnits().size() == 0) {
-            GameMenuView.output("enemyError");
-            return;
+            if(Map.getInstanceMap().getMapCell(X,Y).getBuilding()!=null){
+                if(Map.getInstanceMap().getMapCell(X,Y).getBuilding().getOwnership().equals(currentPlayer)){
+                    GameMenuView.output("enemyError");
+                    return;
+                }
+            }else{
+                GameMenuView.output("enemyError");
+                return;
+            }
+
 
         }
         for (Unit unit : currentUnits) {
@@ -693,6 +705,7 @@ public class GameMenuController extends MenuController {
             }
         }
         if (Map.getInstanceMap().getMapCell(X, Y).getBuilding() != null ) {
+
             Map.getInstanceMap().getMapCell(X, Y).getBuilding().setHealth(Map.getInstanceMap().getMapCell(X, Y).getBuilding().getHealth() - longRanged);
             if (Map.getInstanceMap().getMapCell(X, Y).getBuilding().getHealth() <= 0) {
                 Map.getInstanceMap().getMapCell(X, Y).setBuilding(null);
@@ -971,7 +984,7 @@ public class GameMenuController extends MenuController {
     public static void enterTradeMenu() {
         Scanner scanner = new Scanner(System.in);
         GameMenuView.output("enterTradeMenu");
-        TradeMenuView.run(scanner);
+
 
     }
 
@@ -1013,6 +1026,33 @@ public class GameMenuController extends MenuController {
     public static Government getCurrentPlayer() {
         return currentPlayer;
     }
+    private static int foodPopularity=0;
+    private static int taxPopularity=0;
+
+
+    //private static int fearPopularity=currentPlayer.getFearRate();
+    private static int fearPopularity=10;
+   // private static int religionPopularity=(currentPlayer.getBuildingHash().get(DevelopmentType.CHURCH) * 2 + currentPlayer.getBuildingHash().get(DevelopmentType.CATHEDRAL) * 2);
+   private static int religionPopularity=-10;
+    public static int getFearPopularity() {
+        return fearPopularity;
+    }
+
+    public static void setFearPopularity(int fearPopularity) {
+        GameMenuController.fearPopularity = fearPopularity;
+    }
+
+    public static int getFoodPopularity() {
+        return foodPopularity;
+    }
+
+    public static int getReligionPopularity() {
+        return religionPopularity;
+    }
+
+    public static int getTaxPopularity() {
+        return taxPopularity;
+    }
 
     public static void popularityLogic() {
         //food types
@@ -1030,14 +1070,18 @@ public class GameMenuController extends MenuController {
             i++;
         }
         currentPlayer.setPopularity(currentPlayer.getPopularity() + i - 1);
+        foodPopularity=i-1;
         currentPlayer.setPopularity(currentPlayer.getPopularity() - (-4 * currentPlayer.getFoodRate()));
         if (currentPlayer.getTaxRate() <= 0) {
             currentPlayer.setPopularity(currentPlayer.getPopularity() + ((-2 * currentPlayer.getTaxRate()) + 1));
+            taxPopularity=((-2 * currentPlayer.getTaxRate()) + 1);
         } else if (currentPlayer.getTaxRate() > 0 && currentPlayer.getTaxRate() <= 4) {
             currentPlayer.setPopularity(currentPlayer.getPopularity() - (2 * currentPlayer.getTaxRate()));
+            taxPopularity= - (2 * currentPlayer.getTaxRate());
 
         } else {
             currentPlayer.setPopularity(currentPlayer.getPopularity() - (12 + ((currentPlayer.getTaxRate() - 5) * 4)));
+            taxPopularity= - (12 + ((currentPlayer.getTaxRate() - 5) * 4));
 
         }
         currentPlayer.setPopularity(currentPlayer.getPopularity() + (currentPlayer.getBuildingHash().get(DevelopmentType.CHURCH) * 2 + currentPlayer.getBuildingHash().get(DevelopmentType.CATHEDRAL) * 2));
@@ -1304,7 +1348,7 @@ public class GameMenuController extends MenuController {
         Unit unit=new Unit(3,4, unarmed,5);
         currentUnits.add(unit);
 
-        GameMenuView.run(s,2,2,1000);
+        GameMenuView.run(s,2,2,200);
 
 
 
