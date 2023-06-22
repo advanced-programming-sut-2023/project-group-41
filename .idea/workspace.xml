@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="72fd4c0e-f2c3-4e13-85b9-d70f04a31b27" name="Changes" comment="">
+<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/controller/sampleController.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/database/Image/Briefing.jpg" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/database/Image/back2.jpg" afterDir="false" />
@@ -37,6 +38,9 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/view/GameMenuView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/view/GameMenuView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/view/ShopMenuView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/view/ShopMenuView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/view/TradeMenuView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/view/TradeMenuView.java" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/database/textcontent/GameMenuResponses.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/database/textcontent/GameMenuResponses.json" afterDir="false" />
+>>>>>>> caa33b6922ac1314e23da0507e5653434c6210d2
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,6 +98,7 @@
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
+<<<<<<< HEAD
     <key name="MoveFile.RECENT_KEYS">
       <recent name="F:\Stronghold\project-group-41\src\main\java\stronghold\database\Image" />
       <recent name="F:\Stronghold\project-group-41\src\main\java\stronghold\database\sad" />
@@ -101,13 +106,20 @@
       <recent name="F:\Stronghold\project-group-41\src\main\java\stronghold\database\happy" />
       <recent name="F:\Stronghold\project-group-41\src\main\java\stronghold\database\Image\stronghold\database\happy" />
     </key>
+=======
+>>>>>>> caa33b6922ac1314e23da0507e5653434c6210d2
     <key name="CreateTestDialog.RecentsKey">
       <recent name="stronghold.controller" />
     </key>
   </component>
+<<<<<<< HEAD
   <component name="RunManager" selected="Application.sampleView">
     <configuration name="ReceivedTradeMenu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="stronghold.view.ReceivedTradeMenu" />
+=======
+  <component name="RunManager" selected="JUnit.NavigatorTest.isAbleToNavigate">
+    <configuration name="NavigatorTest.isAbleToNavigate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+>>>>>>> caa33b6922ac1314e23da0507e5653434c6210d2
       <module name="stronghold" />
       <extension name="coverage">
         <pattern>
@@ -115,10 +127,15 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="stronghold.controller" />
+      <option name="MAIN_CLASS_NAME" value="stronghold.controller.NavigatorTest" />
+      <option name="METHOD_NAME" value="isAbleToNavigate" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+<<<<<<< HEAD
     <configuration name="SendTradeMenu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="stronghold.view.SendTradeMenu" />
       <module name="stronghold" />
@@ -134,6 +151,9 @@
     </configuration>
     <configuration name="ShopMenuView" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="stronghold.view.ShopMenuView" />
+=======
+    <configuration name="NavigatorTest.mapPassable" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+>>>>>>> caa33b6922ac1314e23da0507e5653434c6210d2
       <module name="stronghold" />
       <extension name="coverage">
         <pattern>
@@ -141,32 +161,76 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="stronghold.controller" />
+      <option name="MAIN_CLASS_NAME" value="stronghold.controller.NavigatorTest" />
+      <option name="METHOD_NAME" value="mapPassable" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+<<<<<<< HEAD
     <configuration name="TradeHistoryMenu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="stronghold.view.TradeHistoryMenu" />
       <module name="stronghold" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="stronghold.view.*" />
+=======
+    <configuration name="NavigatorTest.shortestPathIsLessThanLimit" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="stronghold" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="stronghold.controller.*" />
+>>>>>>> caa33b6922ac1314e23da0507e5653434c6210d2
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="stronghold.controller" />
+      <option name="MAIN_CLASS_NAME" value="stronghold.controller.NavigatorTest" />
+      <option name="METHOD_NAME" value="shortestPathIsLessThanLimit" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+<<<<<<< HEAD
     <configuration name="sampleView" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="stronghold.view.sampleView" />
       <module name="stronghold" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="stronghold.view.*" />
+=======
+    <configuration name="NavigatorTest.testAll" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="stronghold" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="stronghold.controller.*" />
+>>>>>>> caa33b6922ac1314e23da0507e5653434c6210d2
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="stronghold.controller" />
+      <option name="MAIN_CLASS_NAME" value="stronghold.controller.NavigatorTest" />
+      <option name="METHOD_NAME" value="testAll" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SignUpMenuControllerTest.testAll" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="stronghold" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="stronghold.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="stronghold.controller" />
+      <option name="MAIN_CLASS_NAME" value="stronghold.controller.SignUpMenuControllerTest" />
+      <option name="METHOD_NAME" value="testAll" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -186,6 +250,7 @@
     </configuration>
     <list>
       <item itemvalue="Application.Stronghold" />
+<<<<<<< HEAD
       <item itemvalue="Application.sampleView" />
       <item itemvalue="Application.ReceivedTradeMenu" />
       <item itemvalue="Application.SendTradeMenu" />
@@ -199,6 +264,21 @@
         <item itemvalue="Application.ReceivedTradeMenu" />
         <item itemvalue="Application.SendTradeMenu" />
         <item itemvalue="Application.TradeHistoryMenu" />
+=======
+      <item itemvalue="JUnit.NavigatorTest.isAbleToNavigate" />
+      <item itemvalue="JUnit.NavigatorTest.mapPassable" />
+      <item itemvalue="JUnit.NavigatorTest.shortestPathIsLessThanLimit" />
+      <item itemvalue="JUnit.NavigatorTest.testAll" />
+      <item itemvalue="JUnit.SignUpMenuControllerTest.testAll" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.NavigatorTest.isAbleToNavigate" />
+        <item itemvalue="JUnit.NavigatorTest.testAll" />
+        <item itemvalue="JUnit.SignUpMenuControllerTest.testAll" />
+        <item itemvalue="JUnit.NavigatorTest.mapPassable" />
+        <item itemvalue="JUnit.NavigatorTest.shortestPathIsLessThanLimit" />
+>>>>>>> caa33b6922ac1314e23da0507e5653434c6210d2
       </list>
     </recent_temporary>
   </component>
@@ -238,7 +318,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -248,6 +340,7 @@
     <MESSAGE value="files added" />
     <option name="LAST_COMMIT_MESSAGE" value="files added" />
   </component>
+<<<<<<< HEAD
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
@@ -258,10 +351,13 @@
       </breakpoints>
     </breakpoint-manager>
   </component>
+=======
+>>>>>>> caa33b6922ac1314e23da0507e5653434c6210d2
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/stronghold$SignUpMenuControllerTest_testAll.ic" NAME="SignUpMenuControllerTest.testAll Coverage Results" MODIFIED="1684827485987" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>stronghold.controller.*</FILTER>
     </SUITE>
+<<<<<<< HEAD
     <SUITE FILE_PATH="coverage/project_group_41$ShopMenuView.ic" NAME="ShopMenuView Coverage Results" MODIFIED="1685803140144" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>stronghold.view.*</FILTER>
     </SUITE>
@@ -275,6 +371,12 @@
       <FILTER>stronghold.controller.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/project_group_41$SignUpMenuControllerTest_testAll.ic" NAME="SignUpMenuControllerTest.testAll Coverage Results" MODIFIED="1684842146261" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+=======
+    <SUITE FILE_PATH="coverage/stronghold$NavigatorTest_testAll.ic" NAME="NavigatorTest.testAll Coverage Results" MODIFIED="1684838186953" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>stronghold.controller.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/stronghold$SignUpMenuControllerTest_generateRandomString.ic" NAME="SignUpMenuControllerTest.generateRandomString Coverage Results" MODIFIED="1683906807281" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+>>>>>>> caa33b6922ac1314e23da0507e5653434c6210d2
       <FILTER>stronghold.controller.*</FILTER>
     </SUITE>
   </component>

@@ -18,11 +18,14 @@ class NavigatorTest {
                               {0, 1, 1, 1, 1, 1, 1, 1, 0}};
         assertEquals(NavigatorController.isAbleToNavigate(ableMatrix,
                 0, 1,
-                2 , 4), true);
+                5 , 7), true);
 
-        int[][] unableMatrix = {{0, 1, 0, 0, 1},
+        int[][] unableMatrix = {
+                {0, 1, 0, 0, 1},
                 {0, 1, 0, 1, 0},
-                {0, 1, 0, 1, 1}};
+                {0, 1, 0, 1, 1},
+                {0, 0, 0, 1, 0}
+        };
         assertEquals(NavigatorController.isAbleToNavigate(unableMatrix,
                 0, 1,
                 2 , 4), false);
