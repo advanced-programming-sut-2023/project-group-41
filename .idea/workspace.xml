@@ -4,23 +4,55 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d4900983-f33a-47b2-bf61-9aca166ee9d7" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/stronghold_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/stronghold_jar.xml" afterDir="false" />
+    <list default="true" id="72fd4c0e-f2c3-4e13-85b9-d70f04a31b27" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/controller/sampleController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/database/Image/Briefing.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/database/Image/back2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/database/Image/backg1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/database/Image/coin.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/database/Image/cross.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/database/Image/greenFace.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/database/Image/happy.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/database/Image/poker.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/database/Image/redFace.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/database/Image/sad.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/database/Image/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/database/Image/undo.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/database/Image/yellowFace.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/view/NewTradeMenu.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/view/ReceivedTradeMenu.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/view/SendTradeMenu.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/view/TradeHistoryMenu.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/view/sampleView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_4_19_2023_7_04_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_4_19_2023_7_04_PM__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/stronghold_jar/stronghold.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/stronghold_jar/stronghold.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/controller/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/controller/MainMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/controller/GameMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/controller/GameMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/controller/NavigatorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/controller/NavigatorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/controller/ShopMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/controller/ShopMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/controller/TradeMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/controller/TradeMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/Government.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/Government.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/enums/Resource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/components/game/enums/Resource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/view/GameMenuView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/view/GameMenuView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/view/ShopMenuView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/view/ShopMenuView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/view/TradeMenuView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/view/TradeMenuView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="CoverageOptionsProvider">
+    <option name="myAddOrReplace" value="0" />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="Class" />
         <option value="JavaFXApplication" />
+        <option value="JUnit5 Test Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -39,14 +71,12 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">{
-<<<<<<< HEAD
-    &quot;keyToString&quot;: {
-=======
   &quot;keyToString&quot;: {
->>>>>>> 576c0fc48239546272c175fc3b4d2c9d4dc7b52e
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;last_opened_file_path&quot;: &quot;F:/Stronghold/project-group-41&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -58,20 +88,30 @@
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
-<<<<<<< HEAD
-    }
-    }</component>
-=======
   }
 }</component>
->>>>>>> 576c0fc48239546272c175fc3b4d2c9d4dc7b52e
-  <component name="RunManager" selected="Application.Main">
-    <configuration name="GameMenuController" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="stronghold.controller.GameMenuController" />
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\Stronghold\project-group-41\src\main\java\stronghold\database\Image" />
+      <recent name="F:\Stronghold\project-group-41\src\main\java\stronghold\database\sad" />
+      <recent name="F:\Stronghold\project-group-41\src\main\java\stronghold\database\sasd" />
+      <recent name="F:\Stronghold\project-group-41\src\main\java\stronghold\database\happy" />
+      <recent name="F:\Stronghold\project-group-41\src\main\java\stronghold\database\Image\stronghold\database\happy" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="stronghold.controller" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.sampleView">
+    <configuration name="ReceivedTradeMenu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="stronghold.view.ReceivedTradeMenu" />
       <module name="stronghold" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="stronghold.controller.*" />
+          <option name="PATTERN" value="stronghold.view.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -79,14 +119,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="ALTERNATIVE_JRE_PATH" value="corretto-11" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="MAIN_CLASS_NAME" value="stronghold.Main" />
+    <configuration name="SendTradeMenu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="stronghold.view.SendTradeMenu" />
       <module name="stronghold" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="stronghold.*" />
+          <option name="PATTERN" value="stronghold.view.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -94,12 +132,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MenuController" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="stronghold.controller.MenuController" />
+    <configuration name="ShopMenuView" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="stronghold.view.ShopMenuView" />
       <module name="stronghold" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="stronghold.controller.*" />
+          <option name="PATTERN" value="stronghold.view.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -107,12 +145,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MyJavaFXApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="view.MyJavaFXApp" />
+    <configuration name="TradeHistoryMenu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="stronghold.view.TradeHistoryMenu" />
       <module name="stronghold" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="view.*" />
+          <option name="PATTERN" value="stronghold.view.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -120,12 +158,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UsersDB" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="stronghold.database.java.UsersDB" />
+    <configuration name="sampleView" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="stronghold.view.sampleView" />
       <module name="stronghold" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="stronghold.database.java.*" />
+          <option name="PATTERN" value="stronghold.view.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -148,26 +186,26 @@
     </configuration>
     <list>
       <item itemvalue="Application.Stronghold" />
-      <item itemvalue="Application.GameMenuController" />
-      <item itemvalue="Application.MenuController" />
-      <item itemvalue="Application.UsersDB" />
-      <item itemvalue="Application.MyJavaFXApp" />
-      <item itemvalue="Application.Main" />
+      <item itemvalue="Application.sampleView" />
+      <item itemvalue="Application.ReceivedTradeMenu" />
+      <item itemvalue="Application.SendTradeMenu" />
+      <item itemvalue="Application.TradeHistoryMenu" />
+      <item itemvalue="Application.ShopMenuView" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
-        <item itemvalue="Application.GameMenuController" />
-        <item itemvalue="Application.MenuController" />
-        <item itemvalue="Application.UsersDB" />
-        <item itemvalue="Application.MyJavaFXApp" />
+        <item itemvalue="Application.sampleView" />
+        <item itemvalue="Application.ShopMenuView" />
+        <item itemvalue="Application.ReceivedTradeMenu" />
+        <item itemvalue="Application.SendTradeMenu" />
+        <item itemvalue="Application.TradeHistoryMenu" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="d4900983-f33a-47b2-bf61-9aca166ee9d7" name="Changes" comment="" />
+      <changelist id="72fd4c0e-f2c3-4e13-85b9-d70f04a31b27" name="Changes" comment="" />
       <created>1681067145004</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -179,6 +217,16 @@
       <workItem from="1681919841663" duration="2268000" />
       <workItem from="1681922131756" duration="602000" />
       <workItem from="1681923376063" duration="5766000" />
+      <workItem from="1684844458248" duration="2210000" />
+      <workItem from="1685188690011" duration="532000" />
+      <workItem from="1685724966697" duration="597000" />
+      <workItem from="1685797792270" duration="2794000" />
+      <workItem from="1685801282248" duration="2748000" />
+      <workItem from="1685808009124" duration="630000" />
+      <workItem from="1685808659823" duration="1312000" />
+      <workItem from="1685809988911" duration="10351000" />
+      <workItem from="1687158139985" duration="4386000" />
+      <workItem from="1687163799420" duration="20505000" />
     </task>
     <servers />
   </component>
@@ -199,5 +247,35 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="files added" />
     <option name="LAST_COMMIT_MESSAGE" value="files added" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/stronghold$SignUpMenuControllerTest_testAll.ic" NAME="SignUpMenuControllerTest.testAll Coverage Results" MODIFIED="1684827485987" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>stronghold.controller.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/project_group_41$ShopMenuView.ic" NAME="ShopMenuView Coverage Results" MODIFIED="1685803140144" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>stronghold.view.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/stronghold$SignUpMenuControllerTest_generateRandomString.ic" NAME="SignUpMenuControllerTest.generateRandomString Coverage Results" MODIFIED="1683906807281" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>stronghold.controller.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/stronghold$NavigatorTest_testAll.ic" NAME="NavigatorTest.testAll Coverage Results" MODIFIED="1684838186953" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>stronghold.controller.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/project_group_41$NavigatorTest_testAll.ic" NAME="NavigatorTest.testAll Coverage Results" MODIFIED="1684842119011" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>stronghold.controller.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/project_group_41$SignUpMenuControllerTest_testAll.ic" NAME="SignUpMenuControllerTest.testAll Coverage Results" MODIFIED="1684842146261" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>stronghold.controller.*</FILTER>
+    </SUITE>
   </component>
 </project>
