@@ -4,6 +4,7 @@ import javafx.scene.effect.MotionBlur;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseDragEvent;
+import javafx.scene.input.MouseEvent;
 import stronghold.controller.GameMenuController;
 import stronghold.controller.sampleController;
 
@@ -35,6 +36,7 @@ import stronghold.view.graphics.GameView;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Random;
 
 import static stronghold.view.graphics.GameView.motionBlurEffect;
@@ -42,6 +44,7 @@ import static stronghold.view.graphics.GameView.motionBlurEffect;
 public class sampleView extends Application {
     public static Stage stage;
     private static Government currentUser;
+    private static ArrayList<MapCell>selectedCells=new ArrayList<>();
 
     public static Government getCurrentUser() {
         return currentUser;
@@ -93,6 +96,10 @@ public class sampleView extends Application {
                 else{
                     cell.setFill(Color.BLUE);
                 }
+                cell.addEventHandler(MouseEvent.MOUSE_CLICKED,mouse->{
+                    selectedCells.add(mapCell);
+                    System.out.println(selectedCells);
+                });
                 gamePane.getChildren().add(cell);
             }
         }
@@ -192,6 +199,45 @@ public class sampleView extends Application {
         undo.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/undo.jpg"))));
         root.getChildren().add(undo);
         ////////////////////////////////////////////////////////////////////////////////
+        Pane buildingSelectionPane=new Pane();
+        root.getChildren().add(buildingSelectionPane);
+        ////////////////////////////////////Undo////////////////////////////////////////////////////////////////////////////
+        Rectangle bByTConverter=new Rectangle(40,40);
+        bByTConverter.setY(700);
+        bByTConverter.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/converter.jpg"))));
+        root.getChildren().add(bByTConverter);
+
+        ///////////////////////////////////////////
+        Rectangle bByTStorage=new Rectangle(40,40);
+        bByTStorage.setY(740);
+        bByTStorage.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/storage.png"))));
+        root.getChildren().add(bByTStorage);
+        /////////////////////////////////////////
+        Rectangle bByTCastle=new Rectangle(40,40);
+        bByTCastle.setY(780);
+        bByTCastle.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/castle.jpg"))));
+        root.getChildren().add(bByTCastle);
+        //////////////////////////////////////////
+        Rectangle bByTRes=new Rectangle(40,40);
+        bByTRes.setY(720);
+        bByTRes.setX(40);
+        bByTRes.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/resource.png"))));
+        root.getChildren().add(bByTRes);
+        ///////////////////////////////////////////
+        Rectangle bByTDev=new Rectangle(40,40);
+        bByTDev.setY(760);
+        bByTDev.setX(40);
+        bByTDev.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/development.png"))));
+        root.getChildren().add(bByTDev);
+        bByTDev.setOnMouseClicked(actionEvent -> {
+            try {
+                sampleController.buildingselection("development",buildingSelectionPane);
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+
 
 
 

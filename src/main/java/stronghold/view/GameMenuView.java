@@ -3,6 +3,7 @@ package stronghold.view;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import stronghold.controller.GameMenuController;
 import stronghold.model.components.game.Government;
 import stronghold.model.components.game.Map;
 import stronghold.model.components.game.building.Building;

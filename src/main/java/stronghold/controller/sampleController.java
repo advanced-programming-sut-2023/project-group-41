@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
@@ -325,6 +326,26 @@ public class sampleController {
     public static void taxRate(TextField textField){
         currentGovernment.setTaxRate(Integer.parseInt(textField.getText()));
         textField.setPromptText("successful!");
+    }
+    public static void buildingselection(String type, Pane pane) throws FileNotFoundException {
+        pane.getChildren().clear();
+        if(type.equals("development")){
+            Rectangle house=new Rectangle(50,50);
+            house.setY(740);
+            house.setX(200);
+            house.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/buildings/house.jpg"))));
+            pane.getChildren().add(house);
+            Rectangle church=new Rectangle(50,50);
+            church.setY(740);
+            church.setX(300);
+            church.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/buildings/church.png"))));
+            pane.getChildren().add(church);
+            Rectangle cath=new Rectangle(50,50);
+            cath.setY(740);
+            cath.setX(400);
+            cath.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/buildings/cathedral.png"))));
+            pane.getChildren().add(cath);
+        }
     }
 
 }
