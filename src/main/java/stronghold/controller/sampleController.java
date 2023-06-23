@@ -3,14 +3,19 @@ package stronghold.controller;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
+import javafx.geometry.Orientation;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
@@ -329,23 +334,173 @@ public class sampleController {
     }
     public static void buildingselection(String type, Pane pane) throws FileNotFoundException {
         pane.getChildren().clear();
+        FlowPane flowPane = new FlowPane(120, 700);
+        int ySize = 47, xSize = 47;
         if(type.equals("development")){
-            Rectangle house=new Rectangle(50,50);
-            house.setY(740);
-            house.setX(200);
-            house.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/buildings/house.jpg"))));
-            pane.getChildren().add(house);
-            Rectangle church=new Rectangle(50,50);
-            church.setY(740);
-            church.setX(300);
-            church.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/buildings/church.png"))));
-            pane.getChildren().add(church);
-            Rectangle cath=new Rectangle(50,50);
-            cath.setY(740);
-            cath.setX(400);
-            cath.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/buildings/cathedral.png"))));
-            pane.getChildren().add(cath);
+
+            Rectangle house=new Rectangle(ySize,xSize);
+            house.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/buildings/development/house.jpg"))));
+
+            Rectangle church=new Rectangle(ySize,xSize);
+            church.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/buildings/development/church.png"))));
+
+            Rectangle cathedral=new Rectangle(ySize,xSize);
+            cathedral.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/buildings/development/cathedral.png"))));
+
+            Rectangle inn = new Rectangle(ySize, xSize);
+            inn.setFill(new ImagePattern((new Image(new FileInputStream("src/main/java/stronghold/database/Image/buildings/development/inn.png")))));
+
+            flowPane.getChildren().addAll(house, church, cathedral, inn);
+
+
+        } else if (type.equals("converter")) {
+
+            Rectangle mill = new Rectangle(ySize, xSize);
+            mill.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/buildings/converter/Mill.png"))));
+
+            Rectangle armourer = new Rectangle(ySize, xSize);
+            armourer.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/buildings/converter/Armourers.png"))));
+
+            Rectangle blacksmith = new Rectangle(ySize, xSize);
+            blacksmith.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/buildings/converter/Blacksmiths.png"))));
+
+            Rectangle fletcher = new Rectangle(ySize, xSize);
+            fletcher.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/buildings/converter/Fletchers_Workshop.png"))));
+
+            Rectangle poleturner = new Rectangle(ySize, xSize);
+            poleturner.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/buildings/converter/Poleturners.png"))));
+
+            Rectangle bakery = new Rectangle(ySize, xSize);
+            bakery.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/buildings/converter/Bakers.png"))));
+
+            Rectangle brewing = new Rectangle(ySize,xSize);
+            brewing.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/buildings/converter/Brewers.png"))));
+
+            Rectangle oxTether = new Rectangle(ySize,xSize);
+            oxTether.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/buildings/converter/oxtether.png"))));
+
+            Rectangle barracks = new Rectangle(ySize,xSize);
+            barracks.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/buildings/converter/Barracks.png"))));
+
+            Rectangle mercenaryPost = new Rectangle(ySize,xSize);
+            mercenaryPost.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/buildings/converter/mercenary_post.png"))));
+
+            Rectangle shop = new Rectangle(ySize,xSize);
+            shop.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/buildings/converter/shop.png"))));
+
+            flowPane.getChildren().addAll(mill, armourer, blacksmith, fletcher, poleturner, bakery, brewing,
+                    oxTether, barracks, mercenaryPost, shop);
+
+
+        } else if (type.equals("storage")) {
+
+            Rectangle engineerGuild = new Rectangle(ySize,xSize);
+            engineerGuild.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/buildings/storage/engineersGuild.gif"))));
+
+            Rectangle stockPile = new Rectangle(ySize,xSize);
+            stockPile.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/buildings/storage/gameinfo_buildings_resources_stockpile.gif"))));
+
+            Rectangle foodStockPile = new Rectangle(ySize,xSize);
+            foodStockPile.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/buildings/storage/foodStockPile.png"))));
+
+            Rectangle stable = new Rectangle(ySize,xSize);
+            stable.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/buildings/storage/stable.png"))));
+
+            Rectangle armoury = new Rectangle(ySize,xSize);
+            armoury.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/buildings/storage/armoury.png"))));
+
+            flowPane.getChildren().addAll(engineerGuild, stockPile, foodStockPile, stable, armoury);
+
+        } else if (type.equals("resourceMaker")) {
+
+            Rectangle wheatFarm = new Rectangle(ySize, xSize);
+            wheatFarm.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/buildings/resourcemaker/wheatFarm.png"))));
+
+            Rectangle huntPost = new Rectangle(ySize, xSize);
+            huntPost.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/buildings/resourcemaker/huntPost.png"))));
+
+            Rectangle hopsFarm= new Rectangle(ySize, xSize);
+            hopsFarm.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/buildings/resourcemaker/hopsFarm.png"))));
+
+            Rectangle dairy = new Rectangle(ySize, xSize);
+            dairy.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/buildings/resourcemaker/dairy.gif"))));
+
+            Rectangle appleGarden = new Rectangle(ySize, xSize);
+            appleGarden.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/buildings/resourcemaker/appleGarden.png"))));
+
+            Rectangle pitchRig = new Rectangle(ySize, xSize);
+            pitchRig.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/buildings/resourcemaker/pitchRig.png"))));
+
+            Rectangle quarry = new Rectangle(ySize, xSize);
+            quarry.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/buildings/resourcemaker/quarry.png"))));
+
+            Rectangle ironMine = new Rectangle(ySize, xSize);
+            ironMine.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/buildings/resourcemaker/ironMine.png"))));
+
+            Rectangle woodCutter = new Rectangle(ySize, xSize);
+            woodCutter.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/buildings/resourcemaker/woodCutter.png"))));
+
+            flowPane.getChildren().addAll(wheatFarm, huntPost, hopsFarm, dairy, appleGarden, pitchRig,
+                    quarry, ironMine, woodCutter);
+
+
+        } else if (type.equals("castle")) {
+
+            Rectangle smallStoneGatehouse = new Rectangle(ySize, xSize);
+            smallStoneGatehouse.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/buildings/castle/smallStoneGateHouse.png"))));
+
+            Rectangle bigStoneGatehouse = new Rectangle(ySize, xSize);
+            bigStoneGatehouse.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/buildings/castle/bigStoneGatehouse.png"))));
+
+            Rectangle shortWall = new Rectangle(ySize, xSize);
+            shortWall.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/buildings/castle/shortWall.jpg"))));
+
+            Rectangle thickWall = new Rectangle(ySize, xSize);
+            thickWall.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/buildings/castle/thickWall.jpg"))));
+
+            Rectangle stair = new Rectangle(ySize, xSize);
+            stair.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/buildings/castle/stair.jpg"))));
+
+            Rectangle drawBridge = new Rectangle(ySize, xSize);
+            drawBridge.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/buildings/castle/drawBridge.png"))));
+
+            Rectangle lookoutTower = new Rectangle(ySize, xSize);
+            lookoutTower.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/buildings/castle/lookoutTower.png"))));
+
+            Rectangle perimeterTower = new Rectangle(ySize, xSize);
+            perimeterTower.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/buildings/castle/rightPerimeterTower.png"))));
+
+            Rectangle defensiveTurret = new Rectangle(ySize, xSize);
+            defensiveTurret.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/buildings/castle/defensiveTurret.png"))));
+
+            Rectangle squareTower = new Rectangle(ySize, xSize);
+            squareTower.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/buildings/castle/squareTower.png"))));
+
+            Rectangle circleTower = new Rectangle(ySize, xSize);
+            circleTower.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/buildings/castle/circleTower.png"))));
+
+            Rectangle oilSmelter = new Rectangle(ySize, xSize);
+            oilSmelter.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/buildings/castle/oilSmelter.png"))));
+
+            Rectangle pitchDitch = new Rectangle(ySize, xSize);
+            pitchDitch.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/buildings/castle/pitchDitch.png"))));
+
+            Rectangle ruler = new Rectangle(ySize, xSize);
+            ruler.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/buildings/castle/ruler.png"))));
+
+            Rectangle siegeTent = new Rectangle(ySize, xSize);
+            siegeTent.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/buildings/castle/siegeTent.png"))));
+
+            flowPane.getChildren().addAll(smallStoneGatehouse, bigStoneGatehouse, shortWall, thickWall, stair,
+                    drawBridge, lookoutTower, perimeterTower, defensiveTurret, squareTower, circleTower, oilSmelter,
+                    pitchDitch, ruler, siegeTent);
         }
+        flowPane.setOrientation(Orientation.HORIZONTAL);
+        flowPane.setHgap(2);
+        flowPane.setVgap(2);
+        flowPane.setLayoutY(715);
+        flowPane.setLayoutX(100);
+        pane.getChildren().add(flowPane);
     }
 
 }

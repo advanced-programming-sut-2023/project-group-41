@@ -206,23 +206,51 @@ public class sampleView extends Application {
         bByTConverter.setY(700);
         bByTConverter.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/converter.jpg"))));
         root.getChildren().add(bByTConverter);
+        bByTConverter.setOnMouseClicked(actionEvent -> {
+            try {
+                sampleController.buildingselection("converter",buildingSelectionPane);
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        });
 
         ///////////////////////////////////////////
         Rectangle bByTStorage=new Rectangle(40,40);
         bByTStorage.setY(740);
         bByTStorage.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/storage.png"))));
         root.getChildren().add(bByTStorage);
+        bByTStorage.setOnMouseClicked(actionEvent -> {
+            try {
+                sampleController.buildingselection("storage",buildingSelectionPane);
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        });
         /////////////////////////////////////////
         Rectangle bByTCastle=new Rectangle(40,40);
         bByTCastle.setY(780);
         bByTCastle.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/castle.jpg"))));
         root.getChildren().add(bByTCastle);
+        bByTCastle.setOnMouseClicked(actionEvent -> {
+            try {
+                sampleController.buildingselection("castle",buildingSelectionPane);
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        });
         //////////////////////////////////////////
-        Rectangle bByTRes=new Rectangle(40,40);
-        bByTRes.setY(720);
-        bByTRes.setX(40);
-        bByTRes.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/resource.png"))));
-        root.getChildren().add(bByTRes);
+        Rectangle ResourceMaker=new Rectangle(40,40);
+        ResourceMaker.setY(720);
+        ResourceMaker.setX(40);
+        ResourceMaker.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/resource.png"))));
+        root.getChildren().add(ResourceMaker);
+        ResourceMaker.setOnMouseClicked(actionEvent -> {
+            try {
+                sampleController.buildingselection("resourceMaker",buildingSelectionPane);
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        });
         ///////////////////////////////////////////
         Rectangle bByTDev=new Rectangle(40,40);
         bByTDev.setY(760);
