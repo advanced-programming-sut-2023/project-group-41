@@ -1,10 +1,8 @@
 package stronghold.view;
 
+import javafx.event.EventHandler;
 import javafx.scene.effect.MotionBlur;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseDragEvent;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.input.*;
 import stronghold.controller.GameMenuController;
 import stronghold.controller.sampleController;
 
@@ -26,6 +24,7 @@ import javafx.stage.Stage;
 import stronghold.model.components.game.Government;
 import stronghold.model.components.game.Map;
 import stronghold.model.components.game.MapCell;
+import stronghold.model.components.game.building.Building;
 import stronghold.model.components.game.enums.Resource;
 import stronghold.model.components.game.enums.Texture;
 import stronghold.model.components.game.trade.Trade;
@@ -96,6 +95,20 @@ public class sampleView extends Application {
                 else{
                     cell.setFill(Color.BLUE);
                 }
+                cell.setOnDragOver(new EventHandler<DragEvent>() {
+                    @Override
+                    public void handle(DragEvent dragEvent) {
+                        if (dragEvent.getDragboard().hasImage())
+                            dragEvent.acceptTransferModes(TransferMode.ANY);
+                        dragEvent.consume();
+                    }
+                });
+                cell.setOnDragDropped((DragEvent event) -> {
+                    Dragboard db = event.getDragboard();
+                    //if (GameMenuController.dropBuilding((int) cell.getX(), (int) cell.getY(), Building.getBuilding(currentUser, db.getString())))
+                        cell.setFill(new ImagePattern(db.getImage()));
+                    event.consume();
+                });
                 cell.addEventHandler(MouseEvent.MOUSE_CLICKED,mouse->{
                     selectedCells.add(mapCell);
                     System.out.println(selectedCells);
@@ -112,7 +125,8 @@ public class sampleView extends Application {
         coin.setTextFill(Color.WHITE);
         Image image=new Image(new FileInputStream("src/main/java/stronghold/database/Image/coin.png"));
         ImageView coinImage=new ImageView(image);
-        coinImage.setX(1400);
+        coinImage.setX
+                (1400);
         coinImage.setY(600);
         coinImage.setScaleX(0.1);
         coinImage.setScaleY(0.1);

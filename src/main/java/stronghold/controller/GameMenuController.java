@@ -58,7 +58,7 @@ public class GameMenuController extends MenuController {
 
     private static String pathToRegexJSON = "src/main/java/stronghold/database/utils/regex/GameMenuRegex.json";
     ///////////
-    private static ArrayList<Unit> currentUnits=new ArrayList<>();
+    private static ArrayList<Unit> currentUnits = new ArrayList<>();
     private static Building currentBuilding;
     private static Government currentPlayer;
 
@@ -87,23 +87,21 @@ public class GameMenuController extends MenuController {
     }
 
 
-
     public static void startGame(int playerNum) {
 
         Scanner scanner = new Scanner(System.in);
 
         for (int i = 1; i <= playerNum; i++) {
             Government government = new Government(i);
-            if(i==1)
-                currentPlayer=government;
+            if (i == 1)
+                currentPlayer = government;
             governments.add(government);
             GameMenuView.output("playerCenter");
             int x = scanner.nextInt();
             int y = scanner.nextInt();
 
 
-
-            Castle castle=new Castle(government,CastleType.Ruler);
+            Castle castle = new Castle(government, CastleType.Ruler);
             government.setRuler(castle);
             Map.getInstanceMap().getMapCell(x, y).setBuilding(castle);
 
@@ -127,18 +125,18 @@ public class GameMenuController extends MenuController {
 
     public static void nextPlayer() {
 
-       if(currentPlayer.getColor()==playerNum){
-           endOfRound();
-           currentRound++;
-           if(currentRound>roundNum){
-               //endGame
-           }
-           setCurrentPlayer(getGovernmentByColor(1));
-       }else{
-           setCurrentPlayer(getGovernmentByColor(currentPlayer.getColor() + 1));
-       }
-        System.out.println("player: "+currentPlayer.getColor());
-        System.out.println("round"+currentRound);
+        if (currentPlayer.getColor() == playerNum) {
+            endOfRound();
+            currentRound++;
+            if (currentRound > roundNum) {
+                //endGame
+            }
+            setCurrentPlayer(getGovernmentByColor(1));
+        } else {
+            setCurrentPlayer(getGovernmentByColor(currentPlayer.getColor() + 1));
+        }
+        System.out.println("player: " + currentPlayer.getColor());
+        System.out.println("round" + currentRound);
 
 
     }
@@ -151,10 +149,10 @@ public class GameMenuController extends MenuController {
         return roundNum;
     }
 
-    public static void endOfRound(){
-         patroller();
+    public static void endOfRound() {
+        patroller();
         for (int i = 1; i < playerNum; i++) {
-           setCurrentPlayer( getGovernmentByColor(i));
+            setCurrentPlayer(getGovernmentByColor(i));
             currentPlayer.allBuildingActions();
             taxLogic();
             foodLogic();
@@ -178,16 +176,16 @@ public class GameMenuController extends MenuController {
 
 
     }
-    public  static void populationLogic(Government government){
-       int leftOver= government.getResourcesNum(APPLE)+government.getResourcesNum(MEAT)+government.getResourcesNum(CHEESE)+government.getResourcesNum(BREAD);
-       government.setPopulation(government.getPopulation()+leftOver);
-       GameMenuView.output("success");
+
+    public static void populationLogic(Government government) {
+        int leftOver = government.getResourcesNum(APPLE) + government.getResourcesNum(MEAT) + government.getResourcesNum(CHEESE) + government.getResourcesNum(BREAD);
+        government.setPopulation(government.getPopulation() + leftOver);
+        GameMenuView.output("success");
 
     }
 
 
-
-    public static void showFoodList(){
+    public static void showFoodList() {
         GameMenuView.output("foodList", (Object) "APPLE", Integer.toString(currentPlayer.getResourcesNum(APPLE)));
         GameMenuView.output("foodList", (Object) "CHEESE", Integer.toString(currentPlayer.getResourcesNum(CHEESE)));
         GameMenuView.output("foodList", (Object) "BREAD", Integer.toString(currentPlayer.getResourcesNum(BREAD)));
@@ -231,54 +229,61 @@ public class GameMenuController extends MenuController {
         GameMenuController.currentUnits = currentUnits;
     }
 
-    public static void dropBuilding(int X, int Y, Building type){
+    public static boolean dropBuilding(int X, int Y, Building type) {
         boolean useResource = false;
         MapCell mapCell;
         ResourceMaker resourceMaker;
-        if (type == null){
+        if (type == null) {
             GameMenuView.output("incorrectBuildingType");
-            return;
+            return false;
         }
-        if (Map.getInstanceMap().validMapCell(X, Y)){
+        if (Map.getInstanceMap().validMapCell(X, Y)) {
             mapCell = Map.getInstanceMap().getMapCell(X, Y);
         } else {
             GameMenuView.output("invalidLocation");
             currentPlayer.removeBuilding(type);
-            return;
+            return false;
         }
 
-        if (Map.getInstanceMap().getMapCell(X,Y).getBuilding()!=null){
+        if (Map.getInstanceMap().getMapCell(X, Y).getBuilding() != null) {
             GameMenuView.output("prebuilding");
             currentPlayer.removeBuilding(type);
-        }else if (type.getClass().getSimpleName().equals("ResourceMaker")
-                && !(resourceMaker = (ResourceMaker) type).checkTexture(mapCell.getTexture())){
+            return false;
+        } else if (type.getClass().getSimpleName().equals("ResourceMaker")
+                && !(resourceMaker = (ResourceMaker) type).checkTexture(mapCell.getTexture())) {
             GameMenuView.output("textureProblem");
             currentPlayer.removeBuilding(type);
+            return false;
         } else if (currentPlayer.getBuildingNum(type.getBuildingType()) != 1 && type.getBuildingType().equals(StorageType.FOOD_STOCK_PILE) && !Map.getInstanceMap().isBuildingHere(X, Y, type.getBuildingType())) {
             GameMenuView.output("nearBuilding", (Object) type.getBuildingType().getRegex());
             currentPlayer.removeBuilding(type);
-        }  else if (type.getBuildingType().equals(CastleType.STAIR) &&
+            return false;
+        } else if (type.getBuildingType().equals(CastleType.STAIR) &&
                 !Map.getInstanceMap().isBuildingHere(X, Y, CastleType.SHORT_WALL) &&
                 !Map.getInstanceMap().isBuildingHere(X, Y, CastleType.THICK_WALL) &&
                 !Map.getInstanceMap().isBuildingHere(X, Y, CastleType.SMALL_STONE_GATEHOUSE) &&
                 !Map.getInstanceMap().isBuildingHere(X, Y, CastleType.BIG_STONE_GATEHOUSE)) {
             GameMenuView.output("nearBuilding", (Object) type.getBuildingType().getRegex());
             currentPlayer.removeBuilding(type);
+            return false;
         } else if (type.getBuildingType().equals(ConverterType.Ox_TETHER) && !Map.getInstanceMap().isBuildingNear(X, Y, ResourceMakerType.QUARRY)) {
             GameMenuView.output("nearBuilding", (Object) ResourceMakerType.QUARRY.getRegex());
             currentPlayer.removeBuilding(type);
+            return false;
         } else if (useResource) {
-            if (!type.haveEnoughResource(currentPlayer)){
+            if (!type.haveEnoughResource(currentPlayer)) {
                 GameMenuView.output("lackOfResource");
                 currentPlayer.removeBuilding(type);
+                return false;
             }
         } else {
             mapCell.setBuilding(type);
-            Map.getInstanceMap().getMapCell(X,Y).setPassable(false);
+            Map.getInstanceMap().getMapCell(X, Y).setPassable(false);
             GameMenuView.output("buildingDrop");
+            return true;
         }
+        return false;
     }
-
     public static void selectBuilding(int X, int Y) {
         System.out.println(currentPlayer.getColor());
         System.out.println(Map.getInstanceMap().getMapCell(X, Y).getBuilding().getOwnership().getColor());
