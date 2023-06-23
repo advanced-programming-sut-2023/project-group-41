@@ -22,7 +22,7 @@
             <TextField promptText="Username" style="-fx-background-color: #222266; -fx-border-color: #c4a633; -fx-border-radius: 24; -fx-background-radius: 24; -fx-text-fill: #c4a633;" />
             <PasswordField promptText="Password" style="-fx-border-color: #c4a633; -fx-border-radius: 24; -fx-background-radius: 24; -fx-background-color: #222266; -fx-text-fill: #c4a633;" />
             <CheckBox alignment="TOP_LEFT" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="23.0" prefWidth="126.0" text="Stay logged-in" textFill="#ffd400" />
-            <Button mnemonicParsing="false" style="-fx-background-color: #c4a633; -fx-background-radius: 24; -fx-cursor: hand;" text="Login" />
+            <Button mnemonicParsing="false" onAction="#authenticate" style="-fx-background-color: #c4a633; -fx-background-radius: 24; -fx-cursor: hand;" text="Login" />
             <HBox alignment="CENTER" prefHeight="41.0" prefWidth="200.0" spacing="10.0">
                <children>
                   <Label text="No Account?" textFill="#ffcd44" />

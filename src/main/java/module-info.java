@@ -8,4 +8,5 @@ module stronghold {
     exports stronghold.view.graphics to javafx.graphics;
     exports stronghold.model.components.game.graphical to javafx.graphics;
     exports stronghold.controller to javafx.fxml;
+    exports stronghold.controller.graphical to javafx.fxml;
 }

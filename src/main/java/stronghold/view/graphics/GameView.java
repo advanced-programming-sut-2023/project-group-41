@@ -22,15 +22,15 @@ import java.util.Random;
 import java.util.ServiceConfigurationError;
 
 public class GameView extends Application {
-
-    private void motionBlurEffect(Pane gamePane, MotionBlur motionBlur, double angle){
+    public static Pane gamePane;
+    public static void motionBlurEffect(Pane gamePane, MotionBlur motionBlur, double angle){
         gamePane.setEffect(motionBlur);
         motionBlur.setAngle(angle);
         motionBlur.setRadius(10);
     }
     @Override
     public void start(Stage primaryStage){
-        Pane gamePane = new Pane();
+        gamePane = new Pane();
         Scene gameScene = new Scene(gamePane,1920,1080);
 
         gameScene.setFill(Color.BLACK);

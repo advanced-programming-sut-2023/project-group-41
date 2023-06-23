@@ -2,6 +2,7 @@ package stronghold.model.components.game.enums;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
+import java.util.RandomAccess;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -53,5 +54,8 @@ public enum Resource {
             if (getMatcher(input, resource).find()) return resource;
         }
         return null;
+    }
+    public static ArrayList<Resource> getResources(){
+        return resources;
     }
 }
