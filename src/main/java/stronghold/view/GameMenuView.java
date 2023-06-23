@@ -3,24 +3,16 @@ package stronghold.view;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import stronghold.controller.GameMenuController;
-import stronghold.controller.MenuController;
 import stronghold.model.components.game.Government;
 import stronghold.model.components.game.Map;
-import stronghold.model.components.game.Unit;
 import stronghold.model.components.game.building.Building;
-import stronghold.model.components.game.building.BuildingType;
-import stronghold.model.components.game.building.CastleType;
-import stronghold.model.components.game.building.Converter;
 import stronghold.model.components.game.enums.Direction;
 import stronghold.model.components.game.enums.State;
 import stronghold.model.components.game.enums.Texture;
 import stronghold.model.components.game.enums.Tree;
-import stronghold.model.components.general.User;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 
@@ -79,7 +71,7 @@ public class GameMenuView extends MenuView {
             Matcher pourOilMatcher;
             Matcher digTunnelMatcher;
             Matcher buildMatcher;
-            Matcher catcherGateMatcher;
+            Matcher captureGateMatcher;
             
             Matcher setTextureMatcher;
             Matcher setRectangleTextureMatcher;
@@ -205,8 +197,8 @@ public class GameMenuView extends MenuView {
                 String type = dropUnitMatcher.group("type");
                 int count = Integer.parseInt(dropUnitMatcher.group("count"));
                 dropUnit(X, Y, type, count);
-            } else if ((catcherGateMatcher = getJSONRegexMatcher(command, "catcherGate", gameMenuRegexObj)).matches()) {
-                catcherGate();
+            } else if ((captureGateMatcher = getJSONRegexMatcher(command, "catcherGate", gameMenuRegexObj)).matches()) {
+                captureGate();
             } else if ((moveToStairMatcher = getJSONRegexMatcher(command, "moveToStair", gameMenuRegexObj)).matches()) {
                 moveToStair();
             } else if ((moveToSiegeTentMatcher = getJSONRegexMatcher(command, "moveToSiegeTent", gameMenuRegexObj)).matches()) {

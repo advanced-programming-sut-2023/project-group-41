@@ -1280,12 +1280,37 @@ public class GameMenuController extends MenuController {
 
     }
 
-    public static void catcherGate(){
+    public static void captureGate(){
+        Boolean er = true;
         if (currentBuilding == null){
             GameMenuView.output("selectBuilding");
-        } else if(currentBuilding.getBuildingType().equals(CastleType.SMALL_STONE_GATEHOUSE) ||
+        } else if (currentUnits == null) {
+            GameMenuView.output("wrongSoldierType");
+        }
+        for (Unit currentUnit : currentUnits) {
+            if (currentUnit.getPeople() instanceof Fighter){
+                Fighter fighter = (Fighter) currentUnit.getPeople();
+                if (fighter.getFighterEnum().equals(FighterEnum.assassins)){
+                    er = false;
+                }
+            }
+
+            if (currentUnit.getPeople() instanceof Unarmed){
+                Unarmed unarmed = (Unarmed) currentUnit.getPeople();
+                if (unarmed.getUnarmedEnum().equals(UnarmedEnum.ladderMen)){
+                    er = false;
+                }
+            }
+
+
+        }
+
+        if (er) {
+            GameMenuView.output("wrongSoldierType");
+        }else if(currentBuilding.getBuildingType().equals(CastleType.SMALL_STONE_GATEHOUSE) ||
                 currentBuilding.getBuildingType().equals(CastleType.BIG_STONE_GATEHOUSE) ) {
             Map.getInstanceMap().getMapCell(getSelectedBuildingX(), getSelectedBuildingY()).setPassable(true);
+            moveUnitTo(getSelectedBuildingX(), getSelectedBuildingY());
             GameMenuView.output("Success");
         } else {
             GameMenuView.output("incorrectBuildingType");
@@ -1295,6 +1320,8 @@ public class GameMenuController extends MenuController {
     public static void moveToStair(){
         if (currentBuilding == null){
             GameMenuView.output("selectBuilding");
+        } else if (currentUnits == null) {
+            GameMenuView.output("wrongSoldierType");
         } else if (currentBuilding.getBuildingType().equals(CastleType.STAIR)) {
             for (int i = -1; i <= 1 ; i++) {
                 for (int j = -1; j <= 1; j++) {
@@ -1303,6 +1330,7 @@ public class GameMenuController extends MenuController {
                     }
                 }
             }
+            moveUnitTo(getSelectedBuildingX(), getSelectedBuildingY());
             GameMenuView.output("Success");
         } else {
             GameMenuView.output("incorrectBuildingType");
@@ -1310,8 +1338,11 @@ public class GameMenuController extends MenuController {
     }
 
     public static void moveToSiegeTent(int X, int Y){
-        if (Map.getInstanceMap().getMapCell(X, Y).getTool().getName().equals("siegeTower")) {
+        if (currentUnits == null) {
+            GameMenuView.output("wrongSoldierType");
+        }else if (Map.getInstanceMap().getMapCell(X, Y).getTool().getName().equals("siegeTower")) {
             Map.getInstanceMap().getMapCell(X, Y).setPassable(true);
+            moveUnitTo(X, Y);
             GameMenuView.output("Success");
         } else {
             GameMenuView.output("incorrectBuildingType");
