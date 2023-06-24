@@ -12,7 +12,7 @@ public enum CastleType implements BuildingType{
     SMALL_STONE_GATEHOUSE("smallStoneGatehouse", 1000, 0, 0, false, null, 0, 8, 0, 0),
     BIG_STONE_GATEHOUSE("bigStoneGatehouse", 2000, 0 , 0, false, Resource.STONE, 20, 10, 0, 0),
     SHORT_WALL("shortWall", 50, 0, 0, false, Resource.STONE, 5, 0, 0, 0),
-    THICK_WALL("thickWall, 100", 100, 0, 0 ,false, Resource.STONE, 10, 0, 0, 0),
+    THICK_WALL("thickWall", 100, 0, 0 ,false, Resource.STONE, 10, 0, 0, 0),
     STAIR("stair", 30, 0, 0, false, Resource.STONE, 3, 0, 0, 0),
     DRAWBRIDGE("drawbridge", 100, 0 , 0, false, Resource.WOOD, 10, 0, 1, 0),
     LOOKOUT_TOWER("lookoutTower", 1000, 0, 0, false, Resource.STONE, 10, 0, 0, 0),

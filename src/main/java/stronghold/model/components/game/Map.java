@@ -89,10 +89,8 @@ public class Map {
     }
 
     public  boolean isBuildingHere(int X, int Y, BuildingType buildingType){
-        if (this.validMapCell(X, Y)){
-            try {
-                return Objects.requireNonNull(this.getMapCell(X, Y)).getBuilding().getRegex().matches(buildingType.getRegex());
-            } catch (Exception ignored){}
+        if (validMapCell(X, Y) && getMapCell(X, Y).getBuilding() != null){
+                return getMapCell(X, Y).getBuilding().getBuildingType().equals(buildingType);
         }
         return false;
     }

@@ -254,16 +254,23 @@ public class GameMenuController extends MenuController {
             GameMenuView.output("textureProblem");
             currentPlayer.removeBuilding(type);
             return false;
-        } else if (currentPlayer.getBuildingNum(type.getBuildingType()) != 1 && type.getBuildingType().equals(StorageType.FOOD_STOCK_PILE) && !Map.getInstanceMap().isBuildingHere(X, Y, type.getBuildingType())) {
+        } else if (type.getBuildingType().equals(StorageType.STOCK_PILE) &&
+                !Map.getInstanceMap().isBuildingNear(X, Y, type.getBuildingType()) &&
+                !Map.getInstanceMap().isBuildingNear(X, Y, CastleType.Ruler)) {
+
+            GameMenuView.output("nearBuilding", (Object) "stockPile or ruler");
+            currentPlayer.removeBuilding(type);
+            return false;
+        } else if (currentPlayer.getBuildingNum(type.getBuildingType()) != 1 && type.getBuildingType().equals(StorageType.FOOD_STOCK_PILE) && !Map.getInstanceMap().isBuildingNear(X, Y, type.getBuildingType())) {
             GameMenuView.output("nearBuilding", (Object) type.getBuildingType().getRegex());
             currentPlayer.removeBuilding(type);
             return false;
         } else if (type.getBuildingType().equals(CastleType.STAIR) &&
-                !Map.getInstanceMap().isBuildingHere(X, Y, CastleType.SHORT_WALL) &&
-                !Map.getInstanceMap().isBuildingHere(X, Y, CastleType.THICK_WALL) &&
-                !Map.getInstanceMap().isBuildingHere(X, Y, CastleType.SMALL_STONE_GATEHOUSE) &&
-                !Map.getInstanceMap().isBuildingHere(X, Y, CastleType.BIG_STONE_GATEHOUSE)) {
-            GameMenuView.output("nearBuilding", (Object) type.getBuildingType().getRegex());
+                !Map.getInstanceMap().isBuildingNear(X, Y, CastleType.SHORT_WALL) &&
+                !Map.getInstanceMap().isBuildingNear(X, Y, CastleType.THICK_WALL) &&
+                !Map.getInstanceMap().isBuildingNear(X, Y, CastleType.SMALL_STONE_GATEHOUSE) &&
+                !Map.getInstanceMap().isBuildingNear(X, Y, CastleType.BIG_STONE_GATEHOUSE)) {
+            GameMenuView.output("nearBuilding", (Object) "wall or gate");
             currentPlayer.removeBuilding(type);
             return false;
         } else if (type.getBuildingType().equals(ConverterType.Ox_TETHER) && !Map.getInstanceMap().isBuildingNear(X, Y, ResourceMakerType.QUARRY)) {

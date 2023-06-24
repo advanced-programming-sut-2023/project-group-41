@@ -426,7 +426,7 @@ public class sampleController {
             Rectangle perimeterTower = makeRectangle("perimeterTower", "src/main/java/stronghold/database/Image/buildings/castle/rightPerimeterTower.png");
             Rectangle defensiveTurret = makeRectangle("defensiveTower", "src/main/java/stronghold/database/Image/buildings/castle/defensiveTurret.png");
             Rectangle squareTower = makeRectangle("squareTower", "src/main/java/stronghold/database/Image/buildings/castle/squareTower.png");
-            Rectangle circleTower = makeRectangle("cicleTower", "src/main/java/stronghold/database/Image/buildings/castle/circleTower.png");
+            Rectangle circleTower = makeRectangle("circleTower", "src/main/java/stronghold/database/Image/buildings/castle/circleTower.png");
             Rectangle oilSmelter = makeRectangle("oilSmelter", "src/main/java/stronghold/database/Image/buildings/castle/oilSmelter.png");
             Rectangle pitchDitch = makeRectangle("pitchDitch", "src/main/java/stronghold/database/Image/buildings/castle/pitchDitch.png");
             Rectangle ruler = makeRectangle("ruler", "src/main/java/stronghold/database/Image/buildings/castle/ruler.png");

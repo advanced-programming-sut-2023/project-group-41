@@ -105,7 +105,7 @@ public class sampleView extends Application {
                 });
                 cell.setOnDragDropped((DragEvent event) -> {
                     Dragboard db = event.getDragboard();
-                    //if (GameMenuController.dropBuilding((int) cell.getX(), (int) cell.getY(), Building.getBuilding(currentUser, db.getString())))
+                    if (GameMenuController.dropBuilding(mapCell.getX(), mapCell.getY(), Building.getBuilding(currentUser, db.getString())))
                         cell.setFill(new ImagePattern(db.getImage()));
                     event.consume();
                 });
