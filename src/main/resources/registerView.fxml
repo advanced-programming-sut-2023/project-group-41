@@ -13,7 +13,7 @@
       <VBox alignment="CENTER" layoutX="-1.0" layoutY="-2.0" prefHeight="434.0" prefWidth="600.0" spacing="10.0">
          <children>
             <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="587.0" text="Register" textAlignment="CENTER" />
-            <TextField fx:id="usernameField" onInputMethodTextChanged="#onUsernameFieldChange" promptText="username" />
+            <TextField fx:id="usernameField" onAction="#onUsernameFieldChange" promptText="username" />
             <TextField promptText="password" />
             <TextField promptText="confirm password" />
             <TextField promptText="nickname" />
