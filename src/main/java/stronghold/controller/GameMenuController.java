@@ -66,6 +66,10 @@ public class GameMenuController extends MenuController {
         GameMenuController.roundNum = roundNum;
     }
 
+    public static Building getCurrentBuilding() {
+        return currentBuilding;
+    }
+
     //private static Government currentGovernment;
     private static ArrayList<Government> governments = new ArrayList<>();
     private static ArrayList<Unit> patrolingUnits = new ArrayList<>();

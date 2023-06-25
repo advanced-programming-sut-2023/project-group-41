@@ -30,6 +30,11 @@ import java.io.FileNotFoundException;
 
 public class sampleController {
     private static Government currentGovernment;
+    private static BuildingType buildingCopy;
+
+    public static void setBuildingCopy(BuildingType buildingCopy) {
+        sampleController.buildingCopy = buildingCopy;
+    }
 
     public static void setCurrentGovernment(Government currentGovernment) {
         sampleController.currentGovernment = currentGovernment;
