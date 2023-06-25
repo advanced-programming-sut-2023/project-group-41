@@ -30,9 +30,22 @@ import java.io.FileNotFoundException;
 
 public class sampleController {
     private static Government currentGovernment;
-    private static BuildingType buildingCopy;
+    private static String buildingCopy = null;
+    private static Rectangle buildingPic = null;
 
-    public static void setBuildingCopy(BuildingType buildingCopy) {
+    public static Rectangle getBuildingPic() {
+        return buildingPic;
+    }
+
+    public static void setBuildingPic(Rectangle buildingPic) {
+        sampleController.buildingPic = buildingPic;
+    }
+
+    public static String getBuildingCopy() {
+        return buildingCopy;
+    }
+
+    public static void setBuildingCopy(String buildingCopy) {
         sampleController.buildingCopy = buildingCopy;
     }
 
@@ -450,5 +463,8 @@ public class sampleController {
         flowPane.setLayoutX(100);
         pane.getChildren().add(flowPane);
     }
+
+
+
 
 }

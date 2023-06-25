@@ -66,6 +66,10 @@ public class GameMenuController extends MenuController {
         GameMenuController.roundNum = roundNum;
     }
 
+    public static void setCurrentBuilding(Building currentBuilding) {
+        GameMenuController.currentBuilding = currentBuilding;
+    }
+
     public static Building getCurrentBuilding() {
         return currentBuilding;
     }
@@ -449,7 +453,6 @@ public class GameMenuController extends MenuController {
 
 
     public static void repair() {
-        System.out.println(currentBuilding.getHealth());
         if (currentBuilding == null) {
             GameMenuView.output("selectBuilding");
         } else if (!currentBuilding.getClass().getSimpleName().equals("Castle")){
@@ -459,7 +462,6 @@ public class GameMenuController extends MenuController {
         } else {
             Castle castle = (Castle) currentBuilding;
             castle.repair();
-
             GameMenuView.output("success");
         }
     }

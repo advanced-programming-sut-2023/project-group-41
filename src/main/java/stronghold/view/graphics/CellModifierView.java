@@ -11,17 +11,24 @@ import java.util.Objects;
 
 public class CellModifierView extends Application {
 
+    public Pane root;
+
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        Pane root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/CellModifier.fxml")));
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/CellModifier.fxml")));
         Scene currentScene = new Scene(root);
 
 
         primaryStage.setScene(currentScene);
         primaryStage.show();
+    }
+
+    @Override
+    public void init() {
+        launch(null);
     }
 }

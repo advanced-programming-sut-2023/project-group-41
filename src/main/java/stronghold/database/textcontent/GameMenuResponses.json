@@ -10,7 +10,7 @@
   "noBuildingAvailable": "Error!: there is no building in the mentioned coordinates!",
   "buildingDrop": "Success!: building dropped successfully",
   "nearBuilding": "Error!: you should place your building near $VAR1$",
-  "buildingSelected": "building selected successfully!!!",
+  "buildingSelected": "Success!: building selected successfully!!!",
 
   "selectBuilding": "Error!: please select building first",
   "selectUnitBuilding": "Error!: please select a building that can create unit",
@@ -26,7 +26,7 @@
   "invalid": "Error!: Invalid command!",
   "welcome": "Welcome, $VAR1$!",
   "logout": "User logged out!",
-  "success": "Success: Task executed successfully!",
+  "success": "Success!: Task executed successfully!",
   "showPopularityFactors": "food/tax/religion/fear",
   "rate": "rate: ",
   "waterError": "Error!: cant move to WATER or HIGHLANDS or not Passables!",

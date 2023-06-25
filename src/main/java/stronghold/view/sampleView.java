@@ -1,9 +1,11 @@
 package stronghold.view;
 
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.effect.MotionBlur;
 import javafx.scene.input.*;
 import stronghold.controller.GameMenuController;
+import stronghold.controller.graphical.CellModifierController;
 import stronghold.controller.sampleController;
 
 import javafx.application.Application;
@@ -31,11 +33,14 @@ import stronghold.model.components.game.trade.Trade;
 import stronghold.model.components.game.trade.TradeDataBase;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import stronghold.view.graphics.CellModifierView;
 import stronghold.view.graphics.GameView;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 
 import static stronghold.view.graphics.GameView.motionBlurEffect;
@@ -44,6 +49,7 @@ public class sampleView extends Application {
     public static Stage stage;
     private static Government currentUser;
     private static ArrayList<MapCell>selectedCells=new ArrayList<>();
+    static Rectangle clipboard = new Rectangle(55, 55);
 
     public static Government getCurrentUser() {
         return currentUser;
@@ -55,6 +61,10 @@ public class sampleView extends Application {
 
     public static Stage getStage() {
         return stage;
+    }
+
+    public static void showClipboard(){
+        clipboard.setFill(sampleController.getBuildingPic().getFill());
     }
 
     @Override
@@ -110,8 +120,23 @@ public class sampleView extends Application {
                     event.consume();
                 });
                 cell.addEventHandler(MouseEvent.MOUSE_CLICKED,mouse->{
-                    selectedCells.add(mapCell);
-                    System.out.println(selectedCells);
+                    if (mouse.getButton() == MouseButton.PRIMARY && mapCell.getBuilding() != null) {
+                        GameMenuController.setCurrentBuilding(mapCell.getBuilding());
+                        CellModifierController.setCurrentBuildingPic(cell);
+                        try {
+                            Stage newStage = new Stage();
+                            newStage.setScene(new Scene(
+                                    FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/CellModifier.fxml")))));
+                            newStage.show();
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                    if (mouse.getButton() == MouseButton.SECONDARY && sampleController.getBuildingCopy() != null &&
+                            GameMenuController.dropBuilding(mapCell.getX(), mapCell.getY(), Building.getBuilding(currentUser, sampleController.getBuildingCopy()))){
+                        cell.setFill(sampleController.getBuildingPic().getFill());
+                    }
+                    mouse.consume();
                 });
                 gamePane.getChildren().add(cell);
             }
@@ -155,7 +180,6 @@ public class sampleView extends Application {
         root.getChildren().add(coinImage);
         //////////////////////////////////////////////////////////////
         ImageView popularity=new ImageView();
-
         Image happy=new Image(new FileInputStream("src/main/java/stronghold/database/Image/happy.jpg"));
         Image sad=new Image(new FileInputStream("src/main/java/stronghold/database/Image/sad.png"));
         Image poker=new Image(new FileInputStream("src/main/java/stronghold/database/Image/poker.png"));
@@ -280,6 +304,17 @@ public class sampleView extends Application {
         });
 
 
+        ///////show clipboard//////////
+
+            try {
+                clipboard.setY(645);
+                if (sampleController.getBuildingPic() != null)
+                    clipboard.setFill(sampleController.getBuildingPic().getFill());
+                root.getChildren().add(clipboard);
+            } catch (Exception ignored) {
+            }
+        //////////////////////////////////
+
 
 
 
@@ -334,6 +369,8 @@ public class sampleView extends Application {
             gamePane.setTranslateY(gamePane.getTranslateY() - deltaY/100);
 
         });
+
+
 
         stage.setScene(scene);
         stage.show();
