@@ -9,9 +9,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
-public class CellModifierView extends Application {
-
-    public Pane root;
+public class ScoreboardView extends Application {
 
     public static void main(String[] args) {
         launch(args);
@@ -19,12 +17,9 @@ public class CellModifierView extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/CellModifier.fxml")));
-        Scene currentScene = new Scene(root);
-
-
-        primaryStage.setScene(currentScene);
+        Pane root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/ScoreboardView.fxml")));
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
-
 }
