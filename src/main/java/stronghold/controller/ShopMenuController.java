@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -15,6 +16,7 @@ import stronghold.model.components.general.User;
 import stronghold.view.ShopMenuView;
 import stronghold.view.sampleView;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.HashMap;
@@ -29,10 +31,15 @@ public class ShopMenuController extends MenuController{
     }
 
     public static HashMap<Resource,Integer> prices=new HashMap<>();//not valued yet
+
+
+
+
+
+
     //add prices
     public static void buy(Resource resource, int number,Popup popup){
-        Government government=new Government(1);
-        setCurrentGovernment(government);
+
         if(prices.get(resource)*number> currentGovernment.getBalance()) {
 
             Label label=new Label("Not enough money!");
@@ -54,6 +61,7 @@ public class ShopMenuController extends MenuController{
         }
         else{
             currentGovernment.setBalance(currentGovernment.getBalance()-(prices.get(resource)*number));
+            System.out.println(prices.get(resource)*number);
             currentGovernment.getResourcesMap().put(resource, (currentGovernment.getResourcesMap().get(resource)+number));
 
             Label label=new Label("success!");
@@ -73,7 +81,7 @@ public class ShopMenuController extends MenuController{
             ShopMenuView.output("success");
             System.out.println(currentGovernment.getBalance());
             sampleView.getCoin().setText(Double.toString(currentGovernment.getBalance()));
-            sampleView.getCurrentUser().setBalance(currentGovernment.getBalance());
+
         }
 
     }

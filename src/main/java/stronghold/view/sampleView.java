@@ -70,6 +70,20 @@ import static stronghold.view.graphics.GameView.motionBlurEffect;
 
 public class sampleView extends Application {
     private static Label coin;
+    private static Label population;
+    private static ImageView popularity;
+
+    public static ImageView getPopularity() {
+        return popularity;
+    }
+
+    public static ArrayList<MapCell> getSelectedCells() {
+        return selectedCells;
+    }
+
+    public static Label getPopulation() {
+        return population;
+    }
 
     public static Label getCoin() {
         return coin;
@@ -156,6 +170,7 @@ public class sampleView extends Application {
         MotionBlur motionBlur = new MotionBlur();
 
         Map.getInstanceMap().setSize(200);
+        GameMenuController.startGame(3);
 
         for(int i = 0; i < 9000;i++){
             Map.getInstanceMap().getMapCell(new Random().nextInt(200),new Random().nextInt(200))
@@ -304,7 +319,7 @@ public class sampleView extends Application {
 
 
 
-        GameMenuController.startGame(3);
+
         root.getChildren().add(gamePane);
         root.getChildren().add(b);
          coin=new Label(Double.toString(currentUser.getBalance()));
@@ -320,7 +335,8 @@ public class sampleView extends Application {
         coinImage.setScaleY(0.1);
         root.getChildren().add(coin);
         //////////////////////////////////////////////////////////////////////////////
-        Label population =new Label(Integer.toString(currentUser.getPopulation())+"/"+Integer.toString(currentUser.getPopulation()+10*currentUser.getColor()));
+
+        population = new Label(Integer.toString(currentUser.getPopulation())+"/"+Integer.toString(currentUser.getPopulation()+10*currentUser.getColor()));
         population.setLayoutX(1460);
         population.setLayoutY(730);
         population.setTextFill(Color.WHITE);
@@ -343,7 +359,8 @@ public class sampleView extends Application {
 
         root.getChildren().add(coinImage);
         //////////////////////////////////////////////////////////////
-        ImageView popularity=new ImageView();
+
+        popularity = new ImageView();
         Image happy=new Image(new FileInputStream("src/main/java/stronghold/database/Image/happy.jpg"));
         Image sad=new Image(new FileInputStream("src/main/java/stronghold/database/Image/sad.png"));
         Image poker=new Image(new FileInputStream("src/main/java/stronghold/database/Image/poker.png"));
