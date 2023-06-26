@@ -23,8 +23,11 @@ public class RegisterView extends Application {
         Pane root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/registerView.fxml")));
         Scene currentScene = new Scene(root);
 
-
         primaryStage.setScene(currentScene);
         primaryStage.show();
+    }
+
+    public void launchLoginView(){
+        LoginView.launch(null);
     }
 }

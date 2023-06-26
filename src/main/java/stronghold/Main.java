@@ -7,12 +7,15 @@ import javafx.stage.Stage;
 import stronghold.controller.GameMenuController;
 import stronghold.controller.MainMenuController;
 import stronghold.controller.SignUpMenuController;
+import stronghold.controller.graphical.HubMenuController;
 import stronghold.model.components.general.User;
 import stronghold.model.database.UsersDB;
 import stronghold.model.utils.StringParser;
 import stronghold.view.MainMenuView;
 import stronghold.view.SignUpLoginView;
+import stronghold.view.graphics.HubMenuView;
 import stronghold.view.graphics.LoginView;
+import stronghold.view.graphics.RegisterView;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -38,7 +41,18 @@ public class Main {
         String loggedinuser = StringParser.removeQuotes(
                 String.valueOf(prefsElement.getAsJsonObject().get("logged-in user")));
         if(startInGraphical){
-            LoginView.main(args);
+
+            if(loggedinuser.equals("!NULLUSER")) {
+
+                RegisterView.main(args);
+            }
+            else{
+
+                User currentUser = UsersDB.usersDB.getUserByUsername(loggedinuser);
+                HubMenuController.setCurrentUser(currentUser);
+                HubMenuView.main(args);
+            }
+
         }
         else{
             Scanner scanner = new Scanner(System.in);

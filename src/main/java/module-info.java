@@ -3,7 +3,7 @@ module stronghold {
     requires javafx.fxml;
     requires com.google.gson;
 
-    opens stronghold.controller.graphical to javafx.fxml;
+    opens stronghold.controller.graphical to javafx.fxml, javafx.graphics;
 
     exports stronghold.view to javafx.graphics;
     exports stronghold to javafx.graphics;
