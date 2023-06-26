@@ -169,7 +169,11 @@ public class GameMenuView extends MenuView {
                 int X = Integer.parseInt(setTextureMatcher.group("X"));
                 int Y = Integer.parseInt(setTextureMatcher.group("Y"));
                 Texture type = Texture.getTexture(setTextureMatcher.group("type"));
-                setTexture(X, Y, type);
+                try {
+                    setTexture(X, Y, type);
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
             } else if ((setRectangleTextureMatcher = getJSONRegexMatcher(command, "setRectangleTexture", gameMenuRegexObj)).matches()) {
                 // command: settexture -x1 [x1] -y1 [y1] -x2 [x2] -y2 [y2] -t [type]
                 int X1 = Integer.parseInt(setRectangleTextureMatcher.group("X1"));
@@ -191,7 +195,7 @@ public class GameMenuView extends MenuView {
                 int X = Integer.parseInt(dropTreeMatcher.group("X"));
                 int Y = Integer.parseInt(dropTreeMatcher.group("Y"));
                 Tree type = Tree.getTree(dropTreeMatcher.group("type"));
-                dropTree(X, Y, type);
+              //  dropTree(X, Y, type);
             } else if ((dropUnitMatcher = getJSONRegexMatcher(command, "dropUnit", gameMenuRegexObj)).matches()) {
                 int X = Integer.parseInt(dropUnitMatcher.group("X"));
                 int Y = Integer.parseInt(dropUnitMatcher.group("Y"));

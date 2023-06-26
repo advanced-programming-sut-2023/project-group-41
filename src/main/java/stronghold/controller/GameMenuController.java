@@ -1,7 +1,18 @@
 package stronghold.controller;
 
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
 import stronghold.model.components.game.*;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.lang.Math;
 
 import stronghold.model.components.game.building.Building;
@@ -12,10 +23,7 @@ import stronghold.model.components.game.building.*;
 
 import stronghold.model.components.game.enums.*;
 import stronghold.model.components.game.soldeirtype.*;
-import stronghold.view.GameMenuView;
-import stronghold.view.MapMenuView;
-import stronghold.view.ShopMenuView;
-import stronghold.view.TradeMenuView;
+import stronghold.view.*;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -93,6 +101,9 @@ public class GameMenuController extends MenuController {
     public static void setPlayerNum(int playerNum) {
         GameMenuController.playerNum = playerNum;
     }
+    public static void setallCurrentGovernmentsdsadasda(Government government){
+
+    }
 
 
     public static void startGame(int playerNum) {
@@ -132,6 +143,7 @@ public class GameMenuController extends MenuController {
 
 
     public static void nextPlayer() {
+        System.out.println(currentPlayer.getColor());
 
         if (currentPlayer.getColor() == playerNum) {
             endOfRound();
@@ -441,6 +453,7 @@ public class GameMenuController extends MenuController {
                     currentPlayer.getUnits().add(unit);
                     if (UnarmedEnum.getUnarmedType(type).equals(UnarmedEnum.engineer)) currentPlayer.addResources(ENGINEER, count, false);
                     else if (UnarmedEnum.getUnarmedType(type).equals(UnarmedEnum.worker)) currentPlayer.addResources(WORKER, count, false);
+
                     GameMenuView.output("success");
                 }
             }
@@ -527,10 +540,17 @@ public class GameMenuController extends MenuController {
     }
     }
 
+    public static ArrayList<Unit> getCurrentUnits() {
+        return currentUnits;
+    }
+
     public static void moveUnitTo(int X, int Y) {
         if ( !Map.getInstanceMap().getMapCell(X, Y).isPassable()) {
             GameMenuView.output("waterError");
-        }  else {
+        }
+        else if(!NavigatorController.isAbleToNavigate(NavigatorController.mapPassable(),currentUnits.get(0).getX(),currentUnits.get(0).getY(),X,Y)){
+            GameMenuView.output("waterError");
+        }else {
 
             for (Unit unit : currentUnits) {
                 if (Map.getInstanceMap().getMapCell(X, Y).getBuilding() != null){
@@ -547,6 +567,14 @@ public class GameMenuController extends MenuController {
 
             }
             Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(), currentUnits.get(0).getY()).getUnits().clear();
+            Circle circle=new Circle(5);
+            circle.toFront();
+            circle.setCenterX(20*Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(),currentUnits.get(0).getY()).getX()+10);
+            circle.setCenterY(20*Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(),currentUnits.get(0).getY()).getY()+10);
+            sampleView.getMapCellNodeHashMap().get(Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(),currentUnits.get(0).getY())).toFront();
+            sampleView.getMapCellNodeHashMap().get(Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(),currentUnits.get(0).getY())).getChildren().add(circle);
+            NavigatorController.path(currentUnits.get(0).getX(),currentUnits.get(0).getY(),X,Y,NavigatorController.findShortestPath(NavigatorController.mapPassable(),currentUnits.get(0).getX(),currentUnits.get(0).getY(),X,Y,currentUnits.get(0).getPeople().getSpeed()*10),circle);
+
             GameMenuView.output("success");
         }
     }
@@ -874,15 +902,23 @@ public class GameMenuController extends MenuController {
     }
 
 
-    public static void setTexture(int X, int Y, Texture type) {
+
+    public static void setTexture(int X, int Y, Texture type) throws FileNotFoundException {
         if (!Map.getInstanceMap().validMapCell(X, Y)) {
             GameMenuView.output("invalidLocation");
         } else if (Map.getInstanceMap().getMapCell(X, Y).getBuilding() != null) {
             GameMenuView.output("buildingPlaced");
         } else {
             Map.getInstanceMap().getMapCell(X, Y).setTexture(type);
-            if(type.equals("sea")||type.equals("river")||type.equals("big pound")||type.equals("small pound")||type.equals("stone")){
+            if(type.equals(Texture.SEA)||type.equals(Texture.RIVER)||type.equals(Texture.BIG_POND)||type.equals(Texture.SMALL_POND)||type.equals(Texture.SHALLOW_LAKE)||type.equals(Texture.OIL)){
+                sampleView.getBackgroundTexture(X,Y).setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/tiles/water.jpg"))));
+            }else{
+                sampleView.getBackgroundTexture(X,Y).setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/tiles/grass.jpg"))));
+
+            }
+            if(type.equals(Texture.SEA)||type.equals(Texture.RIVER)||type.equals(Texture.BIG_POND)||type.equals(Texture.SMALL_POND)||type.equals(Texture.STONE)){
                 Map.getInstanceMap().getMapCell(X, Y).setPassable(false);
+
             }
             GameMenuView.output("textureSet");
         }
@@ -913,9 +949,9 @@ public class GameMenuController extends MenuController {
             }
         }
         GameMenuView.output("textureSet");
-    }
+    }//
 
-    public static void clear(int X, int Y) {
+    public static void clear(int X, int Y) {//
         // Map.getMapCell(X,Y).setTexture();default texture
         Map.getInstanceMap().getMapCell(X, Y).setBuilding(null);
         Map.getInstanceMap().getMapCell(X, Y).setPassable(true);
@@ -935,30 +971,44 @@ public class GameMenuController extends MenuController {
         } else if(Map.getInstanceMap().getMapCell(X,Y).getBuilding()!=null||Map.getInstanceMap().getMapCell(X,Y).getRockDirection()!=null||Map.getInstanceMap().getMapCell(X,Y).getTree()!=null){
             GameMenuView.output("sthIsHere");
         }else if (direction.equals(RANDOM)) {
+            try {
+                sampleView.getBackgroundTexture(X,Y).setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/tiles/rock.jpg"))));
+
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+
             Map.getInstanceMap().getMapCell(X, Y).setRockDirection(Direction.getRandom());
             GameMenuView.output("rockDrop");
         } else {
             Map.getInstanceMap().getMapCell(X, Y).setRockDirection(direction);
             Map.getInstanceMap().getMapCell(X,Y).setPassable(false);
+            try {
+                sampleView.getBackgroundTexture(X,Y).setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/tiles/rock.jpg"))));
+
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
             GameMenuView.output("rockDrop");
         }
-    }
+    }//
 
-    public static void dropTree(int X, int Y, Tree type) {
+    public static void dropTree(int X, int Y, Tree type) throws FileNotFoundException {
+        if(!Map.getInstanceMap().getMapCell(X,Y).isPassable()){
+            GameMenuView.output("sthIsHere");
+        }
 
-
-
-
-        if (type == null) {
+        else if (type == null) {
             GameMenuView.output("invalidType");
         } else if(Map.getInstanceMap().getMapCell(X,Y).getBuilding()!=null||Map.getInstanceMap().getMapCell(X,Y).getRockDirection()!=null||Map.getInstanceMap().getMapCell(X,Y).getTree()!=null){
             GameMenuView.output("sthIsHere");
         }else {
             Map.getInstanceMap().getMapCell(X, Y).setTree(type);
             Map.getInstanceMap().getMapCell(X,Y).setPassable(false);
+            sampleView.getBackgroundTexture(X,Y).setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/tiles/tree.jpg"))));
             GameMenuView.output("success");
         }
-    }
+    }//
 
     public static void dropUnit(int X, int Y, String type, int count) {
         if(Map.getInstanceMap().getMapCell(X,Y).isPassable()==false){
@@ -1010,15 +1060,23 @@ public class GameMenuController extends MenuController {
 
         }
         if (currentBuilding.getRegex().equals("post")) {
-            Scanner scanner = new Scanner(System.in);
+           /* Scanner scanner = new Scanner(System.in);
             GameMenuView.output("enterShopMenu");
-            ShopMenuView.run(scanner);
-
+            ShopMenuView.run(scanner);*/
+            shopNewStage = new Stage();
+            shopNewStage.setScene(new Scene(
+                    ShopMenuView.gettetet()));
+            shopNewStage.show();
         } else {
             GameMenuView.output("shopError");
             return;
         }
 
+    }
+    private static Stage shopNewStage;
+
+    public static Stage getShopNewStage() {
+        return shopNewStage;
     }
 
     public static void enterMapMenu() {

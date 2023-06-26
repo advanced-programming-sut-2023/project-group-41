@@ -13,6 +13,7 @@ import stronghold.model.components.game.Government;
 import stronghold.model.components.game.enums.Resource;
 import stronghold.model.components.general.User;
 import stronghold.view.ShopMenuView;
+import stronghold.view.sampleView;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -66,10 +67,13 @@ public class ShopMenuController extends MenuController{
             Button button=new Button("back");
             button.setLayoutX(button.getLayoutX()+80);
             button.setLayoutY(button.getLayoutY()+100);
-            popup.show(ShopMenuView.getStage());
+            popup.show(GameMenuController.getShopNewStage());
             button.setOnAction(actionEvent -> popup.hide());
             popup.getContent().add(button);
             ShopMenuView.output("success");
+            System.out.println(currentGovernment.getBalance());
+            sampleView.getCoin().setText(Double.toString(currentGovernment.getBalance()));
+            sampleView.getCurrentUser().setBalance(currentGovernment.getBalance());
         }
 
     }
@@ -87,7 +91,7 @@ public class ShopMenuController extends MenuController{
             Button button=new Button("back");
             button.setLayoutX(button.getLayoutX()+80);
             button.setLayoutY(button.getLayoutY()+100);
-            popup.show(ShopMenuView.getStage());
+            popup.show(GameMenuController.getShopNewStage());
             button.setOnAction(actionEvent -> popup.hide());
             popup.getContent().add(button);
 
@@ -104,13 +108,15 @@ public class ShopMenuController extends MenuController{
         Button button=new Button("back");
         button.setLayoutX(button.getLayoutX()+80);
         button.setLayoutY(button.getLayoutY()+100);
-        popup.show(ShopMenuView.getStage());
+        popup.show(GameMenuController.getShopNewStage());
         button.setOnAction(actionEvent -> popup.hide());
         popup.getContent().add(button);
 
         currentGovernment.setBalance(currentGovernment.getBalance()+(prices.get(resource)*(number*0.8)));
         currentGovernment.getResourcesMap().put(resource, (currentGovernment.getResourcesMap().get(resource)-number));
         ShopMenuView.output("success");
+        sampleView.getCoin().setText(Double.toString(currentGovernment.getBalance()));
+        sampleView.getCurrentUser().setBalance(currentGovernment.getBalance());
 
 
     }
