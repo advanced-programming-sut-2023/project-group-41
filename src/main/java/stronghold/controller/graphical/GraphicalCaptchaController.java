@@ -1,5 +1,7 @@
 package stronghold.controller.graphical;
 
+import javafx.application.Application;
+import javafx.stage.Stage;
 import stronghold.view.graphics.CaptchaView;
 
 public class GraphicalCaptchaController {
@@ -12,7 +14,8 @@ public class GraphicalCaptchaController {
     }
 
     public static boolean generateCaptcha(){
-        CaptchaView.main(null);
+        CaptchaView captchaView = new CaptchaView();
+        captchaView.start(new Stage());
         return lastResult;
     }
 

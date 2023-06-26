@@ -1,6 +1,5 @@
 package stronghold.view.graphics;
 
-import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.concurrent.Task;
 import javafx.scene.Scene;
@@ -11,22 +10,26 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.stage.Popup;
+import javafx.stage.PopupWindow;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import javafx.util.Duration;
 import stronghold.controller.graphical.GraphicalCaptchaController;
 import stronghold.model.components.general.GraphicalCaptcha;
 
 public class CaptchaView extends Application {
 
+    public static Stage stage;
+    public static Pane root;
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
     public void start(Stage primaryStage) {
-
         primaryStage.setTitle("Captcha...");
-        Pane root = new Pane();
+        root = new Pane();
         Scene scene = new Scene(root,700,200);
         GraphicalCaptcha graphicalCaptcha = new GraphicalCaptcha();
         graphicalCaptcha.graphicalCaptcha.setTranslateX(20);
@@ -60,9 +63,11 @@ public class CaptchaView extends Application {
 
 
         });
+
         root.getChildren().addAll(textField,submit);
         primaryStage.setScene(scene);
-        primaryStage.show();
+        stage = primaryStage;
+        primaryStage.showAndWait();
     }
 
     public static void delay(long millis, Runnable continuation) {
