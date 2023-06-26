@@ -219,6 +219,7 @@ public class sampleView extends Application {
                     if (mouse2.getButton() == MouseButton.PRIMARY && mapCell.getBuilding() != null) {
                         GameMenuController.setCurrentBuilding(mapCell.getBuilding());
                         CellModifierController.setCurrentBuildingPic(backgroundTexture);
+                        CellModifierController.setCurrentCell(cell);
                         try {
                             Stage newStage = new Stage();
                             newStage.setScene(new Scene(
@@ -303,7 +304,7 @@ public class sampleView extends Application {
 
 
 
-        GameMenuController.startGame(3);
+        //GameMenuController.startGame(3);
         root.getChildren().add(gamePane);
         root.getChildren().add(b);
          coin=new Label(Double.toString(currentUser.getBalance()));
