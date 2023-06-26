@@ -2,9 +2,11 @@ package stronghold.view;
 
 import javafx.application.Application;
 import javafx.fxml.FXML;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import stronghold.model.components.game.enums.Resource;
 
@@ -20,6 +22,13 @@ public class TradeHistoryMenu extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        Screen screen = Screen.getPrimary();
+        Rectangle2D bounds = screen.getVisualBounds();
+
+        stage.setX(bounds.getMinX());
+        stage.setY(bounds.getMinY());
+        stage.setWidth(bounds.getWidth());
+        stage.setHeight(bounds.getHeight());
         this.stage=stage;
         Pane root=new Pane();
         Button button=new Button("Sended History");

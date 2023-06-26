@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -19,6 +20,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Popup;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import stronghold.controller.GameMenuController;
 import stronghold.controller.ShopMenuController;
@@ -95,7 +97,93 @@ public class ShopMenuView extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        Screen screen = Screen.getPrimary();
+        Rectangle2D bounds = screen.getVisualBounds();
+
+        stage.setX(bounds.getMinX());
+        stage.setY(bounds.getMinY());
+        stage.setWidth(bounds.getWidth());
+        stage.setHeight(bounds.getHeight());
         this.stage=stage;
+        Pane root=new Pane();
+        Pane pane=new Pane();
+        Label text=new Label("Please choose an item");
+        text.setLayoutX(400);
+        text.setLayoutY(200);
+        text.setTextFill(Color.GREEN);
+        text.setScaleY(3);
+        text.setScaleX(3);
+        root.getChildren().add(text);
+        Button button3=new Button("TradeMenu");
+        button3.setLayoutX(1000);
+        button3.setLayoutY(500);
+        button3.setOnAction(actionEvent -> {
+            try {
+                new TradeMenuView().start(ShopMenuView.getStage());
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+        root.getChildren().add(button3);
+
+
+        int i=30;
+        for (Resource resource : Resource.getResources()) {
+            Button button=new Button(resource.getRegex());
+            button.setLayoutX(800);
+            button.setLayoutY(i);
+            EventHandler<ActionEvent> event =
+                    new EventHandler<ActionEvent>() {
+
+                        public void handle(ActionEvent e)
+                        {
+                            text.setText(resource.getRegex());
+                            TextField textField=new TextField();
+                            textField.setText("1");
+                            textField.setLayoutX(350);
+                            textField.setLayoutY(230);
+                            root.getChildren().add(textField);
+                            textField.setPromptText("enter number you Want to sell");
+                            Button button1=new Button("Buy");
+                            button1.setLayoutX(350);
+                            button1.setLayoutY(270);
+                            Popup popup1=new Popup();
+                            button1.setOnAction(actionEvent -> ShopMenuController.buy(resource,Integer.parseInt(textField.getText()),popup1));
+                            root.getChildren().add(button1);
+
+                            Button button2=new Button("Sell");
+                            button2.setLayoutX(430);
+                            button2.setLayoutY(270);
+                            Popup popup2=new Popup();
+                            button2.setOnAction(actionEvent -> ShopMenuController.sell(resource,Integer.parseInt(textField.getText()),popup2));
+                            Label label=new Label("Buy: "+prices.get(resource)*(Integer.parseInt(textField.getText()))+"\nSell: "+0.8*prices.get(resource)*(Integer.parseInt(textField.getText())));
+
+                            textField.setOnAction(actionEvent -> label.setText("Buy: "+prices.get(resource)*(Integer.parseInt(textField.getText()))+"\nSell: "+0.8*prices.get(resource)*(Integer.parseInt(textField.getText()))));
+
+                            label.setLayoutX(600);
+                            label.setLayoutY(250);
+                            root.getChildren().add(button2);
+                            root.getChildren().add(label);
+                        }
+                    };
+
+            button.setOnAction(event);
+            i+=30;
+            root.getChildren().add(button);
+
+        }
+        ShopMenuController.setCurrentGovernment(sampleView.getCurrentUser());
+        Scene scene=new Scene(root);
+
+        stage.setScene(scene);
+        stage.show();
+
+
+    }
+    public static Pane gettetet(){
+        for(Resource resource:Resource.getResources()){
+            prices.put(resource,10);
+        }
         Pane root=new Pane();
         Pane pane=new Pane();
         Label text=new Label("Please choose an item");
@@ -162,11 +250,8 @@ public class ShopMenuView extends Application {
             root.getChildren().add(button);
 
         }
-        Scene scene=new Scene(root);
-
-        stage.setScene(scene);
-        stage.show();
-
+        ShopMenuController.setCurrentGovernment(sampleView.getCurrentUser());
+        return root;
     }
 
     public static void main

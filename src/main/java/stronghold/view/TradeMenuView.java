@@ -5,12 +5,14 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import javafx.application.Application;
 import javafx.fxml.FXML;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Popup;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import stronghold.controller.GameMenuController;
 import stronghold.controller.TradeMenuController;
@@ -38,6 +40,13 @@ public class TradeMenuView extends Application {
     }
     @Override
     public void start(Stage stage) throws Exception {
+        Screen screen = Screen.getPrimary();
+        Rectangle2D bounds = screen.getVisualBounds();
+
+        stage.setX(bounds.getMinX());
+        stage.setY(bounds.getMinY());
+        stage.setWidth(bounds.getWidth());
+        stage.setHeight(bounds.getHeight());
         this.stage=stage;
         Pane root=new Pane();
         Button button=new Button("New Trade");

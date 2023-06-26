@@ -21,6 +21,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import stronghold.model.components.game.Government;
+import stronghold.model.components.game.Map;
 import stronghold.model.components.game.Unit;
 import stronghold.model.components.game.building.BuildingType;
 import stronghold.model.components.game.enums.Resource;
@@ -30,6 +31,7 @@ import java.io.FileNotFoundException;
 
 public class sampleController {
     private static Government currentGovernment;
+    private static boolean select=false;
     private static String buildingCopy = null;
     private static Rectangle buildingPic = null;
 
@@ -466,8 +468,59 @@ public class sampleController {
         }
 
     }
+    public static void selecting(){
+        if(select==true)
+            select=false;
+        else
+            select=true;
+    }
+
+    public static boolean isSelect() {
+        return select;
+    }
+    public static void selectingUnits(Popup popup){
+        TextField textField=new TextField();
+        textField.setPromptText("enter Xs: X1-X2-...");
+        TextField Y=new TextField();
+        Y.setPromptText("enter Ys: Y1-Y2-...");
+        Button Select=new Button("Select");
+        Select.setOnAction(actionEvent ->{
+            String[] Xs=textField.getText().split("-");
+            String[] Ys=textField.getText().split("-");
+            int[][] XY;
+           for (int j = 0; j < Xs.length; j++) {
+               for (Unit unit : Map.getInstanceMap().getMapCell(Integer.parseInt(Xs[j]), Integer.parseInt(Ys[j])).getUnits()) {
+                   GameMenuController.getCurrentUnits().add(unit);
+               }
+            }
+           textField.setLayoutX(popup.getX()+100);
+           Y.setLayoutX(popup.getX()+100);
+           Select.setLayoutX(popup.getX()+100);
+           popup.getContent().add(textField);
+           popup.getContent().add(Y);
+           popup.getContent().add(Select);
 
 
+        });
+    }
+    public static void options(Stage stage) {
+        Popup popup = new Popup();
+        popup.show(stage);
+        Rectangle rectangle = new Rectangle(400, 400);
+        popup.getContent().add(rectangle);
+        try {
+            rectangle.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/back2.jpg"))));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        Button back = new Button("Back");
+        popup.getContent().add(back);
+        back.setOnAction(actionEvent -> popup.hide());
+        Button Exit = new Button("setTexture");
+        Exit.setLayoutX(rectangle.getLayoutX() + 170);
+        Exit.setLayoutY(rectangle.getLayoutY() + 70);
+        popup.getContent().add(Exit);
 
 
+    }
 }
