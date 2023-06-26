@@ -101,7 +101,16 @@ public class GameMenuController extends MenuController {
     public static void setPlayerNum(int playerNum) {
         GameMenuController.playerNum = playerNum;
     }
-    public static void setallCurrentGovernmentsdsadasda(Government government){
+    public static void setallCurrentGovernments(Government government){
+        setCurrentPlayer(government);
+        sampleView.setCurrentUser(government);
+        sampleController.setCurrentGovernment(government);
+        ShopMenuController.setCurrentGovernment(government);
+        TradeMenuView.setCurrentUser(government);
+        TradeMenuController.setCurrentGovernment(government);
+        ReceivedTradeMenu.setCurrentUser(government);
+        NewTradeMenu.setCurrentPlayer(government);
+        SendTradeMenu.setCurrentUser(government);
 
     }
 
@@ -126,6 +135,7 @@ public class GameMenuController extends MenuController {
 
 
         }
+        setallCurrentGovernments(getGovernmentByColor(1));
     }
 
     public static void setCurrentPlayer(Government government) {
@@ -151,9 +161,9 @@ public class GameMenuController extends MenuController {
             if (currentRound > roundNum) {
                 //endGame
             }
-            setCurrentPlayer(getGovernmentByColor(1));
+            setallCurrentGovernments(getGovernmentByColor(1));
         } else {
-            setCurrentPlayer(getGovernmentByColor(currentPlayer.getColor() + 1));
+            setallCurrentGovernments(getGovernmentByColor(currentPlayer.getColor() + 1));
         }
         System.out.println("player: " + currentPlayer.getColor());
         System.out.println("round" + currentRound);
@@ -956,7 +966,19 @@ public class GameMenuController extends MenuController {
                 Map.getInstanceMap().getMapCell(i, j).setTexture(type);
                 if(type.equals("sea")||type.equals("river")||type.equals("big pound")||type.equals("small pound")||type.equals("sttone")){
                     Map.getInstanceMap().getMapCell(i, j).setPassable(false);
+                    try {
+                        sampleView.getBackgroundTexture(i,j).setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/tiles/water.jpg"))));
+                    } catch (FileNotFoundException e) {
+                        throw new RuntimeException(e);
+                    }
+
                 }
+                try {
+                    sampleView.getBackgroundTexture(i,j).setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/tiles/grass.jpg"))));
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+
             }
         }
         GameMenuView.output("textureSet");
@@ -969,6 +991,11 @@ public class GameMenuController extends MenuController {
         Map.getInstanceMap().getMapCell(X, Y).getUnits().clear();
         Map.getInstanceMap().getMapCell(X, Y).setRockDirection(null);
         Map.getInstanceMap().getMapCell(X, Y).setTree(null);
+        try {
+            sampleView.getBackgroundTexture(X,Y).setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/tiles/grass.jpg"))));
+        } catch (FileNotFoundException e) {
+
+        }
         GameMenuView.output("success");
 
 
