@@ -316,10 +316,10 @@ public class GameMenuController extends MenuController {
         }
     }
 
-    public static void createUnit(String type, int count) {
+    public static boolean createUnit(String type, int count) {
         if (currentBuilding == null){
             GameMenuView.output("selectBuilding");
-            return;
+            return false;
 
         }
         else if (currentBuilding.getBuildingType().equals(ConverterType.MERCENARY_POST)){
@@ -327,7 +327,7 @@ public class GameMenuController extends MenuController {
                 if (FighterEnum.getFighterType(type).isArab()) {
                     if (currentPlayer.getBalance() < count * FighterEnum.getFighterType(type).getPrice()) {
                         GameMenuView.output("balanceError");
-                        return;
+                        return false;
                     } else {
                         Fighter fighter = new Fighter(FighterEnum.getFighterType(type));
                         Unit unit = new Unit(selectedBuildingX, selectedBuildingY, fighter, count);
@@ -336,6 +336,7 @@ public class GameMenuController extends MenuController {
                         currentPlayer.setPopulation(currentPlayer.getPopulation()-count);
                         currentPlayer.getUnits().add(unit);
                         GameMenuView.output("success");
+                        return true;
                     }
                 }
             }
@@ -343,7 +344,7 @@ public class GameMenuController extends MenuController {
            if (LongRangedEnum.getLongRangedType(type).isArab()) {
                     if (currentPlayer.getBalance() < count * LongRangedEnum.getLongRangedType(type).getPrice()) {
                         GameMenuView.output("balanceError");
-                        return;
+                        return false;
                     } else {
                         LongRanged fighter = new LongRanged(LongRangedEnum.getLongRangedType(type));
                         Unit unit = new Unit(selectedBuildingX, selectedBuildingY, fighter, count);
@@ -352,18 +353,20 @@ public class GameMenuController extends MenuController {
                         currentPlayer.getUnits().add(unit);
                         Map.getInstanceMap().getMapCell(getSelectedBuildingX(), getSelectedBuildingY()).getUnits().add(unit);
                         GameMenuView.output("success");
+                        return true;
                     }
 
                 }
             }else{
               GameMenuView.output("notArab");
+              return false;
             }
             
         }
         else if (currentBuilding.getBuildingType().equals(ConverterType.BARRACKS)){
             if(type.equals("blackMonk")){
                 GameMenuView.output("blackMonk");
-                return;
+                return false;
             }
             if(FighterEnum.getFighterType(type)!=null) {
                 if (!FighterEnum.getFighterType(type).isArab()) {
@@ -372,7 +375,7 @@ public class GameMenuController extends MenuController {
                         if (FighterEnum.getFighterType(type).getResource() != null && currentPlayer.getResourcesMap().get(FighterEnum.getFighterType(type).getResource()) < count) {
                             GameMenuView.output("resourceError");
                         }
-                        return;
+                        return false;
 
                     } else {
                         Fighter fighter = new Fighter(FighterEnum.getFighterType(type));
@@ -385,6 +388,7 @@ public class GameMenuController extends MenuController {
                         currentPlayer.setPopulation(currentPlayer.getPopulation() - count);
                         currentPlayer.getUnits().add(unit);
                         GameMenuView.output("success");
+                        return true;
 
                     }
                 }
@@ -395,7 +399,7 @@ public class GameMenuController extends MenuController {
                         if (LongRangedEnum.getLongRangedType(type).getResource() != null && currentPlayer.getResourcesMap().get(LongRangedEnum.getLongRangedType(type).getResource()) < count) {
                             GameMenuView.output("resourceError");
                         }
-                        return;
+                        return false;
 
                     } else {
                         LongRanged fighter = new LongRanged(LongRangedEnum.getLongRangedType(type));
@@ -408,6 +412,7 @@ public class GameMenuController extends MenuController {
                         currentPlayer.setPopulation(currentPlayer.getPopulation() - count);
                         currentPlayer.getUnits().add(unit);
                         GameMenuView.output("success");
+                        return true;
                     }
                 }
             }
@@ -416,7 +421,7 @@ public class GameMenuController extends MenuController {
             if(type.equals("blackMonk")){
                 if(FighterEnum.blackMonk.getPrice()*count>currentPlayer.getBalance()){
                     GameMenuView.output("balanceError");
-                    return;
+                    return false;
                 }
                 Fighter fighter =new Fighter(FighterEnum.blackMonk);
                 Unit unit=new Unit(getSelectedBuildingX(),getSelectedBuildingY(),fighter,count);
@@ -424,14 +429,17 @@ public class GameMenuController extends MenuController {
                 currentPlayer.setPopulation(currentPlayer.getPopulation()-count);
                 currentPlayer.getUnits().add(unit);
                 GameMenuView.output("success");
+                return true;
             }else{
                 GameMenuView.output("notblackMonk");
+                return false;
             }
 
         } else if(currentBuilding.getBuildingType().equals(StorageType.ENGINEER_GUILD) ){
             if (UnarmedEnum.getUnarmedType(type) != null) {
                 if (currentPlayer.getBalance() < count * UnarmedEnum.getUnarmedType(type).getPrice()) {
                     GameMenuView.output("balanceError");
+                    return false;
                 } else {
                     Unarmed fighter = new Unarmed(UnarmedEnum.getUnarmedType(type));
                     Unit unit = new Unit(selectedBuildingX, selectedBuildingY, fighter, count);
@@ -442,13 +450,16 @@ public class GameMenuController extends MenuController {
                     if (UnarmedEnum.getUnarmedType(type).equals(UnarmedEnum.engineer)) currentPlayer.addResources(ENGINEER, count, false);
                     else if (UnarmedEnum.getUnarmedType(type).equals(UnarmedEnum.worker)) currentPlayer.addResources(WORKER, count, false);
                     GameMenuView.output("success");
+                    return true;
                 }
             }
         }else {
             GameMenuView.output("selectUnitBuilding");
+            return false;
         }
+        return false;
 
-        }
+    }
 
 
 

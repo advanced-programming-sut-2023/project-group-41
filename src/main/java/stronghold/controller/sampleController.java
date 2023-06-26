@@ -374,9 +374,15 @@ public class sampleController {
         });
         return rectangle;
     }
-    public static void buildingselection(String type, Pane pane) throws FileNotFoundException {
-        pane.getChildren().clear();
-        FlowPane flowPane = new FlowPane(120, 700);
+    public static void buildingselection(String type, FlowPane flowPane) throws FileNotFoundException {
+
+        flowPane.getChildren().clear();
+        flowPane.setOrientation(Orientation.HORIZONTAL);
+        flowPane.setHgap(2);
+        flowPane.setVgap(2);
+        flowPane.setLayoutY(715);
+        flowPane.setLayoutX(100);
+
         int ySize = 47, xSize = 47;
         if(type.equals("development")){
 
@@ -385,6 +391,7 @@ public class sampleController {
             Rectangle cathedral= makeRectangle("cathedral", "src/main/java/stronghold/database/Image/buildings/development/cathedral.png");
             Rectangle inn = makeRectangle("inn", "src/main/java/stronghold/database/Image/buildings/development/inn.png");
 
+            flowPane.getChildren().clear();
             flowPane.getChildren().addAll(house, church, cathedral, inn);
 
 
@@ -402,6 +409,7 @@ public class sampleController {
             Rectangle mercenaryPost = makeRectangle("mercenaryPost", "src/main/java/stronghold/database/Image/buildings/converter/mercenary_post.png");
             Rectangle shop = makeRectangle("post", "src/main/java/stronghold/database/Image/buildings/converter/shop.png");
 
+            flowPane.getChildren().clear();
             flowPane.getChildren().addAll(mill, armourer, blacksmith, fletcher, poleturner, bakery, brewing,
                     oxTether, barracks, mercenaryPost, shop);
 
@@ -456,12 +464,7 @@ public class sampleController {
 
 
         }
-        flowPane.setOrientation(Orientation.HORIZONTAL);
-        flowPane.setHgap(2);
-        flowPane.setVgap(2);
-        flowPane.setLayoutY(715);
-        flowPane.setLayoutX(100);
-        pane.getChildren().add(flowPane);
+
     }
 
 

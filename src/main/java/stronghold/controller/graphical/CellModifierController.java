@@ -25,7 +25,9 @@ public class CellModifierController {
 
     public void createUnitHandler(MouseEvent e){
         try {
-            GameMenuController.createUnit(soldierText.getText(), Integer.parseInt(soldierNum.getText()));
+            if (GameMenuController.createUnit(soldierText.getText(), Integer.parseInt(soldierNum.getText()))) {
+                //CurrentBuildingPic.
+            }
         } catch (Exception ignored){
 
         }

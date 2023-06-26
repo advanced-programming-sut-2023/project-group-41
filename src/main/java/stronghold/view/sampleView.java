@@ -4,6 +4,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.effect.MotionBlur;
 import javafx.scene.input.*;
+import javafx.scene.layout.FlowPane;
 import stronghold.controller.GameMenuController;
 import stronghold.controller.graphical.CellModifierController;
 import stronghold.controller.sampleController;
@@ -237,7 +238,7 @@ public class sampleView extends Application {
         undo.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/undo.jpg"))));
         root.getChildren().add(undo);
         ////////////////////////////////////////////////////////////////////////////////
-        Pane buildingSelectionPane=new Pane();
+        FlowPane buildingSelectionPane= new FlowPane();
         root.getChildren().add(buildingSelectionPane);
         ////////////////////////////////////Undo////////////////////////////////////////////////////////////////////////////
         Rectangle bByTConverter=new Rectangle(40,40);
