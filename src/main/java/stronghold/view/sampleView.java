@@ -217,13 +217,15 @@ public class sampleView extends Application {
                 });
                 cell.addEventHandler(MouseEvent.MOUSE_CLICKED,mouse2->{
                     if (mouse2.getButton() == MouseButton.PRIMARY && mapCell.getBuilding() != null) {
-                        GameMenuController.setCurrentBuilding(mapCell.getBuilding());
+                        GameMenuController.setCurrentCell(mapCell);
                         CellModifierController.setCurrentBuildingPic(backgroundTexture);
                         CellModifierController.setCurrentCell(cell);
                         try {
                             Stage newStage = new Stage();
                             newStage.setScene(new Scene(
                                     FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/CellModifier.fxml")))));
+                            newStage.setX(400);
+                            newStage.setY(200);
                             newStage.show();
                         } catch (IOException e) {
                             throw new RuntimeException(e);
@@ -752,7 +754,6 @@ public class sampleView extends Application {
             }
             if(k.getCode() == KeyCode.DIGIT4){
                 sampleController.selecting();
-
             }
             if(k.getCode() == KeyCode.DIGIT5){
                 sampleController.selecting();

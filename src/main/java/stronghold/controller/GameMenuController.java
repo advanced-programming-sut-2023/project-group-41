@@ -36,9 +36,16 @@ public class GameMenuController extends MenuController {
     private static int roundNum;
     private static int currentRound;
     private static int playerNum;
+    private static Tool currentTool;
+
+    private static String pathToRegexJSON = "src/main/java/stronghold/database/utils/regex/GameMenuRegex.json";
+    ///////////
+    private static MapCell currentMapCell;
+    private static ArrayList<Unit> currentUnits = new ArrayList<>();
+    private static Building currentBuilding;
     private static int selectedBuildingX;
     private static int selectedBuildingY;
-    private static Tool currentTool;
+    private static Government currentPlayer;
 
     public static Tool getCurrentTool() {
         return currentTool;
@@ -56,6 +63,13 @@ public class GameMenuController extends MenuController {
         return selectedBuildingY;
     }
 
+    public static void setCurrentCell(MapCell mapCell){
+        currentMapCell = mapCell;
+        setCurrentBuilding(mapCell.getBuilding());
+        setSelectedBuildingX(mapCell.getX());
+        setSelectedBuildingY(mapCell.getY());
+    }
+
     public static void setSelectedBuildingX(int selectedBuildingX) {
         GameMenuController.selectedBuildingX = selectedBuildingX;
     }
@@ -64,11 +78,6 @@ public class GameMenuController extends MenuController {
         GameMenuController.selectedBuildingY = selectedBuildingY;
     }
 
-    private static String pathToRegexJSON = "src/main/java/stronghold/database/utils/regex/GameMenuRegex.json";
-    ///////////
-    private static ArrayList<Unit> currentUnits = new ArrayList<>();
-    private static Building currentBuilding;
-    private static Government currentPlayer;
 
     public static void setRoundNum(int roundNum) {
         GameMenuController.roundNum = roundNum;
