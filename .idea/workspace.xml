@@ -4,18 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="72fd4c0e-f2c3-4e13-85b9-d70f04a31b27" name="Changes" comment="Wired up register and login menus and created hub menu">
-      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/controller/graphical/ProfileEditController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/controller/graphical/SearchPlayersController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/view/graphics/ProfileEditView.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/view/graphics/SearchPlayerView.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/profileEditView.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/searchPlayerView.fxml" afterDir="false" />
+    <list default="true" id="72fd4c0e-f2c3-4e13-85b9-d70f04a31b27" name="Changes" comment="added search players to hub menu">
+      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/controller/graphical/PasswordRecoverController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/view/graphics/PasswordRecoverView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/passwordRecoverView.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/stronghold_jar/stronghold.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/stronghold_jar/stronghold.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/controller/graphical/HubMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/controller/graphical/HubMenuController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/controller/graphical/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/controller/graphical/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/controller/graphical/ProfileEditController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/controller/graphical/ProfileEditController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/database/datasets/preferences.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/database/datasets/preferences.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/view/graphics/ProfileEditView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/view/graphics/ProfileEditView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/hubMenuView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hubMenuView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/profileEditView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/profileEditView.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -205,7 +207,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687766457809</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="added search players to hub menu">
+      <created>1687858801173</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1687858801173</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -238,7 +247,8 @@
     <MESSAGE value="files added" />
     <MESSAGE value="fixed module-info.java and opened graphical controllers to FXML" />
     <MESSAGE value="Wired up register and login menus and created hub menu" />
-    <option name="LAST_COMMIT_MESSAGE" value="Wired up register and login menus and created hub menu" />
+    <MESSAGE value="added search players to hub menu" />
+    <option name="LAST_COMMIT_MESSAGE" value="added search players to hub menu" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/stronghold$SignUpMenuControllerTest_testAll.ic" NAME="SignUpMenuControllerTest.testAll Coverage Results" MODIFIED="1684827485987" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

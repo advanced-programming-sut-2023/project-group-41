@@ -23,8 +23,8 @@
                   <Label fx:id="usernameLabel" text="###USERNAME####" />
                </children>
             </HBox>
-            <Button fx:id="startNewGameButton" mnemonicParsing="false" text="Start New Game" />
-            <Button fx:id="profileMenuButton" mnemonicParsing="false" text="Profile Menu" />
+            <Button fx:id="startNewGameButton" mnemonicParsing="false" text="Enter Game Lobby" />
+            <Button fx:id="profileMenuButton" mnemonicParsing="false" onAction="#openProfileEdit" text="Edit Profile Menu" />
             <Button mnemonicParsing="false" onAction="#searchPlayers" text="Search Players" />
             <Button fx:id="logOutButton" mnemonicParsing="false" onMouseClicked="#logOut" text="Log Out" />
          </children>

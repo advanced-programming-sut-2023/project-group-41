@@ -2,8 +2,10 @@ package stronghold;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import stronghold.controller.GameMenuController;
 import stronghold.controller.MainMenuController;
 import stronghold.controller.SignUpMenuController;
@@ -26,13 +28,13 @@ public class Main {
     /* !!!!!FOR THE SAKE OF F*CK, DO NOT COMMENT YOUR CODES!!!!! */
 
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         JsonElement prefsElement;
         boolean startInGraphical = true;
 
 
         try {
-             prefsElement = JsonParser.parseReader(
+            prefsElement = JsonParser.parseReader(
                     new FileReader("src/main/java/stronghold/database/datasets/preferences.json"));
         } catch (
                 FileNotFoundException e) {
@@ -40,28 +42,25 @@ public class Main {
         }
         String loggedinuser = StringParser.removeQuotes(
                 String.valueOf(prefsElement.getAsJsonObject().get("logged-in user")));
-        if(startInGraphical){
+        if (startInGraphical) {
 
-            if(loggedinuser.equals("!NULLUSER")) {
+            if (loggedinuser.equals("!NULLUSER")) {
 
                 RegisterView.main(args);
-            }
-            else{
+            } else {
 
                 User currentUser = UsersDB.usersDB.getUserByUsername(loggedinuser);
                 HubMenuController.setCurrentUser(currentUser);
                 HubMenuView.main(args);
             }
 
-        }
-        else{
+        } else {
             Scanner scanner = new Scanner(System.in);
 
-            if(loggedinuser.equals("!NULLUSER")) {
+            if (loggedinuser.equals("!NULLUSER")) {
 
                 SignUpLoginView.run(scanner);
-            }
-            else{
+            } else {
 
                 User currentUser = UsersDB.usersDB.getUserByUsername(loggedinuser);
                 MainMenuView.run(currentUser, scanner);

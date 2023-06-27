@@ -1,5 +1,7 @@
 package stronghold.controller.graphical;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
@@ -21,10 +23,15 @@ import stronghold.model.database.UsersDB;
 import stronghold.model.utils.Encryption;
 import stronghold.view.graphics.HubMenuView;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Objects;
 
 public class LoginController {
+    @FXML
+    public CheckBox stayLoggedInBox;
     @FXML
     TextField usernameField;
     @FXML
@@ -76,6 +83,28 @@ public class LoginController {
         if (user == null) {
             openErrorDialog("Error!: Provided credentials are incorrect!");
             return;
+        }
+        if(stayLoggedInBox.isSelected()){
+            JsonElement prefsElement;
+            String pathToPrefs = "src/main/java/stronghold/database/datasets/preferences.json";
+            try {
+                prefsElement = JsonParser.parseReader(
+                        new FileReader(pathToPrefs));
+            } catch (
+                    FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+
+            try {
+                String toBeWritten = prefsElement.toString();
+                toBeWritten = toBeWritten.replace("!NULLUSER",username);
+                FileWriter fileWriter = new FileWriter(pathToPrefs);
+                fileWriter.write(toBeWritten);
+                fileWriter.close();
+            } catch (
+                    IOException e) {
+                throw new RuntimeException(e);
+            }
         }
         boolean userAuthenticated =
                 user.getPassword().equals(password);

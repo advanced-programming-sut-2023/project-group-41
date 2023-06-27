@@ -2,6 +2,7 @@ package stronghold.controller.graphical;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import stronghold.controller.ProfileMenuController;
 import stronghold.model.components.general.User;
 import stronghold.view.graphics.LoginView;
@@ -19,7 +21,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.Duration;
 import java.util.Objects;
 
 public class HubMenuController {
@@ -78,9 +79,22 @@ public class HubMenuController {
         // TODO: wire up game menu
     }
 
-    public void openProfileMenu() {
+    public void openProfileEdit() {
         ProfileEditController.setCurrentUser(currentUser);
         // TODO: Make profile menu
+
+            Pane root = null;
+            try {
+                root = FXMLLoader.load(getClass().getResource("/profileEditView.fxml"));
+            } catch (
+                    IOException e) {
+                throw new RuntimeException(e);
+            }
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.showAndWait();
+            usernameLabel.setText(currentUser.getUsername());
     }
 
     @FXML
