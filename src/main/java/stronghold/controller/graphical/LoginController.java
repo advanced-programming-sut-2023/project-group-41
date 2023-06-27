@@ -1,5 +1,8 @@
 package stronghold.controller.graphical;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.PauseTransition;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -10,6 +13,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import javafx.util.Duration;
 import stronghold.Main;
 import stronghold.controller.MainMenuController;
 import stronghold.model.components.general.User;
@@ -28,7 +32,7 @@ public class LoginController {
     @FXML
     Button loginButton, registerButton, recoverPasswordButton;
 
-    public void openErrorDialog(String error){
+    public void openErrorDialog(String error) {
         Dialog<String> dialog = new Dialog<String>();
         dialog.setTitle("Error!");
         Label label = new Label(error);
@@ -45,7 +49,7 @@ public class LoginController {
 
     @FXML
     public boolean checkStates() {
-        if(!MainMenuController.usernameFormatCorrect(usernameField.getText())){
+        if (!MainMenuController.usernameFormatCorrect(usernameField.getText())) {
             openErrorDialog("Error!: Username format incorrect!");
             return false;
         }
@@ -62,36 +66,40 @@ public class LoginController {
     }
 
     @FXML
-    public void authenticate(){
-        if(!checkStates()){
+    public void authenticate() {
+        if (!checkStates()) {
             return;
         }
         String username = usernameField.getText();
         String password = Encryption.toSHA256(passwordField.getText());
         User user = UsersDB.usersDB.getUserByUsername(username);
-        if(user == null){
+        if (user == null) {
             openErrorDialog("Error!: Provided credentials are incorrect!");
             return;
         }
         boolean userAuthenticated =
                 user.getPassword().equals(password);
-        if(!userAuthenticated){
+        if (!userAuthenticated) {
             openErrorDialog("Error!: Provided credentials are incorrect!");
-        }
-        else{
-            Parent root = null;
-            try {
-                root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/hubMenuView.fxml")));
-            } catch (
-                    IOException e) {
-                throw new RuntimeException(e);
-            }
+        } else {
             HubMenuController.setCurrentUser(user);
+            PauseTransition delay = new PauseTransition(Duration.millis(30));
+            delay.setOnFinished(event -> {
+                Parent root = null;
+                try {
+                    root = FXMLLoader.load(getClass().getResource("/hubMenuView.fxml"));
+                } catch (
+                        IOException ignored) {
 
-            Scene scene = new Scene(root);
-            Stage stage = (Stage) loginButton.getScene().getWindow();
-            stage.setScene(scene);
-            stage.show();
+                }
+                Scene scene = new Scene(root);
+                Stage stage = (Stage) loginButton.getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();
+            });
+            delay.play();
+
+
         }
 
     }

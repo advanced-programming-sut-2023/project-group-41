@@ -11,7 +11,7 @@
          <children>
             <Label text="Stronghold">
                <font>
-                  <Font size="24.0" />
+                  <Font name="System Bold" size="24.0" />
                </font>
                <padding>
                   <Insets top="20.0" />
@@ -25,6 +25,7 @@
             </HBox>
             <Button fx:id="startNewGameButton" mnemonicParsing="false" text="Start New Game" />
             <Button fx:id="profileMenuButton" mnemonicParsing="false" text="Profile Menu" />
+            <Button mnemonicParsing="false" onAction="#searchPlayers" text="Search Players" />
             <Button fx:id="logOutButton" mnemonicParsing="false" onMouseClicked="#logOut" text="Log Out" />
          </children>
          <padding>
