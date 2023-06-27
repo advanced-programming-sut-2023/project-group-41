@@ -1,7 +1,6 @@
 package stronghold.model.components.game.building;
 
 import stronghold.model.components.game.Government;
-import stronghold.model.components.game.Map;
 import stronghold.model.components.game.enums.Resource;
 
 import java.util.ArrayList;

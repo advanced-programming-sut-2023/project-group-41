@@ -112,6 +112,7 @@ public class MapCell {
         this.tree = tree;
     }
 
+
     public char showMovingSoldier(){
         if(getUnits().size()!=0)
             return 'S';

@@ -313,7 +313,6 @@ public class GameMenuController extends MenuController {
     public static boolean dropBuilding(int X, int Y, Building type) {
         boolean useResource = false;
         MapCell mapCell;
-        ResourceMaker resourceMaker;
         if (type == null) {
             GameMenuView.output("incorrectBuildingType");
             return false;
@@ -330,8 +329,13 @@ public class GameMenuController extends MenuController {
             GameMenuView.output("prebuilding");
             currentPlayer.removeBuilding(type);
             return false;
+        } else if (!type.getBuildingType().equals(CastleType.DRAWBRIDGE) && mapCell.getTexture().getColor().equals("BLUE")) {
+            GameMenuView.output("textureProblem");
+            currentPlayer.removeBuilding(type);
+            return false;
+
         } else if (type.getClass().getSimpleName().equals("ResourceMaker")
-                && !(resourceMaker = (ResourceMaker) type).checkTexture(mapCell.getTexture())) {
+                && !((ResourceMaker) type).checkTexture(mapCell.getTexture())) {
             GameMenuView.output("textureProblem");
             currentPlayer.removeBuilding(type);
             return false;

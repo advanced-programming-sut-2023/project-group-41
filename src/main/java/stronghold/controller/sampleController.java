@@ -39,7 +39,7 @@ public class sampleController {
     private static Rectangle religionR;
     private static int total;
     private static Label month;
-    private static   Rectangle totalR;
+    private static Rectangle totalR;
     public static void updateNodes() throws FileNotFoundException {
         if(GameMenuController.getFearPopularity()>0){
             fearR.setFill(new ImagePattern(new Image(new FileInputStream("F:\\Stronghold\\project-group-41\\src\\main\\java\\stronghold\\database\\Image\\greenFace.png"))));
