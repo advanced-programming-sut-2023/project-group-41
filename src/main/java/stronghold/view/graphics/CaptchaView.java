@@ -30,6 +30,7 @@ public class CaptchaView extends Application {
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Captcha...");
         root = new Pane();
+        root.setStyle("-fx-background-color: #222266;");
         Scene scene = new Scene(root,700,200);
         GraphicalCaptcha graphicalCaptcha = new GraphicalCaptcha();
         graphicalCaptcha.graphicalCaptcha.setTranslateX(20);
@@ -38,9 +39,11 @@ public class CaptchaView extends Application {
         TextField textField = new TextField();
         textField.setTranslateY(100);
         textField.setTranslateX(200);
+        textField.setStyle("-fx-text-fill: #c4a633; -fx-border-color: #c4a633; -fx-background-color: #222266; -fx-border-radius: 20;");
         textField.setPrefSize(200,20);
         textField.setPromptText("Enter Captcha...");
         Button submit = new Button();
+        submit.setStyle("-fx-background-color: #c4a633; -fx-background-radius: 25;");
         submit.setTranslateY(100);
         submit.setTranslateX(420);
         submit.setText("Submit");

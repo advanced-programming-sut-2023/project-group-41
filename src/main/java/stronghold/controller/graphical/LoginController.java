@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -110,7 +111,8 @@ public class LoginController {
                 user.getPassword().equals(password);
         if (!userAuthenticated) {
             openErrorDialog("Error!: Provided credentials are incorrect!");
-        } else {
+        }
+        else if(GraphicalCaptchaController.generateCaptcha()){
             HubMenuController.setCurrentUser(user);
             PauseTransition delay = new PauseTransition(Duration.millis(30));
             delay.setOnFinished(event -> {
@@ -131,6 +133,15 @@ public class LoginController {
 
         }
 
+    }
+
+    @FXML
+    public void openPasswordRecoverMenu() throws IOException {
+        Pane root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/passwordRecoverView.fxml")));
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.showAndWait();
     }
 
 

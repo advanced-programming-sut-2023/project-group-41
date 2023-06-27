@@ -23,7 +23,7 @@
                   <Button fx:id="registerButton" mnemonicParsing="false" onMouseClicked="#enterRegisterMenu" style="-fx-background-color: #c4a633; -fx-background-radius: 24; -fx-cursor: hand;" text="Register" />
                </children>
             </HBox>
-            <Button fx:id="recoverPasswordButton" mnemonicParsing="false" style="-fx-background-radius: 24; -fx-background-color: #c4a633; -fx-cursor: hand;" text="Recover Password" />
+            <Button fx:id="recoverPasswordButton" mnemonicParsing="false" onAction="#openPasswordRecoverMenu" style="-fx-background-radius: 24; -fx-background-color: #c4a633; -fx-cursor: hand;" text="Recover Password" />
          </children></VBox>
    </children>
 </AnchorPane>
