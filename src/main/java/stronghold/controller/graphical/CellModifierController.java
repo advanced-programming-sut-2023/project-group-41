@@ -37,7 +37,7 @@ public class CellModifierController {
     public void createUnitHandler(MouseEvent e){
         try {
             if (GameMenuController.createUnit(soldierText.getText(), Integer.parseInt(soldierNum.getText()))) {
-                Rectangle soldier = new Rectangle(CurrentBuildingPic.getX(), CurrentBuildingPic.getY(), 20, 20);
+                Rectangle soldier = new Rectangle(CurrentBuildingPic.getX(), CurrentBuildingPic.getY(), 5, 5);
                 soldier.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/soldier/group.png"))));
                 soldier.toFront();
                 soldier.setVisible(true);

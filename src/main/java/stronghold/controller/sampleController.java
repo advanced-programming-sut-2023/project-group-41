@@ -2,21 +2,16 @@ package stronghold.controller;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.event.EventHandler;
 import javafx.geometry.Orientation;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.*;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
@@ -34,6 +29,134 @@ public class sampleController {
     private static boolean select=false;
     private static String buildingCopy = null;
     private static Rectangle buildingPic = null;
+    private static Rectangle foodR;
+    private static Label fear;
+    private static Rectangle fearR;
+    private static Label tax;
+    private static Rectangle taxR;
+    private static Label food;
+    private static Label religion;
+    private static Rectangle religionR;
+    private static int total;
+    private static Label month;
+    private static   Rectangle totalR;
+    public static void updateNodes() throws FileNotFoundException {
+        if(GameMenuController.getFearPopularity()>0){
+            fearR.setFill(new ImagePattern(new Image(new FileInputStream("F:\\Stronghold\\project-group-41\\src\\main\\java\\stronghold\\database\\Image\\greenFace.png"))));
+
+        }else if(GameMenuController.getFearPopularity()<0){
+            fearR.setFill(new ImagePattern(new Image(new FileInputStream("F:\\Stronghold\\project-group-41\\src\\main\\java\\stronghold\\database\\Image\\redFace.png"))));
+
+        }else{
+            fearR.setFill(new ImagePattern(new Image(new FileInputStream("F:\\Stronghold\\project-group-41\\src\\main\\java\\stronghold\\database\\Image\\yellowFace.png"))));
+
+        }
+        if(GameMenuController.getTaxPopularity()>0){
+            taxR.setFill(new ImagePattern(new Image(new FileInputStream("F:\\Stronghold\\project-group-41\\src\\main\\java\\stronghold\\database\\Image\\greenFace.png"))));
+
+        }else if(GameMenuController.getFearPopularity()<0){
+            taxR.setFill(new ImagePattern(new Image(new FileInputStream("F:\\Stronghold\\project-group-41\\src\\main\\java\\stronghold\\database\\Image\\redFace.png"))));
+
+        }else{
+            taxR.setFill(new ImagePattern(new Image(new FileInputStream("F:\\Stronghold\\project-group-41\\src\\main\\java\\stronghold\\database\\Image\\yellowFace.png"))));
+
+        }
+        if(GameMenuController.getReligionPopularity()>0){
+            religionR.setFill(new ImagePattern(new Image(new FileInputStream("F:\\Stronghold\\project-group-41\\src\\main\\java\\stronghold\\database\\Image\\greenFace.png"))));
+
+        }else if(GameMenuController.getFearPopularity()<0){
+            religionR.setFill(new ImagePattern(new Image(new FileInputStream("F:\\Stronghold\\project-group-41\\src\\main\\java\\stronghold\\database\\Image\\redFace.png"))));
+
+        }else{
+            religionR.setFill(new ImagePattern(new Image(new FileInputStream("F:\\Stronghold\\project-group-41\\src\\main\\java\\stronghold\\database\\Image\\yellowFace.png"))));
+
+        }
+        if(GameMenuController.getFoodPopularity()>0){
+            foodR.setFill(new ImagePattern(new Image(new FileInputStream("F:\\Stronghold\\project-group-41\\src\\main\\java\\stronghold\\database\\Image\\greenFace.png"))));
+
+        }else if(GameMenuController.getFearPopularity()<0){
+            foodR.setFill(new ImagePattern(new Image(new FileInputStream("F:\\Stronghold\\project-group-41\\src\\main\\java\\stronghold\\database\\Image\\redFace.png"))));
+
+        }else{
+            foodR.setFill(new ImagePattern(new Image(new FileInputStream("F:\\Stronghold\\project-group-41\\src\\main\\java\\stronghold\\database\\Image\\yellowFace.png"))));
+
+        }
+
+         fear.setText("fear "+GameMenuController.getFearPopularity());
+        food.setText("tax "+GameMenuController.getFoodPopularity());
+        tax.setText("fear "+GameMenuController.getTaxPopularity());
+        tax.setText("religion "+GameMenuController.getReligionPopularity());
+
+        total = GameMenuController.getReligionPopularity()+GameMenuController.getFoodPopularity()+GameMenuController.getTaxPopularity()+GameMenuController.getFearPopularity();
+
+        month = new Label("this month: "+total);
+        if(total>0){
+            totalR.setFill(new ImagePattern(new Image(new FileInputStream("F:\\Stronghold\\project-group-41\\src\\main\\java\\stronghold\\database\\Image\\greenFace.png"))));
+
+        }else if(total<0){
+            totalR.setFill(new ImagePattern(new Image(new FileInputStream("F:\\Stronghold\\project-group-41\\src\\main\\java\\stronghold\\database\\Image\\redFace.png"))));
+
+        }else{
+            totalR.setFill(new ImagePattern(new Image(new FileInputStream("F:\\Stronghold\\project-group-41\\src\\main\\java\\stronghold\\database\\Image\\yellowFace.png"))));
+
+        }
+
+        buildingsLabel.setText(buildings());
+        resourceLabel.setText(buildings());
+        troopsLabel.setText(buildings());
+
+
+
+
+
+
+
+
+    }
+
+    public static Rectangle getTotalR() {
+        return totalR;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public Label getMonth() {
+        return month;
+    }
+
+    public static Rectangle getReligionR() {
+        return religionR;
+    }
+
+    public static Label getReligion() {
+        return religion;
+    }
+
+    public static Label getFood() {
+        return food;
+    }
+
+    public static Rectangle getTaxR() {
+        return taxR;
+    }
+
+    public static Label getTax() {
+        return tax;
+    }
+
+    public static Rectangle getFearR() {
+        return fearR;
+    }
+
+    public static Label getFear() {
+        return fear;
+    }
+
+    public static Rectangle getFoodR() {
+        return foodR;
+    }
 
     public static Rectangle getBuildingPic() {
         return buildingPic;
@@ -72,12 +195,14 @@ public class sampleController {
         back.setOnAction(actionEvent -> popup.hide());
         popup.getContent().add(back);
         //////////////////////////////////
-        Label fear=new Label("fear "+GameMenuController.getFearPopularity());
+
+        fear = new Label("fear "+GameMenuController.getFearPopularity());
         fear.setLayoutX(rectangle.getX()+200);
         fear.setLayoutY(rectangle.getLayoutY());
         fear.setTextFill(Color.WHITE);
         fear.setStyle("-fx-font: bold 40 arial;");
-        Rectangle fearR=new Rectangle(30,30);
+
+        fearR = new Rectangle(30,30);
         fearR.setX(fear.getLayoutX()+250);
         fearR.setY(fear.getLayoutY()+15);
         popup.getContent().add(fearR);
@@ -93,12 +218,14 @@ public class sampleController {
         }
         //////////////////////////////////////////
 
-        Label tax=new Label("tax "+GameMenuController.getTaxPopularity());
+
+        tax = new Label("tax "+GameMenuController.getTaxPopularity());
         tax.setLayoutX(rectangle.getX()+200);
         tax.setLayoutY(rectangle.getLayoutY()+50);
         tax.setTextFill(Color.WHITE);
         tax.setStyle("-fx-font: bold 40 arial;");
-        Rectangle taxR=new Rectangle(30,30);
+
+        taxR = new Rectangle(30,30);
         taxR.setX(tax.getLayoutX()+250);
         taxR.setY(tax.getLayoutY()+15);
         popup.getContent().add(taxR);
@@ -113,12 +240,14 @@ public class sampleController {
 
         }
         ///////////////////////////////////////
-        Label food=new Label("food "+GameMenuController.getFoodPopularity());
+
+        food = new Label("food "+GameMenuController.getFoodPopularity());
         food.setLayoutX(rectangle.getX()+200);
         food.setLayoutY(rectangle.getLayoutY()+100);
         food.setTextFill(Color.WHITE);
         food.setStyle("-fx-font: bold 40 arial;");
-        Rectangle foodR=new Rectangle(30,30);
+
+        foodR = new Rectangle(30,30);
         foodR.setX(food.getLayoutX()+250);
         foodR.setY(food.getLayoutY()+15);
         popup.getContent().add(foodR);
@@ -133,12 +262,14 @@ public class sampleController {
 
         }
         //////////////////////////////////////
-        Label religion=new Label("religion "+GameMenuController.getReligionPopularity());
+
+        religion = new Label("religion "+GameMenuController.getReligionPopularity());
         religion.setLayoutX(rectangle.getX()+200);
         religion.setLayoutY(rectangle.getLayoutY()+150);
         religion.setTextFill(Color.WHITE);
         religion.setStyle("-fx-font: bold 40 arial;");
-        Rectangle religionR=new Rectangle(30,30);
+
+        religionR = new Rectangle(30,30);
         religionR.setX(religion.getLayoutX()+250);
         religionR.setY(religion.getLayoutY()+15);
         popup.getContent().add(religionR);
@@ -153,13 +284,16 @@ public class sampleController {
 
         }
         //////////////////////////////////////////
-        int total=GameMenuController.getReligionPopularity()+GameMenuController.getFoodPopularity()+GameMenuController.getTaxPopularity()+GameMenuController.getFearPopularity();
-        Label month=new Label("this month: "+total);
+
+        total = GameMenuController.getReligionPopularity()+GameMenuController.getFoodPopularity()+GameMenuController.getTaxPopularity()+GameMenuController.getFearPopularity();
+
+        month = new Label("this month: "+total);
         month.setLayoutX(rectangle.getX()+100);
         month.setLayoutY(rectangle.getLayoutY()+250);
         month.setTextFill(Color.WHITE);
         month.setStyle("-fx-font: bold 30 arial;");
-        Rectangle totalR=new Rectangle(30,30);
+
+        totalR = new Rectangle(30,30);
         totalR.setX(month.getLayoutX()+250);
         totalR.setY(month.getLayoutY()+15);
         popup.getContent().add(totalR);
@@ -202,7 +336,8 @@ public class sampleController {
         Button back=new Button("Back");
         back.setOnAction(actionEvent -> resourceP.hide());
         resourceP.getContent().add(back);
-        Label resourceLabel=new Label(resource());
+
+        resourceLabel = new Label(resource());
         resourceLabel.setTextFill(Color.WHITE);
         resourceLabel.setLayoutX(resourceLabel.getLayoutX()+100);
         resourceP.getContent().add(resourceLabel);
@@ -218,7 +353,8 @@ public class sampleController {
         Button back3=new Button("Back");
         back3.setOnAction(actionEvent -> troopsP.hide());
         troopsP.getContent().add(back3);
-        Label troopsLabel=new Label(troops());
+
+        troopsLabel = new Label(troops());
         System.out.println(troopsLabel.getText());
         troopsLabel.setTextFill(Color.WHITE);
         troopsLabel.setLayoutX(troopsLabel.getLayoutX()+100);
@@ -235,7 +371,8 @@ public class sampleController {
         Button back4=new Button("Back");
         back4.setOnAction(actionEvent -> buildingsP.hide());
         buildingsP.getContent().add(back4);
-        Label buildingsLabel=new Label(buildings());
+
+        buildingsLabel = new Label(buildings());
         System.out.println(buildingsLabel.getText());
         buildingsLabel.setTextFill(Color.WHITE);
         buildingsLabel.setLayoutX(buildingsLabel.getLayoutX()+100);
@@ -252,6 +389,10 @@ public class sampleController {
 
 
     }
+    private static Label troopsLabel;
+    private static Label resourceLabel;
+    private static Label buildingsLabel;
+
     public static String resource(){
         String s="";
         for (Resource resource : Resource.getResources()) {
