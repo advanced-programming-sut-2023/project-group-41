@@ -25,9 +25,8 @@ public class Host extends NetworkNode{
         this.lighthouseThread = new Thread(() -> {
             while (initLighthouseThread){
                 try {
-                    this.acceptClient();
+                    acceptClient();
                     System.out.println("ACCEPTING SOCKETS...");
-
 
                 } catch (
                         IOException e) {
@@ -64,6 +63,7 @@ public class Host extends NetworkNode{
             }
         });
         this.lighthouseThread.start();
+        this.readThread.start();
     }
 
     public Host() throws IOException {
@@ -75,12 +75,14 @@ public class Host extends NetworkNode{
     }
 
     public void acceptClient() throws IOException {
-        this.ioSocket = this.serverSocket.accept();
+        this.clientSockets.add(this.serverSocket.accept());
     }
 
     public void readMessageFromClient(Socket socket) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         String readLine = bufferedReader.readLine();
+        if(readLine == null)
+            return;
         System.out.println(readLine);
     }
 
@@ -89,6 +91,7 @@ public class Host extends NetworkNode{
             client.close();
         }
         this.lighthouseThread.stop();
+        this.readThread.stop();
         this.serverSocket.close();
     }
 
