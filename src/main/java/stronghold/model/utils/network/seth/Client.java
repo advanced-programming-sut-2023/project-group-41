@@ -2,26 +2,34 @@
 
 package stronghold.model.utils.network.seth;
 
+import stronghold.controller.graphical.ProfileEditController;
+
 import java.io.*;
 import java.net.Socket;
 
-public class Client {
-
-    protected final static int DEFAULT_PORT = 12345;
+public class Client extends NetworkNode{
 
     private Socket socket;
 
     public Client() throws IOException {
         this.socket = new Socket("localhost",DEFAULT_PORT);
-
+        this.input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        this.output = new PrintWriter(socket.getOutputStream(), true);
     }
 
-    public void testConnection() throws IOException {
-        BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-
-        out.println(1);
+    public void sendMessageToHost(String message){
+        output.println(message);
     }
 
+    public String recieveMessageFromHost(String message){
+        char[] dataBuffer = new char[8192];
+        try {
+            input.read(dataBuffer);
+        } catch (
+                IOException e) {
+            throw new RuntimeException(e);
+        }
+        return String.copyValueOf(dataBuffer);
+    }
 
 }

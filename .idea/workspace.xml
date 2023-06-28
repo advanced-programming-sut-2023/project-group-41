@@ -4,13 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="72fd4c0e-f2c3-4e13-85b9-d70f04a31b27" name="Changes" comment="finalized all user-based menus">
-      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/MainNetTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/seth/Client.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/seth/Host.java" afterDir="false" />
+    <list default="true" id="72fd4c0e-f2c3-4e13-85b9-d70f04a31b27" name="Changes" comment="Merge remote-tracking branch 'origin/main'">
+      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/seth/NetworkNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/stronghold_jar/stronghold.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/stronghold_jar/stronghold.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/view/sampleView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/view/sampleView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/MainNetTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/MainNetTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/seth/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/seth/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/seth/Host.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/seth/Host.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -224,7 +224,21 @@
       <option name="project" value="LOCAL" />
       <updated>1687884549952</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="created a prototype of Simplified Efficient Transmission Hub ( SETH )">
+      <created>1687939920286</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1687939920286</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Merge remote-tracking branch 'origin/main'">
+      <created>1687940022454</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1687940022454</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -260,7 +274,9 @@
     <MESSAGE value="added search players to hub menu" />
     <MESSAGE value="completed profile edit and created ui for password recovery menu" />
     <MESSAGE value="finalized all user-based menus" />
-    <option name="LAST_COMMIT_MESSAGE" value="finalized all user-based menus" />
+    <MESSAGE value="created a prototype of Simplified Efficient Transmission Hub ( SETH )" />
+    <MESSAGE value="Merge remote-tracking branch 'origin/main'" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/main'" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/stronghold$SignUpMenuControllerTest_testAll.ic" NAME="SignUpMenuControllerTest.testAll Coverage Results" MODIFIED="1684827485987" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

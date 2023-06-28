@@ -13,7 +13,6 @@ public class MainNetTest {
         while (true){
             if(scanner.nextLine().equals("1")){
                 Client networkNode = new Client();
-                networkNode.testConnection();
             }
         }
 

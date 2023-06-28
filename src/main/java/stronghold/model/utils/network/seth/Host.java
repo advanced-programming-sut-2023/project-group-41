@@ -8,14 +8,20 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
-public class Host{
+public class Host extends NetworkNode{
 
     private ServerSocket serverSocket;
+    private Socket ioSocket;
     private Thread lighthouseThread;
     private ArrayList<Socket> clientSockets;
 
     public Host(boolean initLighthouseThread) throws IOException {
         this.serverSocket = new ServerSocket(12345);
+        this.ioSocket = this.serverSocket.accept();
+
+        this.input = new BufferedReader(new InputStreamReader(ioSocket.getInputStream()));
+        this.output = new PrintWriter(ioSocket.getOutputStream(), true);
+
         this.clientSockets = new ArrayList<>();
         this.lighthouseThread = new Thread(() -> {
             while (initLighthouseThread){
@@ -58,4 +64,6 @@ public class Host{
         this.lighthouseThread.stop();
         this.serverSocket.close();
     }
+
+
 }
