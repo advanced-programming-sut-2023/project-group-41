@@ -20,15 +20,34 @@ public class NetworkNode {
 
             try {
                 Socket socket = new Socket();
-                socket.connect(new InetSocketAddress(baseSubnet + i, DEFAULT_PORT), 100);
+                socket.connect(new InetSocketAddress(baseSubnet + i, DEFAULT_PORT), 40);
                 socket.close();
                 activeIPsInLAN.add(baseSubnet + i);
+                
             } catch (IOException ignored) {
                 // Connection failed, ignore and continue
             }
         }
 
         return activeIPsInLAN;
+    }
+
+    public String findFirstSubnetAvailable(){
+        String baseSubnet = "192.168.1.";
+
+        for (int i = 1; i <= 254; i++){
+
+            try {
+                Socket socket = new Socket();
+                socket.connect(new InetSocketAddress(baseSubnet + i, DEFAULT_PORT), 40);
+                socket.close();
+                return baseSubnet + i;
+
+            } catch (IOException ignored) {
+                // Connection failed, ignore and continue
+            }
+        }
+        return null;
     }
 
 }

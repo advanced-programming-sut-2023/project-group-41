@@ -11,10 +11,14 @@ public class Client extends NetworkNode{
 
     private Socket socket;
 
-    public Client() throws IOException {
-        this.socket = new Socket("localhost",DEFAULT_PORT);
+    public Client(String subnet) throws IOException {
+        this.socket = new Socket(subnet,DEFAULT_PORT);
         this.input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         this.output = new PrintWriter(socket.getOutputStream(), true);
+    }
+
+    public Client() throws IOException {
+        this(new NetworkNode().findFirstSubnetAvailable());
     }
 
     public void sendMessageToHost(String message){

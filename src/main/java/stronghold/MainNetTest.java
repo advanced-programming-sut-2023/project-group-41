@@ -12,7 +12,7 @@ public class MainNetTest {
         Scanner scanner = new Scanner(System.in);
         while (true){
             if(scanner.nextLine().equals("1")){
-                Client networkNode = new Client();
+                Client networkNode = new Client("localhost");
                 networkNode.sendMessageToHost("22");
             }
         }

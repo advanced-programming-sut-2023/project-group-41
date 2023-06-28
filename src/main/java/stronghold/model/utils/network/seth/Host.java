@@ -12,7 +12,10 @@ public class Host extends NetworkNode{
 
     private ServerSocket serverSocket;
     private Socket ioSocket;
+
     private Thread lighthouseThread;
+    private Thread readThread;
+
     private ArrayList<Socket> clientSockets;
 
     public Host(boolean initLighthouseThread) throws IOException {
@@ -24,7 +27,7 @@ public class Host extends NetworkNode{
                 try {
                     this.acceptClient();
                     System.out.println("ACCEPTING SOCKETS...");
-                    readMessageFromClient(this.ioSocket);
+
 
                 } catch (
                         IOException e) {
@@ -37,6 +40,26 @@ public class Host extends NetworkNode{
                 } catch (
                         InterruptedException ignored) {
                     
+                }
+            }
+        });
+        this.readThread = new Thread(() -> {
+            while (initLighthouseThread){
+                try {
+                    for (Socket socket: this.clientSockets){
+                        readMessageFromClient(socket);
+                    }
+                } catch (
+                        IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+
+                try {
+                    Thread.sleep(200);
+                } catch (
+                        InterruptedException ignored) {
+
                 }
             }
         });
