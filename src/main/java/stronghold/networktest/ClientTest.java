@@ -20,6 +20,7 @@ public class ClientTest {
                 throw new RuntimeException(e);
             }
         }).start();
+        Thread.sleep(2000);
         new Thread(() -> {
             Client client = null;
             try {
@@ -38,6 +39,7 @@ public class ClientTest {
                 }
             }
         }).start();
+        Thread.sleep(2000);
         new Thread(() -> {
             Client client = null;
             try {
@@ -48,8 +50,14 @@ public class ClientTest {
             }
             while(true){
                 client.sendMessageToHost("NIMA KORDE BI GHEIRAT!");
-
+                try {
+                    Thread.sleep(250);
+                } catch (
+                        InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
             }
+
         }).start();
     }
 }

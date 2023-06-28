@@ -26,26 +26,22 @@ public class Host extends NetworkNode{
             while (initLighthouseThread){
                 try {
                     acceptClient();
+
                     System.out.println("ACCEPTING SOCKETS...");
 
                 } catch (
-                        IOException e) {
-                    throw new RuntimeException(e);
+                        Exception e) {
+                    System.out.println(e.getLocalizedMessage());
                 }
 
-
-                try {
-                    Thread.sleep(200);
-                } catch (
-                        InterruptedException ignored) {
-                    
-                }
             }
         });
         this.readThread = new Thread(() -> {
             while (initLighthouseThread){
+                ArrayList<Socket> currentClients = new ArrayList<>();
+                currentClients.addAll(this.clientSockets);
                 try {
-                    for (Socket socket: this.clientSockets){
+                    for (Socket socket: currentClients){
                         readMessageFromClient(socket);
                     }
                 } catch (
@@ -53,13 +49,6 @@ public class Host extends NetworkNode{
                     throw new RuntimeException(e);
                 }
 
-
-                try {
-                    Thread.sleep(200);
-                } catch (
-                        InterruptedException ignored) {
-
-                }
             }
         });
         this.lighthouseThread.start();
@@ -74,8 +63,11 @@ public class Host extends NetworkNode{
         return serverSocket;
     }
 
-    public void acceptClient() throws IOException {
+    public void acceptClient() throws Exception {
+        if(this.readThread.isDaemon())
+            this.readThread.wait(200);
         this.clientSockets.add(this.serverSocket.accept());
+
     }
 
     public void readMessageFromClient(Socket socket) throws IOException {

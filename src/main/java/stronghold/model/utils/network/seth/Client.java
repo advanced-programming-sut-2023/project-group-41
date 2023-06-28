@@ -23,6 +23,7 @@ public class Client extends NetworkNode{
 
     public void sendMessageToHost(String message){
         output.println(message);
+
     }
 
     public String recieveMessageFromHost(String message){
