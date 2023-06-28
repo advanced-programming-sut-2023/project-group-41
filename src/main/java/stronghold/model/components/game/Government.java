@@ -39,14 +39,8 @@ public class Government {
         this.setRuler(ruler);
         resources = new HashMap<>();
         for (Resource resource : EnumSet.allOf(Resource.class)) {
-            resources.put(resource, 20);
+            resources.put(resource, 200);
         }
-
-
-
-
-
-
     }
     public void incPopularity(int num) {
         popularity += num;
