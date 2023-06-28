@@ -866,8 +866,8 @@ public class sampleView extends Application {
         });
 
          scene.addEventHandler(MouseEvent.MOUSE_PRESSED , mouse -> {
-            startX = mouse.getX();
-            startY = mouse.getY();
+            startX = mouse.getX() + gamePane.getTranslateX();
+            startY = mouse.getY() + gamePane.getTranslateY();
 
         });
         scene.addEventHandler(MouseEvent.MOUSE_RELEASED, mouse -> {
@@ -876,8 +876,8 @@ public class sampleView extends Application {
             }
             selectedNodes.clear();
             System.out.println(gamePane.getScaleX());
-            double endX = mouse.getX();
-            double endY = mouse.getY();
+            double endX = mouse.getX() + gamePane.getTranslateX();
+            double endY = mouse.getY() + gamePane.getTranslateY();
 
             for(MapCell cell: Map.getCells()){
                 if(Math.floor(startX/gamePane.getScaleX()/20) <= cell.getX() &&
