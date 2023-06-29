@@ -3,6 +3,9 @@
 package stronghold.model.utils.network.seth;
 
 
+import javafx.beans.binding.ObjectExpression;
+import stronghold.model.components.general.User;
+
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -42,10 +45,18 @@ public class Host extends NetworkNode{
                 currentClients.addAll(this.clientSockets);
                 try {
                     for (Socket socket: currentClients){
-                        readMessageFromClient(socket);
+                        Object received = recieveObjectFromClient(socket);
+                        if(received instanceof User){
+                            User user = (User) received;
+                            System.out.println(user.getUsername());
+                            
+                        }
                     }
                 } catch (
                         IOException e) {
+
+                } catch (
+                        ClassNotFoundException e) {
                     throw new RuntimeException(e);
                 }
 
@@ -76,6 +87,24 @@ public class Host extends NetworkNode{
         if(readLine == null)
             return;
         System.out.println(readLine);
+        bufferedReader.close();
+    }
+
+    public void sendMessageToClient(Socket socket, String Message) throws IOException{
+        PrintWriter printWriter = new PrintWriter(socket.getOutputStream(), true);
+        printWriter.println(Message);
+        printWriter.close();
+    }
+
+    public void sendObjectToClient(Socket socket, Object object) throws IOException {
+        ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
+        outputStream.writeObject(object);
+    }
+
+    public Object recieveObjectFromClient(Socket socket) throws IOException, ClassNotFoundException {
+        ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
+        Object recievedObject = objectInputStream.readObject();
+        return recievedObject;
     }
 
     public void killHost() throws IOException {

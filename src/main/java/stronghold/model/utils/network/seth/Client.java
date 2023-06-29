@@ -26,15 +26,38 @@ public class Client extends NetworkNode{
 
     }
 
-    public String recieveMessageFromHost(String message){
-        char[] dataBuffer = new char[8192];
+    public String recieveMessageFromHost(){
+        String dataBuffer;
         try {
-            input.read(dataBuffer);
+            dataBuffer = input.readLine();
         } catch (
                 IOException e) {
             throw new RuntimeException(e);
         }
-        return String.copyValueOf(dataBuffer);
+        return dataBuffer;
     }
 
+    public void sendObjectToServer(Object object){
+        try {
+            ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
+            outputStream.writeObject(object);
+        } catch (
+                IOException e) {
+
+        }
+    }
+
+    public Object recieveObjectFromHost(){
+        try {
+            ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
+            Object recievedObejct = objectInputStream.readObject();
+            return recievedObejct;
+        } catch (
+                IOException e) {
+            throw new RuntimeException(e);
+        } catch (
+                ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

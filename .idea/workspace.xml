@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="ANALYZE_INJECTED_CODE" value="false" />
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="72fd4c0e-f2c3-4e13-85b9-d70f04a31b27" name="Changes" comment="fixed read thread">
+    <list default="true" id="72fd4c0e-f2c3-4e13-85b9-d70f04a31b27" name="Changes" comment="fixed Host's read thread">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/stronghold_jar/stronghold.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/stronghold_jar/stronghold.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/MainNetTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/MainNetTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/components/general/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/components/general/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/seth/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/seth/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/seth/Host.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/seth/Host.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/networktest/ClientTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/networktest/ClientTest.java" afterDir="false" />
@@ -37,6 +42,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
+  </component>
   <component name="ProjectId" id="2OCaiWnhB6UpIzQlXBfaos2QULR" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -45,26 +53,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-    &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;F:/Stronghold/project-group-41&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
-    }
-    }</component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "F:/Stronghold/project-group-41",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -76,7 +85,7 @@
       <recent name="stronghold.controller" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ClientTest">
+  <component name="RunManager" selected="Application.MainNetTest">
     <configuration name="ClientTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="stronghold.networktest.ClientTest" />
       <module name="stronghold" />
@@ -165,9 +174,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.MainNetTest" />
         <item itemvalue="Application.ClientTest" />
         <item itemvalue="Application.HostTest" />
-        <item itemvalue="Application.MainNetTest" />
         <item itemvalue="Application.sampleView" />
         <item itemvalue="Application.SearchPlayerView" />
       </list>
@@ -266,7 +275,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687982977561</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="fixed Host's read thread">
+      <created>1687988984483</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1687988984483</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -296,6 +312,8 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="files added" />
     <MESSAGE value="fixed module-info.java and opened graphical controllers to FXML" />
     <MESSAGE value="Wired up register and login menus and created hub menu" />
@@ -308,7 +326,8 @@
     <MESSAGE value="added network tests" />
     <MESSAGE value="added read thread" />
     <MESSAGE value="fixed read thread" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed read thread" />
+    <MESSAGE value="fixed Host's read thread" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed Host's read thread" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/stronghold$SignUpMenuControllerTest_testAll.ic" NAME="SignUpMenuControllerTest.testAll Coverage Results" MODIFIED="1684827485987" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
