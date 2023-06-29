@@ -81,6 +81,14 @@ public class Host extends NetworkNode{
         return serverSocket;
     }
 
+    public void setHandleReceivedObjects(Consumer<Object> handleReceivedObjects) {
+        this.handleReceivedObjects = handleReceivedObjects;
+    }
+
+    public void setHandleReceivedMessages(Consumer<String> handleReceivedMessages) {
+        this.handleReceivedMessages = handleReceivedMessages;
+    }
+
     public void acceptClient() throws Exception {
         if(this.readThread.isDaemon())
             this.readThread.wait(200);
