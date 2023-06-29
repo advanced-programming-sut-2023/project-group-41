@@ -53,8 +53,14 @@ public class Host extends NetworkNode {
                 currentClients.addAll(this.clientSockets);
                 for (Socket socket : currentClients) {
                     try {
+                        Object received = receiveObjectFromClient(socket);
                         if(!socket.isClosed()){
-                            receiveObjectFromClient(socket);
+                            if(received instanceof String){
+                                handleReceivedMessages.accept((String) received);
+                            }
+                            else {
+                                handleReceivedObjects.accept(received);
+                            }
                         }
                     } catch (
                             IOException e) {
@@ -117,7 +123,6 @@ public class Host extends NetworkNode {
     public Object receiveObjectFromClient(Socket socket) throws IOException, ClassNotFoundException {
         ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
         Object receivedObject = objectInputStream.readObject();
-        System.out.println(receivedObject.toString());
         return receivedObject;
 
     }
