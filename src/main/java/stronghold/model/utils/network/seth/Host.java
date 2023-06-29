@@ -7,8 +7,9 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.function.Consumer;
 
-public class Host extends NetworkNode{
+public class Host extends NetworkNode {
 
     private ServerSocket serverSocket;
     private Socket ioSocket;
@@ -16,39 +17,59 @@ public class Host extends NetworkNode{
     private Thread lighthouseThread;
     private Thread readThread;
 
+    private Consumer<Object> handleReceivedObjects;
+    private Consumer<String> handleReceivedMessages;
+
     private ArrayList<Socket> clientSockets;
 
     public Host(boolean initLighthouseThread) throws IOException {
         this.serverSocket = new ServerSocket(DEFAULT_PORT);
 
+        this.handleReceivedMessages = (String str) -> {
+            System.out.println(str);
+            return;
+        };
+        this.handleReceivedObjects = (Object obj) -> {
+            System.out.println(obj.toString());
+            return;
+        };
+
         this.clientSockets = new ArrayList<>();
         this.lighthouseThread = new Thread(() -> {
-            while (initLighthouseThread){
+            while (initLighthouseThread) {
                 try {
                     acceptClient();
-
                     System.out.println("ACCEPTING SOCKETS...");
 
                 } catch (
                         Exception e) {
                     System.out.println(e.getLocalizedMessage());
                 }
-
             }
         });
         this.readThread = new Thread(() -> {
-            while (initLighthouseThread){
+            while (initLighthouseThread) {
                 ArrayList<Socket> currentClients = new ArrayList<>();
                 currentClients.addAll(this.clientSockets);
-                try {
-                    for (Socket socket: currentClients){
-                        readMessageFromClient(socket);
-                    }
-                } catch (
-                        IOException e) {
-                    throw new RuntimeException(e);
-                }
+                for (Socket socket : currentClients) {
+                    try {
+                        Object received = receiveObjectFromClient(socket);
+                        if(!socket.isClosed()){
+                            if(received instanceof String){
+                                handleReceivedMessages.accept((String) received);
+                            }
+                            else {
+                                handleReceivedObjects.accept(received);
+                            }
+                        }
+                    } catch (
+                            IOException e) {
 
+                    } catch (
+                            ClassNotFoundException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
             }
         });
         this.lighthouseThread.start();
@@ -63,23 +84,51 @@ public class Host extends NetworkNode{
         return serverSocket;
     }
 
+    public void setHandleReceivedObjects(Consumer<Object> handleReceivedObjects) {
+        this.handleReceivedObjects = handleReceivedObjects;
+    }
+
+    public void setHandleReceivedMessages(Consumer<String> handleReceivedMessages) {
+        this.handleReceivedMessages = handleReceivedMessages;
+    }
+
     public void acceptClient() throws Exception {
-        if(this.readThread.isDaemon())
+        if (this.readThread.isDaemon())
             this.readThread.wait(200);
-        this.clientSockets.add(this.serverSocket.accept());
+        Socket socket = this.serverSocket.accept();
+        this.clientSockets.add(socket);
 
     }
 
-    public void readMessageFromClient(Socket socket) throws IOException {
+    public String readMessageFromClient(Socket socket) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         String readLine = bufferedReader.readLine();
-        if(readLine == null)
-            return;
-        System.out.println(readLine);
+        if (readLine == null)
+            return null;
+        bufferedReader.close();
+        return readLine;
+    }
+
+    public void sendMessageToClient(Socket socket, String Message) throws IOException {
+        PrintWriter printWriter = new PrintWriter(socket.getOutputStream(), true);
+        printWriter.println(Message);
+        printWriter.close();
+    }
+
+    public void sendObjectToClient(Socket socket, Object object) throws IOException {
+        ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
+        outputStream.writeObject(object);
+    }
+
+    public Object receiveObjectFromClient(Socket socket) throws IOException, ClassNotFoundException {
+        ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
+        Object receivedObject = objectInputStream.readObject();
+        return receivedObject;
+
     }
 
     public void killHost() throws IOException {
-        for(Socket client: this.clientSockets){
+        for (Socket client : this.clientSockets) {
             client.close();
         }
         this.lighthouseThread.stop();
