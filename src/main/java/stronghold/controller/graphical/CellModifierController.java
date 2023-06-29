@@ -2,10 +2,12 @@ package stronghold.controller.graphical;
 
 import javafx.scene.Group;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
@@ -25,6 +27,7 @@ public class CellModifierController {
 
     private static Rectangle CurrentBuildingPic;
     private static Group currentCell;
+
 
     public static void setCurrentCell(Group currentCell) {
         CellModifierController.currentCell = currentCell;

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stronghold.controller.graphical.ChatMenuController">
+   <children>
+      <VBox alignment="TOP_CENTER" layoutX="250.0" layoutY="52.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label alignment="CENTER" text="Chat Rooms">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Label>
+            <HBox prefHeight="294.0" prefWidth="600.0">
+               <children>
+                  <ScrollPane prefHeight="282.0" prefWidth="162.0">
+                     <content>
+                        <VBox fx:id="roomNamesVBox" prefHeight="406.0" prefWidth="145.0" />
+                     </content>
+                  </ScrollPane>
+                  <ScrollPane prefHeight="282.0" prefWidth="437.0">
+                     <content>
+                        <VBox fx:id="messagesVBox" prefHeight="396.0" prefWidth="421.0" spacing="10.0">
+                           <children>
+<!--                              ///////message HBox/////////-->
+<!--                              <HBox prefHeight="54.0" prefWidth="358.0" style="-fx-border-color: Gray; -fx-border-width: 2; -fx-border-radius: 30;">-->
+<!--                                 <children>-->
+<!--                                    <ImageView fx:id="userAvatar" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />-->
+<!--                                    <VBox prefHeight="53.0" prefWidth="45.0">-->
+<!--                                       <children>-->
+<!--                                          <Label fx:id="usernameLabel" prefHeight="30.0" prefWidth="60.0" text="Label">-->
+<!--                                             <font>-->
+<!--                                                <Font size="14.0" />-->
+<!--                                             </font>-->
+<!--                                          </Label>-->
+<!--                                          <Label fx:id="dateLabel" prefHeight="18.0" prefWidth="62.0" text="Label">-->
+<!--                                             <font>-->
+<!--                                                <Font size="10.0" />-->
+<!--                                             </font>-->
+<!--                                          </Label>-->
+<!--                                       </children>-->
+<!--                                    </VBox>-->
+<!--                                    <TextArea fx:id="messageTextField" prefHeight="53.0" prefWidth="212.0" />-->
+<!--                                    <VBox alignment="CENTER" prefHeight="53.0" prefWidth="27.0">-->
+<!--                                       <children>-->
+<!--                                          <Label onMouseClicked="#editMessageHandler" style="-fx-border-color: gray;" text="Edit" />-->
+<!--                                          <Label onMouseClicked="#hideMessageHandler" style="-fx-border-color: gray;" text="Hide" />-->
+<!--                                          <Label onMouseClicked="#delMessageHandler" style="-fx-border-color: gray;" text="Del" />-->
+<!--                                       </children></VBox>-->
+<!--                                    <VBox fx:id="emojiVBox" prefHeight="53.0" prefWidth="16.0">-->
+<!--                                       <children>-->
+<!--                                          <Label text="😂" />-->
+<!--                                          <Label text="💩" />-->
+<!--                                          <Label text="❤" />-->
+<!--                                       </children>-->
+<!--                                    </VBox>-->
+<!--                                    <VBox prefHeight="53.0" prefWidth="28.0">-->
+<!--                                       <children>-->
+<!--                                          <Label fx:id="laughLabel" text="Label" />-->
+<!--                                          <Label fx:id="peeLabel" prefHeight="18.0" prefWidth="45.0" text="Label" />-->
+<!--                                          <Label fx:id="loveLabel" text="Label" />-->
+<!--                                       </children>-->
+<!--                                    </VBox>-->
+<!--                                    <Circle fx:id="messageStateCircle" radius="12.0" stroke="BLACK" strokeType="INSIDE">-->
+<!--                                       <HBox.margin>-->
+<!--                                          <Insets bottom="12.0" top="12.0" />-->
+<!--                                       </HBox.margin>-->
+<!--                                    </Circle>-->
+<!--                                 </children>-->
+<!--                                 <padding>-->
+<!--                                    <Insets left="10.0" />-->
+<!--                                 </padding></HBox>-->
+                           </children></VBox>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <TextField fx:id="roomNameTextField" prefHeight="26.0" prefWidth="125.0" promptText="Enter new room name">
+                     <font>
+                        <Font size="10.0" />
+                     </font></TextField>
+                  <Button mnemonicParsing="false" onAction="#addRoomHandler" prefHeight="26.0" prefWidth="50.0" text="add" />
+                  <VBox prefHeight="88.0" prefWidth="432.0">
+                     <children>
+                        <HBox prefHeight="49.0" prefWidth="378.0" spacing="20.0">
+                           <children>
+                              <TextField fx:id="messageTestField" prefHeight="26.0" prefWidth="320.0" promptText="Write a message" />
+                              <Button mnemonicParsing="false" onAction="#sendMessageHandler" prefHeight="26.0" prefWidth="50.0" text="send" />
+                           </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <padding>
+                              <Insets bottom="5.0" left="10.0" right="10.0" top="10.0" />
+                           </padding></HBox>
+                        <HBox prefHeight="49.0" prefWidth="378.0" spacing="20.0">
+                           <children>
+                              <TextField fx:id="newUserTextField" prefHeight="26.0" prefWidth="320.0" promptText="Enter new member username" />
+                              <Button mnemonicParsing="false" onAction="#addNewUserHandler" prefHeight="26.0" prefWidth="50.0" text="add" />
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
+                           </padding></HBox>
+                     </children>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

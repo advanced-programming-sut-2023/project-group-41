@@ -7,8 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import stronghold.controller.graphical.GraphicalProfileCartController;
-import stronghold.model.components.game.enums.Direction;
+import stronghold.controller.graphical.ChatMenuController;
 import stronghold.model.components.general.User;
 
 import java.io.IOException;
@@ -19,7 +18,7 @@ public class ProfileCartView extends Application {
 
     public static void main(String[] args) {
         User user = new User("nima", "adf", "nim", "mjahfdahlkfjhdklhflsh", 5, "kosnnt", "kobs");
-        GraphicalProfileCartController.setUser(user);
+        ChatMenuController.setUser(user);
         PauseTransition pauseTransition = new PauseTransition(Duration.millis(30));
 //        pauseTransition.setOnFinished(actionEvent -> {
 //
@@ -30,7 +29,7 @@ public class ProfileCartView extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/ProfileCartView.fxml")));
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/ChatMenu.fxml")));
         Scene currentScene = new Scene(root);
         primaryStage.setScene(currentScene);
         primaryStage.show();

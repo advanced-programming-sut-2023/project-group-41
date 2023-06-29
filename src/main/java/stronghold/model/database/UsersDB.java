@@ -62,6 +62,10 @@ public class UsersDB {
         return null;
     }
 
+    public List<User> getUsers() {
+        return users;
+    }
+
     public User getUserByEmail(String email){
         for(User user: this.users){
             if(user.getEmail().equalsIgnoreCase(email)){

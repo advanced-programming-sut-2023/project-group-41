@@ -6,8 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -47,7 +45,7 @@ public class GraphicalScoreboardController {
         Label username = new Label(user1.getUsername());
         username.setPrefSize(138, 52);
         username.setOnMouseClicked(MouseEvent-> {
-            GraphicalProfileCartController.setUser(user1);
+            GraphicalProfileCardController.setUser(user1);
             PauseTransition pauseTransition = new PauseTransition(Duration.millis(30));
             pauseTransition.setOnFinished(actionEvent -> {
                 Pane root = null;

@@ -4,11 +4,8 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import stronghold.controller.graphical.GraphicalProfileCartController;
 import stronghold.controller.graphical.GraphicalScoreboardController;
-import stronghold.model.components.general.User;
 import stronghold.model.database.UsersDB;
 
 import java.io.IOException;
