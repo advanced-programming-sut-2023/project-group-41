@@ -6,15 +6,33 @@ import stronghold.controller.graphical.ProfileEditController;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.function.Consumer;
 
 public class Client extends NetworkNode{
 
     private Socket socket;
 
+    private Consumer<Object> handleReceivedObjects;
+    private Consumer<String>  handleReceivedMessages;
+
     public Client(String subnet) throws IOException {
         this.socket = new Socket(subnet,DEFAULT_PORT);
         this.input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         this.output = new PrintWriter(socket.getOutputStream(), true);
+        this.handleReceivedMessages = (String str) -> {
+            System.out.println(str);
+        };
+        this.handleReceivedObjects = (Object obj) -> {
+            System.out.println(obj.toString());
+        };
+    }
+
+    public void setHandleReceivedObjects(Consumer<Object> handleReceivedObjects) {
+        this.handleReceivedObjects = handleReceivedObjects;
+    }
+
+    public void setHandleReceivedMessages(Consumer<String> handleReceivedMessages) {
+        this.handleReceivedMessages = handleReceivedMessages;
     }
 
     public Client() throws IOException {
@@ -44,6 +62,7 @@ public class Client extends NetworkNode{
         } catch (
                 IOException e) {
 
+            
         }
     }
 

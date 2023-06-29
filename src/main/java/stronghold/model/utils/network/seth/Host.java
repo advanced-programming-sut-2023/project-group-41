@@ -3,13 +3,11 @@
 package stronghold.model.utils.network.seth;
 
 
-import javafx.beans.binding.ObjectExpression;
-import stronghold.model.components.general.User;
-
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.function.Consumer;
 
 public class Host extends NetworkNode{
 
@@ -19,24 +17,34 @@ public class Host extends NetworkNode{
     private Thread lighthouseThread;
     private Thread readThread;
 
+    private Consumer<Object> handleReceivedObjects;
+    private Consumer<String>  handleReceivedMessages;
+
     private ArrayList<Socket> clientSockets;
 
     public Host(boolean initLighthouseThread) throws IOException {
         this.serverSocket = new ServerSocket(DEFAULT_PORT);
+
+        this.handleReceivedMessages = (String str) -> {
+            System.out.println(str);
+            return;
+        };
+        this.handleReceivedObjects = (Object obj) -> {
+            System.out.println(obj.toString());
+            return;
+        };
 
         this.clientSockets = new ArrayList<>();
         this.lighthouseThread = new Thread(() -> {
             while (initLighthouseThread){
                 try {
                     acceptClient();
-
                     System.out.println("ACCEPTING SOCKETS...");
 
                 } catch (
                         Exception e) {
                     System.out.println(e.getLocalizedMessage());
                 }
-
             }
         });
         this.readThread = new Thread(() -> {
@@ -46,20 +54,19 @@ public class Host extends NetworkNode{
                 try {
                     for (Socket socket: currentClients){
                         Object received = recieveObjectFromClient(socket);
-                        if(received instanceof User){
-                            User user = (User) received;
-                            System.out.println(user.getUsername());
-                            
+                        if(received instanceof String){
+                            handleReceivedMessages.accept((String) received);
+                        }
+                        else{
+                            handleReceivedObjects.accept(received);
                         }
                     }
                 } catch (
                         IOException e) {
-
                 } catch (
                         ClassNotFoundException e) {
                     throw new RuntimeException(e);
                 }
-
             }
         });
         this.lighthouseThread.start();
@@ -81,13 +88,13 @@ public class Host extends NetworkNode{
 
     }
 
-    public void readMessageFromClient(Socket socket) throws IOException {
+    public String readMessageFromClient(Socket socket) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         String readLine = bufferedReader.readLine();
         if(readLine == null)
-            return;
-        System.out.println(readLine);
+            return null;
         bufferedReader.close();
+        return readLine;
     }
 
     public void sendMessageToClient(Socket socket, String Message) throws IOException{
