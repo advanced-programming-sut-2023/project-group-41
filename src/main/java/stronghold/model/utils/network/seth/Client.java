@@ -17,8 +17,10 @@ public class Client extends NetworkNode{
 
     public Client(String subnet) throws IOException {
         this.socket = new Socket(subnet,DEFAULT_PORT);
+        new ObjectOutputStream(socket.getOutputStream()).writeObject(socket.getInetAddress());
         this.input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         this.output = new PrintWriter(socket.getOutputStream(), true);
+
         this.handleReceivedMessages = (String str) -> {
             System.out.println(str);
         };
@@ -62,7 +64,6 @@ public class Client extends NetworkNode{
         } catch (
                 IOException e) {
 
-            
         }
     }
 

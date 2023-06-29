@@ -7,11 +7,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="72fd4c0e-f2c3-4e13-85b9-d70f04a31b27" name="Changes" comment="created Object transfer methods in both Host and Client Classes in SETH">
+    <list default="true" id="72fd4c0e-f2c3-4e13-85b9-d70f04a31b27" name="Changes" comment="added sample test for HostTest.java, run MainNetTest To see the results">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/stronghold_jar/stronghold.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/stronghold_jar/stronghold.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/seth/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/seth/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/seth/Host.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/seth/Host.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/seth/NetworkNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/seth/NetworkNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/networktest/ClientTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/networktest/ClientTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -286,7 +288,21 @@
       <option name="project" value="LOCAL" />
       <updated>1688000063113</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="added consumers for message and object receive handling">
+      <created>1688002022865</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1688002022865</updated>
+    </task>
+    <task id="LOCAL-00015" summary="added sample test for HostTest.java, run MainNetTest To see the results">
+      <created>1688002197370</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1688002197370</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -332,7 +348,9 @@
     <MESSAGE value="fixed read thread" />
     <MESSAGE value="fixed Host's read thread" />
     <MESSAGE value="created Object transfer methods in both Host and Client Classes in SETH" />
-    <option name="LAST_COMMIT_MESSAGE" value="created Object transfer methods in both Host and Client Classes in SETH" />
+    <MESSAGE value="added consumers for message and object receive handling" />
+    <MESSAGE value="added sample test for HostTest.java, run MainNetTest To see the results" />
+    <option name="LAST_COMMIT_MESSAGE" value="added sample test for HostTest.java, run MainNetTest To see the results" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/stronghold$SignUpMenuControllerTest_testAll.ic" NAME="SignUpMenuControllerTest.testAll Coverage Results" MODIFIED="1684827485987" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

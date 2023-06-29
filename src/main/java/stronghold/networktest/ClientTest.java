@@ -1,5 +1,6 @@
 package stronghold.networktest;
 
+import javafx.scene.control.Slider;
 import javafx.scene.layout.Pane;
 import stronghold.model.components.general.User;
 import stronghold.model.database.UsersDB;
@@ -15,21 +16,15 @@ public class ClientTest {
         new Thread(() -> {
             Client client = null;
             try {
-                client = new Client("192.168.1.150");
+                client = new Client();
             } catch (
                     IOException e) {
                 throw new RuntimeException(e);
             }
+            User user = new User("test","test","test","test",
+                    1,"test", "test");
             while(true){
-                User user = new User("test","test","test","test",
-                        1,"test", "test");
                 client.sendObjectToServer(user);
-                try {
-                    Thread.sleep(200);
-                } catch (
-                        InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
             }
         }).start();
 

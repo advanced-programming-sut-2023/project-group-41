@@ -9,7 +9,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.function.Consumer;
 
-public class Host extends NetworkNode{
+public class Host extends NetworkNode {
 
     private ServerSocket serverSocket;
     private Socket ioSocket;
@@ -18,7 +18,7 @@ public class Host extends NetworkNode{
     private Thread readThread;
 
     private Consumer<Object> handleReceivedObjects;
-    private Consumer<String>  handleReceivedMessages;
+    private Consumer<String> handleReceivedMessages;
 
     private ArrayList<Socket> clientSockets;
 
@@ -36,7 +36,7 @@ public class Host extends NetworkNode{
 
         this.clientSockets = new ArrayList<>();
         this.lighthouseThread = new Thread(() -> {
-            while (initLighthouseThread){
+            while (initLighthouseThread) {
                 try {
                     acceptClient();
                     System.out.println("ACCEPTING SOCKETS...");
@@ -48,24 +48,21 @@ public class Host extends NetworkNode{
             }
         });
         this.readThread = new Thread(() -> {
-            while (initLighthouseThread){
+            while (initLighthouseThread) {
                 ArrayList<Socket> currentClients = new ArrayList<>();
                 currentClients.addAll(this.clientSockets);
-                try {
-                    for (Socket socket: currentClients){
-                        Object received = recieveObjectFromClient(socket);
-                        if(received instanceof String){
-                            handleReceivedMessages.accept((String) received);
+                for (Socket socket : currentClients) {
+                    try {
+                        if(!socket.isClosed()){
+                            receiveObjectFromClient(socket);
                         }
-                        else{
-                            handleReceivedObjects.accept(received);
-                        }
+                    } catch (
+                            IOException e) {
+
+                    } catch (
+                            ClassNotFoundException e) {
+                        throw new RuntimeException(e);
                     }
-                } catch (
-                        IOException e) {
-                } catch (
-                        ClassNotFoundException e) {
-                    throw new RuntimeException(e);
                 }
             }
         });
@@ -90,22 +87,23 @@ public class Host extends NetworkNode{
     }
 
     public void acceptClient() throws Exception {
-        if(this.readThread.isDaemon())
+        if (this.readThread.isDaemon())
             this.readThread.wait(200);
-        this.clientSockets.add(this.serverSocket.accept());
+        Socket socket = this.serverSocket.accept();
+        this.clientSockets.add(socket);
 
     }
 
     public String readMessageFromClient(Socket socket) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         String readLine = bufferedReader.readLine();
-        if(readLine == null)
+        if (readLine == null)
             return null;
         bufferedReader.close();
         return readLine;
     }
 
-    public void sendMessageToClient(Socket socket, String Message) throws IOException{
+    public void sendMessageToClient(Socket socket, String Message) throws IOException {
         PrintWriter printWriter = new PrintWriter(socket.getOutputStream(), true);
         printWriter.println(Message);
         printWriter.close();
@@ -116,14 +114,16 @@ public class Host extends NetworkNode{
         outputStream.writeObject(object);
     }
 
-    public Object recieveObjectFromClient(Socket socket) throws IOException, ClassNotFoundException {
+    public Object receiveObjectFromClient(Socket socket) throws IOException, ClassNotFoundException {
         ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
-        Object recievedObject = objectInputStream.readObject();
-        return recievedObject;
+        Object receivedObject = objectInputStream.readObject();
+        System.out.println(receivedObject.toString());
+        return receivedObject;
+
     }
 
     public void killHost() throws IOException {
-        for(Socket client: this.clientSockets){
+        for (Socket client : this.clientSockets) {
             client.close();
         }
         this.lighthouseThread.stop();

@@ -2,6 +2,7 @@ package stronghold.model.utils.network.seth;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
@@ -40,6 +41,7 @@ public class NetworkNode {
             try {
                 Socket socket = new Socket();
                 socket.connect(new InetSocketAddress(baseSubnet + i, DEFAULT_PORT), 40);
+                new ObjectOutputStream(socket.getOutputStream()).writeObject(socket.getInetAddress());
                 socket.close();
                 return baseSubnet + i;
 
