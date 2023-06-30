@@ -7,10 +7,12 @@ import stronghold.model.database.UsersDB;
 import stronghold.model.utils.network.seth.Client;
 import stronghold.model.utils.network.seth.Host;
 import stronghold.model.utils.network.seth.NetworkNode;
+import stronghold.model.utils.network.seth.RequestObject;
 import stronghold.view.graphics.RegisterView;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ClientTest {
     public static void main(String[] args) throws IOException, InterruptedException {
@@ -22,16 +24,22 @@ public class ClientTest {
                     IOException e) {
                 throw new RuntimeException(e);
             }
+            ArrayList<Object> creds1 = new ArrayList<>();
+            creds1.addAll(List.of(new String[]{"anakin", "giiggg"}));
+            ArrayList<Object> creds2 = new ArrayList<>();
+            creds2.addAll(List.of(new String[]{"skywalker", "An@k1n"}));
+
+            RequestObject requestObject1 = new RequestObject("authenticate", creds1);
+            RequestObject requestObject2 = new RequestObject("authenticate", creds2);
+
+            client.sendObjectToServer(requestObject1);
             try {
-                UsersDB.usersDB.fromJSON();
+                Thread.sleep(1000);
             } catch (
-                    IOException e) {
+                    InterruptedException e) {
                 throw new RuntimeException(e);
             }
-
-            while(true){
-                client.sendObjectToServer(UsersDB.usersDB.getAtIndex(1));
-            }
+            client.sendObjectToServer(requestObject2);
         }).start();
 
     }

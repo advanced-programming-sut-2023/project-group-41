@@ -7,13 +7,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="72fd4c0e-f2c3-4e13-85b9-d70f04a31b27" name="Changes" comment="fixed network test for register view">
-      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/seth/Request.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/seth/RequestObject.java" afterDir="false" />
+    <list default="true" id="72fd4c0e-f2c3-4e13-85b9-d70f04a31b27" name="Changes" comment="added read thread to Client">
+      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/authenticator/AuthenticatorServer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/stronghold_jar/stronghold.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/stronghold_jar/stronghold.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/seth/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/seth/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/seth/Host.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/seth/Host.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/seth/NetworkNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/seth/NetworkNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/networktest/ClientTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/networktest/ClientTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/networktest/HostTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/networktest/HostTest.java" afterDir="false" />
     </list>
@@ -177,8 +177,8 @@
       <list>
         <item itemvalue="Application.MainNetTest" />
         <item itemvalue="Application.ClientTest" />
-        <item itemvalue="Application.sampleView" />
         <item itemvalue="Application.HostTest" />
+        <item itemvalue="Application.sampleView" />
         <item itemvalue="Application.SearchPlayerView" />
       </list>
     </recent_temporary>
@@ -339,7 +339,14 @@
       <option name="project" value="LOCAL" />
       <updated>1688127464653</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="added read thread to Client">
+      <created>1688144853372</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1688144853372</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -392,7 +399,8 @@
     <MESSAGE value="added test for users db" />
     <MESSAGE value="added network test for register view" />
     <MESSAGE value="fixed network test for register view" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed network test for register view" />
+    <MESSAGE value="added read thread to Client" />
+    <option name="LAST_COMMIT_MESSAGE" value="added read thread to Client" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/stronghold$SignUpMenuControllerTest_testAll.ic" NAME="SignUpMenuControllerTest.testAll Coverage Results" MODIFIED="1684827485987" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

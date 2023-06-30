@@ -40,7 +40,7 @@ public class NetworkNode {
 
             try {
                 Socket socket = new Socket();
-                socket.connect(new InetSocketAddress(baseSubnet + i, DEFAULT_PORT), 40);
+                socket.connect(new InetSocketAddress(baseSubnet + i, DEFAULT_PORT), 50);
                 new ObjectOutputStream(socket.getOutputStream()).writeObject(socket.getInetAddress());
                 socket.close();
                 return baseSubnet + i;
