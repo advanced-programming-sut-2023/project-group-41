@@ -78,7 +78,8 @@
 
 
   "engineerGotOil": "the engineer went to get oil",
-  "back": "you are in mainMenu"
+  "back": "you are in mainMenu",
+  "sick": "you have sick people"
 
 
 }

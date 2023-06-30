@@ -245,6 +245,9 @@ public class NavigatorController {
                        // node.setLayoutX(node.getLayoutX()+i*20);
                         //node.setLayoutY(node.getLayoutY()+j*20);
                        sampleView.backGround( sampleView.getMapCellNodeHashMap().get(Map.getInstanceMap().getMapCell(k,k2))).setFill(Color.RED);
+                        sampleView.backGround( sampleView.getMapCellNodeHashMap().get(Map.getInstanceMap().getMapCell(k,k2))).toFront();
+                        sampleView.backGround( sampleView.getMapCellNodeHashMap().get(Map.getInstanceMap().getMapCell(k,k2))).setVisible(true);
+
                        mapCells.add(sampleView.getMapCellNodeHashMap().get(Map.getInstanceMap().getMapCell(k,k2)));
 
 
@@ -284,6 +287,9 @@ public class NavigatorController {
     }//
     public static void  adder(ArrayList<Group>mapCells){
         ImagePattern grass= null;
+
+            sampleView.getAttackBanner().setFill(Color.BLACK);
+
         try {
             grass = new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/tiles/grass.jpg")));
         } catch (FileNotFoundException e) {

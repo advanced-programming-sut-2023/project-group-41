@@ -40,14 +40,11 @@ public class TradeMenuView extends Application {
     }
     @Override
     public void start(Stage stage) throws Exception {
+        this.stage=stage;
         Screen screen = Screen.getPrimary();
         Rectangle2D bounds = screen.getVisualBounds();
 
-        stage.setX(bounds.getMinX());
-        stage.setY(bounds.getMinY());
-        stage.setWidth(bounds.getWidth());
-        stage.setHeight(bounds.getHeight());
-        this.stage=stage;
+
         Pane root=new Pane();
         Button button=new Button("New Trade");
         button.setLayoutX(600);
@@ -90,6 +87,58 @@ public class TradeMenuView extends Application {
 
         stage.setScene(scene);
         stage.show();
+    }
+    public static Pane getTradeMenuPane(){
+
+
+        Pane root=new Pane();
+        Button button=new Button("New Trade");
+        button.setLayoutX(600);
+        button.setLayoutY(300);
+        Button button2=new Button("Trade History");
+        button2.setLayoutX(750);
+        button2.setLayoutY(300);
+        Button back=new Button("back");
+        back.setLayoutX(675);
+        back.setLayoutY(330);
+        back.setOnAction(actionEvent -> {
+            try {
+                Stage shopNewStage = new Stage();
+                shopNewStage.setScene(new Scene(
+                        ShopMenuView.gettetet()));
+                shopNewStage.show();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+        button.setOnAction(actionEvent -> {
+            try {
+                Stage shopNewStage = new Stage();
+                shopNewStage.setScene(new Scene(
+                        NewTradeMenu.getNewTradePane()));
+                shopNewStage.show();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+        button2.setOnAction(actionEvent -> {
+            try {
+                 Stage shopNewStage = new Stage();
+                shopNewStage.setScene(new Scene(
+                        TradeHistoryMenu.getTradeHistoryMenuPane()));
+                shopNewStage.show();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+        root.getChildren().add(back);
+        root.getChildren().add(button);
+        root.getChildren().add(button2);
+
+
+
+
+        return root;
     }
 
     public static void setCurrentUser(Government currentUser) {

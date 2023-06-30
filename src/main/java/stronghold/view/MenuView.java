@@ -2,8 +2,16 @@ package stronghold.view;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Rectangle;
+import javafx.stage.Popup;
 import stronghold.controller.MenuController;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Arrays;
@@ -29,6 +37,24 @@ public class MenuView {
             }
 
             response+="\u001B[0m";
+            Popup popup=new Popup();
+            popup.show(sampleView.stage);
+            Rectangle rectangle=new Rectangle(500,300);
+            rectangle.setX(370);
+            rectangle.setY(100);
+            rectangle.setFill(new ImagePattern(new Image(new FileInputStream("F:\\Stronghold\\project-group-41\\src\\main\\java\\stronghold\\database\\Image\\back2.jpg"))));
+            popup.getContent().add(rectangle);
+            Button back=new Button("Back");
+            back.setLayoutX(600);
+            back.setLayoutY(350);
+
+            popup.getContent().add(back);
+            back.setOnAction(actionEvent -> popup.hide());
+            Label label=new Label(response);
+            popup.getContent().add(label);
+            label.setLayoutX(400);
+            label.setLayoutY(200);
+            label.setTextFill(Color.WHITE);
             System.out.println(response);
 
         } catch (

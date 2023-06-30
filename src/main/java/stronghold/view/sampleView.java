@@ -13,6 +13,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 
+import javafx.scene.shape.Circle;
 import stronghold.controller.GameMenuController;
 import stronghold.controller.ShopMenuController;
 import stronghold.controller.sampleController;
@@ -71,7 +72,12 @@ import static stronghold.view.graphics.GameView.motionBlurEffect;
 public class sampleView extends Application {
     private static Label coin;
     private static Label population;
-    private static ImageView popularity;
+    private static ImageView popularity=new ImageView();
+    private static Rectangle attackBanner;
+
+    public static Rectangle getAttackBanner() {
+        return attackBanner;
+    }
 
     public static ImageView getPopularity() {
         return popularity;
@@ -79,6 +85,11 @@ public class sampleView extends Application {
 
     public static ArrayList<MapCell> getSelectedCells() {
         return selectedCells;
+    }
+    private static Label units;
+
+    public static Label getUnits() {
+        return units;
     }
 
     public static Label getPopulation() {
@@ -142,6 +153,11 @@ public class sampleView extends Application {
     public static Stage getStage() {
         return stage;
     }
+    private  static Pane root=new Pane();
+
+    public static Pane getRoot() {
+        return root;
+    }
 
     public static void showClipboard(){
         clipboard.setFill(sampleController.getBuildingPic().getFill());
@@ -157,7 +173,7 @@ public class sampleView extends Application {
         stage.setY(bounds.getMinY());
         stage.setWidth(bounds.getWidth());
         stage.setHeight(bounds.getHeight());
-        Pane root=new Pane();
+
 
         /////////////////////////////////////////////////////////
         Rectangle b=new Rectangle(1530,200);
@@ -172,12 +188,9 @@ public class sampleView extends Application {
         Map.getInstanceMap().setSize(200);
         GameMenuController.startGame(3);
 
-        for(int i = 0; i < 9000;i++){
-            Map.getInstanceMap().getMapCell(new Random().nextInt(200),new Random().nextInt(200))
-                    .setTexture(Texture.SEA);
-        }
-        ImagePattern water=new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/tiles/grass.jpg")));
-        ImagePattern grass=new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/tiles/water.jpg")));
+
+        ImagePattern grass=new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/tiles/grass.jpg")));
+        ImagePattern water=new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/tiles/water.jpg")));
         for(int i = 0;i < Map.getInstanceMap().getSize();i++){
             for (int j = 0; j < Map.getInstanceMap().getSize(); j++){
                 MapCell mapCell = Map.getInstanceMap().getMapCell(i,j);
@@ -192,11 +205,15 @@ public class sampleView extends Application {
 
                 if(mapCell.getTexture().getColor().equals("GREEN")){
                     //cell.setFill(Color.GREEN);
-                    backgroundTexture.setFill(water);
+                    backgroundTexture.setFill(grass);
+                    mapCell.setPassable(true);
                 }
                 else{
                     //cell.setFill(Color.BLUE);
-                    backgroundTexture.setFill(grass);
+                    backgroundTexture.setFill(water);
+                    mapCell.setPassable(false);
+
+
 
                 }
 
@@ -276,9 +293,11 @@ public class sampleView extends Application {
                         building.setTextFill(Color.WHITE);
                         popup.getContent().add(building);
                     }
+                    System.out.println(mapCell.getUnits().size());
 
                     if(mapCell.getUnits().size()!=0) {
-                        Label units = new Label();
+
+                        units = new Label();
                         for (Unit unit : mapCell.getUnits()) {
                             units.setText(units.getText()+unit.getPeople().getRegex()+") count: "+unit.getCount()+"\n");
                         }
@@ -362,7 +381,7 @@ public class sampleView extends Application {
         root.getChildren().add(coinImage);
         //////////////////////////////////////////////////////////////
 
-        popularity = new ImageView();
+        //popularity = new ImageView();
         Image happy=new Image(new FileInputStream("src/main/java/stronghold/database/Image/happy.jpg"));
         Image sad=new Image(new FileInputStream("src/main/java/stronghold/database/Image/sad.png"));
         Image poker=new Image(new FileInputStream("src/main/java/stronghold/database/Image/poker.png"));
@@ -388,6 +407,29 @@ public class sampleView extends Application {
                 throw new RuntimeException(e);
             }
         });
+        //////////////////////////////////////////////
+        Button sick=new Button("Cure");
+        sick.setOnAction(actionEvent -> {
+            currentUser.setSick(0);
+
+
+                     for (MapCell cell : Map.getCells()) {
+
+                            for (int i=2 ; i<getMapCellNodeHashMap().get(cell).getChildren().size();i++) {
+                                if(getMapCellNodeHashMap().get(cell).getChildren().get(i) instanceof  Circle){
+                                    getMapCellNodeHashMap().get(cell).getChildren().remove(i);
+                                    break;
+                                }
+
+                            }
+
+
+                    }
+        }
+        );
+        sick.setLayoutX(1200);
+        sick.setLayoutY(700);
+        root.getChildren().add(sick);
         ///////////////////////////////////////////////////////////////////////////
         Button options=new Button("Options     ");
         options.setOnAction(actionEvent -> sampleController.options(stage));
@@ -396,20 +438,19 @@ public class sampleView extends Application {
         root.getChildren().add(options);
         ///////////////////////////////////////
         Button shop=new Button("Shop          ");
-        shop.setOnAction(actionEvent -> sampleController.options(stage));
         shop.setLayoutX(1300);
         shop.setLayoutY(730);
         shop.setOnAction(actionEvent -> GameMenuController.enterShopMenu());
         root.getChildren().add(shop);
         ///////////////////////////////////
-        Button Trade=new Button("TradeMenu");
-        Trade.setOnAction(actionEvent -> sampleController.options(stage));
+        Button Trade=new Button("SelectTroop");
+        Trade.setOnAction(actionEvent -> sampleController.unitSelection(stage));
         Trade.setLayoutX(1300);
         Trade.setLayoutY(760);
         root.getChildren().add(Trade);
         ///////////////////////////////////
         Button next=new Button("next player");
-        next.setOnAction(actionEvent -> sampleController.options(stage));
+
         next.setLayoutX(1300);
         next.setLayoutY(790);
         next.setOnAction(actionEvent -> GameMenuController.nextPlayer());
@@ -423,6 +464,7 @@ public class sampleView extends Application {
         delete.setX(1380);
         delete.setY(780);
         delete.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/cross.png"))));
+        delete.setOnMouseClicked(actionHandeler -> GameMenuController.clear(selectedCells.get(0).getX(),selectedCells.get(0).getY()));
         root.getChildren().add(delete);
         //////////////////////////////////////Briefing//////////////////////////////////////////////////////////////////////
         Rectangle briefing=new Rectangle(40,40);
@@ -443,6 +485,12 @@ public class sampleView extends Application {
         undo.setY(700);
         undo.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/undo.jpg"))));
         root.getChildren().add(undo);
+        ////////////////////////////////////////////////////////////////////
+        attackBanner = new Rectangle(40,40);
+        attackBanner.setX(1420);
+        attackBanner.setY(700);
+
+        root.getChildren().add(attackBanner);
         ////////////////////////////////////////////////////////////////////////////////
         FlowPane buildingSelectionPane= new FlowPane();
         root.getChildren().add(buildingSelectionPane);
@@ -735,8 +783,15 @@ public class sampleView extends Application {
                 popup.getContent().add(back);
                 back.setOnAction(actionEvent -> popup.hide());
                 Button tree=new Button("Attack");
-                tree.setLayoutX(rectangle.getLayoutX()+170);
+
+
+                tree.setLayoutX(rectangle.getLayoutX()+140);
                 tree.setLayoutY(rectangle.getLayoutY()+70);
+                Button tree2=new Button("FireAttack");
+
+
+                tree2.setLayoutX(rectangle.getLayoutX()+210);
+                tree2.setLayoutY(rectangle.getLayoutY()+70);
                 TextField X=new TextField();
                 X.setPromptText("enter X");
                 X.setLayoutX(rectangle.getLayoutX()+20);
@@ -745,9 +800,12 @@ public class sampleView extends Application {
                 Y.setPromptText("enter Y");
                 Y.setLayoutX(rectangle.getLayoutX()+210);
                 Y.setLayoutY(rectangle.getLayoutY()+30);
+                tree.setOnAction(actionEvent -> GameMenuController.attackEnemy(Integer.parseInt(X.getText()),Integer.parseInt(Y.getText()),false));
+                tree2.setOnAction(actionEvent -> GameMenuController.attackEnemy(Integer.parseInt(X.getText()),Integer.parseInt(Y.getText()),true));
 
 
                 popup.getContent().add(tree);
+                popup.getContent().add(tree2);
                 popup.getContent().add(X);
                 popup.getContent().add(Y);
 
@@ -766,8 +824,9 @@ public class sampleView extends Application {
                 Button Fire=new Button("FireAttack");
                 Fire.setLayoutX(rectangle.getLayoutX()+120);
                 Fire.setLayoutY(rectangle.getLayoutY()+170);
+                rock.setOnAction(e ->GameMenuController.airAttack(Integer.parseInt(X1.getText()),Integer.parseInt(Y1.getText()),false));
 
-
+                Fire.setOnAction(e ->GameMenuController.airAttack(Integer.parseInt(X1.getText()),Integer.parseInt(Y1.getText()),true));
                 popup.getContent().add(rock);
                 popup.getContent().add(X1);
                 popup.getContent().add(Y1);
@@ -776,7 +835,36 @@ public class sampleView extends Application {
 
             }
             if(k.getCode() == KeyCode.DIGIT4){
-                sampleController.selecting();
+                Popup popup=new Popup();
+                Rectangle rectangle=new Rectangle(400,400);
+                try {
+                    rectangle.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/back2.jpg"))));
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+                popup.getContent().add(rectangle);
+                popup.show(stage);
+                Button back=new Button("Back");
+                popup.getContent().add(back);
+                back.setOnAction(actionEvent -> popup.hide());
+                Button tree=new Button("Move");
+                tree.setLayoutX(rectangle.getLayoutX()+170);
+                tree.setLayoutY(rectangle.getLayoutY()+70);
+                TextField X=new TextField();
+                X.setPromptText("enter X");
+                X.setLayoutX(rectangle.getLayoutX()+20);
+                X.setLayoutY(rectangle.getLayoutY()+30);
+                TextField Y=new TextField();
+                Y.setPromptText("enter Y");
+                Y.setLayoutX(rectangle.getLayoutX()+210);
+                Y.setLayoutY(rectangle.getLayoutY()+30);
+                tree.setOnAction(actionEvent -> GameMenuController.moveUnitTo(Integer.parseInt(X.getText()),Integer.parseInt(Y.getText()),(Circle) getMapCellNodeHashMap().get(Map.getInstanceMap().getMapCell(GameMenuController.getCurrentUnits().get(0).getX(),GameMenuController.getCurrentUnits().get(0).getY())).getChildren().get(1)));
+
+
+                popup.getContent().add(tree);
+                popup.getContent().add(X);
+                popup.getContent().add(Y);
+
             }
             if(k.getCode() == KeyCode.DIGIT5){
                 sampleController.selecting();
@@ -876,27 +964,30 @@ public class sampleView extends Application {
             }
             selectedNodes.clear();
             System.out.println(gamePane.getScaleX());
-            double endX = mouse.getX() + gamePane.getTranslateX();
-            double endY = mouse.getY() + gamePane.getTranslateY();
+            double endX = mouse.getX() ;
+            double endY = mouse.getY() ;
 
-            for(MapCell cell: Map.getCells()){
-                if(Math.floor(startX/gamePane.getScaleX()/20) <= cell.getX() &&
-                        cell.getX() <= Math.floor(endX/gamePane.getScaleX()/20)
-                && Math.floor(startY/gamePane.getScaleX()/20) <= cell.getY() &&
-                        cell.getY() <= Math.floor(endY/gamePane.getScaleX()/20)
-                ){
-                    Node rect =
-                            gamePane.getChildren().get(cell.getX()*Map.getInstanceMap().getSize()+cell.getY());
-                    if(sampleController.isSelect()) {
-                        selectedNodes.add(rect);
-                        rect.setOpacity(0.7);
-                        selectedCells.add(cell);
+                for (MapCell cell : Map.getCells()) {
+                    if (Math.floor(startX / gamePane.getScaleX() / 20) <= cell.getX() &&
+                            cell.getX() <= Math.floor(endX / gamePane.getScaleX() / 20)
+                            && Math.floor(startY / gamePane.getScaleX() / 20) <= cell.getY() &&
+                            cell.getY() <= Math.floor(endY / gamePane.getScaleX() / 20)
+                    ) {
+                        Node rect =
+                                gamePane.getChildren().get(cell.getX() * Map.getInstanceMap().getSize() + cell.getY());
+                        if (sampleController.isSelect()) {
+                            selectedNodes.add(rect);
+                            rect.setOpacity(0.7);
+                            selectedCells.add(cell);
+                        }
                     }
                 }
-            }
 
-            startX = -1;
-            startY = -1;
+                startX = -1;
+                startY = -1;
+
+
+
         });
 
 
@@ -908,12 +999,13 @@ public class sampleView extends Application {
         stage.setScene(scene);
         stage.show();
         LongRanged longRanged=new LongRanged(LongRangedEnum.archer);
-        Unit unit=new Unit(50,50, longRanged,20);
+
+        Unit unit=new Unit(10,10, longRanged,20);
         ArrayList<Unit>h=new ArrayList<>();
         h.add(unit);
         GameMenuController.setCurrentUnits(h);
-        Map.getInstanceMap().getMapCell(50,50).getUnits().add(unit);
-        GameMenuController.moveUnitTo(53,53);
+        Map.getInstanceMap().getMapCell(10,10).getUnits().add(unit);
+        //GameMenuController.moveUnitTo(13,13,);
 
 
         //NavigatorController.findShortestPath(NavigatorController.mapPassable(),50,50,53,53,20);

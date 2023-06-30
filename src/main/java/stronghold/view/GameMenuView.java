@@ -133,7 +133,7 @@ public class GameMenuView extends MenuView {
             } else if ((moveUnitToMatcher = getJSONRegexMatcher(command, "moveUnitTo", gameMenuRegexObj)).matches()) {
                 int X = Integer.parseInt(moveUnitToMatcher.group("X"));
                 int Y = Integer.parseInt(moveUnitToMatcher.group("Y"));
-                moveUnitTo(X, Y);
+                ///moveUnitTo(X, Y);
             } else if ((patrolUnitMatcher = getJSONRegexMatcher(command, "patrolUnit", gameMenuRegexObj)).matches()) {
                 int X1 = Integer.parseInt(patrolUnitMatcher.group("X1"));
                 int Y1 = Integer.parseInt(patrolUnitMatcher.group("Y1"));
@@ -147,12 +147,12 @@ public class GameMenuView extends MenuView {
                 setStateOfUnit(X, Y, stateOfUnit);
             } else if ((attackEnemyMatcher = getJSONRegexMatcher(command, "attackEnemy", gameMenuRegexObj)).matches()) {
                 //command: attack -e [enemy’s x] [enemy’s y]
-                attackEnemy(Integer.parseInt(attackEnemyMatcher.group(1)), Integer.parseInt(attackEnemyMatcher.group(2)));
+                //attackEnemy(Integer.parseInt(attackEnemyMatcher.group(1)), Integer.parseInt(attackEnemyMatcher.group(2)));
             } else if ((airAttackMatcher = getJSONRegexMatcher(command, "airAttack", gameMenuRegexObj)).matches()) {
                 //command: attack -x [x] -y [y]
                 int X = Integer.parseInt(airAttackMatcher.group("X"));
                 int Y = Integer.parseInt(airAttackMatcher.group("Y"));
-                airAttack(X, Y);
+              //  airAttack(X, Y);
             } else if ((pourOilMatcher = getJSONRegexMatcher(command, "pourOil", gameMenuRegexObj)).matches()) {
                 Direction direction = Direction.getDirection(pourOilMatcher.group("direction"));
                 pourOil(direction);

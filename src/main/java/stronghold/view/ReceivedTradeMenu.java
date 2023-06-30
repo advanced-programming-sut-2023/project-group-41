@@ -73,6 +73,52 @@ public class ReceivedTradeMenu extends Application {
         stage.setScene(scene);
         stage.show();
     }
+    public static Pane getReceivedTradesPAne(){
+        Pane root=new Pane();
+        //Label history=new Label();
+
+        int i=1;
+        int y=0;
+        for (Trade trade : TradeDataBase.getTrades()) {
+            if(trade.getSender().equals(currentUser))
+                continue;
+            Label history=new Label();
+            history.setLayoutX(650);
+            history.setLayoutY(y);
+            history.setTextFill(Color.CADETBLUE);
+            history.setText(history.getText()+i+")id: "+trade.getId()+" sender: player "+trade.getSender().getColor()
+                    +"resource: "+trade
+                    .getResourceType().getRegex()+"  "+trade.getNumber()+"message: "+trade.getMessage()+"price: "+trade.getPrice()+"status: "+trade.getIsAccepted()+"\n");
+            if(!trade.getIsAccepted()){
+                Button button=new Button("Accept");
+                button.setLayoutX(history.getLayoutX()+700);
+                button.setLayoutY(history.getLayoutY());
+                root.getChildren().add(button);
+                Popup popup=new Popup();
+                button.setOnAction(actionEvent -> TradeMenuController.acceptTrade(trade,popup));
+            }
+
+
+            root.getChildren().add(history);
+            i++;
+            y+=40;
+        }
+        Button back=new Button("back");
+        back.setLayoutX(1200);
+        back.setLayoutY(530);
+        back.setOnAction(actionEvent -> {
+            try {
+                Stage shopNewStage = new Stage();
+                shopNewStage.setScene(new Scene(
+                        TradeHistoryMenu.getTradeHistoryMenuPane()));
+                shopNewStage.show();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+        root.getChildren().add(back);
+        return root;
+    }
 
     public static void setCurrentUser(Government currentUser) {
         ReceivedTradeMenu.currentUser = currentUser;

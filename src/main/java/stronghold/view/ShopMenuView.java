@@ -181,6 +181,7 @@ public class ShopMenuView extends Application {
 
     }
     public static Pane gettetet(){
+
         for(Resource resource:Resource.getResources()){
             prices.put(resource,10);
         }
@@ -198,7 +199,10 @@ public class ShopMenuView extends Application {
         button3.setLayoutY(500);
         button3.setOnAction(actionEvent -> {
             try {
-                new TradeMenuView().start(ShopMenuView.getStage());
+               Stage tradeNewStage = new Stage();
+                tradeNewStage.setScene(new Scene(
+                        TradeMenuView.getTradeMenuPane()));
+                tradeNewStage.show();
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public class Government {
+    private int sick;
     private User owner;
     private int color;
     private String[] popularityFactors;
@@ -41,7 +42,17 @@ public class Government {
         for (Resource resource : EnumSet.allOf(Resource.class)) {
             resources.put(resource, 200);
         }
+        sick=0;
     }
+
+    public int getSick() {
+        return sick;
+    }
+
+    public void setSick(int sick) {
+        this.sick = sick;
+    }
+
     public void incPopularity(int num) {
         popularity += num;
     }

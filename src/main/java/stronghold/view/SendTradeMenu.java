@@ -43,7 +43,10 @@ public class SendTradeMenu extends Application {
         back.setLayoutY(530);
         back.setOnAction(actionEvent -> {
             try {
-                new TradeHistoryMenu().start(this.getStage());
+                Stage shopNewStage = new Stage();
+                shopNewStage.setScene(new Scene(
+                        TradeHistoryMenu.getTradeHistoryMenuPane()));
+                shopNewStage.show();
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -56,6 +59,37 @@ public class SendTradeMenu extends Application {
         stage.setScene(scene);
         stage.show();
 
+    }
+    public static Pane getSendedTradesPAne(){
+        Pane root=new Pane();
+        Label history=new Label();
+        history.setLayoutX(800);
+        history.setTextFill(Color.GREENYELLOW);
+        int i=1;
+        for (Trade trade : TradeDataBase.getTrades()) {
+            if(!trade.getSender().equals(currentUser))
+                continue;
+            history.setText(history.getText()+i+")id: "+trade.getId()+" sender: player "+trade.getSender().getColor()
+                    +"resource: "+trade
+                    .getResourceType().getRegex()+"  "+trade.getNumber()+"message: "+trade.getMessage()+"price: "+trade.getPrice()+"\n");
+            i++;
+        }
+        Button back=new Button("back");
+        back.setLayoutX(1200);
+        back.setLayoutY(530);
+        back.setOnAction(actionEvent -> {
+            try {
+                Stage shopNewStage = new Stage();
+                shopNewStage.setScene(new Scene(
+                        TradeHistoryMenu.getTradeHistoryMenuPane()));
+                shopNewStage.show();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+        root.getChildren().add(back);
+        root.getChildren().add(history);
+        return root;
     }
 
     public static void setCurrentUser(Government currentUser) {

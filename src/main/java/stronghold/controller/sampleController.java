@@ -17,9 +17,11 @@ import javafx.stage.Popup;
 import javafx.stage.Stage;
 import stronghold.model.components.game.Government;
 import stronghold.model.components.game.Map;
+import stronghold.model.components.game.MapCell;
 import stronghold.model.components.game.Unit;
 import stronghold.model.components.game.building.BuildingType;
 import stronghold.model.components.game.enums.Resource;
+import stronghold.view.sampleView;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -29,20 +31,65 @@ public class sampleController {
     private static boolean select=false;
     private static String buildingCopy = null;
     private static Rectangle buildingPic = null;
-    private static Rectangle foodR;
-    private static Label fear;
-    private static Rectangle fearR;
-    private static Label tax;
-    private static Rectangle taxR;
-    private static Label food;
-    private static Label religion;
-    private static Rectangle religionR;
+    private static Rectangle foodR=new Rectangle();
+    private static Label fear=new Label();
+    private static Rectangle fearR=new Rectangle();
+    private static Label tax=new Label();
+    private static Rectangle taxR=new Rectangle();
+    private static Label food=new Label();
+    private static Label religion=new Label();
+    private static Rectangle religionR=new Rectangle();
     private static int total;
-    private static Label month;
-    private static Rectangle totalR;
+    private static Label month=new Label();
+    private static   Rectangle totalR=new Rectangle();
+    static Image sad;
+    static Image poker;
+    static Image happy;
     public static void updateNodes() throws FileNotFoundException {
+        if(currentGovernment.getPopularity()>10){
+            sampleView.getPopularity().setImage(happy);
+            System.out.println(sampleView.getRoot().getChildren().contains(sampleView.getPopularity()));
+            System.out.println("1");
+        }else if(currentGovernment.getPopularity()< -10){
+            sampleView.getPopularity().setImage(sad);
+            System.out.println(sampleView.getRoot().getChildren().contains(sampleView.getPopularity()));
+            System.out.println("2");
+        }else{
+            sampleView.getPopularity().setImage(poker);
+            System.out.println(sampleView.getRoot().getChildren().contains(sampleView.getPopularity()));
+            sampleView.getPopularity().toFront();
+            sampleView.getPopularity().setVisible(true);
+            System.out.println("3");
+        }
+
+        {
+            try {
+                poker = new Image(new FileInputStream("src/main/java/stronghold/database/Image/poker.png"));
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        {
+            try {
+                happy = new Image(new FileInputStream("src/main/java/stronghold/database/Image/happy.jpg"));
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+
+
+        {
+            try {
+                sad = new Image(new FileInputStream("src/main/java/stronghold/database/Image/sad.png"));
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
         if(GameMenuController.getFearPopularity()>0){
-            fearR.setFill(new ImagePattern(new Image(new FileInputStream("F:\\Stronghold\\project-group-41\\src\\main\\java\\stronghold\\database\\Image\\greenFace.png"))));
+            //fearR.setFill(new ImagePattern(new Image(new FileInputStream("F:\\Stronghold\\project-group-41\\src\\main\\java\\stronghold\\database\\Image\\greenFace.png"))));
+
 
         }else if(GameMenuController.getFearPopularity()<0){
             fearR.setFill(new ImagePattern(new Image(new FileInputStream("F:\\Stronghold\\project-group-41\\src\\main\\java\\stronghold\\database\\Image\\redFace.png"))));
@@ -58,7 +105,7 @@ public class sampleController {
             taxR.setFill(new ImagePattern(new Image(new FileInputStream("F:\\Stronghold\\project-group-41\\src\\main\\java\\stronghold\\database\\Image\\redFace.png"))));
 
         }else{
-            taxR.setFill(new ImagePattern(new Image(new FileInputStream("F:\\Stronghold\\project-group-41\\src\\main\\java\\stronghold\\database\\Image\\yellowFace.png"))));
+            taxR.setFill(new ImagePattern(new Image(new FileInputStream("F:\\Stronghold\\project-group-41\\src\\main\\java\\stronghold\\database\\Image\\yellowFace.jpg"))));
 
         }
         if(GameMenuController.getReligionPopularity()>0){
@@ -68,7 +115,7 @@ public class sampleController {
             religionR.setFill(new ImagePattern(new Image(new FileInputStream("F:\\Stronghold\\project-group-41\\src\\main\\java\\stronghold\\database\\Image\\redFace.png"))));
 
         }else{
-            religionR.setFill(new ImagePattern(new Image(new FileInputStream("F:\\Stronghold\\project-group-41\\src\\main\\java\\stronghold\\database\\Image\\yellowFace.png"))));
+            religionR.setFill(new ImagePattern(new Image(new FileInputStream("F:\\Stronghold\\project-group-41\\src\\main\\java\\stronghold\\database\\Image\\yellowFace.jpg"))));
 
         }
         if(GameMenuController.getFoodPopularity()>0){
@@ -78,7 +125,7 @@ public class sampleController {
             foodR.setFill(new ImagePattern(new Image(new FileInputStream("F:\\Stronghold\\project-group-41\\src\\main\\java\\stronghold\\database\\Image\\redFace.png"))));
 
         }else{
-            foodR.setFill(new ImagePattern(new Image(new FileInputStream("F:\\Stronghold\\project-group-41\\src\\main\\java\\stronghold\\database\\Image\\yellowFace.png"))));
+            foodR.setFill(new ImagePattern(new Image(new FileInputStream("F:\\Stronghold\\project-group-41\\src\\main\\java\\stronghold\\database\\Image\\yellowFace.jpg"))));
 
         }
 
@@ -97,7 +144,7 @@ public class sampleController {
             totalR.setFill(new ImagePattern(new Image(new FileInputStream("F:\\Stronghold\\project-group-41\\src\\main\\java\\stronghold\\database\\Image\\redFace.png"))));
 
         }else{
-            totalR.setFill(new ImagePattern(new Image(new FileInputStream("F:\\Stronghold\\project-group-41\\src\\main\\java\\stronghold\\database\\Image\\yellowFace.png"))));
+            totalR.setFill(new ImagePattern(new Image(new FileInputStream("F:\\Stronghold\\project-group-41\\src\\main\\java\\stronghold\\database\\Image\\yellowFace.jpg"))));
 
         }
 
@@ -389,9 +436,9 @@ public class sampleController {
 
 
     }
-    private static Label troopsLabel;
-    private static Label resourceLabel;
-    private static Label buildingsLabel;
+    private static Label troopsLabel=new Label();
+    private static Label resourceLabel=new Label();
+    private static Label buildingsLabel=new Label();
 
     public static String resource(){
         String s="";
@@ -424,6 +471,9 @@ public class sampleController {
         rectangle.setY(100);
         rectangle.setFill(new ImagePattern(new Image(new FileInputStream("F:\\Stronghold\\project-group-41\\src\\main\\java\\stronghold\\database\\Image\\back2.jpg"))));
         popup.getContent().add(rectangle);
+        Button back=new Button("Back");
+        popup.getContent().add(back);
+        back.setOnAction(actionEvent -> popup.hide());
         TextField food=new TextField();
         food.setPromptText("enter food rate");
         Button foodEnter=new Button("enter");
@@ -663,5 +713,58 @@ public class sampleController {
         popup.getContent().add(Exit);
 
 
+    }
+    public static void unitSelection(Stage stage){
+        Popup popup=new Popup();
+        popup.show(stage);
+        Rectangle rectangle = new Rectangle(400, 400);
+        popup.getContent().add(rectangle);
+        try {
+            rectangle.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/back2.jpg"))));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        Button back = new Button("Back");
+        popup.getContent().add(back);
+        back.setOnAction(actionEvent -> popup.hide());
+        TextField X=new TextField();
+        X.setPromptText("enter X");
+        X.setLayoutX(rectangle.getLayoutX()+20);
+        X.setLayoutY(rectangle.getLayoutY()+30);
+        TextField Y=new TextField();
+        Y.setPromptText("enter Y");
+        Y.setLayoutX(rectangle.getLayoutX()+210);
+        Y.setLayoutY(rectangle.getLayoutY()+30);
+        popup.getContent().add(X);
+        popup.getContent().add(Y);
+        Button setTexture=new Button("Select");
+        setTexture.setLayoutX(rectangle.getLayoutX()+170);
+        setTexture.setLayoutY(rectangle.getLayoutY()+70);
+        setTexture.setOnAction(actionEvent -> {
+            GameMenuController.getCurrentUnits().clear();
+            GameMenuController.setCurrentCell(Map.getInstanceMap().getMapCell(Integer.parseInt(X.getText()), Integer.parseInt(Y.getText())));
+            for (Unit unit : Map.getInstanceMap().getMapCell(20, 20).getUnits()) {
+                System.out.println(unit.getPeople().getRegex());
+            }
+
+            for (Unit unit : Map.getInstanceMap().getMapCell(Integer.parseInt(X.getText()), Integer.parseInt(Y.getText())).getUnits()) {
+                GameMenuController.getCurrentUnits().add(unit);
+
+            }
+            System.out.println("ASDfasdfasdfsafsdffsdfsdfsdfasdfasdfsdf");
+            for (Unit currentUnit : GameMenuController.getCurrentUnits()) {
+                System.out.println(currentUnit.getPeople().getRegex());
+            }
+        });
+        popup.getContent().add(setTexture);
+
+
+
+    }
+    public static void cure(){
+        for (MapCell cell : Map.getCells()) {
+            cell.setSick(false);
+        }
+        currentGovernment.setSick(0);
     }
 }

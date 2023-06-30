@@ -10,6 +10,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import stronghold.controller.GameMenuController;
 import stronghold.controller.sampleController;
@@ -40,11 +41,11 @@ public class CellModifierController {
     public void createUnitHandler(MouseEvent e){
         try {
             if (GameMenuController.createUnit(soldierText.getText(), Integer.parseInt(soldierNum.getText()))) {
-                Rectangle soldier = new Rectangle(CurrentBuildingPic.getX(), CurrentBuildingPic.getY(), 5, 5);
+                Circle soldier = new Circle(CurrentBuildingPic.getX(), CurrentBuildingPic.getY(),10 );
                 soldier.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/soldier/group.png"))));
                 soldier.toFront();
                 soldier.setVisible(true);
-                currentCell.getChildren().add(soldier);
+                currentCell.getChildren().add(1,soldier);
             }
         } catch (Exception ignored){
 

@@ -10,6 +10,7 @@ import stronghold.model.components.game.soldeirtype.UnarmedEnum;
 import java.util.ArrayList;
 
 public class MapCell {
+    private boolean isSick=false;
     private final int x;
     private final int y;
     private boolean isPassable;
@@ -22,6 +23,7 @@ public class MapCell {
     private Direction rockDirection;
     private Tree tree;
     private Tool tool;
+    private int onFire;
     public MapCell(int x,int y,Texture texture){
         this.x=x;
         this.y=y;
@@ -34,6 +36,24 @@ public class MapCell {
         this.hasTunnel=false;
         this.hasDitch=false;
         this.tool=null;
+        this.onFire=0;
+        this.isSick=false;
+    }
+
+    public void setSick(boolean sick) {
+        isSick = sick;
+    }
+
+    public boolean isSick() {
+        return isSick;
+    }
+
+    public int getOnFire() {
+        return onFire;
+    }
+
+    public void setOnFire(int onFire) {
+        this.onFire = onFire;
     }
 
     public Tool getTool() {

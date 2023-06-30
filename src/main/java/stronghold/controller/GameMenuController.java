@@ -1,9 +1,12 @@
 package stronghold.controller;
 
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import stronghold.model.components.game.*;
 
@@ -22,6 +25,7 @@ import stronghold.model.components.game.soldeirtype.*;
 import stronghold.view.*;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 import static stronghold.model.components.game.enums.Direction.RANDOM;
@@ -158,32 +162,7 @@ public class GameMenuController extends MenuController {
         }
         return null;
     }
-    static Image poker;
 
-    {
-        try {
-            poker = new Image(new FileInputStream("src/main/java/stronghold/database/Image/poker.png"));
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    {
-        try {
-            happy = new Image(new FileInputStream("src/main/java/stronghold/database/Image/happy.jpg"));
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    static Image sad;
-
-    {
-        try {
-            sad = new Image(new FileInputStream("src/main/java/stronghold/database/Image/sad.png"));
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     public static void nextPlayer() {
         System.out.println(currentPlayer.getColor());
@@ -199,15 +178,17 @@ public class GameMenuController extends MenuController {
             }
             sampleView.getCoin().setText(Double.toString(currentPlayer.getBalance()));
             sampleView.getPopulation().setText(Integer.toString(currentPlayer.getPopulation())+"/"+Integer.toString(currentPlayer.getPopulation()+10* currentPlayer.getColor()));
-            if(currentPlayer.getPopularity()>10){
-                sampleView.getPopularity().setImage(happy);
-            }else if(currentPlayer.getPopularity()< -10){
-                sampleView.getPopularity().setImage(sad);
-            }else{
-                sampleView.getPopularity().setImage(poker);
-            }
+            System.out.println(currentPlayer.getPopularity());
+
+
+            sampleView.getPopularity().toFront();
+
         } else {
             setallCurrentGovernments(getGovernmentByColor(currentPlayer.getColor() + 1));
+
+
+
+            sampleView.getPopularity().toFront();
             try {
                 sampleController.updateNodes();
             } catch (FileNotFoundException e) {
@@ -240,10 +221,33 @@ public class GameMenuController extends MenuController {
             populationLogic(currentPlayer);
             popularityLogic();
             currentPlayer.unitKiller();
+            unitKiller();
+
 
         }
+        fireLogic();
+        sicknessLogic();
 
 
+    }
+    public static void unitKiller(){
+        for (int i = 0; i <Map.getInstanceMap().getSize() ; i++) {
+            for (int j = 0; j < Map.getInstanceMap().getSize(); j++) {
+                ArrayList<Unit>alive=new ArrayList<>();
+                for (Unit unit : Map.getInstanceMap().getMapCell(i, j).getUnits()) {
+
+                    if(unit.getCount()>0){
+                        alive.add(unit);
+
+                    }
+                }
+                Map.getInstanceMap().getMapCell(i, j).getUnits().clear();
+                for (Unit unit : alive) {
+                    Map.getInstanceMap().getMapCell(i, j).getUnits().add(unit);
+                }
+
+            }
+        }
     }
 
     public static void showPopularityFactors() {
@@ -394,6 +398,7 @@ public class GameMenuController extends MenuController {
     }
 
     public static boolean createUnit(String type, int count) {
+
         if (currentBuilding == null){
             GameMenuView.output("selectBuilding");
             return false;
@@ -505,6 +510,10 @@ public class GameMenuController extends MenuController {
                 Map.getInstanceMap().getMapCell(getSelectedBuildingX(),getSelectedBuildingY()).getUnits().add(unit);
                 currentPlayer.setPopulation(currentPlayer.getPopulation()-count);
                 currentPlayer.getUnits().add(unit);
+                System.out.println(Map.getInstanceMap().getMapCell(getSelectedBuildingX(),getSelectedBuildingY()).getUnits().get(0).getPeople().getRegex());
+
+                System.out.println(getSelectedBuildingX()+ getSelectedBuildingY());
+
                 GameMenuView.output("success");
                 return true;
             }else{
@@ -620,11 +629,13 @@ public class GameMenuController extends MenuController {
         return currentUnits;
     }
 
-    public static void moveUnitTo(int X, int Y) {
+    public static void moveUnitTo(int X, int Y,Circle circle) {
+
         if ( !Map.getInstanceMap().getMapCell(X, Y).isPassable()) {
             GameMenuView.output("waterError");
         }
         else if(!NavigatorController.isAbleToNavigate(NavigatorController.mapPassable(),currentUnits.get(0).getX(),currentUnits.get(0).getY(),X,Y)){
+            System.out.println("fasdfasdfsf");
             GameMenuView.output("waterError");
         }else {
 
@@ -639,17 +650,27 @@ public class GameMenuController extends MenuController {
                     }
                 } else {
                     Map.getInstanceMap().getMapCell(X, Y).addUnit(unit);
+                    
                 }
 
             }
             Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(), currentUnits.get(0).getY()).getUnits().clear();
-            Circle circle=new Circle(5);
             circle.toFront();
-            circle.setCenterX(20*Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(),currentUnits.get(0).getY()).getX()+10);
-            circle.setCenterY(20*Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(),currentUnits.get(0).getY()).getY()+10);
-            sampleView.getMapCellNodeHashMap().get(Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(),currentUnits.get(0).getY())).toFront();
-            sampleView.getMapCellNodeHashMap().get(Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(),currentUnits.get(0).getY())).getChildren().add(circle);
+            //circle.setCenterX(20*Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(),currentUnits.get(0).getY()).getX()+10);
+            //circle.setCenterY(20*Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(),currentUnits.get(0).getY()).getY()+10);
+
+            System.out.println(Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(), currentUnits.get(0).getY()).getUnits());
+            System.out.println(Map.getInstanceMap().getMapCell(X,Y).getUnits().size());
+
+            //System.out.println(Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(), currentUnits.get(0).getY()).getUnits());
+            sampleView.getMapCellNodeHashMap().get(Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(),currentUnits.get(0).getY())).getChildren().remove(circle);
             NavigatorController.path(currentUnits.get(0).getX(),currentUnits.get(0).getY(),X,Y,NavigatorController.findShortestPath(NavigatorController.mapPassable(),currentUnits.get(0).getX(),currentUnits.get(0).getY(),X,Y,currentUnits.get(0).getPeople().getSpeed()*10),circle);
+            for (Unit currentUnit : currentUnits) {
+                currentUnit.setX(X);
+                currentUnit.setY(Y);
+            }
+            sampleView.getMapCellNodeHashMap().get(Map.getInstanceMap().getMapCell(X,Y)).getChildren().add(1,circle);
+
 
             GameMenuView.output("success");
         }
@@ -721,83 +742,196 @@ public class GameMenuController extends MenuController {
 
         GameMenuView.output("success");
     }
+    public static void fireLogic(){
+        for (int i = 0; i < Map.getInstanceMap().getSize(); i++) {
+            for (int j = 0; j < Map.getInstanceMap().getSize(); j++) {
+                if(Map.getInstanceMap().getMapCell(i,j).getOnFire()>0){
+                    if(Map.getInstanceMap().getMapCell(i,j).getBuilding()!=null){
+                        Map.getInstanceMap().getMapCell(i,j).getBuilding().setHealth(Map.getInstanceMap().getMapCell(i,j).getBuilding().getHealth()-100);
+                    }
+                    if(Map.getInstanceMap().getMapCell(i,j).getUnits().size()>0){
+                        for (Unit unit : Map.getInstanceMap().getMapCell(i, j).getUnits()) {
+                            unit.setCount(unit.getCount()-3);
+                        }
+                    }
+                    if(Map.getInstanceMap().getMapCell(i,j).getOnFire()==1){
 
-    public static void attackEnemy(int enemyX, int enemyY) {
+
+                            for (int k=sampleView.getMapCellNodeHashMap().get(Map.getInstanceMap().getMapCell(i,j)).getChildren().size(); k>=2;k--) {
+                                if(sampleView.getMapCellNodeHashMap().get(Map.getInstanceMap().getMapCell(i,j)).getChildren().get(k) instanceof  Circle){
+                                    sampleView.getMapCellNodeHashMap().get(Map.getInstanceMap().getMapCell(i,j)).getChildren().remove(k);
+                                    break;
+                                }
+
+                            }
+
+
+
+
+
+                    }
+                    Map.getInstanceMap().getMapCell(i,j).setOnFire(Map.getInstanceMap().getMapCell(i,j).getOnFire()-1);
+
+                }
+            }
+        }
+    }
+
+    public static void attackEnemy(int enemyX, int enemyY,boolean  fire) {
+        System.out.println(currentUnits.get(0).getX());
+        System.out.println(currentUnits.get(0).getY());
         //command: attack -e [enemy’s x] [enemy’
         //buildings attack
+        if(Map.getInstanceMap().getMapCell(enemyX, enemyY).getUnits().size()==0){
+            if (!currentUnits.get(0).isInRange(enemyX, enemyY)) {
+                GameMenuView.output("enemyBond");
+                return;
+            } else if (Map.getInstanceMap().getMapCell(enemyX, enemyY).getUnits().size() == 0 && Map.getInstanceMap().getMapCell(enemyX, enemyY).getBuilding() == null) {
+                GameMenuView.output("enemyError");
+                return;
 
-        if (!currentUnits.get(0).isInRange(enemyX, enemyY)) {
-            GameMenuView.output("enemyBond");
-            return;
-        } else if (Map.getInstanceMap().getMapCell(enemyX, enemyY).getUnits().size() == 0&&Map.getInstanceMap().getMapCell(enemyX, enemyY).getBuilding()==null) {
-            GameMenuView.output("enemyError");
-            return;
+            }
+            if(Map.getInstanceMap().getMapCell(enemyX, enemyY).getBuilding()!=null){
+                clear(enemyX, enemyY);
+                if(fire){
+                    Map.getInstanceMap().getMapCell(enemyX, enemyY).setOnFire(3);
+                    Circle soldier = new Circle(enemyX*20+10, enemyY*20+10,5 );
+                    try {
+                        soldier.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/fire.png"))));
+                    } catch (FileNotFoundException e) {
+                        throw new RuntimeException(e);
+                    }
+                    soldier.toFront();
+                    soldier.setVisible(true);
+                    sampleView.getMapCellNodeHashMap().get(Map.getInstanceMap().getMapCell(enemyX,enemyY)).getChildren().add(soldier);
+                }
 
-        } else if(Map.getInstanceMap().getMapCell(enemyX, enemyY).getUnits().get(0).getPeople().getOwner().equals(currentPlayer)){
-            GameMenuView.output("ally");
-            return;
-
+                GameMenuView.output("fightWin");
+            }
         }else {
-            int allyOffense = 0, allyDefense = 0, enemyOffense = 0, enemyDefense = 0;
-            for (Unit unit : currentUnits) {
-                allyOffense += unit.getPeople().getOffense() * unit.getCount();
-                allyDefense += unit.getPeople().getDefence() * unit.getCount();
-            }
-            for (Unit unit : Map.getInstanceMap().getMapCell(enemyX, enemyY).getUnits()) {
-                if (!unit.getPeople().getOwner().equals(currentPlayer)) {
-                    enemyOffense += unit.getPeople().getOffense() * unit.getCount();
-                    enemyOffense += unit.getPeople().getDefence() * unit.getCount();
-                }
 
-            }
-            if (Map.getInstanceMap().getMapCell(enemyX, enemyY).getBuilding() != null && Map.getInstanceMap().getMapCell(enemyX, enemyY).getBuilding() instanceof Castle) {
-                enemyOffense += ((Castle) Map.getInstanceMap().getMapCell(enemyX, enemyY).getBuilding()).getFireRange() * 10;
-            }
-            if (allyOffense == enemyDefense) {
+            if (!currentUnits.get(0).isInRange(enemyX, enemyY)) {
+                GameMenuView.output("enemyBond");
+                return;
+            } else if (Map.getInstanceMap().getMapCell(enemyX, enemyY).getUnits().size() == 0 && Map.getInstanceMap().getMapCell(enemyX, enemyY).getBuilding() == null) {
+                GameMenuView.output("enemyError");
+                return;
 
-                for (Unit unit : Map.getInstanceMap().getMapCell(enemyX, enemyY).getUnits()) {
-                    unit.setCount(0);
-                }
-                for (Unit unit : Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(), currentUnits.get(0).getY()).getUnits()) {
-                    unit.setCount(0);
-                }
-                if(Map.getInstanceMap().getMapCell(enemyX, enemyY).getBuilding()!=null){
-                    Map.getInstanceMap().getMapCell(enemyX, enemyY).getBuilding().setHealth(Map.getInstanceMap().getMapCell(enemyX, enemyY).getBuilding().getHealth()-allyOffense);
-
-                }
-
-                GameMenuView.output("fightLoss");
-                GameMenuView.output("fightWin");
-
-
-            } else if (allyOffense >= enemyDefense) {
-
-                for (Unit unit : Map.getInstanceMap().getMapCell(enemyX, enemyY).getUnits()) {
-                    unit.setCount(0);
-                }
-
-
-                if(Map.getInstanceMap().getMapCell(enemyX, enemyY).getBuilding()!=null){
-                    Map.getInstanceMap().getMapCell(enemyX, enemyY).getBuilding().setHealth(Map.getInstanceMap().getMapCell(enemyX, enemyY).getBuilding().getHealth()-allyOffense);
-
-                }
-                GameMenuView.output("fightWin");
-
+            } else if (Map.getInstanceMap().getMapCell(enemyX, enemyY).getUnits().get(0).getPeople().getOwner().equals(currentPlayer)) {
+                GameMenuView.output("ally");
+                return;
 
             } else {
-                for (Unit unit : Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(), currentUnits.get(0).getY()).getUnits()) {
-                    unit.setCount(0);
+                if(fire){
+                    Map.getInstanceMap().getMapCell(enemyX, enemyY).setOnFire(3);
+                    Circle soldier = new Circle(enemyX*20+10, enemyY*20+10,5 );
+                    try {
+                        soldier.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/fire.png"))));
+                    } catch (FileNotFoundException e) {
+                        throw new RuntimeException(e);
+                    }
+                    soldier.toFront();
+                    soldier.setVisible(true);
+                    sampleView.getMapCellNodeHashMap().get(Map.getInstanceMap().getMapCell(enemyX,enemyY)).getChildren().add(soldier);
                 }
-                GameMenuView.output("fightLoss");
 
+                try {
+                    sampleView.getAttackBanner().setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/attackingBanner.png"))));
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+                int allyOffense = 0, allyDefense = 0, enemyOffense = 0, enemyDefense = 0;
+                for (Unit unit : currentUnits) {
+                    allyOffense += unit.getPeople().getOffense() * unit.getCount();
+                    allyDefense += unit.getPeople().getDefence() * unit.getCount();
+                }
+                for (Unit unit : Map.getInstanceMap().getMapCell(enemyX, enemyY).getUnits()) {
+                    if (!unit.getPeople().getOwner().equals(currentPlayer)) {
+                        enemyOffense += unit.getPeople().getOffense() * unit.getCount();
+                        enemyOffense += unit.getPeople().getDefence() * unit.getCount();
+                    }
+
+                }
+                if (Map.getInstanceMap().getMapCell(enemyX, enemyY).getBuilding() != null && Map.getInstanceMap().getMapCell(enemyX, enemyY).getBuilding() instanceof Castle) {
+                    enemyOffense += ((Castle) Map.getInstanceMap().getMapCell(enemyX, enemyY).getBuilding()).getFireRange() * 10;
+                }
+                if (allyOffense == enemyDefense) {
+
+                    for (Unit unit : Map.getInstanceMap().getMapCell(enemyX, enemyY).getUnits()) {
+                        unit.setCount(0);
+                    }
+                    for (Unit unit : Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(), currentUnits.get(0).getY()).getUnits()) {
+                        unit.setCount(0);
+                    }
+                    if (Map.getInstanceMap().getMapCell(enemyX, enemyY).getBuilding() != null) {
+                        Map.getInstanceMap().getMapCell(enemyX, enemyY).getBuilding().setHealth(Map.getInstanceMap().getMapCell(enemyX, enemyY).getBuilding().getHealth() - allyOffense);
+
+                    }
+
+                    GameMenuView.output("fightLoss");
+                    GameMenuView.output("fightWin");
+
+
+                } else if (allyOffense >= enemyDefense) {
+
+                    for (Unit unit : Map.getInstanceMap().getMapCell(enemyX, enemyY).getUnits()) {
+                        unit.setCount(0);
+                    }
+
+
+                    if (Map.getInstanceMap().getMapCell(enemyX, enemyY).getBuilding() != null) {
+                        Map.getInstanceMap().getMapCell(enemyX, enemyY).getBuilding().setHealth(Map.getInstanceMap().getMapCell(enemyX, enemyY).getBuilding().getHealth() - allyOffense);
+
+                    }
+                    if(fire){
+                        Map.getInstanceMap().getMapCell(enemyX, enemyY).setOnFire(3);
+                        for (Node child : sampleView.getMapCellNodeHashMap().get(Map.getInstanceMap().getMapCell(enemyX, enemyY)).getChildren()) {
+                            if(child instanceof Rectangle){
+                                try {
+                                    ((Rectangle) child).setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/firedGrass.png"))));
+                                } catch (FileNotFoundException e) {
+                                    throw new RuntimeException(e);
+                                }
+                                break;
+                            }
+                        }
+                    }
+
+                    for (Node child : sampleView.getMapCellNodeHashMap().get(Map.getInstanceMap().getMapCell(enemyX, enemyY)).getChildren()) {
+                        if(child instanceof Circle){
+                            sampleView.getMapCellNodeHashMap().get(Map.getInstanceMap().getMapCell(enemyX, enemyY)).getChildren().remove(child);
+                            break;
+                        }
+                    }
+                    moveUnitTo(enemyX,enemyY,(Circle) sampleView.getMapCellNodeHashMap().get(Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(), currentUnits.get(0).getY())).getChildren().get(1));
+
+                    GameMenuView.output("fightWin");
+
+
+                } else {
+                    for (Unit unit : Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(), currentUnits.get(0).getY()).getUnits()) {
+                        unit.setCount(0);
+                    }
+                    moveUnitTo(enemyX,enemyY,(Circle) sampleView.getMapCellNodeHashMap().get(Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(), currentUnits.get(0).getY())).getChildren().get(1));
+
+                    for (Node child : sampleView.getMapCellNodeHashMap().get(Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(), currentUnits.get(0).getY())).getChildren()) {
+                        if(child instanceof Circle){
+                            sampleView.getMapCellNodeHashMap().get(Map.getInstanceMap().getMapCell(currentUnits.get(0).getX(), currentUnits.get(0).getY())).getChildren().remove(child);
+                            break;
+                        }
+                    }
+
+                    GameMenuView.output("fightLoss");
+
+
+                }
 
             }
-
         }
 
     }
 
-    public static void airAttack(int X, int Y) {
+    public static void airAttack(int X, int Y,boolean fire) {
         int longRanged = 0;
         if (Map.getInstanceMap().getMapCell(X, Y).getUnits().size() == 0) {
             if(Map.getInstanceMap().getMapCell(X,Y).getBuilding()!=null){
@@ -812,6 +946,19 @@ public class GameMenuController extends MenuController {
 
 
         }
+        if(fire){
+            Map.getInstanceMap().getMapCell(X, Y).setOnFire(3);
+            Circle soldier = new Circle(X*20+10, Y*20+10,5 );
+            try {
+                soldier.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/fire.png"))));
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+            soldier.toFront();
+            soldier.setVisible(true);
+            sampleView.getMapCellNodeHashMap().get(Map.getInstanceMap().getMapCell(X,Y)).getChildren().add(soldier);
+        }
+
         for (Unit unit : currentUnits) {
             if (unit.getPeople() instanceof LongRanged) {
                 if (((LongRanged) unit.getPeople()).getRange() < Math.abs(X - unit.getX()) || ((LongRanged) unit.getPeople()).getRange() < Math.abs(Y - unit.getY())) {
@@ -1044,6 +1191,11 @@ public class GameMenuController extends MenuController {
         Map.getInstanceMap().getMapCell(X, Y).setBuilding(null);
         Map.getInstanceMap().getMapCell(X, Y).setPassable(true);
         Map.getInstanceMap().getMapCell(X, Y).getUnits().clear();
+        Node node=sampleView.getMapCellNodeHashMap().get(Map.getInstanceMap().getMapCell(X, Y)).getChildren().get(0);
+        sampleView.getMapCellNodeHashMap().get(Map.getInstanceMap().getMapCell(X, Y)).getChildren().clear();
+        sampleView.getMapCellNodeHashMap().get(Map.getInstanceMap().getMapCell(X, Y)).getChildren().add(node);
+
+
         Map.getInstanceMap().getMapCell(X, Y).setRockDirection(null);
         Map.getInstanceMap().getMapCell(X, Y).setTree(null);
         try {
@@ -1098,7 +1250,7 @@ public class GameMenuController extends MenuController {
         }else {
             Map.getInstanceMap().getMapCell(X, Y).setTree(type);
             Map.getInstanceMap().getMapCell(X,Y).setPassable(false);
-            sampleView.getBackgroundTexture(X,Y).setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/tiles/tree.jpg"))));
+            sampleView.getBackgroundTexture(X,Y).setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/tree.png"))));
             GameMenuView.output("success");
         }
     }//
@@ -1251,6 +1403,7 @@ public class GameMenuController extends MenuController {
         }
         currentPlayer.setPopularity(currentPlayer.getPopularity() + (currentPlayer.getBuildingHash().get(DevelopmentType.CHURCH) * 2 + currentPlayer.getBuildingHash().get(DevelopmentType.CATHEDRAL) * 2));
         currentPlayer.setPopularity(currentPlayer.getPopularity() + currentPlayer.getFearRate());
+        currentPlayer.setPopularity(currentPlayer.getPopularity() - currentPlayer.getSick());
     }
 
     private static void foodLogic() {
@@ -1479,7 +1632,7 @@ public class GameMenuController extends MenuController {
         }else if(currentBuilding.getBuildingType().equals(CastleType.SMALL_STONE_GATEHOUSE) ||
                 currentBuilding.getBuildingType().equals(CastleType.BIG_STONE_GATEHOUSE) ) {
             Map.getInstanceMap().getMapCell(getSelectedBuildingX(), getSelectedBuildingY()).setPassable(true);
-            moveUnitTo(getSelectedBuildingX(), getSelectedBuildingY());
+            //moveUnitTo(getSelectedBuildingX(), getSelectedBuildingY());
             GameMenuView.output("Success");
         } else {
             GameMenuView.output("incorrectBuildingType");
@@ -1499,7 +1652,7 @@ public class GameMenuController extends MenuController {
                     }
                 }
             }
-            moveUnitTo(getSelectedBuildingX(), getSelectedBuildingY());
+           // moveUnitTo(getSelectedBuildingX(), getSelectedBuildingY());
             GameMenuView.output("Success");
         } else {
             GameMenuView.output("incorrectBuildingType");
@@ -1511,11 +1664,59 @@ public class GameMenuController extends MenuController {
             GameMenuView.output("wrongSoldierType");
         }else if (Map.getInstanceMap().getMapCell(X, Y).getTool().getName().equals("siegeTower")) {
             Map.getInstanceMap().getMapCell(X, Y).setPassable(true);
-            moveUnitTo(X, Y);
+          //  moveUnitTo(X, Y);
             GameMenuView.output("Success");
         } else {
             GameMenuView.output("incorrectBuildingType");
         }
+    }
+    public static void sicknessLogic(){
+        for (MapCell cell : Map.getCells()) {
+            if(cell.isSick()){
+                cell.getUnits().get(0).getPeople().getOwner().setSick(1);
+            }
+        }
+        ArrayList<MapCell> unitedMapCells=new ArrayList<>();
+        for (MapCell cell : Map.getCells()) {
+           if( cell.getUnits().size()>0){
+               unitedMapCells.add(cell);
+
+            }
+        }
+        Random random=new Random();
+        int index=random.nextInt(unitedMapCells.size());
+        if(unitedMapCells.get(index).isSick()==false){
+            unitedMapCells.get(index).setSick(true);
+
+
+            /*ImageView imageView= new ImageView();
+
+            try {
+                imageView.setImage(new Image(new FileInputStream("src/main/java/stronghold/database/Image/cross.png")));
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+            imageView.toFront();
+            imageView.setLayoutX(sampleView.getMapCellNodeHashMap().get(unitedMapCells.get(index)).getLayoutX());
+            imageView.setLayoutY(sampleView.getMapCellNodeHashMap().get(unitedMapCells.get(index)).getLayoutY());
+
+            sampleView.getMapCellNodeHashMap().get(unitedMapCells.get(index)).getChildren().add(imageView);*/
+            ////////////////////
+            Circle soldier = new Circle(unitedMapCells.get(index).getX()*20+10, unitedMapCells.get(index).getY()*20+10,5 );
+            try {
+                soldier.setFill(new ImagePattern(new Image(new FileInputStream("src/main/java/stronghold/database/Image/sick.png"))));
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+            soldier.toFront();
+            soldier.setVisible(true);
+
+            sampleView.getMapCellNodeHashMap().get(unitedMapCells.get(index)).getChildren().add(soldier);
+        }
+
+        GameMenuView.output("sick");
+        System.out.println("sicked");
+
     }
 
 

@@ -19,6 +19,54 @@ public class TradeHistoryMenu extends Application {
     public static Stage getStage() {
         return stage;
     }
+    public static Pane getTradeHistoryMenuPane(){
+        Pane root=new Pane();
+        Button button=new Button("Sended History");
+        button.setOnAction(actionEvent -> {
+            try {
+                Stage shopNewStage = new Stage();
+                shopNewStage.setScene(new Scene(
+                        SendTradeMenu.getSendedTradesPAne()));
+                shopNewStage.show();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+        button.setLayoutX(700);
+        button.setLayoutY(300);
+        Button button1=new Button("Received History");
+        button1.setLayoutX(800);
+        button1.setLayoutY(300);
+        button1.setOnAction(actionEvent -> {
+            try {
+                Stage shopNewStage = new Stage();
+                shopNewStage.setScene(new Scene(
+                        ReceivedTradeMenu
+                                .getReceivedTradesPAne()));
+                shopNewStage.show();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+        root.getChildren().add(button);
+        root.getChildren().add(button1);
+        Button back=new Button("back");
+        back.setLayoutX(750);
+        back.setLayoutY(330);
+        back.setOnAction(actionEvent -> {
+            try {
+              Stage  shopNewStage = new Stage();
+                shopNewStage.setScene(new Scene(
+                        TradeMenuView.getTradeMenuPane()));
+                shopNewStage.show();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+        root.getChildren().add(back);
+        return root;
+
+    }
 
     @Override
     public void start(Stage stage) throws Exception {
