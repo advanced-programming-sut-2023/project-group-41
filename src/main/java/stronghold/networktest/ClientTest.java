@@ -21,10 +21,14 @@ public class ClientTest {
                     IOException e) {
                 throw new RuntimeException(e);
             }
-            User user = new User("test","test","test","test",
-                    1,"test", "test");
+            try {
+                UsersDB.usersDB.fromJSON();
+            } catch (
+                    IOException e) {
+                throw new RuntimeException(e);
+            }
             while(true){
-                client.sendObjectToServer(user);
+                client.sendObjectToServer(UsersDB.usersDB);
             }
         }).start();
 

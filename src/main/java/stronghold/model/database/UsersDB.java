@@ -12,7 +12,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class UsersDB {
+public class UsersDB implements Serializable{
     private List<User> users;
     private final String pathToUsersDBJsonFile = "src/main/java/stronghold/database/datasets/users.json";
 

@@ -1,5 +1,6 @@
 package stronghold;
 
+import stronghold.model.database.UsersDB;
 import stronghold.model.utils.network.seth.Host;
 import stronghold.model.utils.network.seth.Client;
 import stronghold.networktest.ClientTest;

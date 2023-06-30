@@ -120,6 +120,10 @@ public class Host extends NetworkNode {
         outputStream.writeObject(object);
     }
 
+    public ArrayList<Socket> getClientSockets() {
+        return clientSockets;
+    }
+
     public Object receiveObjectFromClient(Socket socket) throws IOException, ClassNotFoundException {
         ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
         Object receivedObject = objectInputStream.readObject();
