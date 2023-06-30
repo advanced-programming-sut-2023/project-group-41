@@ -3,6 +3,7 @@ package stronghold.model.components.chatrooms;
 import stronghold.model.components.general.User;
 import stronghold.model.database.RoomsDB;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashMap;
 
@@ -26,7 +27,12 @@ public class Message implements Serializable {
         this.room = room;
         this.user = user;
         this.text = text;
-        room.addMessage(this);
+        try {
+            room.addMessage(this);
+        } catch (
+                IOException e) {
+            throw new RuntimeException(e);
+        }
         this.date = date;
         RoomsDB.getInstance().update();
     }

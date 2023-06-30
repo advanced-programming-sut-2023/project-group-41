@@ -24,13 +24,9 @@ public class ClientTest {
                     IOException e) {
                 throw new RuntimeException(e);
             }
-            ArrayList<Object> creds1 = new ArrayList<>();
-            creds1.addAll(List.of(new String[]{"anakin", "giiggg"}));
-            ArrayList<Object> creds2 = new ArrayList<>();
-            creds2.addAll(List.of(new String[]{"skywalker", "An@k1n"}));
 
-            RequestObject requestObject1 = new RequestObject("authenticate", creds1);
-            RequestObject requestObject2 = new RequestObject("authenticate", creds2);
+            RequestObject requestObject1 = new RequestObject("authenticate", "anakin", "gioiiiigg");
+            RequestObject requestObject2 = new RequestObject("authenticate", "skywalker", "An@k1n");
 
             client.sendObjectToServer(requestObject1);
             try {

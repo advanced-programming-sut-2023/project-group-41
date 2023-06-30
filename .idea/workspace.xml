@@ -7,15 +7,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="72fd4c0e-f2c3-4e13-85b9-d70f04a31b27" name="Changes" comment="added read thread to Client">
-      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/authenticator/AuthenticatorServer.java" afterDir="false" />
+    <list default="true" id="72fd4c0e-f2c3-4e13-85b9-d70f04a31b27" name="Changes" comment="Created AuthenticatorServer">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/stronghold_jar/stronghold.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/stronghold_jar/stronghold.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/controller/graphical/ChatMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/controller/graphical/ChatMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/components/chatrooms/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/components/chatrooms/Message.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/components/chatrooms/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/components/chatrooms/Room.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/database/RoomsDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/database/RoomsDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/authenticator/AuthenticatorServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/authenticator/AuthenticatorServer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/seth/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/seth/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/seth/Host.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/seth/Host.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/seth/NetworkNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/seth/NetworkNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/networktest/ClientTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/networktest/ClientTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/networktest/HostTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/networktest/HostTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/seth/RequestObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/seth/RequestObject.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -346,7 +347,14 @@
       <option name="project" value="LOCAL" />
       <updated>1688144853372</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Created AuthenticatorServer">
+      <created>1688150276337</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1688150276337</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -400,7 +408,8 @@
     <MESSAGE value="added network test for register view" />
     <MESSAGE value="fixed network test for register view" />
     <MESSAGE value="added read thread to Client" />
-    <option name="LAST_COMMIT_MESSAGE" value="added read thread to Client" />
+    <MESSAGE value="Created AuthenticatorServer" />
+    <option name="LAST_COMMIT_MESSAGE" value="Created AuthenticatorServer" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/stronghold$SignUpMenuControllerTest_testAll.ic" NAME="SignUpMenuControllerTest.testAll Coverage Results" MODIFIED="1684827485987" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

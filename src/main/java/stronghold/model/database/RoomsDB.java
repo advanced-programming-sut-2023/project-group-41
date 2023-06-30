@@ -23,13 +23,24 @@ public class RoomsDB implements Serializable {
                 FileInputStream fileInputStream = new FileInputStream(path);
                 ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)
         ){
-                rooms = (ArrayList<Room>) objectInputStream.readObject();
+            rooms = (ArrayList<Room>) objectInputStream.readObject();
         } catch (Exception e) {
             rooms = new ArrayList<>();
             List<User> allUsers = UsersDB.usersDB.getUsers();
-            Room pubicChat = new Room(null, "publicRoom");
+            Room pubicChat = null;
+            try {
+                pubicChat = new Room(null, "publicRoom");
+            } catch (
+                    IOException ex) {
+                throw new RuntimeException(ex);
+            }
             for (User user : allUsers) {
-                pubicChat.addUser(user);
+                try {
+                    pubicChat.addUser(user);
+                } catch (
+                        IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
             rooms.add(pubicChat);
         }

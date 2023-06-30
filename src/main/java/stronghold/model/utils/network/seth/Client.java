@@ -35,26 +35,18 @@ public class Client extends NetworkNode {
             while (true) {
                 try {
                     Object object = recieveObjectFromHost();
-                    if(object != null){
-                        if(!socket.isClosed()){
-                            Request request = new Request(object, socket);
-                            if(object instanceof String){
-                                handleReceivedMessages.accept(request);
-                            }
-                            else {
-                                handleReceivedObjects.accept(request);
-                            }
+                    if (object != null) {
+                        Request request = new Request(object, socket);
+                        if (object instanceof String) {
+                            handleReceivedMessages.accept(request);
+                        } else {
+                            handleReceivedObjects.accept(request);
                         }
+
                     }
                 } catch (
                         Exception ignore) {
 
-                }
-                try {
-                    Thread.sleep(30);
-                } catch (
-                        InterruptedException e) {
-                    throw new RuntimeException(e);
                 }
             }
         });

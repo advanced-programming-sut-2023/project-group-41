@@ -21,6 +21,7 @@ import stronghold.model.components.general.User;
 import stronghold.model.database.RoomsDB;
 import stronghold.model.database.UsersDB;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -200,8 +201,14 @@ public class ChatMenuController {
     }
 
 
-    public void addRoomHandler(ActionEvent actionEvent) {
-        Room room = new Room(user, roomNameTextField.getText());
+    public void addRoomHandler(ActionEvent actionEvent){
+        Room room = null;
+        try {
+            room = new Room(user, roomNameTextField.getText());
+        } catch (
+                IOException e) {
+            throw new RuntimeException(e);
+        }
         roomNamesVBox.getChildren().add(makeRoomNameLabel(room));
     }
 
@@ -212,10 +219,16 @@ public class ChatMenuController {
         messagesVBox.getChildren().add(makeMessageHBox(message));
     }
 
-    public void addNewUserHandler(ActionEvent actionEvent) {
+    public void addNewUserHandler(ActionEvent actionEvent){
         User newUser;
-        if ((newUser = UsersDB.usersDB.getUserByUsername(newUserTextField.getText())) != null)
-            currRoom.addUser(newUser);
+        if ((newUser = UsersDB.usersDB.getUserByUsername(newUserTextField.getText())) != null) {
+            try {
+                currRoom.addUser(newUser);
+            } catch (
+                    IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
 }

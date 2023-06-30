@@ -6,9 +6,9 @@ import java.util.Objects;
 
 public class RequestObject implements Serializable {
     private String serialCode;
-    private ArrayList<Object> args;
+    private Object[] args;
 
-    public RequestObject(String serialCode, ArrayList<Object> args) {
+    public RequestObject(String serialCode, Object... args) {
         this.serialCode = serialCode;
         this.args = args;
     }
@@ -21,11 +21,11 @@ public class RequestObject implements Serializable {
         this.serialCode = serialCode;
     }
 
-    public ArrayList<Object> getArgs() {
+    public Object[] getArgs() {
         return args;
     }
 
-    public void setArgs(ArrayList<Object> args) {
+    public void setArgs(Object... args) {
         this.args = args;
     }
 }

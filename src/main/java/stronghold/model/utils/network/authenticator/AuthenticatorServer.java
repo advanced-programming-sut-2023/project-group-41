@@ -35,11 +35,11 @@ public class AuthenticatorServer {
                 RequestObject requestObject = (RequestObject) object;
 
                 String requestString = requestObject.getSerialCode();
-                ArrayList<Object> requestList = requestObject.getArgs();
+                Object[] requestList = requestObject.getArgs();
 
                 if(requestString.equals("authenticate")){
-                    String username = (String) requestList.get(0);
-                    String password = (String) requestList.get(1);
+                    String username = (String) requestList[0];
+                    String password = (String) requestList[1];
 
                     System.out.println(username + "\t" + password);
                     
@@ -50,6 +50,7 @@ public class AuthenticatorServer {
                             host.sendMessageToClient(sender, "OK");
                         } catch (
                                 IOException e) {
+
                             throw new RuntimeException(e);
                         }
                     }
@@ -58,6 +59,7 @@ public class AuthenticatorServer {
                             host.sendMessageToClient(sender, "NOTOK");
                         } catch (
                                 IOException e) {
+
                             throw new RuntimeException(e);
                         }
                     }
