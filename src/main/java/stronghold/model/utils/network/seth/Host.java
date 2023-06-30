@@ -17,20 +17,20 @@ public class Host extends NetworkNode {
     private Thread lighthouseThread;
     private Thread readThread;
 
-    private Consumer<Object> handleReceivedObjects;
-    private Consumer<String> handleReceivedMessages;
+    private Consumer<Request> handleReceivedObjects;
+    private Consumer<Request> handleReceivedMessages;
 
     private ArrayList<Socket> clientSockets;
 
     public Host(boolean initLighthouseThread) throws IOException {
         this.serverSocket = new ServerSocket(DEFAULT_PORT);
 
-        this.handleReceivedMessages = (String str) -> {
-            System.out.println(str);
+        this.handleReceivedMessages = (Request message) -> {
+            System.out.println(message.receivedObject);
             return;
         };
-        this.handleReceivedObjects = (Object obj) -> {
-            System.out.println(obj.toString());
+        this.handleReceivedObjects = (Request obj) -> {
+            System.out.println(obj.receivedObject.toString());
             return;
         };
 
@@ -54,12 +54,13 @@ public class Host extends NetworkNode {
                 for (Socket socket : currentClients) {
                     try {
                         Object received = receiveObjectFromClient(socket);
+                        Request request = new Request(received, socket);
                         if(!socket.isClosed()){
                             if(received instanceof String){
-                                handleReceivedMessages.accept((String) received);
+                                handleReceivedMessages.accept(request);
                             }
                             else {
-                                handleReceivedObjects.accept(received);
+                                handleReceivedObjects.accept(request);
                             }
                         }
                     } catch (
@@ -84,11 +85,11 @@ public class Host extends NetworkNode {
         return serverSocket;
     }
 
-    public void setHandleReceivedObjects(Consumer<Object> handleReceivedObjects) {
+    public void setHandleReceivedObjects(Consumer<Request> handleReceivedObjects) {
         this.handleReceivedObjects = handleReceivedObjects;
     }
 
-    public void setHandleReceivedMessages(Consumer<String> handleReceivedMessages) {
+    public void setHandleReceivedMessages(Consumer<Request> handleReceivedMessages) {
         this.handleReceivedMessages = handleReceivedMessages;
     }
 

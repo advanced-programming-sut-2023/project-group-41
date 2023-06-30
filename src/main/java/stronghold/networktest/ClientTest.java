@@ -22,9 +22,15 @@ public class ClientTest {
                     IOException e) {
                 throw new RuntimeException(e);
             }
-            RegisterView registerView = new RegisterView();
+            try {
+                UsersDB.usersDB.fromJSON();
+            } catch (
+                    IOException e) {
+                throw new RuntimeException(e);
+            }
+
             while(true){
-                client.sendObjectToServer(registerView);
+                client.sendObjectToServer(UsersDB.usersDB.getAtIndex(1));
             }
         }).start();
 
