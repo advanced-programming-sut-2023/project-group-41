@@ -8,14 +8,9 @@ import stronghold.model.utils.network.seth.Host;
 import java.io.IOException;
 import java.net.Socket;
 
-public class HostTest extends Application {
+public class HostTest {
 
-    @Override
-    public void start(Stage primaryStage){
-        System.out.println("KHIAR");
-
-    }
-    public static void main(String[] args) throws IOException {
+public static void main(String[] args) throws IOException {
         Host host = new Host();
 
         host.setHandleReceivedObjects(request -> {
@@ -35,4 +30,6 @@ public class HostTest extends Application {
             }
         });
     }
+
+
 }

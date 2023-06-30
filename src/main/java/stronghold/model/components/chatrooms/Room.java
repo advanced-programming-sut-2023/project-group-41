@@ -18,7 +18,6 @@ public class Room implements Serializable {
             RoomsDB.getInstance().addRoom(this);
             RoomsDB.getInstance().update();
         }
-
     }
 
     public ArrayList<User> getUsers() {

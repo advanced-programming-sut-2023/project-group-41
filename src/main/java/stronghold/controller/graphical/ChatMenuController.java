@@ -42,7 +42,7 @@ public class ChatMenuController {
         for (Room room : rooms) {
             roomNamesVBox.getChildren().add(makeRoomNameLabel(room));
         }
-        roomNamesVBox.getChildren().add(makeRoomNameLabel(RoomsDB.getInstance().getPubicChat()));
+        currRoom = RoomsDB.getInstance().getPubicChat();
     }
 
     public static User getUser() {

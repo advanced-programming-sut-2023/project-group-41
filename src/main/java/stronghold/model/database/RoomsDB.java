@@ -10,10 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RoomsDB implements Serializable {
-    private Room pubicChat;
     private ArrayList<Room> rooms;
     private static RoomsDB instanceRoomsDB = new RoomsDB();
-    private String path = "src/main/java/stronghold/database/datasets/chats.ser";
+    private final String path = "src/main/java/stronghold/database/datasets/chats.ser";
 
     public static RoomsDB getInstance() {
         return instanceRoomsDB;
@@ -22,25 +21,17 @@ public class RoomsDB implements Serializable {
     private RoomsDB(){
         try (
                 FileInputStream fileInputStream = new FileInputStream(path);
-                ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-                ){
-            try {
-                instanceRoomsDB = (RoomsDB) objectInputStream.readObject();
-            } catch (IOException e) {
-                System.out.println("dd");
-                throw new RuntimeException(e);
-            } catch (ClassNotFoundException e) {
-                System.out.println("psdca");
-                throw new RuntimeException(e);
-            }
+                ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)
+        ){
+                rooms = (ArrayList<Room>) objectInputStream.readObject();
         } catch (Exception e) {
-            System.out.println("error in file input");
             rooms = new ArrayList<>();
             List<User> allUsers = UsersDB.usersDB.getUsers();
-            pubicChat = new Room(null, "publicRoom");
+            Room pubicChat = new Room(null, "publicRoom");
             for (User user : allUsers) {
                 pubicChat.addUser(user);
             }
+            rooms.add(pubicChat);
         }
     }
 
@@ -49,7 +40,7 @@ public class RoomsDB implements Serializable {
     }
 
     public Room getPubicChat() {
-        return pubicChat;
+        return rooms.get(0);
     }
 
     public ArrayList<Room> getRooms() {
@@ -58,25 +49,22 @@ public class RoomsDB implements Serializable {
 
     public ArrayList<Room> getUserRooms(User user) {
         ArrayList<Room> userRooms = new ArrayList<>();
-        for (Room room : instanceRoomsDB.getRooms()) {
+        for (Room room : rooms) {
             if (room.getUsers().contains(user))
                 userRooms.add(room);
         }
         return userRooms;
     }
 
-    public void update(){
+    public void update() throws IOException {
         try (
-                FileOutputStream fileOutputStream = new FileOutputStream(path);
-                ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);){
-            objectOutputStream.writeObject(instanceRoomsDB);
-        } catch (Exception e){
-            System.out.println("error in file output");
+
+                FileOutputStream fileOutputStream = new FileOutputStream(path, false);
+                ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)){
+            objectOutputStream.writeObject(rooms);
         }
 
     }
 
-    public static void main(String[] args) {
-        System.out.println(RoomsDB.getInstance().getRooms().get(0).getName());
-    }
+
 }
