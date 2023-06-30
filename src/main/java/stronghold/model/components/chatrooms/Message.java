@@ -1,10 +1,12 @@
 package stronghold.model.components.chatrooms;
 
 import stronghold.model.components.general.User;
+import stronghold.model.database.RoomsDB;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class Message {
+public class Message implements Serializable {
     Room room;
     User user;
     String text;
@@ -26,6 +28,7 @@ public class Message {
         this.text = text;
         room.addMessage(this);
         this.date = date;
+        RoomsDB.getInstance().update();
     }
 
     public Room getRoom() {
@@ -34,6 +37,7 @@ public class Message {
 
     public void setRoom(Room room) {
         this.room = room;
+        RoomsDB.getInstance().update();
     }
 
     public User getUser() {
@@ -42,6 +46,7 @@ public class Message {
 
     public void setUser(User user) {
         this.user = user;
+        RoomsDB.getInstance().update();
     }
 
     public String getText() {
@@ -50,6 +55,7 @@ public class Message {
 
     public void setText(String text) {
         this.text = text;
+        RoomsDB.getInstance().update();
     }
 
     public HashMap<Reaction, Integer> getReactions() {
@@ -58,6 +64,7 @@ public class Message {
 
     public void incReactionByOne(Reaction reaction) {
         reactions.put(reaction, reactions.get(reaction) + 1);
+        RoomsDB.getInstance().update();
     }
 
     public int getReaction(Reaction reaction) {
@@ -69,10 +76,11 @@ public class Message {
     }
 
     public void setDate(String date) {
-        this.date = date;
+        this.date = date;RoomsDB.getInstance().update();
     }
 
     public void del(){
         room.getMessages().remove(this);
+        RoomsDB.getInstance().update();
     }
 }

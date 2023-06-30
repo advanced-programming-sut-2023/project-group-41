@@ -1,5 +1,7 @@
 package stronghold.model.components.chatrooms;
 
-public enum Reaction {
+import java.io.Serializable;
+
+public enum Reaction implements Serializable {
     LAUGH, PEE, HEART;
 }
