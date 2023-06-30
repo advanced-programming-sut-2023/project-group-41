@@ -7,11 +7,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="72fd4c0e-f2c3-4e13-85b9-d70f04a31b27" name="Changes" comment="added test for users db">
+    <list default="true" id="72fd4c0e-f2c3-4e13-85b9-d70f04a31b27" name="Changes" comment="fixed network test for register view">
+      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/seth/Request.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/seth/RequestObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/stronghold_jar/stronghold.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/stronghold_jar/stronghold.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/seth/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/seth/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/seth/Host.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/seth/Host.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/networktest/ClientTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/networktest/ClientTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/networktest/HostTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/networktest/HostTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/view/graphics/RegisterView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/view/graphics/RegisterView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +86,7 @@
       <recent name="stronghold.controller" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ClientTest">
+  <component name="RunManager" selected="Application.MainNetTest">
     <configuration name="ClientTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="stronghold.networktest.ClientTest" />
       <module name="stronghold" />
@@ -171,8 +175,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ClientTest" />
         <item itemvalue="Application.MainNetTest" />
+        <item itemvalue="Application.ClientTest" />
         <item itemvalue="Application.sampleView" />
         <item itemvalue="Application.HostTest" />
         <item itemvalue="Application.SearchPlayerView" />
@@ -321,7 +325,21 @@
       <option name="project" value="LOCAL" />
       <updated>1688127007841</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="added network test for register view">
+      <created>1688127331803</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1688127331803</updated>
+    </task>
+    <task id="LOCAL-00020" summary="fixed network test for register view">
+      <created>1688127464653</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1688127464653</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -372,7 +390,9 @@
     <MESSAGE value="fixed sync LAN connection and Object transfer issues." />
     <MESSAGE value="rewired object transfer methods and consumers." />
     <MESSAGE value="added test for users db" />
-    <option name="LAST_COMMIT_MESSAGE" value="added test for users db" />
+    <MESSAGE value="added network test for register view" />
+    <MESSAGE value="fixed network test for register view" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed network test for register view" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/stronghold$SignUpMenuControllerTest_testAll.ic" NAME="SignUpMenuControllerTest.testAll Coverage Results" MODIFIED="1684827485987" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
