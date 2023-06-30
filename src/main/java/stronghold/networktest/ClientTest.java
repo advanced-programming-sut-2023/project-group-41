@@ -7,6 +7,7 @@ import stronghold.model.database.UsersDB;
 import stronghold.model.utils.network.seth.Client;
 import stronghold.model.utils.network.seth.Host;
 import stronghold.model.utils.network.seth.NetworkNode;
+import stronghold.view.graphics.RegisterView;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,14 +22,9 @@ public class ClientTest {
                     IOException e) {
                 throw new RuntimeException(e);
             }
-            try {
-                UsersDB.usersDB.fromJSON();
-            } catch (
-                    IOException e) {
-                throw new RuntimeException(e);
-            }
+            RegisterView registerView = new RegisterView();
             while(true){
-                client.sendObjectToServer(UsersDB.usersDB);
+                client.sendObjectToServer(registerView);
             }
         }).start();
 

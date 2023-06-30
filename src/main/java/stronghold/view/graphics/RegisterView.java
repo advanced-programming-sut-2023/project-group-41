@@ -11,9 +11,10 @@ import javafx.stage.Stage;
 import stronghold.controller.SignUpMenuController;
 import stronghold.controller.graphical.RegisterController;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class RegisterView extends Application {
+public class RegisterView extends Application implements Serializable {
     public static void main(String[] args) {
         launch(args);
     }
