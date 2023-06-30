@@ -24,11 +24,11 @@ public class Client extends NetworkNode {
 
 
         this.handleReceivedMessages = (Request message) -> {
-            System.out.println(message.receivedObject);
+            System.out.println(message.receivedObject.toString());
             return;
         };
         this.handleReceivedObjects = (Request obj) -> {
-            System.out.println(obj.receivedObject.toString());
+            System.out.println(obj.receivedObject);
             return;
         };
         this.readThread = new Thread(() -> {

@@ -26,7 +26,7 @@ public class Host extends NetworkNode {
         this.serverSocket = new ServerSocket(DEFAULT_PORT);
 
         this.handleReceivedMessages = (Request message) -> {
-            System.out.println(message.receivedObject);
+            System.out.println(message.receivedObject.toString());
             return;
         };
         this.handleReceivedObjects = (Request obj) -> {
