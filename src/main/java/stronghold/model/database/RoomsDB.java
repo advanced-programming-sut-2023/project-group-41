@@ -56,12 +56,14 @@ public class RoomsDB implements Serializable {
         return userRooms;
     }
 
-    public void update() throws IOException {
+    public void update() {
         try (
 
                 FileOutputStream fileOutputStream = new FileOutputStream(path, false);
                 ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)){
             objectOutputStream.writeObject(rooms);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
 
     }
