@@ -42,6 +42,7 @@ public class Message implements Serializable {
         this.room = null;
         this.user = user;
         this.text = text;
+        this.date = date;
     }
 
     public Room getRoom() {

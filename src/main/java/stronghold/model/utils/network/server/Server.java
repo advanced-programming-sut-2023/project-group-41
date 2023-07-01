@@ -229,7 +229,15 @@ public class Server {
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
-                }else if(requestString.equals("createANewLobbyGame")){
+                }
+                else if (requestString.equals("getSortedUsers")) {
+                    try {
+                        host.sendObjectToClient(sender, UsersDB.usersDB.sortByScore());
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                else if(requestString.equals("createANewLobbyGame")){
                     Game game=new Game((String) requestList[0],(Integer)requestList[1],(boolean) requestList[2],(User) requestList[3]);
                     try {
                         host.sendObjectToClient(sender,game);

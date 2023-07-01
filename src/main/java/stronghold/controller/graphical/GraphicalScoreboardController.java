@@ -17,14 +17,18 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import stronghold.model.components.general.User;
 import stronghold.model.database.UsersDB;
+import stronghold.model.utils.network.server.StaticClient;
+import stronghold.model.utils.network.seth.Client;
+import stronghold.model.utils.network.seth.RequestObject;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
 public class GraphicalScoreboardController {
+    private Client client;
     private static User user;
-    private static List<User> userList = UsersDB.usersDB.sortByScore();
+    private static List<User> list = null;
     private static int rankEndingIdx = 10;
     public VBox playersVBox;
     public HBox userHbox;
@@ -39,7 +43,7 @@ public class GraphicalScoreboardController {
         hBox.setSpacing(40);
         hBox.setPadding(new Insets(10));
 
-        Label rank = new Label(String.valueOf(userList.indexOf(user1) + 1));
+        Label rank = new Label(String.valueOf(list.indexOf(user1) + 1));
         rank.setPrefSize(42, 52);
 
         Label username = new Label(user1.getUsername());
@@ -73,9 +77,18 @@ public class GraphicalScoreboardController {
     }
 
     @FXML
-    public void initialize(){
+    public void initialize() throws IOException {
+        StaticClient staticClient = new StaticClient();
+        client = staticClient.getClient();
+        RequestObject requestObject = new RequestObject("getSortedUsers");
+        client.sendObjectToServer(requestObject);
+        try {
+            list = (List<User>) client.recieveObjectFromHost();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
         userHbox.getChildren().add(makeUserHBox(user));
-        List<User> list = UsersDB.usersDB.sortByScore();
         if (rankEndingIdx > list.size())
             rankEndingIdx = list.size();
 
@@ -88,7 +101,6 @@ public class GraphicalScoreboardController {
 
 
     public void finishedScrollHandler(ScrollEvent scrollEvent) {
-        List<User> list = UsersDB.usersDB.sortByScore();
         if (rankEndingIdx + 10 > list.size())
             rankEndingIdx = list.size();
         else
