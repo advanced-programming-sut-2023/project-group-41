@@ -193,14 +193,14 @@ public class LobbyExample extends Application {
         // Show UI
 
 
-        //root.getChildren().add(gridPane2);
+        root.getChildren().add(gridPane2);
         //System.out.println(gridPane2.get());
         gridPane2.setPrefWidth(400);
         System.out.println(gridPane2.getWidth());
 
 
 
-        stage.setScene(new Scene(gridPane2, 600, 400));
+        stage.setScene(new Scene(root, 600, 400));
         stage.show();
     }
     /**
