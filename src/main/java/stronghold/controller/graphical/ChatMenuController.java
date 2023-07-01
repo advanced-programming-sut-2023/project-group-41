@@ -8,6 +8,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -44,11 +45,11 @@ public class ChatMenuController {
 
     @FXML
     public void initialize() throws IOException, ClassNotFoundException {
-        RequestObject requestObject = new RequestObject("getUserRoom",user);
+        RequestObject requestObject = new RequestObject("getUserRoom",user.getUsername());
         StaticClient staticClient = new StaticClient();
         client = staticClient.getClient();
-        staticClient.getClient().sendObjectToServer(requestObject);
-        ArrayList<Room> rooms = (ArrayList<Room>) staticClient.getClient().recieveObjectFromHost();
+        client.sendObjectToServer(requestObject);
+        ArrayList<Room> rooms = (ArrayList<Room>) client.recieveObjectFromHost();
         for (Room room : rooms) {
             roomNamesVBox.getChildren().add(makeRoomNameLabel(room));
         }
@@ -69,8 +70,16 @@ public class ChatMenuController {
         label.setOnMouseClicked(mouseEvent -> {
             currRoom = room;
             messagesVBox.getChildren().clear();
-            for (Message message : room.getMessages()) {
-                messagesVBox.getChildren().add(makeMessageHBox(message));
+            RequestObject requestObject = new RequestObject("getRoomMessages", room);
+            client.sendObjectToServer(requestObject);
+            try {
+                for (Message message : (ArrayList<Message>) client.recieveObjectFromHost()) {
+                    messagesVBox.getChildren().add(makeMessageHBox(message));
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
             }
         });
         return label;
@@ -101,7 +110,7 @@ public class ChatMenuController {
         rootHBox.setPrefWidth(358.0);
         rootHBox.setStyle("-fx-border-color: Gray; -fx-border-width: 2; -fx-border-radius: 30;");
 
-        userAvatar = new ImageView();// todo: add user avatar
+        userAvatar = new ImageView();
         userAvatar.setFitHeight(50.0);
         userAvatar.setFitWidth(50.0);
         userAvatar.setPickOnBounds(true);
@@ -144,7 +153,6 @@ public class ChatMenuController {
 
         hideLabel = new Label();
         hideLabel.setOnMouseClicked(event -> {
-            //todo: handel hide message
             messagesVBox.getChildren().remove(rootHBox);
         });
         hideLabel.setStyle("-fx-border-color: gray;");
@@ -217,6 +225,9 @@ public class ChatMenuController {
         messageStateCircle.setRadius(12.0);
         messageStateCircle.setStrokeType(javafx.scene.shape.StrokeType.INSIDE);
         messageStateCircle.setStroke(javafx.scene.paint.Color.BLACK);
+        if(message.getSendMessage()){
+            messageStateCircle.setFill(Color.BLUE);
+        }
         HBox.setMargin(messageStateCircle, new Insets(12.0, 0.0, 12.0, 0.0));
 
         rootHBox.getChildren().addAll(userAvatar, userVBox, messageTextField,vbox2 ,emojiVBox, otherVBox, messageStateCircle);
@@ -227,7 +238,7 @@ public class ChatMenuController {
 
 
     public void addRoomHandler(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
-        RequestObject requestObject = new RequestObject("createRoom", user, roomNameTextField.getText());
+        RequestObject requestObject = new RequestObject("createRoom", user.getUsername(), roomNameTextField.getText());
         client.sendObjectToServer(requestObject);
         Room room = (Room) client.recieveObjectFromHost();
         roomNamesVBox.getChildren().add(makeRoomNameLabel(room));
@@ -236,10 +247,11 @@ public class ChatMenuController {
     public void sendMessageHandler(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
         SimpleDateFormat formatDate = new SimpleDateFormat("HH:mm");
         Date date = new Date();
-        RequestObject requestObject = new RequestObject("createMessage", currRoom, user, messageTestField.getText(), formatDate.format(date));
+        HBox nullMessageHBox = makeMessageHBox(new Message(user, messageTestField.getText(), formatDate.format(date)));
+        messagesVBox.getChildren().add(nullMessageHBox);
+        RequestObject requestObject = new RequestObject("createMessage", currRoom, user.getUsername(), messageTestField.getText(), formatDate.format(date));
         client.sendObjectToServer(requestObject);
         Message message = (Message) client.recieveObjectFromHost();
-        messagesVBox.getChildren().add(makeMessageHBox(message));
     }
 
     public void addNewUserHandler(ActionEvent actionEvent){
@@ -248,15 +260,35 @@ public class ChatMenuController {
         client.recieveMessgeFromHost();
     }
 
-//    public static void update(ArrayList<Room> rooms, Room room){
-//        roomNamesVBox.getChildren().clear();
-//        for (Room room1 : rooms) {
-//            roomNamesVBox.getChildren().add(makeRoomNameLabel(room));
-//        }
-//        messagesVBox.getChildren().clear();
-//        for (Message message : room.getMessages()) {
-//            messagesVBox.getChildren().add(makeMessageHBox(message));
-//        }
-//    }
+    public void refreshChat(MouseEvent mouseEvent) {
+        Room saveRoom = currRoom;
+        RequestObject requestObject = new RequestObject("getUserRoom",user.getUsername());
+        client.sendObjectToServer(requestObject);
+        ArrayList<Room> rooms = null;
+        roomNamesVBox.getChildren().clear();
+        try {
+            rooms = (ArrayList<Room>) client.recieveObjectFromHost();
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        for (Room room : rooms) {
+            roomNamesVBox.getChildren().add(makeRoomNameLabel(room));
+        }
+
+
+
+        messagesVBox.getChildren().clear();
+        RequestObject requestObject2 = new RequestObject("getRoomMessages", saveRoom);
+        client.sendObjectToServer(requestObject2);
+        try {
+            for (Message message : (ArrayList<Message>) client.recieveObjectFromHost()) {
+                messagesVBox.getChildren().add(makeMessageHBox(message));
+            }
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
 
 }

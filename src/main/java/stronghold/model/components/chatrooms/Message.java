@@ -38,6 +38,12 @@ public class Message implements Serializable {
         RoomsDB.getInstance().update();
     }
 
+    public Message(User user, String text, String date) {
+        this.room = null;
+        this.user = user;
+        this.text = text;
+    }
+
     public Room getRoom() {
         return room;
     }
@@ -89,6 +95,22 @@ public class Message implements Serializable {
     public void del(){
         room.getMessages().remove(this);
         RoomsDB.getInstance().update();
+    }
+
+    public Boolean getSendMessage() {
+        return sendMessage;
+    }
+
+    public void setSendMessage(Boolean sendMessage) {
+        this.sendMessage = sendMessage;
+    }
+
+    public Boolean getSeenMassage() {
+        return seenMassage;
+    }
+
+    public void setSeenMassage(Boolean seenMassage) {
+        this.seenMassage = seenMassage;
     }
 
     @Override

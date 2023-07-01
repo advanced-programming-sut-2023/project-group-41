@@ -22,6 +22,14 @@ public class Room implements Serializable {
         }
     }
 
+    public Message getMessageByObj(Object obj) {
+        for (Message message1 : messages) {
+            if (message1.equals(obj))
+                return message1;
+        }
+        return null;
+    }
+
     public ArrayList<User> getUsers() {
         return users;
     }

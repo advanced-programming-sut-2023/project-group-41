@@ -4,8 +4,6 @@ import stronghold.model.components.chatrooms.Room;
 import stronghold.model.components.general.User;
 
 import java.io.*;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,6 +51,14 @@ public class RoomsDB implements Serializable {
         return rooms;
     }
 
+    public Room getRoomByObj(Object obj) {
+        for (Room room1 : rooms) {
+            if (room1.equals(obj))
+                return room1;
+        }
+        return null;
+    }
+
     public ArrayList<Room> getUserRooms(User user) {
         ArrayList<Room> userRooms = new ArrayList<>();
         for (Room room : rooms) {
@@ -73,6 +79,8 @@ public class RoomsDB implements Serializable {
         }
 
     }
+
+
 
 
 }

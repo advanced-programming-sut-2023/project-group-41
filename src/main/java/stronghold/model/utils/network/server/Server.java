@@ -151,7 +151,7 @@ public class Server {
                         throw new RuntimeException(ex);
                     }
                 } else if (requestString.equals("getUserRoom")) {
-                    User usr = (User) requestList[0];
+                    User usr = UsersDB.usersDB.getUserByUsername((String) requestList[0]);
                     try {
                         host.sendObjectToClient(sender, RoomsDB.getInstance().getUserRooms(usr));
                     } catch (IOException e) {
@@ -160,6 +160,7 @@ public class Server {
 
                 } else if (requestString.equals("editMessage")) {
                     Message message = (Message) requestList[0];
+                    message = RoomsDB.getInstance().getRoomByObj(message.getRoom()).getMessageByObj(message);
                     String text = (String) requestList[1];
                     message.setText(text);
                     try {
@@ -169,6 +170,7 @@ public class Server {
                     }
                 } else if (requestString.equals("delMessage")) {
                     Message message = (Message) requestList[0];
+                    message = RoomsDB.getInstance().getRoomByObj(message.getRoom()).getMessageByObj(message);
                     message.del();
                     try {
                         host.sendMessageToClient(sender, "True");
@@ -177,6 +179,7 @@ public class Server {
                     }
                 } else if (requestString.equals("incReaction")) {
                     Message message = (Message) requestList[0];
+                    message = RoomsDB.getInstance().getRoomByObj(message.getRoom()).getMessageByObj(message);
                     Reaction reaction = (Reaction) requestList[1];
 
                     message.incReactionByOne(reaction);
@@ -187,7 +190,7 @@ public class Server {
                     }
 
                 } else if (requestString.equals("createRoom")) {
-                    User user = (User) requestList[0];
+                    User user =  UsersDB.usersDB.getUserByUsername((String) requestList[0]);
                     String roomName = (String) requestList[1];
                     Room room = new Room(user, roomName);
                     try {
@@ -197,8 +200,9 @@ public class Server {
                     }
                     
                 } else if (requestString.equals("createMessage")) {
-                    Message message = new Message((Room) requestList[0], (User) requestList[1],
-                            (String) requestList[2], (String) requestList[2]);
+                    Message message = new Message(RoomsDB.getInstance().getRoomByObj(requestList[0]), UsersDB.usersDB.getUserByUsername((String) requestList[1]),
+                            (String) requestList[2], (String) requestList[3]);
+                    message.setSendMessage(true);
 
                     try {
                         host.sendObjectToClient(sender, message);
@@ -206,11 +210,18 @@ public class Server {
                         throw new RuntimeException(e);
                     }
                 } else if (requestString.equals("addNewUser")) {
-                    Room room = (Room) requestList[0];
+                    Room room = RoomsDB.getInstance().getRoomByObj(requestList[0]);
 
                     try {
                         room.addUser( UsersDB.usersDB.getUserByUsername((String) requestList[1]));
                         host.sendMessageToClient(sender, "True");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else if (requestString.equals("getRoomMessages")) {
+                    Room room = RoomsDB.getInstance().getRoomByObj((Room) requestList[0]);
+                    try {
+                        host.sendObjectToClient(sender, room.getMessages());
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
