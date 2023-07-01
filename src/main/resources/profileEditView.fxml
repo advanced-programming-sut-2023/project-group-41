@@ -16,8 +16,8 @@
                </font></Label>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
                <children>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                  <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="58.0" style="-fx-background-color: #c4a633; -fx-background-radius: 15;" text="Change" />
+                  <ImageView fx:id="avatar" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                  <Button fx:id="changeAvatar" mnemonicParsing="false" onAction="#setAvatar" prefHeight="58.0" prefWidth="58.0" style="-fx-background-color: #c4a633; -fx-background-radius: 15;" text="Change" />
                </children>
             </HBox>
             <TextField fx:id="usernameField" onKeyTyped="#checkStates" promptText="Enter Username" style="-fx-text-fill: #c4a633; -fx-border-color: #c4a633; -fx-background-color: #222266; -fx-border-radius: 20;" />
