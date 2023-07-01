@@ -291,6 +291,20 @@ public class Server {
                         GamesDB.getInstance().getGameByUsername((String) requestList[0]).getUsers().add((User) requestList[1]);
                         Date date=new Date();
                         GamesDB.getInstance().getGameByUsername((String) requestList[0]).setLastMin(date.getMinutes());
+                        if( GamesDB.getInstance().getGameByUsername((String) requestList[0]).getUsers().size()== GamesDB.getInstance().getGameByUsername((String) requestList[0]).getCapacity()){
+                            try {
+                                host.sendMessageToClient(sender,"Started a game ");
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }else{
+                            try {
+                                host.sendMessageToClient(sender,"joined a game ");
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+
 
 
                     }
@@ -313,6 +327,18 @@ public class Server {
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
+                }else if(requestString.equals("startGame")){
+                    boolean isHost=false;
+                    if (GamesDB.getInstance().getGameByUsername((String) requestList[0]).getHost().getUsername().equals((String) requestList[0])){
+                    isHost=true;
+
+                    }
+                    try {
+                        host.sendObjectToClient(sender,isHost);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+
                 }
             }
         });

@@ -38,6 +38,8 @@ public class LobbyController {
     @FXML
     Button create;
     @FXML
+    Label startGameLabel;
+    @FXML
     TextField usernameField;
     @FXML
      CheckBox pri;
@@ -146,6 +148,8 @@ public class LobbyController {
     public void join(String string){
         RequestObject requestObject=new RequestObject("joiningAGame",string,user);
         client.sendObjectToServer(requestObject);
+        client.recieveMessgeFromHost();
+        System.out.println();
 
 
         currentGame = string;
@@ -153,13 +157,32 @@ public class LobbyController {
         System.out.println(currentGame);
 
     }
+
     public void updatePlayers(ActionEvent actionEvent){
         players.getChildren().clear();
         RequestObject requestObject=new RequestObject("updatingPlayersInSession",currentGame);
         client.sendObjectToServer(requestObject);
+        client.recieveMessgeFromHost();
         Label label=new Label(" ");
         label.setText(client.recieveMessgeFromHost());
         players.getChildren().add(label);
+    }
+    public void startGame(){
+        RequestObject requestObject=new RequestObject("startGame",currentGame,user.getUsername());
+        client.sendObjectToServer(requestObject);
+        boolean isHost;
+        try {
+            isHost=(boolean) client.recieveObjectFromHost();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        if(!isHost){
+            startGameLabel.setText("you are not the host");
+        }
+
+
     }
 
 
