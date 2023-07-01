@@ -243,7 +243,7 @@ public class RegisterController{
         stage.show();
     }
 
-    public void registerUser(){
+    public void registerUser() throws InterruptedException {
         if(checkStates()){
             if(GraphicalCaptchaController.generateCaptcha()){
                 String username = usernameField.getText();
@@ -257,6 +257,8 @@ public class RegisterController{
                 User toBeAdded = new User(username,password,nickname,email,
                         securityQuestion,questionsAnswer,slogan);
                 client.sendObjectToServer(new RequestObject("register", toBeAdded));
+                client.recieveMessgeFromHost();
+                Thread.sleep(100);
                 try {
                     LoginController.setClient(client);
                     openLoginView();

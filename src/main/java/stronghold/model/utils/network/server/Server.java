@@ -40,6 +40,12 @@ public class Server {
                 Object[] requestList = requestObject.getArgs();
 
                 if(requestString.equals("authenticate")){
+                    try {
+                        UsersDB.usersDB.fromJSON();
+                    } catch (
+                            IOException e) {
+                        throw new RuntimeException(e);
+                    }
                     String token = (String) requestList[0];
                     boolean authenticated = UsersDB.usersDB.tokenBasedAuth(token);
                     if(authenticated){
@@ -65,6 +71,8 @@ public class Server {
                 }
                 else if(requestString.equals("register")){
                     User user = (User) requestList[0];
+                    System.out.println(user.getUsername());
+                    
                     if(UsersDB.usersDB.getUserByUsername(user.getUsername()) != null){
                         try {
                             host.sendMessageToClient(sender, "false");
@@ -74,17 +82,33 @@ public class Server {
                         }
                     }
                     else {
-                        UsersDB.usersDB.addUser(user);
+                        new Thread(() -> {
+                            UsersDB.usersDB.addUser(user);
+                            try {
+                                UsersDB.usersDB.toJSON();
+                            } catch (
+                                    IOException e) {
+                                try {
+                                    host.sendMessageToClient(sender, "false");
+                                } catch (
+                                        IOException ex) {
+                                    System.out.println("REGISTER FAILED");
+                                    throw new RuntimeException(ex);
+                                }
+                            }
+
+                        }).start();
                         try {
-                            UsersDB.usersDB.toJSON();
+                            Thread.sleep(1000);
+                        } catch (
+                                InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                        try {
+                            UsersDB.usersDB.fromJSON();
                         } catch (
                                 IOException e) {
-                            try {
-                                host.sendMessageToClient(sender, "false");
-                            } catch (
-                                    IOException ex) {
-                                throw new RuntimeException(ex);
-                            }
+                            throw new RuntimeException(e);
                         }
                         try {
                             host.sendMessageToClient(sender, "true");
@@ -351,6 +375,13 @@ public class Server {
                 }
                 else if(requestString.equals("getuser")){
                     String username = (String) requestList[0];
+                    System.out.println(username);
+                    try {
+                        UsersDB.usersDB.fromJSON();
+                    } catch (
+                            IOException e) {
+                        throw new RuntimeException(e);
+                    }
                     User user = UsersDB.usersDB.getUserByUsername(username);
                     try {
                         host.sendObjectToClient(sender, user);
