@@ -22,6 +22,7 @@ import stronghold.model.database.UsersDB;
 import stronghold.model.utils.Encryption;
 import stronghold.model.utils.network.server.StaticClient;
 import stronghold.model.utils.network.seth.Client;
+import stronghold.model.utils.network.seth.RequestObject;
 import stronghold.view.graphics.LoginView;
 import stronghold.view.graphics.RegisterView;
 
@@ -44,18 +45,59 @@ public class RegisterController{
         Node closeButton = dialog.getDialogPane().lookupButton(ButtonType.CLOSE);
         closeButton.managedProperty().bind(closeButton.visibleProperty());
         closeButton.setVisible(false);
+        dialog.showAndWait();
+    }
+
+    public void connect() throws IOException {
+        Pane pane = new Pane();
+        Label label = new Label("Connecting to server...");
+        pane.getChildren().add(label);
+        Stage dialog = new Stage();
+        dialog.setTitle("Connecting...");
+        dialog.setScene(new Scene(pane,300,50));
+        try {
+            Thread.sleep(1000);
+        } catch (
+                InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         dialog.show();
+        try {
+            Thread.sleep(1000);
+        } catch (
+                InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            if(client == null){
+                StaticClient staticClient = new StaticClient();
+                client = staticClient.getClient();
+            }
+        } catch (Exception e){
+            dialog.close();
+            openErrorDialog("Unable to connect");
+            System.exit(0);
+            return;
+        }
+        dialog.close();
     }
 
     @FXML
     public void initialize() throws IOException {
-        openErrorDialog("Connecting to server...");
-        staticClient = new StaticClient();
-        client = staticClient.getClient();
+        if(client == null)
+            connect();
     }
 
     StaticClient staticClient;
-    Client client;
+    public static Client client;
+
+    public static Client getClient() {
+        return client;
+    }
+
+    public static void setClient(Client client) {
+        RegisterController.client = client;
+    }
 
     @FXML
     public AnchorPane root;
@@ -74,12 +116,24 @@ public class RegisterController{
 
     int questionPicked = 0;
 
+    public boolean checkIfUsernameExists(String username){
+        client.sendObjectToServer(new RequestObject("usernameexists", username));
+        String response = client.recieveMessgeFromHost();
+        return Boolean.parseBoolean(response);
+    }
+
+    public boolean checkIfEmailExists(String email){
+        client.sendObjectToServer(new RequestObject("emailexists", email));
+        String response = client.recieveMessgeFromHost();
+        return Boolean.parseBoolean(response);
+    }
+
     public boolean checkStates(){
         boolean usernameFormatCorrect = MenuController.usernameFormatCorrect(usernameField.getText());
         boolean passwordIsStrong = MenuController.passwordIsStrong(passwordField.getText());
         boolean emailFormatCorrect = MenuController.emailIsValid(emailField.getText());
-        boolean emailIsTaken = MenuController.emailExists(emailField.getText());
-        boolean usernameExists = MenuController.usernameExists(usernameField.getText());
+        boolean emailIsTaken = checkIfEmailExists(emailField.getText());
+        boolean usernameExists = checkIfUsernameExists(usernameField.getText());
 
         errorPrompt.setOpacity(1);
 
@@ -181,6 +235,7 @@ public class RegisterController{
     }
 
     public void openLoginView() throws IOException {
+        LoginController.setClient(client);
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/loginView.fxml")));
         Scene scene = new Scene(root);
         Stage stage = (Stage) goToLoginButton.getScene().getWindow();
@@ -201,14 +256,9 @@ public class RegisterController{
 
                 User toBeAdded = new User(username,password,nickname,email,
                         securityQuestion,questionsAnswer,slogan);
-                UsersDB.usersDB.addUser(toBeAdded);
+                client.sendObjectToServer(new RequestObject("register", toBeAdded));
                 try {
-                    UsersDB.usersDB.toJSON();
-                } catch (
-                        IOException e) {
-                    throw new RuntimeException(e);
-                }
-                try {
+                    LoginController.setClient(client);
                     openLoginView();
                 } catch (
                         IOException e) {

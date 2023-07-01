@@ -7,11 +7,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="72fd4c0e-f2c3-4e13-85b9-d70f04a31b27" name="Changes" comment="added register, login and profile edit functions to Server.java">
-      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/server/StaticClient.java" afterDir="false" />
+    <list default="true" id="72fd4c0e-f2c3-4e13-85b9-d70f04a31b27" name="Changes" comment="added StaticClient">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/stronghold_jar/stronghold.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/stronghold_jar/stronghold.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/controller/graphical/ChatMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/controller/graphical/ChatMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/controller/graphical/HubMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/controller/graphical/HubMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/controller/graphical/LobbyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/controller/graphical/LobbyController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/controller/graphical/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/controller/graphical/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/controller/graphical/ProfileEditController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/controller/graphical/ProfileEditController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/controller/graphical/RegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/controller/graphical/RegisterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/database/datasets/chats.ser" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/database/datasets/chats.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/database/datasets/preferences.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/database/datasets/preferences.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/database/datasets/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/database/datasets/users.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/components/general/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/components/general/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/database/UsersDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/database/UsersDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/server/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/server/StaticClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/server/StaticClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/seth/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/seth/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/view/graphics/ProfileCartView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/view/graphics/ProfileCartView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,6 +110,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="GameView" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="stronghold.view.graphics.GameView" />
+      <module name="stronghold" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="stronghold.view.graphics.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="HostTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="stronghold.networktest.HostTest" />
       <module name="stronghold" />
@@ -109,21 +136,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MainNetTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="stronghold.MainNetTest" />
-      <module name="stronghold" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="stronghold.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SearchPlayerView" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="stronghold.view.graphics.SearchPlayerView" />
+    <configuration name="ProfileCartView" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="stronghold.view.graphics.ProfileCartView" />
       <module name="stronghold" />
       <extension name="coverage">
         <pattern>
@@ -163,19 +177,19 @@
     </configuration>
     <list>
       <item itemvalue="Application.Stronghold" />
+      <item itemvalue="Application.GameView" />
+      <item itemvalue="Application.ProfileCartView" />
       <item itemvalue="Application.ClientTest" />
       <item itemvalue="Application.HostTest" />
-      <item itemvalue="Application.MainNetTest" />
-      <item itemvalue="Application.SearchPlayerView" />
       <item itemvalue="Application.sampleView" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ClientTest" />
-        <item itemvalue="Application.MainNetTest" />
         <item itemvalue="Application.HostTest" />
+        <item itemvalue="Application.ProfileCartView" />
+        <item itemvalue="Application.GameView" />
         <item itemvalue="Application.sampleView" />
-        <item itemvalue="Application.SearchPlayerView" />
+        <item itemvalue="Application.ClientTest" />
       </list>
     </recent_temporary>
   </component>
@@ -370,7 +384,14 @@
       <option name="project" value="LOCAL" />
       <updated>1688192020685</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="added StaticClient">
+      <created>1688192420244</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1688192420244</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -402,7 +423,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="fixed module-info.java and opened graphical controllers to FXML" />
     <MESSAGE value="Wired up register and login menus and created hub menu" />
     <MESSAGE value="added search players to hub menu" />
     <MESSAGE value="completed profile edit and created ui for password recovery menu" />
@@ -427,7 +447,8 @@
     <MESSAGE value="changed RequestObject's constructor" />
     <MESSAGE value="fixed data transfer bugs in system" />
     <MESSAGE value="added register, login and profile edit functions to Server.java" />
-    <option name="LAST_COMMIT_MESSAGE" value="added register, login and profile edit functions to Server.java" />
+    <MESSAGE value="added StaticClient" />
+    <option name="LAST_COMMIT_MESSAGE" value="added StaticClient" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/stronghold$SignUpMenuControllerTest_testAll.ic" NAME="SignUpMenuControllerTest.testAll Coverage Results" MODIFIED="1684827485987" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

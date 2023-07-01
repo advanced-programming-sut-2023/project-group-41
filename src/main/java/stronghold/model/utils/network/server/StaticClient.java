@@ -11,6 +11,10 @@ public class StaticClient {
         client = new Client();
     }
 
+    public StaticClient(String hostIP) throws IOException {
+        client = new Client(hostIP);
+    }
+
     public Client getClient() {
         return client;
     }

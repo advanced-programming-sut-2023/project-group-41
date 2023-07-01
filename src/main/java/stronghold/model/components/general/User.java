@@ -103,8 +103,25 @@ public class User implements Serializable {
         return Objects.equals(username, user.username);
     }
 
+    public void set(User user){
+        this.setUsername(user.getUsername());
+        this.setPassword(user.getPassword());
+        this.setNickname(user.getNickname());
+        this.setEmail(user.getEmail());
+        this.setSlogan(user.getSlogan());
+        this.setScore(user.getScore());
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(username);
+    }
+
+    public User clone(){
+        User cloneUser = new User(this.getUsername(),this.getPassword(),this.getNickname(),this.getEmail(),
+                this.getPasswordRecoveryQuestion(),this.getPasswordRecoveryAnswer(),
+                this.getSlogan());
+        cloneUser.setScore(this.getScore());
+        return cloneUser;
     }
 }

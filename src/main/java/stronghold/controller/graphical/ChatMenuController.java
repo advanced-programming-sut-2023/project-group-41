@@ -72,14 +72,8 @@ public class ChatMenuController {
             messagesVBox.getChildren().clear();
             RequestObject requestObject = new RequestObject("getRoomMessages", room);
             client.sendObjectToServer(requestObject);
-            try {
-                for (Message message : (ArrayList<Message>) client.recieveObjectFromHost()) {
-                    messagesVBox.getChildren().add(makeMessageHBox(message));
-                }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            } catch (ClassNotFoundException e) {
-                throw new RuntimeException(e);
+            for (Message message : (ArrayList<Message>) client.recieveObjectFromHost()) {
+                messagesVBox.getChildren().add(makeMessageHBox(message));
             }
         });
         return label;
@@ -266,11 +260,7 @@ public class ChatMenuController {
         client.sendObjectToServer(requestObject);
         ArrayList<Room> rooms = null;
         roomNamesVBox.getChildren().clear();
-        try {
-            rooms = (ArrayList<Room>) client.recieveObjectFromHost();
-        } catch (IOException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        rooms = (ArrayList<Room>) client.recieveObjectFromHost();
         for (Room room : rooms) {
             roomNamesVBox.getChildren().add(makeRoomNameLabel(room));
         }
@@ -280,12 +270,8 @@ public class ChatMenuController {
         messagesVBox.getChildren().clear();
         RequestObject requestObject2 = new RequestObject("getRoomMessages", saveRoom);
         client.sendObjectToServer(requestObject2);
-        try {
-            for (Message message : (ArrayList<Message>) client.recieveObjectFromHost()) {
-                messagesVBox.getChildren().add(makeMessageHBox(message));
-            }
-        } catch (IOException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
+        for (Message message : (ArrayList<Message>) client.recieveObjectFromHost()) {
+            messagesVBox.getChildren().add(makeMessageHBox(message));
         }
 
     }

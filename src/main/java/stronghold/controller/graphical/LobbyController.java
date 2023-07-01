@@ -70,13 +70,7 @@ public class LobbyController {
     public  void createNewGame(){
         RequestObject requestObject=new RequestObject("createANewLobbyGame",usernameField.getText(),Integer.parseInt(cap.getText()),pri.isSelected(),user);
         client.sendObjectToServer(requestObject);
-        try {
-            client.recieveObjectFromHost();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        client.recieveObjectFromHost();
 
 
     }
@@ -87,13 +81,7 @@ public class LobbyController {
         RequestObject requestObject=new RequestObject("getGamesList");
         client.sendObjectToServer(requestObject);
         ArrayList<Game> gameArrayList;
-        try {
-             gameArrayList= (ArrayList<Game>) client.recieveObjectFromHost();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        gameArrayList= (ArrayList<Game>) client.recieveObjectFromHost();
         for (Game game : gameArrayList) {
             if(!game.isPrivate()){
                 Label label=new Label(game.getTitle()+",cap: "+game.getCapacity());
@@ -116,13 +104,7 @@ public class LobbyController {
         RequestObject requestObject=new RequestObject("getGamesList");
         client.sendObjectToServer(requestObject);
         ArrayList<Game> gameArrayList;
-        try {
-            gameArrayList= (ArrayList<Game>) client.recieveObjectFromHost();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        gameArrayList= (ArrayList<Game>) client.recieveObjectFromHost();
         for (Game game : gameArrayList) {
             if(searchField.getText().equals(game.getTitle())){
                 Label label=new Label(game.getTitle()+",cap: "+game.getCapacity());

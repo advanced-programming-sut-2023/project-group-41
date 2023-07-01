@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import stronghold.model.components.general.User;
+import stronghold.model.utils.Encryption;
 
 import java.io.*;
 import java.lang.reflect.Array;
@@ -97,5 +98,23 @@ public class UsersDB implements Serializable{
             }
         });
         return users;
+    }
+
+    public boolean tokenBasedAuth(String token){
+        for(User user: this.users){
+            String currentToken = Encryption.toSHA256(user.getUsername() + user.getPassword());
+            if(currentToken.equals(token))
+                return true;
+        }
+        return false;
+    }
+
+    public void updateByOldUser(User oldUser, User newUser){
+        for(User iter: users){
+            if(iter.getUsername().equals(oldUser.getUsername())){
+                iter.set(newUser);
+                return;
+            }
+        }
     }
 }
