@@ -47,8 +47,8 @@ public class ChatMenuController {
         RequestObject requestObject = new RequestObject("getUserRoom",user);
         StaticClient staticClient = new StaticClient();
         client = staticClient.getClient();
-        staticClient.getClient().sendObjectToServer(requestObject);
-        ArrayList<Room> rooms = (ArrayList<Room>) staticClient.getClient().recieveObjectFromHost();
+        client.sendObjectToServer(requestObject);
+        ArrayList<Room> rooms = (ArrayList<Room>) client.recieveObjectFromHost();
         for (Room room : rooms) {
             roomNamesVBox.getChildren().add(makeRoomNameLabel(room));
         }
