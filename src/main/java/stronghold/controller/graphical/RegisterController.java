@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -19,6 +20,8 @@ import stronghold.controller.SignUpMenuController;
 import stronghold.model.components.general.User;
 import stronghold.model.database.UsersDB;
 import stronghold.model.utils.Encryption;
+import stronghold.model.utils.network.server.StaticClient;
+import stronghold.model.utils.network.seth.Client;
 import stronghold.view.graphics.LoginView;
 import stronghold.view.graphics.RegisterView;
 
@@ -28,6 +31,31 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class RegisterController{
+
+    public void openErrorDialog(String error) {
+        Dialog<String> dialog = new Dialog<String>();
+        dialog.setTitle("Notification!");
+        Label label = new Label(error);
+        dialog.setContentText(label.getText());
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
+        dialog.getDialogPane().getChildren().add(label);
+        ButtonType type = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().add(type);
+        Node closeButton = dialog.getDialogPane().lookupButton(ButtonType.CLOSE);
+        closeButton.managedProperty().bind(closeButton.visibleProperty());
+        closeButton.setVisible(false);
+        dialog.show();
+    }
+
+    @FXML
+    public void initialize() throws IOException {
+        openErrorDialog("Connecting to server...");
+        staticClient = new StaticClient();
+        client = staticClient.getClient();
+    }
+
+    StaticClient staticClient;
+    Client client;
 
     @FXML
     public AnchorPane root;

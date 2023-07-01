@@ -7,13 +7,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="72fd4c0e-f2c3-4e13-85b9-d70f04a31b27" name="Changes" comment="fixed data transfer bugs in system">
-      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/server/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/database/datasets/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/database/datasets/users.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/authenticator/AuthenticatorServer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/seth/NetworkNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/seth/NetworkNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/networktest/HostTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/networktest/HostTest.java" afterDir="false" />
+    <list default="true" id="72fd4c0e-f2c3-4e13-85b9-d70f04a31b27" name="Changes" comment="added register, login and profile edit functions to Server.java">
+      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/server/StaticClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/stronghold_jar/stronghold.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/stronghold_jar/stronghold.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/controller/graphical/RegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/controller/graphical/RegisterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/database/datasets/preferences.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/database/datasets/preferences.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -365,7 +363,14 @@
       <option name="project" value="LOCAL" />
       <updated>1688190277262</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="added register, login and profile edit functions to Server.java">
+      <created>1688192020685</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1688192020685</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -397,7 +402,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="files added" />
     <MESSAGE value="fixed module-info.java and opened graphical controllers to FXML" />
     <MESSAGE value="Wired up register and login menus and created hub menu" />
     <MESSAGE value="added search players to hub menu" />
@@ -422,7 +426,8 @@
     <MESSAGE value="Created AuthenticatorServer" />
     <MESSAGE value="changed RequestObject's constructor" />
     <MESSAGE value="fixed data transfer bugs in system" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed data transfer bugs in system" />
+    <MESSAGE value="added register, login and profile edit functions to Server.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="added register, login and profile edit functions to Server.java" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/stronghold$SignUpMenuControllerTest_testAll.ic" NAME="SignUpMenuControllerTest.testAll Coverage Results" MODIFIED="1684827485987" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
