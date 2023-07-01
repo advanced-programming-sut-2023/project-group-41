@@ -20,15 +20,21 @@ import stronghold.model.components.chatrooms.Room;
 import stronghold.model.components.general.User;
 import stronghold.model.database.RoomsDB;
 import stronghold.model.database.UsersDB;
+import stronghold.model.utils.network.server.StaticClient;
+import stronghold.model.utils.network.seth.Client;
+import stronghold.model.utils.network.seth.Host;
+import stronghold.model.utils.network.seth.RequestObject;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Objects;
 
 public class ChatMenuController {
     private static User user;
-    private static Room currRoom;
+    private Room currRoom;
+    private Client client;
 
     public VBox roomNamesVBox;
     public VBox messagesVBox;
@@ -37,16 +43,18 @@ public class ChatMenuController {
     public TextField newUserTextField;
 
     @FXML
-    public void initialize(){
-
-        ArrayList<Room> rooms = RoomsDB.getInstance().getUserRooms(user);
+    public void initialize() throws IOException, ClassNotFoundException {
+        RequestObject requestObject = new RequestObject("getUserRoom",user);
+        StaticClient staticClient = new StaticClient();
+        client = staticClient.getClient();
+        staticClient.getClient().sendObjectToServer(requestObject);
+        ArrayList<Room> rooms = (ArrayList<Room>) staticClient.getClient().recieveObjectFromHost();
         for (Room room : rooms) {
             roomNamesVBox.getChildren().add(makeRoomNameLabel(room));
         }
-        currRoom = RoomsDB.getInstance().getPubicChat();
     }
 
-    public static User getUser() {
+    public User getUser() {
         return user;
     }
 
@@ -54,7 +62,7 @@ public class ChatMenuController {
         ChatMenuController.user = user;
     }
 
-    private Label makeRoomNameLabel(Room room){
+    private  Label makeRoomNameLabel(Room room){
         Label label = new Label(room.getName());
         label.setPrefSize(145, 29);
         label.setBorder(Border.stroke(Color.BLACK));
@@ -126,7 +134,10 @@ public class ChatMenuController {
 
         editLabel = new Label();
         editLabel.setOnMouseClicked(event -> {
-            message.setText(messageTextField.getText());
+            RequestObject requestObject = new RequestObject("editMessage",message, messageTextField.getText());
+            client.sendObjectToServer(requestObject);
+            if (Boolean.parseBoolean(client.recieveMessgeFromHost()))
+                message.setText(messageTextField.getText());
         });
         editLabel.setStyle("-fx-border-color: gray;");
         editLabel.setText("Edit");
@@ -141,8 +152,10 @@ public class ChatMenuController {
 
         delLabel = new Label();
         delLabel.setOnMouseClicked(event -> {
-            message.del();
-            messagesVBox.getChildren().remove(rootHBox);
+            RequestObject requestObject = new RequestObject("delMessage",message);
+            client.sendObjectToServer(requestObject);
+            if (Boolean.parseBoolean(client.recieveMessgeFromHost()))
+                messagesVBox.getChildren().remove(rootHBox);
         });
         delLabel.setStyle("-fx-border-color: gray;");
         delLabel.setText("Del");
@@ -167,23 +180,35 @@ public class ChatMenuController {
 
         emojiLabel1 = new Label("😂");
         emojiLabel1.setOnMouseClicked(event -> {
-            message.incReactionByOne(Reaction.LAUGH);
-            laughLabel.setText(String.valueOf(message.getReaction(Reaction.LAUGH)));
-            emojiVBox.getChildren().clear();
+            RequestObject requestObject = new RequestObject("incReaction",message, Reaction.LAUGH);
+            client.sendObjectToServer(requestObject);
+            if (Boolean.parseBoolean(client.recieveMessgeFromHost())) {
+                laughLabel.setText(String.valueOf(Integer.parseInt(laughLabel.getText()) + 1));
+                emojiVBox.getChildren().clear();
+            }
         });
 
         emojiLabel2 = new Label("💩");
         emojiLabel2.setOnMouseClicked(event -> {
-            message.incReactionByOne(Reaction.PEE);
-            peeLabel.setText(String.valueOf(message.getReaction(Reaction.PEE)));
-            emojiVBox.getChildren().clear();
+            RequestObject requestObject = new RequestObject("incReaction",message, Reaction.PEE);
+            client.sendObjectToServer(requestObject);
+
+            if (Boolean.parseBoolean(client.recieveMessgeFromHost())) {
+                laughLabel.setText(String.valueOf(Integer.parseInt(laughLabel.getText()) + 1));
+                emojiVBox.getChildren().clear();
+            }
         });
 
         emojiLabel3 = new Label("❤");
         emojiLabel3.setOnMouseClicked(event -> {
-            message.incReactionByOne(Reaction.HEART);
-            heartLabel.setText(String.valueOf(message.getReaction(Reaction.HEART)));
-            emojiVBox.getChildren().clear();
+            RequestObject requestObject = new RequestObject("incReaction",message, Reaction.HEART);
+            client.sendObjectToServer(requestObject);
+
+
+            if (Boolean.parseBoolean(client.recieveMessgeFromHost())) {
+                laughLabel.setText(String.valueOf(Integer.parseInt(laughLabel.getText()) + 1));
+                emojiVBox.getChildren().clear();
+            }
         });
 
         emojiVBox.getChildren().addAll(emojiLabel1, emojiLabel2, emojiLabel3);
@@ -201,34 +226,37 @@ public class ChatMenuController {
     }
 
 
-    public void addRoomHandler(ActionEvent actionEvent){
-        Room room = null;
-        try {
-            room = new Room(user, roomNameTextField.getText());
-        } catch (
-                IOException e) {
-            throw new RuntimeException(e);
-        }
+    public void addRoomHandler(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
+        RequestObject requestObject = new RequestObject("createRoom", user, roomNameTextField.getText());
+        client.sendObjectToServer(requestObject);
+        Room room = (Room) client.recieveObjectFromHost();
         roomNamesVBox.getChildren().add(makeRoomNameLabel(room));
     }
 
-    public void sendMessageHandler(ActionEvent actionEvent) {
+    public void sendMessageHandler(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
         SimpleDateFormat formatDate = new SimpleDateFormat("HH:mm");
         Date date = new Date();
-        Message message = new Message(currRoom, user, messageTestField.getText(), formatDate.format(date));
+        RequestObject requestObject = new RequestObject("createMessage", currRoom, user, messageTestField.getText(), formatDate.format(date));
+        client.sendObjectToServer(requestObject);
+        Message message = (Message) client.recieveObjectFromHost();
         messagesVBox.getChildren().add(makeMessageHBox(message));
     }
 
     public void addNewUserHandler(ActionEvent actionEvent){
-        User newUser;
-        if ((newUser = UsersDB.usersDB.getUserByUsername(newUserTextField.getText())) != null) {
-            try {
-                currRoom.addUser(newUser);
-            } catch (
-                    IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
+        RequestObject requestObject = new RequestObject("addNewUser", currRoom, newUserTextField.getText());
+        client.sendObjectToServer(requestObject);
+        client.recieveMessgeFromHost();
     }
+
+//    public static void update(ArrayList<Room> rooms, Room room){
+//        roomNamesVBox.getChildren().clear();
+//        for (Room room1 : rooms) {
+//            roomNamesVBox.getChildren().add(makeRoomNameLabel(room));
+//        }
+//        messagesVBox.getChildren().clear();
+//        for (Message message : room.getMessages()) {
+//            messagesVBox.getChildren().add(makeMessageHBox(message));
+//        }
+//    }
 
 }

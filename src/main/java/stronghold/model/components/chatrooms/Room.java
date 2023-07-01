@@ -6,13 +6,14 @@ import stronghold.model.database.RoomsDB;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Room implements Serializable {
     private String name;
     private ArrayList<User> users = new ArrayList<>();
     private ArrayList<Message> messages = new ArrayList<>();
 
-    public Room(User user, String name) throws IOException {
+    public Room(User user, String name) {
         this.name = name;
         users.add(user);
         if (!name.equals("publicRoom")) {
@@ -52,5 +53,18 @@ public class Room implements Serializable {
     public void setName(String name) throws IOException {
         this.name = name;
         RoomsDB.getInstance().update();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Room room = (Room) o;
+        return Objects.equals(name, room.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
     }
 }

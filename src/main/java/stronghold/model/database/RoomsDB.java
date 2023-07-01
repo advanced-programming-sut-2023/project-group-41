@@ -28,12 +28,7 @@ public class RoomsDB implements Serializable {
             rooms = new ArrayList<>();
             List<User> allUsers = UsersDB.usersDB.getUsers();
             Room pubicChat = null;
-            try {
-                pubicChat = new Room(null, "publicRoom");
-            } catch (
-                    IOException ex) {
-                throw new RuntimeException(ex);
-            }
+            pubicChat = new Room(null, "publicRoom");
             for (User user : allUsers) {
                 try {
                     pubicChat.addUser(user);
@@ -73,7 +68,7 @@ public class RoomsDB implements Serializable {
                 FileOutputStream fileOutputStream = new FileOutputStream(path, false);
                 ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)){
             objectOutputStream.writeObject(rooms);
-        } catch (IOException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
 

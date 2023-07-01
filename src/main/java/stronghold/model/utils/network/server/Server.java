@@ -1,7 +1,11 @@
 package stronghold.model.utils.network.server;
 
 import stronghold.controller.SignUpMenuController;
+import stronghold.model.components.chatrooms.Message;
+import stronghold.model.components.chatrooms.Reaction;
+import stronghold.model.components.chatrooms.Room;
 import stronghold.model.components.general.User;
+import stronghold.model.database.RoomsDB;
 import stronghold.model.database.UsersDB;
 import stronghold.model.utils.network.seth.Host;
 import stronghold.model.utils.network.seth.RequestObject;
@@ -145,6 +149,70 @@ public class Server {
                     } catch (
                             IOException ex) {
                         throw new RuntimeException(ex);
+                    }
+                } else if (requestString.equals("getUserRoom")) {
+                    User usr = (User) requestList[0];
+                    try {
+                        host.sendObjectToClient(sender, RoomsDB.getInstance().getUserRooms(usr));
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                } else if (requestString.equals("editMessage")) {
+                    Message message = (Message) requestList[0];
+                    String text = (String) requestList[1];
+                    message.setText(text);
+                    try {
+                        host.sendMessageToClient(sender, "True");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else if (requestString.equals("delMessage")) {
+                    Message message = (Message) requestList[0];
+                    message.del();
+                    try {
+                        host.sendMessageToClient(sender, "True");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else if (requestString.equals("incReaction")) {
+                    Message message = (Message) requestList[0];
+                    Reaction reaction = (Reaction) requestList[1];
+
+                    message.incReactionByOne(reaction);
+                    try {
+                        host.sendMessageToClient(sender, "True");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                } else if (requestString.equals("createRoom")) {
+                    User user = (User) requestList[0];
+                    String roomName = (String) requestList[1];
+                    Room room = new Room(user, roomName);
+                    try {
+                        host.sendObjectToClient(sender, room);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                    
+                } else if (requestString.equals("createMessage")) {
+                    Message message = new Message((Room) requestList[0], (User) requestList[1],
+                            (String) requestList[2], (String) requestList[2]);
+
+                    try {
+                        host.sendObjectToClient(sender, message);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else if (requestString.equals("addNewUser")) {
+                    Room room = (Room) requestList[0];
+
+                    try {
+                        room.addUser( UsersDB.usersDB.getUserByUsername((String) requestList[1]));
+                        host.sendMessageToClient(sender, "True");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
                     }
                 }
             }

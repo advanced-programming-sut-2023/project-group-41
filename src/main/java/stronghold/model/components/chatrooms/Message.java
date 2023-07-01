@@ -6,6 +6,7 @@ import stronghold.model.database.RoomsDB;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class Message implements Serializable {
     Room room;
@@ -88,5 +89,18 @@ public class Message implements Serializable {
     public void del(){
         room.getMessages().remove(this);
         RoomsDB.getInstance().update();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Message message = (Message) o;
+        return Objects.equals(user, message.user) && Objects.equals(text, message.text) && Objects.equals(date, message.date);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(user, text, date);
     }
 }

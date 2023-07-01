@@ -5,7 +5,7 @@ import stronghold.model.utils.network.seth.Client;
 import java.io.IOException;
 
 public class StaticClient {
-    Client client;
+    static Client client;
 
     public StaticClient() throws IOException {
         client = new Client();

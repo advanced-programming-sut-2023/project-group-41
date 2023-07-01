@@ -89,17 +89,10 @@ public class Client extends NetworkNode {
     }
 
 
-    public Object recieveObjectFromHost() {
-        try {
-            ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
-            return objectInputStream.readObject();
-        } catch (
-                IOException e) {
+    public Object recieveObjectFromHost() throws IOException, ClassNotFoundException {
+        ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
+        Object receivedObject = objectInputStream.readObject();
+        return receivedObject;
 
-            throw new RuntimeException(e);
-        } catch (
-                ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
     }
 }
