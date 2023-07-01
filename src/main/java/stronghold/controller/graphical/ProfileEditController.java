@@ -14,6 +14,8 @@ import stronghold.controller.MainMenuController;
 import stronghold.model.components.general.User;
 import stronghold.model.database.UsersDB;
 import stronghold.model.utils.Encryption;
+import stronghold.model.utils.network.seth.Client;
+import stronghold.model.utils.network.seth.RequestObject;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -22,7 +24,17 @@ import java.io.IOException;
 import java.security.PrivilegedExceptionAction;
 
 public class ProfileEditController {
+    public static Client client;
     public static User currentUser;
+
+    public static Client getClient() {
+        return client;
+    }
+
+    public static void setClient(Client client) {
+        ProfileEditController.client = client;
+    }
+
     public TextField usernameField;
     public TextField passwordField;
     public TextField sloganField;
@@ -48,10 +60,25 @@ public class ProfileEditController {
         nicknameField.setText(currentUser.getNickname());
     }
 
+    public boolean checkIfUsernameExists(String username){
+        client.sendObjectToServer(new RequestObject("usernameexists", username));
+        String response = client.recieveMessgeFromHost();
+        return Boolean.parseBoolean(response);
+    }
+
+    public boolean checkIfEmailExists(String email){
+        client.sendObjectToServer(new RequestObject("emailexists", email));
+        String response = client.recieveMessgeFromHost();
+        return Boolean.parseBoolean(response);
+    }
+
     @FXML
     public boolean checkStates(){
         String newUsername = usernameField.getText();
         String newEmail = emailField.getText();
+
+        boolean emailIsTaken = checkIfEmailExists(emailField.getText());
+        boolean usernameExists = checkIfUsernameExists(usernameField.getText());
 
         if(newUsername.isEmpty()){
             errorPrompt.setText("Username not provided!");
@@ -61,7 +88,7 @@ public class ProfileEditController {
             errorPrompt.setText("Username format incorrect!");
             return false;
         }
-        if(MainMenuController.usernameExists(newUsername) && !newUsername.equals(currentUser.getUsername())){
+        if(usernameExists && !newUsername.equals(currentUser.getUsername())){
             errorPrompt.setText("Entered Username is already taken!");
             return false;
         }
@@ -73,7 +100,7 @@ public class ProfileEditController {
             errorPrompt.setText("Email format incorrect!");
             return false;
         }
-        if(MainMenuController.emailExists(newEmail) && !newEmail.equals(currentUser.getEmail())){
+        if(emailIsTaken && !newEmail.equals(currentUser.getEmail())){
             errorPrompt.setText("Email already exists!");
             return false;
         }
@@ -126,7 +153,8 @@ public class ProfileEditController {
                 throw new RuntimeException(e);
             }
         }
-        PauseTransition delay = new PauseTransition(Duration.seconds(0.5));
+        PauseTransition delay = new PauseTransition(Duration.seconds(0.3));
+        User oldUser = currentUser.clone();
         delay.setOnFinished(event -> {
             currentUser.setUsername(usernameField.getText());
             currentUser.setEmail(emailField.getText());
@@ -135,18 +163,12 @@ public class ProfileEditController {
             if(!passwordField.getText().isEmpty()){
                 currentUser.setPassword(Encryption.toSHA256(passwordField.getText()));
             }
-            UsersDB.usersDB.update(currentUser);
-            try {
-                UsersDB.usersDB.toJSON();
-            } catch (
-                    IOException e) {
-                throw new RuntimeException(e);
-            }
+            client.sendObjectToServer(new RequestObject("edituser",  oldUser, currentUser));
+
+            System.out.println(client.recieveMessgeFromHost());
 
         });
         delay.play();
-
-
 
         HubMenuController.setCurrentUser(currentUser);
     }

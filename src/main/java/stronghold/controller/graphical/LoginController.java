@@ -22,6 +22,8 @@ import stronghold.controller.MainMenuController;
 import stronghold.model.components.general.User;
 import stronghold.model.database.UsersDB;
 import stronghold.model.utils.Encryption;
+import stronghold.model.utils.network.seth.Client;
+import stronghold.model.utils.network.seth.RequestObject;
 import stronghold.view.graphics.HubMenuView;
 
 import java.io.FileNotFoundException;
@@ -31,6 +33,17 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class LoginController {
+
+    public static Client client;
+
+    public static Client getClient() {
+        return client;
+    }
+
+    public static void setClient(Client client) {
+        LoginController.client = client;
+    }
+
     @FXML
     public CheckBox stayLoggedInBox;
     @FXML
@@ -66,6 +79,7 @@ public class LoginController {
 
     @FXML
     public void enterRegisterMenu() throws IOException {
+        RegisterController.setClient(client);
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/registerView.fxml")));
         Scene scene = new Scene(root);
         Stage stage = (Stage) registerButton.getScene().getWindow();
@@ -74,46 +88,56 @@ public class LoginController {
     }
 
     @FXML
-    public void authenticate() {
+    public void authenticate() throws InterruptedException {
         if (!checkStates()) {
             return;
         }
         String username = usernameField.getText();
         String password = Encryption.toSHA256(passwordField.getText());
-        User user = UsersDB.usersDB.getUserByUsername(username);
-        if (user == null) {
+
+        String token = Encryption.toSHA256(username + password);
+//
+        client.sendObjectToServer(new RequestObject("authenticate", token));
+        boolean authenticate = Boolean.parseBoolean(client.recieveMessgeFromHost());
+
+
+        if (!authenticate) {
             openErrorDialog("Error!: Provided credentials are incorrect!");
             return;
         }
-        if(stayLoggedInBox.isSelected()){
-            JsonElement prefsElement;
-            String pathToPrefs = "src/main/java/stronghold/database/datasets/preferences.json";
-            try {
-                prefsElement = JsonParser.parseReader(
-                        new FileReader(pathToPrefs));
-            } catch (
-                    FileNotFoundException e) {
-                throw new RuntimeException(e);
-            }
 
-            try {
-                String toBeWritten = prefsElement.toString();
-                toBeWritten = toBeWritten.replace("!NULLUSER",username);
-                FileWriter fileWriter = new FileWriter(pathToPrefs);
-                fileWriter.write(toBeWritten);
-                fileWriter.close();
-            } catch (
-                    IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        boolean userAuthenticated =
-                user.getPassword().equals(password);
-        if (!userAuthenticated) {
+        client.sendObjectToServer(new RequestObject("getuser", username));
+        User user = (User) client.recieveObjectFromHost();
+
+        if (!authenticate) {
             openErrorDialog("Error!: Provided credentials are incorrect!");
         }
         else if(GraphicalCaptchaController.generateCaptcha()){
+            if(stayLoggedInBox.isSelected()){
+                Thread.sleep(1000);
+                JsonElement prefsElement;
+                String pathToPrefs = "src/main/java/stronghold/database/datasets/preferences.json";
+                try {
+                    prefsElement = JsonParser.parseReader(
+                            new FileReader(pathToPrefs));
+                } catch (
+                        FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+
+                try {
+                    String toBeWritten = prefsElement.toString();
+                    toBeWritten = toBeWritten.replace("!NULLUSER",username);
+                    FileWriter fileWriter = new FileWriter(pathToPrefs);
+                    fileWriter.write(toBeWritten);
+                    fileWriter.close();
+                } catch (
+                        IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
             HubMenuController.setCurrentUser(user);
+            HubMenuController.setClient(client);
             PauseTransition delay = new PauseTransition(Duration.millis(30));
             delay.setOnFinished(event -> {
                 Parent root = null;

@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane prefHeight="655.0" prefWidth="833.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stronghold.controller.graphical.LobbyController">
+<Pane prefHeight="655.0" prefWidth="1168.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stronghold.controller.graphical.LobbyController">
 
       <VBox layoutX="511.0" layoutY="387.0" prefHeight="254.0" prefWidth="317.0">
          <TextArea fx:id="chatTextArea" editable="false" prefHeight="200" />
@@ -72,5 +72,6 @@
    <Button fx:id="leave" layoutX="240.0" layoutY="64.0" mnemonicParsing="false" onAction="#leave" text="Leave" />
    <Button fx:id="ref" layoutX="240.0" layoutY="93.0" mnemonicParsing="false" onAction="#updatePlayers" text="Refresh" />
    <VBox fx:id="players" layoutX="14.0" layoutY="106.0" prefHeight="200.0" prefWidth="100.0" />
+   <Label fx:id="startGameLabel" layoutX="731.0" layoutY="41.0" text="Start!" />
 
 </Pane>

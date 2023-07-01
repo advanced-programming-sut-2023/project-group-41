@@ -19,7 +19,7 @@ public class ProfileCartView extends Application {
     public Pane root;
 
     public static void main(String[] args) {
-        User user = UsersDB.usersDB.getUserByUsername("nima");
+        User user = UsersDB.usersDB.getUserByUsername("yoda");
         ChatMenuController.setUser(user);
         PauseTransition pauseTransition = new PauseTransition(Duration.millis(100));
         pauseTransition.setOnFinished(actionEvent -> {
