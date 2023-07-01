@@ -11,7 +11,7 @@ import java.util.HashMap;
 
 public class RequestDB implements Serializable {
 
-    private HashMap<User,User>requests;
+    private ArrayList<ArrayList<User>>requests;
 
     public static RequestDB requestDB=new RequestDB();
     private final String path = "src/main/java/stronghold/database/datasets/requests.ser";
@@ -28,21 +28,25 @@ public class RequestDB implements Serializable {
                 FileInputStream fileInputStream = new FileInputStream(path);
                 ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)
         ){
-            requests = (HashMap<User, User>) objectInputStream.readObject();
+            requests = (ArrayList<ArrayList<User>>) objectInputStream.readObject();
 
         } catch (Exception e) {
-            requests = new HashMap<>();
+            requests = new ArrayList<>();
 
 
 
         }
     }
 
-    public HashMap<User, User> getRequests() {
+    public ArrayList<ArrayList<User>> getRequests() {
         return requests;
     }
-    public void addRequest(User user,User user2) {
-        requests.put(user,user2);
+
+    public void addRequest(User user, User user2) {
+        ArrayList<User> adder= new ArrayList<>();
+        adder.add(user);
+        adder.add(user2);
+        requests.add(adder);
         try {
             RequestDB.getInstance().update();
         } catch (IOException e) {
@@ -51,12 +55,9 @@ public class RequestDB implements Serializable {
 
     }
     public void removeRequest(User user,User user2) {
-        if(requests.get(user)!=null)
-            requests.remove(user);
-        else if(requests.get(user2)!=null)
-            requests.remove(user2);
-        else
-            return;
+        requests.removeIf(request -> request.get(0).equals(user) && request.get(1).equals(user2));
+
+
         try {
             RequestDB.getInstance().update();
         } catch (IOException e) {

@@ -437,7 +437,12 @@ public class Server {
                 }else if(requestString.equals("showFriendReq")){
 
                     ArrayList<User> friends=new ArrayList<>();
-                    friends=FriendsDB.getInstance().getFriends().get((User) requestList[0]);
+                    for (ArrayList<User> users : RequestDB.getInstance().getRequests()) {
+                        if(users.get(0).equals(requestList[1])){
+                            friends.add(users.get(1));
+                        }
+                    }
+
                     try {
                         host.sendObjectToClient(sender,friends);
                     } catch (IOException e) {
