@@ -6,9 +6,7 @@ import stronghold.model.components.chatrooms.Reaction;
 import stronghold.model.components.chatrooms.Room;
 import stronghold.model.components.general.User;
 import stronghold.model.components.lobby.Game;
-import stronghold.model.database.GamesDB;
-import stronghold.model.database.RoomsDB;
-import stronghold.model.database.UsersDB;
+import stronghold.model.database.*;
 import stronghold.model.utils.network.seth.Host;
 import stronghold.model.utils.network.seth.RequestObject;
 
@@ -283,7 +281,7 @@ public class Server {
                     Game game=new Game((String) requestList[0],(Integer)requestList[1],(boolean) requestList[2],(User) requestList[3]);
                     new Room(UsersDB.usersDB.getUserByUsername(((User) requestList[3]).getUsername()), (String) requestList[0]);
                     try {
-                        host.sendObjectToClient(sender,game);
+                        host.sendMessageToClient(sender,"accept");
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
@@ -407,7 +405,7 @@ public class Server {
                     }
                 }else if(requestString.equals("startGame")){
                     boolean isHost=false;
-                    if (GamesDB.getInstance().getGameByUsername((String) requestList[0]).getHost().getUsername().equals((String) requestList[0])){
+                    if (GamesDB.getInstance().getGameByUsername((String) requestList[0]).getHost().getUsername().equals((String) requestList[1])){
                     isHost=true;
 
                     }
@@ -416,6 +414,50 @@ public class Server {
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
+
+                }else if(requestString.equals("sendFriendReq")){
+                    RequestDB.getInstance().addRequest((User) requestList[0],(User) requestList[1]);
+                    try {
+                        host.sendMessageToClient(sender,"sended");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+
+
+                }else if(requestString.equals("acceptFriendReq")){
+                    FriendsDB.getInstance().addFriendForUsers((User) requestList[0],(User) requestList[1]);
+                    try {
+                        FriendsDB.getInstance().update();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                    RequestDB.getInstance().removeRequest((User) requestList[0],(User) requestList[1]);
+                    try {
+                        host.sendMessageToClient(sender,"accepted");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                }else if(requestString.equals("rejectFriendReq")){
+
+                    RequestDB.getInstance().removeRequest((User) requestList[0],(User) requestList[1]);
+                    try {
+                        host.sendMessageToClient(sender,"rejected");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+
+
+                }else if(requestString.equals("showFriendReq")){
+
+                    ArrayList<User> friends=new ArrayList<>();
+                    friends=FriendsDB.getInstance().getFriends().get((User) requestList[0]);
+                    try {
+                        host.sendObjectToClient(sender,friends);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+
 
                 }
             }

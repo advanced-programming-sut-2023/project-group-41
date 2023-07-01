@@ -14,9 +14,14 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import stronghold.model.components.general.User;
+import stronghold.model.utils.network.server.StaticClient;
+import stronghold.model.utils.network.seth.Client;
+import stronghold.model.utils.network.seth.RequestObject;
+import stronghold.view.graphics.HubMenuView;
 import stronghold.model.utils.network.seth.Client;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class GraphicalProfileCardController {
@@ -35,6 +40,12 @@ public class GraphicalProfileCardController {
     public HBox nicknameHBox;
     public HBox emailHBox;
     public HBox sloganHbox;
+    private  User loggedInUser;
+    public Client client;
+
+    public void setLoggedInUser(User loggedInUser) {
+        this.loggedInUser = loggedInUser;
+    }
 
     public static void setUser(User user) {
         GraphicalProfileCardController.user = user;
@@ -46,6 +57,14 @@ public class GraphicalProfileCardController {
 
     @FXML
     public void initialize(){
+        StaticClient staticClient = null;
+        try {
+            staticClient = new StaticClient();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        client = staticClient.getClient();
+        loggedInUser.set(HubMenuController.getCurrentUser());
         usernameLabel.setText(user.getUsername());
         nicknameLabel.setText(user.getNickname());
         emailLabel.setText(user.getEmail());
@@ -53,6 +72,10 @@ public class GraphicalProfileCardController {
     }
 
     public void sendFriendReqHandler(MouseEvent mouseEvent) {
+        RequestObject requestObject=new RequestObject("sendFriendReq",user,loggedInUser);
+        client.sendObjectToServer(requestObject);
+        client.recieveMessgeFromHost();
+
 
     }
 
@@ -74,5 +97,29 @@ public class GraphicalProfileCardController {
     }
 
     public void changeAvatarHandler(ActionEvent actionEvent) {
+    }
+    /////////////////////////////////
+    public void acceptFriendReq(MouseEvent mouseEvent) {
+        RequestObject requestObject=new RequestObject("acceptFriendReq",user,loggedInUser);
+        client.sendObjectToServer(requestObject);
+        client.recieveMessgeFromHost();
+
+
+    }
+    public void rejectFriendReq(MouseEvent mouseEvent) {
+        RequestObject requestObject=new RequestObject("rejectFriendReq",user,loggedInUser);
+        client.sendObjectToServer(requestObject);
+        client.recieveMessgeFromHost();
+
+
+    }
+    public void showFriendReq(MouseEvent mouseEvent) {
+        RequestObject requestObject=new RequestObject("acceptFriendReq",loggedInUser);
+        client.sendObjectToServer(requestObject);
+        ArrayList<User>friends=(ArrayList<User>) client.recieveObjectFromHost();
+        //TODO: popups pf friends name accept/reject button
+
+
+
     }
 }
