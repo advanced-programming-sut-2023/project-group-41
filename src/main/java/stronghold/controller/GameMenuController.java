@@ -131,17 +131,18 @@ public class GameMenuController extends MenuController {
 
         for (int i = 1; i <= playerNum; i++) {
             Government government = new Government(i);
+
             if (i == 1)
                 currentPlayer = government;
             governments.add(government);
-            GameMenuView.output("playerCenter");
-            int x = scanner.nextInt();
-            int y = scanner.nextInt();
+            //GameMenuView.output("playerCenter");
+            //int x = scanner.nextInt();
+            //int y = scanner.nextInt();
 
 
             Castle castle = new Castle(government, CastleType.Ruler);
             government.setRuler(castle);
-            Map.getInstanceMap().getMapCell(x, y).setBuilding(castle);
+           // Map.getInstanceMap().getMapCell(x, y).setBuilding(castle);
 
 
         }

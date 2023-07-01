@@ -36,7 +36,7 @@ public class GameMenuView extends MenuView {
 
     public static void run(Scanner scanner, int round, int playerNum1, int mapSize) {
         Map.getInstanceMap().setSize(mapSize);
-        startGame(playerNum1);
+        //startGame(playerNum1);
 
         setCurrentRound(1);
         setRoundNum(round);

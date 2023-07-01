@@ -5,6 +5,8 @@ import stronghold.model.components.chatrooms.Message;
 import stronghold.model.components.chatrooms.Reaction;
 import stronghold.model.components.chatrooms.Room;
 import stronghold.model.components.general.User;
+import stronghold.model.components.lobby.Game;
+import stronghold.model.database.GamesDB;
 import stronghold.model.database.RoomsDB;
 import stronghold.model.database.UsersDB;
 import stronghold.model.utils.network.seth.Host;
@@ -12,6 +14,8 @@ import stronghold.model.utils.network.seth.RequestObject;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class Server {
 
@@ -211,6 +215,90 @@ public class Server {
                     try {
                         room.addUser( UsersDB.usersDB.getUserByUsername((String) requestList[1]));
                         host.sendMessageToClient(sender, "True");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }else if(requestString.equals("createANewLobbyGame")){
+                    Game game=new Game((String) requestList[0],(Integer)requestList[1],(boolean) requestList[2],(User) requestList[3]);
+                    try {
+                        host.sendObjectToClient(sender,game);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                    try {
+                        GamesDB.getInstance().update();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }else if(requestString.equals("getGamesList")){
+                    int now=new  Date().getMinutes();
+                    ArrayList<Game> aliveGames=new ArrayList<>();
+                    for (Game game : GamesDB.getInstance().getGames()) {
+                        if(now-game.getLastMin()<5){
+                            aliveGames.add(game);
+                        }
+                    }
+                    GamesDB.getInstance().getGames().clear();
+                    for (Game aliveGame : aliveGames) {
+                        GamesDB.getInstance().getGames().add(aliveGame);
+                    }
+                    try {
+                        host.sendObjectToClient(sender,GamesDB.getInstance().getGames());
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                    try {
+                        GamesDB.getInstance().update();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }else if(requestString.equals("removeFromPlayersList")){
+                    if(GamesDB.getInstance().getGameByUsername((String) requestList[1])!=null){
+                        if(GamesDB.getInstance().getGameByUsername((String) requestList[1]).getUsers().contains((User) requestList[0])){
+                            GamesDB.getInstance().getGameByUsername((String) requestList[1]).getUsers().remove((User) requestList[0]);
+                        }
+                    }
+                    if(GamesDB.getInstance().getGameByUsername((String) requestList[1]).getUsers().size()==0){
+                        GamesDB.getInstance().getGames().remove(GamesDB.getInstance().getGameByUsername((String) requestList[1]));
+                    }
+                    else if(GamesDB.getInstance().getGameByUsername((String) requestList[1]).getHost().equals((User) requestList[0])){
+                        GamesDB.getInstance().getGameByUsername((String) requestList[1]).setHost(GamesDB.getInstance().getGameByUsername((String) requestList[1]).getUsers().get(0));
+                    }
+                    try {
+                        host.sendMessageToClient(sender,"removedPlayer");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                    try {
+                        GamesDB.getInstance().update();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                }else if(requestString.equals("joiningAGame")){
+                    if(GamesDB.getInstance().getGameByUsername((String) requestList[0]).getCapacity()>GamesDB.getInstance().getGameByUsername((String) requestList[0]).getUsers().size()) {
+                        GamesDB.getInstance().getGameByUsername((String) requestList[0]).getUsers().add((User) requestList[1]);
+                        Date date=new Date();
+                        GamesDB.getInstance().getGameByUsername((String) requestList[0]).setLastMin(date.getMinutes());
+
+
+                    }
+                    try {
+                        GamesDB.getInstance().update();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }else if(requestString.equals("updatingPlayersInSession")){
+                    String string="";
+                    for (User user1 : GamesDB.getInstance().getGameByUsername((String) requestList[0]).getUsers()) {
+                        string+=user1.getUsername();
+                        if(user1.equals(GamesDB.getInstance().getGameByUsername((String) requestList[0]).getHost())){
+                            string+=" (Host) ";
+                        }
+                        string+="\n";
+                    }
+                    try {
+                        host.sendMessageToClient(sender,string);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
