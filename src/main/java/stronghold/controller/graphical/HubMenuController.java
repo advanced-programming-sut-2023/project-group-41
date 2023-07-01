@@ -174,6 +174,7 @@ public class HubMenuController {
     public void searchPlayers(ActionEvent actionEvent) {
         Stage stage = new Stage();
         Pane root = null;
+        SearchPlayersController.setClient(client);
         try {
             root = FXMLLoader.load(getClass().getResource("/searchPlayerView.fxml"));
         } catch (

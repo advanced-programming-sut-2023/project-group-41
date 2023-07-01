@@ -6,6 +6,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -26,15 +28,24 @@ import java.util.List;
 import java.util.Objects;
 
 public class GraphicalScoreboardController {
-    private Client client;
+    private static Client client;
     private static User user;
     private static List<User> list = null;
     private static int rankEndingIdx = 10;
     public VBox playersVBox;
     public HBox userHbox;
+    public Label scoreBoardLabel;
 
     public static void setUser(User user) {
         GraphicalScoreboardController.user = user;
+    }
+
+    public static Client getClient() {
+        return client;
+    }
+
+    public static void setClient(Client client) {
+        GraphicalScoreboardController.client = client;
     }
 
     private HBox makeUserHBox(User user1){
@@ -50,6 +61,7 @@ public class GraphicalScoreboardController {
         username.setPrefSize(138, 52);
         username.setOnMouseClicked(MouseEvent-> {
             GraphicalProfileCardController.setUser(user1);
+            GraphicalProfileCardController.setClient(client);
             PauseTransition pauseTransition = new PauseTransition(Duration.millis(30));
             pauseTransition.setOnFinished(actionEvent -> {
                 Pane root = null;
@@ -75,18 +87,11 @@ public class GraphicalScoreboardController {
         hBox.getChildren().addAll(rank, username, score, onlineState);
         return hBox;
     }
-
     @FXML
     public void initialize() throws IOException {
-        StaticClient staticClient = new StaticClient();
-        client = staticClient.getClient();
         RequestObject requestObject = new RequestObject("getSortedUsers");
         client.sendObjectToServer(requestObject);
-        try {
-            list = (List<User>) client.recieveObjectFromHost();
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        list = (List<User>) client.recieveObjectFromHost();
 
         userHbox.getChildren().add(makeUserHBox(user));
         if (rankEndingIdx > list.size())
@@ -108,6 +113,20 @@ public class GraphicalScoreboardController {
         playersVBox.getChildren().clear();
         for (User user1 : list.subList(rankEndingIdx - 10, rankEndingIdx)) {
             playersVBox.getChildren().add(makeUserHBox(user1));
+        }
+    }
+
+    public void refreshHandler(KeyEvent keyEvent) {
+        if (keyEvent.getCode().equals(KeyCode.TAB)){
+            RequestObject requestObject = new RequestObject("getSortedUsers");
+            client.sendObjectToServer(requestObject);
+            list = (List<User>) client.recieveObjectFromHost();
+
+
+            playersVBox.getChildren().clear();
+            for (User user1 : list.subList(rankEndingIdx - 10, rankEndingIdx)) {
+                playersVBox.getChildren().add(makeUserHBox(user1));
+            }
         }
     }
 }

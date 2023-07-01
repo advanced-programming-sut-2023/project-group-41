@@ -13,6 +13,7 @@ import stronghold.model.components.chatrooms.Room;
 import stronghold.model.components.general.User;
 import stronghold.model.components.lobby.Game;
 import stronghold.model.database.GamesDB;
+import stronghold.model.database.RoomsDB;
 import stronghold.model.utils.network.server.StaticClient;
 import stronghold.model.utils.network.seth.Client;
 import stronghold.model.utils.network.seth.RequestObject;
@@ -68,6 +69,7 @@ public class LobbyController {
 
     }
     public  void createNewGame(){
+
         RequestObject requestObject=new RequestObject("createANewLobbyGame",usernameField.getText(),Integer.parseInt(cap.getText()),pri.isSelected(),user);
         client.sendObjectToServer(requestObject);
         client.recieveObjectFromHost();
@@ -153,13 +155,7 @@ public class LobbyController {
         RequestObject requestObject=new RequestObject("startGame",currentGame,user.getUsername());
         client.sendObjectToServer(requestObject);
         boolean isHost;
-        try {
-            isHost=(boolean) client.recieveObjectFromHost();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        isHost=(boolean) client.recieveObjectFromHost();
         if(!isHost){
             startGameLabel.setText("you are not the host");
         }

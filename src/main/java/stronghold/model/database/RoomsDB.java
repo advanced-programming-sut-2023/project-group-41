@@ -59,6 +59,14 @@ public class RoomsDB implements Serializable {
         return null;
     }
 
+    public Room getRoomByString(String string) {
+        for (Room room1 : rooms) {
+            if (room1.getName().equals(string))
+                return room1;
+        }
+        return null;
+    }
+
     public ArrayList<Room> getUserRooms(User user) {
         ArrayList<Room> userRooms = new ArrayList<>();
         for (Room room : rooms) {

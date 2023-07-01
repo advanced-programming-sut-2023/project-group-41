@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import stronghold.model.components.general.User;
 import stronghold.model.database.UsersDB;
+import stronghold.model.utils.network.seth.Client;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -18,7 +19,15 @@ import java.util.Objects;
 public class SearchPlayersController {
     @FXML
     TextField userId;
+    static Client client;
 
+    public Client getClient() {
+        return client;
+    }
+
+    public static void setClient(Client client) {
+        SearchPlayersController.client = client;
+    }
 
     public void searchPlayers(ActionEvent Event) {
         String username = userId.getText();
@@ -27,6 +36,7 @@ public class SearchPlayersController {
             userId.clear();
         } else {
             GraphicalProfileCardController.setUser(user);
+            GraphicalProfileCardController.setClient(client);
             PauseTransition pauseTransition = new PauseTransition(Duration.millis(30));
             pauseTransition.setOnFinished(actionEvent -> {
                 Pane root = null;

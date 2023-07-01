@@ -14,12 +14,14 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import stronghold.model.components.general.User;
+import stronghold.model.utils.network.seth.Client;
 
 import java.io.IOException;
 import java.util.Objects;
 
 public class GraphicalProfileCardController {
     public static User user;
+    public static Client client;
 
     public ImageView avatarPic;
     public Label usernameLabel;
@@ -38,6 +40,10 @@ public class GraphicalProfileCardController {
         GraphicalProfileCardController.user = user;
     }
 
+    public static void setClient(Client client) {
+        GraphicalProfileCardController.client = client;
+    }
+
     @FXML
     public void initialize(){
         usernameLabel.setText(user.getUsername());
@@ -52,6 +58,7 @@ public class GraphicalProfileCardController {
 
     public void showScoreboardHandler(MouseEvent mouseEvent) {
         GraphicalScoreboardController.setUser(user);
+        GraphicalScoreboardController.setClient(client);
         PauseTransition pauseTransition = new PauseTransition(Duration.millis(30));
         pauseTransition.setOnFinished(actionEvent -> {
             ScrollPane root = null;

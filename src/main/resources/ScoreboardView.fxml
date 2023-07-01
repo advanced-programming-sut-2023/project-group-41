@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onScroll="#finishedScrollHandler" prefHeight="438.0" prefWidth="437.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stronghold.controller.graphical.GraphicalScoreboardController">
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#refreshHandler" onScroll="#finishedScrollHandler" prefHeight="438.0" prefWidth="437.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stronghold.controller.graphical.GraphicalScoreboardController">
    <content>
       <VBox fx:id="playersVBox" prefHeight="551.0" prefWidth="420.0">
          <children>
-            <Label alignment="TOP_CENTER" prefHeight="44.0" prefWidth="420.0" text="Scoreboard">
+            <Label fx:id="scoreBoardLabel" alignment="TOP_CENTER" prefHeight="44.0" prefWidth="420.0" text="Scoreboard">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <HBox fx:id="userHbox"  style="-fx-border-color: #ccaa16; -fx-border-width: 2; -fx-border-radius: 10;">
+            <HBox fx:id="userHbox" style="-fx-border-color: #ccaa16; -fx-border-width: 2; -fx-border-radius: 10;">
             </HBox>
          </children>
       </VBox>
