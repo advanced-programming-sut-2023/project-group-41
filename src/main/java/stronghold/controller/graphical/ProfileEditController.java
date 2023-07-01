@@ -8,6 +8,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import stronghold.Main;
 import stronghold.controller.MainMenuController;
@@ -17,10 +21,7 @@ import stronghold.model.utils.Encryption;
 import stronghold.model.utils.network.seth.Client;
 import stronghold.model.utils.network.seth.RequestObject;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.security.PrivilegedExceptionAction;
 
 public class ProfileEditController {
@@ -43,6 +44,9 @@ public class ProfileEditController {
     public Button saveButton;
     public Label errorPrompt;
     public PasswordField confirmPasswordField;
+
+    public Button changeAvatar;
+    public ImageView avatar;
 
     public static User getCurrentUser() {
         return currentUser;
@@ -171,5 +175,12 @@ public class ProfileEditController {
         delay.play();
 
         HubMenuController.setCurrentUser(currentUser);
+    }
+
+    @FXML
+    public void setAvatar(){
+        FileChooser fileChooser = new FileChooser();
+        File img = fileChooser.showOpenDialog(new Stage());
+        avatar.setImage(new Image(img.getAbsolutePath()));
     }
 }
