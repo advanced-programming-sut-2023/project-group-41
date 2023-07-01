@@ -7,13 +7,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="72fd4c0e-f2c3-4e13-85b9-d70f04a31b27" name="Changes" comment="changed RequestObject's constructor">
+    <list default="true" id="72fd4c0e-f2c3-4e13-85b9-d70f04a31b27" name="Changes" comment="fixed data transfer bugs in system">
+      <change afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/server/Server.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/stronghold_jar/stronghold.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/stronghold_jar/stronghold.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/authenticator/AuthenticatorServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/authenticator/AuthenticatorServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/seth/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/seth/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/seth/Host.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/seth/Host.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/networktest/ClientTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/networktest/ClientTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/database/datasets/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/database/datasets/users.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/authenticator/AuthenticatorServer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/seth/NetworkNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/model/utils/network/seth/NetworkNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stronghold/networktest/HostTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stronghold/networktest/HostTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +84,7 @@
       <recent name="stronghold.controller" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.MainNetTest">
+  <component name="RunManager" selected="Application.Stronghold">
     <configuration name="ClientTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="stronghold.networktest.ClientTest" />
       <module name="stronghold" />
@@ -173,8 +173,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.MainNetTest" />
         <item itemvalue="Application.ClientTest" />
+        <item itemvalue="Application.MainNetTest" />
         <item itemvalue="Application.HostTest" />
         <item itemvalue="Application.sampleView" />
         <item itemvalue="Application.SearchPlayerView" />
@@ -358,7 +358,14 @@
       <option name="project" value="LOCAL" />
       <updated>1688152360409</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="fixed data transfer bugs in system">
+      <created>1688190277262</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1688190277262</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -414,7 +421,8 @@
     <MESSAGE value="added read thread to Client" />
     <MESSAGE value="Created AuthenticatorServer" />
     <MESSAGE value="changed RequestObject's constructor" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed RequestObject's constructor" />
+    <MESSAGE value="fixed data transfer bugs in system" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed data transfer bugs in system" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/stronghold$SignUpMenuControllerTest_testAll.ic" NAME="SignUpMenuControllerTest.testAll Coverage Results" MODIFIED="1684827485987" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
