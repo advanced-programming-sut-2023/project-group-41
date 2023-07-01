@@ -18,8 +18,6 @@ import javafx.scene.shape.StrokeType;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import stronghold.model.components.general.User;
-import stronghold.model.database.UsersDB;
-import stronghold.model.utils.network.server.StaticClient;
 import stronghold.model.utils.network.seth.Client;
 import stronghold.model.utils.network.seth.RequestObject;
 
@@ -62,11 +60,12 @@ public class GraphicalScoreboardController {
         username.setOnMouseClicked(MouseEvent-> {
             GraphicalProfileCardController.setUser(user1);
             GraphicalProfileCardController.setClient(client);
+            GraphicalProfileCardController.setLoggedInUser(user);
             PauseTransition pauseTransition = new PauseTransition(Duration.millis(30));
             pauseTransition.setOnFinished(actionEvent -> {
                 Pane root = null;
                 try {
-                    root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/ProfileCartView.fxml")));
+                    root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/profileCardView.fxml")));
                 } catch (IOException ignored) {}
                 Scene scene = playersVBox.getScene();
                 Stage stage = (Stage) scene.getWindow();

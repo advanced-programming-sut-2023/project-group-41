@@ -35,7 +35,7 @@ import java.util.Objects;
 public class ChatMenuController {
     private static User user;
     private Room currRoom;
-    private Client client;
+    private static Client client;
 
     public VBox roomNamesVBox;
     public VBox messagesVBox;
@@ -46,8 +46,6 @@ public class ChatMenuController {
     @FXML
     public void initialize() throws IOException, ClassNotFoundException {
         RequestObject requestObject = new RequestObject("getUserRoom",user.getUsername());
-        StaticClient staticClient = new StaticClient();
-        client = staticClient.getClient();
         client.sendObjectToServer(requestObject);
         ArrayList<Room> rooms = (ArrayList<Room>) client.recieveObjectFromHost();
         for (Room room : rooms) {
@@ -55,12 +53,20 @@ public class ChatMenuController {
         }
     }
 
-    public User getUser() {
+    public static User getUser() {
         return user;
     }
 
     public static void setUser(User user) {
         ChatMenuController.user = user;
+    }
+
+    public static Client getClient() {
+        return client;
+    }
+
+    public static void setClient(Client client) {
+        ChatMenuController.client = client;
     }
 
     private  Label makeRoomNameLabel(Room room){

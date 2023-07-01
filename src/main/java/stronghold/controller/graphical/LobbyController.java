@@ -1,7 +1,10 @@
 package stronghold.controller.graphical;
 
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -9,6 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import stronghold.model.components.chatrooms.Room;
 import stronghold.model.components.general.User;
 import stronghold.model.components.lobby.Game;
@@ -20,6 +24,7 @@ import stronghold.model.utils.network.seth.RequestObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 
 public class LobbyController {
@@ -179,5 +184,19 @@ public class LobbyController {
     }
 
 
-
+    public void enterChatRoomsHandler(ActionEvent actionEvent) {
+        ChatMenuController.setUser(user);
+        ChatMenuController.setClient(client);
+        PauseTransition pauseTransition = new PauseTransition(Duration.millis(30));
+        pauseTransition.setOnFinished(actionEvent1 -> {
+            Pane root = null;
+            try {
+                root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/ChatMenu.fxml")));
+            } catch (IOException ignored) {}
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        });
+        pauseTransition.play();
+    }
 }

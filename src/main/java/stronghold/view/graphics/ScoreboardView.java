@@ -7,6 +7,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.stage.Stage;
 import stronghold.controller.graphical.GraphicalScoreboardController;
 import stronghold.model.database.UsersDB;
+import stronghold.model.utils.network.server.StaticClient;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -20,6 +21,8 @@ public class ScoreboardView extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
+        StaticClient staticClient = new StaticClient();
+        GraphicalScoreboardController.setClient(staticClient.getClient());
         GraphicalScoreboardController.setUser(UsersDB.usersDB.getUserByUsername("yoda"));
         ScrollPane root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/ScoreboardView.fxml")));
         Scene scene = new Scene(root);
