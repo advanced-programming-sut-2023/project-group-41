@@ -17,7 +17,7 @@
       </VBox>
 
       <VBox layoutX="670.0" layoutY="5.0" prefHeight="27.0" prefWidth="150.0">
-         <Button fx:id="start" prefWidth="150" text="Start game" />
+         <Button fx:id="start" onAction="#startGame" prefWidth="150" text="Start game" />
       </VBox>
 
       <GridPane alignment="CENTER" hgap="10" layoutX="14.0" layoutY="436.0" vgap="10">

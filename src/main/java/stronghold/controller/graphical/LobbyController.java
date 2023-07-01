@@ -153,13 +153,7 @@ public class LobbyController {
         RequestObject requestObject=new RequestObject("startGame",currentGame,user.getUsername());
         client.sendObjectToServer(requestObject);
         boolean isHost;
-        try {
-            isHost=(boolean) client.recieveObjectFromHost();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        isHost=(boolean) client.recieveObjectFromHost();
         if(!isHost){
             startGameLabel.setText("you are not the host");
         }
