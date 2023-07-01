@@ -108,4 +108,22 @@ public class GraphicalProfileCardController {
             pauseTransition.play();
         }
     }
+
+    public void showFriendsHandler(ActionEvent actionEvent) {
+        FriendListController.setUser(loggedInUser);
+        FriendListController.setClient(client);
+        PauseTransition pauseTransition = new PauseTransition(Duration.millis(30));
+        pauseTransition.setOnFinished(actionEvent1 -> {
+            ScrollPane root = null;
+            try {
+                root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/FriendListView.fxml")));
+            } catch (IOException ignored) {}
+            Scene scene = sloganHbox.getScene();
+            Stage stage = (Stage) scene.getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        });
+        pauseTransition.play();
+
+    }
 }

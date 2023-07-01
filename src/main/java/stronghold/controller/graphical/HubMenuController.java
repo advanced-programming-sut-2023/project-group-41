@@ -65,6 +65,7 @@ public class HubMenuController {
                 IOException e) {
             throw new RuntimeException(e);
         }
+        LoginController.setClient(client);
         Pane root = null;
         try {
             root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/loginView.fxml")));

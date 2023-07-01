@@ -44,7 +44,7 @@ public class FriendReqListController {
 
         Button acceptButton = new Button("Accept");
         acceptButton.setOnMouseClicked(mouseEvent -> {
-            RequestObject requestObject=new RequestObject("acceptFriendReq",user1,user);
+            RequestObject requestObject=new RequestObject("acceptFriendReq", user1, user);
             client.sendObjectToServer(requestObject);
             client.recieveMessgeFromHost();
             playersVBox.getChildren().remove(hBox);
@@ -64,7 +64,7 @@ public class FriendReqListController {
 
     @FXML
     public void initialize(){
-        RequestObject requestObject=new RequestObject("acceptFriendReq",user);
+        RequestObject requestObject=new RequestObject("showFriendReq",user);
         client.sendObjectToServer(requestObject);
         ArrayList<User> friends=(ArrayList<User>) client.recieveObjectFromHost();
 

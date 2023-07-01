@@ -452,7 +452,7 @@ public class Server {
 
                     ArrayList<User> friends=new ArrayList<>();
                     for (ArrayList<User> users : RequestDB.getInstance().getRequests()) {
-                        if(users.get(0).equals(requestList[1])){
+                        if(users.get(0).equals(requestList[0])){
                             friends.add(users.get(1));
                         }
                     }
@@ -464,6 +464,14 @@ public class Server {
                     }
 
 
+                }else if (requestString.equals("showFriends")){
+                    ArrayList<User> friends=new ArrayList<>();
+                    friends=FriendsDB.getInstance().getFriends().get((User) requestList[0]);
+                    try {
+                        host.sendObjectToClient(sender,friends);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
         });
