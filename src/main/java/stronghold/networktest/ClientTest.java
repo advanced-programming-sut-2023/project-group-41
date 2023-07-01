@@ -25,17 +25,19 @@ public class ClientTest {
                 throw new RuntimeException(e);
             }
 
+            User user = new User("lolipop", "bruv", "loli", "e@c.c", 1, "1", "111");
             RequestObject requestObject1 = new RequestObject("authenticate", "anakin", "gioiiiigg");
-            RequestObject requestObject2 = new RequestObject("authenticate", "skywalker", "An@k1n");
+            RequestObject requestObject2 = new RequestObject("register", user);
 
             client.sendObjectToServer(requestObject1);
-            try {
-                Thread.sleep(1000);
-            } catch (
-                    InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+            String str;
+
+            str = client.recieveMessgeFromHost();
+            System.out.println(str);
             client.sendObjectToServer(requestObject2);
+            str = client.recieveMessgeFromHost();
+            System.out.println(str);
+            
         }).start();
 
     }

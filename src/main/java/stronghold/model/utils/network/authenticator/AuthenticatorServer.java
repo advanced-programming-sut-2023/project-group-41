@@ -56,12 +56,35 @@ public class AuthenticatorServer {
                     }
                     else{
                         try {
+
                             host.sendMessageToClient(sender, "NOTOK");
                         } catch (
                                 IOException e) {
 
+
                             throw new RuntimeException(e);
                         }
+                    }
+                }
+                else if(requestString.equals("register")){
+                    User user = (User) requestList[0];
+                    UsersDB.usersDB.addUser(user);
+                    try {
+                        UsersDB.usersDB.toJSON();
+                    } catch (
+                            IOException e) {
+                        try {
+                            host.sendMessageToClient(sender, "NOTOK");
+                        } catch (
+                                IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    }
+                    try {
+                        host.sendMessageToClient(sender, "OK");
+                    } catch (
+                            IOException e) {
+                        throw new RuntimeException(e);
                     }
                 }
             }

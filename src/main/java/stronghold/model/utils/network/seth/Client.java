@@ -14,22 +14,18 @@ public class Client extends NetworkNode {
     private Socket socket;
     private Thread readThread;
     private Consumer<Request> handleReceivedObjects;
-    private Consumer<Request> handleReceivedMessages;
+    private Consumer<String> handleReceivedMessages;
 
     public Client(String subnet) throws IOException {
         this.socket = new Socket(subnet, DEFAULT_PORT);
         new ObjectOutputStream(socket.getOutputStream()).writeObject(socket.getInetAddress());
         this.input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        this.output = new PrintWriter(socket.getOutputStream(), true);
+        this.output = new PrintWriter(socket.getOutputStream());
 
 
-        this.handleReceivedMessages = (Request message) -> {
-            System.out.println(message.receivedObject.toString());
-            return;
-        };
+        this.handleReceivedMessages = System.out::println;
         this.handleReceivedObjects = (Request obj) -> {
             System.out.println(obj.receivedObject);
-            return;
         };
         this.readThread = new Thread(() -> {
             while (true) {
@@ -38,7 +34,8 @@ public class Client extends NetworkNode {
                     if (object != null) {
                         Request request = new Request(object, socket);
                         if (object instanceof String) {
-                            handleReceivedMessages.accept(request);
+                            System.out.println(1);
+                            handleReceivedMessages.accept((String) object);
                         } else {
                             handleReceivedObjects.accept(request);
                         }
@@ -50,14 +47,14 @@ public class Client extends NetworkNode {
                 }
             }
         });
-        readThread.start();
+//        readThread.start();
     }
 
     public void setHandleReceivedObjects(Consumer<Request> handleReceivedObjects) {
         this.handleReceivedObjects = handleReceivedObjects;
     }
 
-    public void setHandleReceivedMessages(Consumer<Request> handleReceivedMessages) {
+    public void setHandleReceivedMessages(Consumer<String> handleReceivedMessages) {
         this.handleReceivedMessages = handleReceivedMessages;
     }
 
@@ -70,7 +67,7 @@ public class Client extends NetworkNode {
 
     }
 
-    public String recieveMessageFromHost() {
+    public String recieveMessgeFromHost() {
         String dataBuffer;
         try {
             dataBuffer = input.readLine();
@@ -91,13 +88,14 @@ public class Client extends NetworkNode {
         }
     }
 
+
     public Object recieveObjectFromHost() {
         try {
             ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
-            Object recievedObejct = objectInputStream.readObject();
-            return recievedObejct;
+            return objectInputStream.readObject();
         } catch (
                 IOException e) {
+
             throw new RuntimeException(e);
         } catch (
                 ClassNotFoundException e) {

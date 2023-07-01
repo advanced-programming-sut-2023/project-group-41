@@ -113,7 +113,6 @@ public class Host extends NetworkNode {
     public void sendMessageToClient(Socket socket, String Message) throws IOException {
         PrintWriter printWriter = new PrintWriter(socket.getOutputStream(), true);
         printWriter.println(Message);
-        printWriter.close();
     }
 
     public void sendObjectToClient(Socket socket, Object object) throws IOException {
