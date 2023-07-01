@@ -102,11 +102,12 @@ public class LoginController {
 
 
         if (!authenticate) {
-            openErrorDialog("Error!: Provided credentials are incorrect!");
+            openErrorDialog("Error!: Provided credentials are invalid!");
             return;
         }
 
         client.sendObjectToServer(new RequestObject("getuser", username));
+        Thread.sleep(1000);
         User user = (User) client.recieveObjectFromHost();
 
         if (!authenticate) {
