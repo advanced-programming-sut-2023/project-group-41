@@ -273,7 +273,7 @@ public class Server {
                 else if(requestString.equals("createANewLobbyGame")){
                     Game game=new Game((String) requestList[0],(Integer)requestList[1],(boolean) requestList[2],(User) requestList[3]);
                     try {
-                        host.sendObjectToClient(sender,game);
+                        host.sendMessageToClient(sender,"accept");
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }

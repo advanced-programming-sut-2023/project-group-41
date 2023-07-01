@@ -94,13 +94,24 @@ public class HubMenuController {
         dialog.showAndWait();
     }
 
-    public void startNewGame() {
+    public void goToLobby() throws IOException, InterruptedException {
         // TODO: wire up game menu
+        LobbyController.setUser(currentUser);
+        LobbyController.setClient(client);
+        Thread.sleep(200);
+        Stage primaryStage = new Stage();
+        Pane root;
+        LobbyController.setStage(primaryStage);
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/LobbyMenu.fxml")));
+        Scene currentScene = new Scene(root);
+        primaryStage.setScene(currentScene);
+        primaryStage.show();
     }
 
     public void openProfileEdit() {
         ProfileEditController.setClient(client);
         ProfileEditController.setCurrentUser(currentUser);
+
         // TODO: Make profile menu
 
             Pane root = null;

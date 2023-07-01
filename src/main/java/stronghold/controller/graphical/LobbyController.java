@@ -22,9 +22,27 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class LobbyController {
-    private static User user=new User("Sadf","ASdf","sdf","ASdfsdf",2,"23234","WEr");
+    private static User user;
+
+    public static User getUser() {
+        return user;
+    }
+
+    public static void setUser(User user) {
+        LobbyController.user = user;
+    }
+
     private String currentGame;
-    private Client client;
+
+    public static Client getClient() {
+        return client;
+    }
+
+    public static void setClient(Client client) {
+        LobbyController.client = client;
+    }
+
+    static Client client;
     @FXML
      Button search;
     @FXML
@@ -62,15 +80,12 @@ public class LobbyController {
 
     @FXML
     public void initialize() throws IOException {
-
-        StaticClient staticClient = new StaticClient();
-        client = staticClient.getClient();
-
+        System.out.println(user.getUsername());
     }
     public  void createNewGame(){
         RequestObject requestObject=new RequestObject("createANewLobbyGame",usernameField.getText(),Integer.parseInt(cap.getText()),pri.isSelected(),user);
         client.sendObjectToServer(requestObject);
-        client.recieveObjectFromHost();
+        client.recieveMessgeFromHost();
 
 
     }
